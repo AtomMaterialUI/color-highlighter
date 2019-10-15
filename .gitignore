@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# IntelliJ
+out/
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+classes/
+
+#gradle.properties
+*.icls
+src/test/resources/
+
+publishToken
