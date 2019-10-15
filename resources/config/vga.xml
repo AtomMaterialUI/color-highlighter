@@ -1,0 +1,40 @@
+<!--
+  ~ Color Browser - Color browser plugin for IDEA
+  ~ Copyright (C) 2006 Rick Maddy. All Rights Reserved.
+  ~
+  ~ This program is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU General Public License
+  ~ as published by the Free Software Foundation; either version 2
+  ~ of the License, or (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  -->
+
+<!--
+  ~ This is a list of SVG colors as defined at http://www.w3.org/TR/css3-color/#html4
+  -->
+<colors>
+    <color name="Black" code="000000"/>
+    <color name="White" code="ffffff"/>
+    <color name="Red" code="ff0000"/>
+    <color name="Yellow" code="ffff00"/>
+    <color name="Lime" code="00ff00"/>
+    <color name="Aqua" code="00ffff"/>
+    <color name="Blue" code="0000ff"/>
+    <color name="Fuchsia" code="ff00ff"/>
+    <color name="Gray" code="808080"/>
+    <color name="Silver" code="c0c0c0"/>
+    <color name="Maroon" code="800000"/>
+    <color name="Olive" code="808000"/>
+    <color name="Green" code="008000"/>
+    <color name="Teal" code="008080"/>
+    <color name="Navy" code="000080"/>
+    <color name="Purple" code="800080"/>
+</colors>
