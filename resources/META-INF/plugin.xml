@@ -41,6 +41,13 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.mallowigi.colors.ColorsService">
+
+        </applicationService>
+        <toolWindow factoryClass="com.mallowigi.ColorBrowserToolWindowFactory"
+                    id="ColorBrowser"
+                    anchor="bottom"
+                    icon="AllIcons.Toolwindows.ToolWindowProject"></toolWindow>
     </extensions>
 
     <application-components>
@@ -48,6 +55,12 @@
             <implementation-class>com.mallowigi.ColorInfoComponent</implementation-class>
         </component>
     </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>com.mallowigi.ColorBrowser</implementation-class>
+        </component>
+    </project-components>
 
     <change-notes>
     </change-notes>

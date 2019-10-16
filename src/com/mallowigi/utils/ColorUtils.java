@@ -26,83 +26,33 @@
 
 package com.mallowigi.utils;
 
-import com.intellij.ui.ColorUtil;
 import com.mallowigi.colors.ColorsService;
-import com.mallowigi.search.ColorSearchEngine;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.util.StringTokenizer;
 
 /**
  * Color Utils!
  */
-public enum MTColorUtils {
+@SuppressWarnings({"StandardVariableNames",
+    "OverlyComplexBooleanExpression",
+    "StaticMethodOnlyUsedInOneClass",
+    "MagicCharacter",
+    "SingleCharacterStartsWith",
+    "ReuseOfLocalVariable",
+    "TypeMayBeWeakened",
+    "HardCodedStringLiteral",
+    "ClassWithTooManyMethods",
+    "AssignmentToMethodParameter",
+    "FloatingPointEquality",
+    "OverlyLongMethod",
+    "UseOfStringTokenizer",
+    "MethodWithMultipleReturnPoints"})
+public enum ColorUtils {
   DEFAULT;
-
-  private static final int HC_FG_TONES = 4;
-  private static final int HC_BG_TONES = 2;
-
-  public static ColorUIResource parseColor(@Nullable final String value) {
-    if (value != null && value.length() == 8) {
-      final Color color = ColorUtil.fromHex(value.substring(0, 6));
-
-      try {
-        final int alpha = Integer.parseInt(value.substring(6, 8), 16);
-        return new ColorUIResource(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
-      } catch (final Exception ignore) {
-      }
-
-      return new ColorUIResource(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
-    }
-
-    final Color color = ColorUtil.fromHex(value, Color.GRAY);
-    return new ColorUIResource(new Color(color.getRed(), color.getGreen(), color.getBlue()));
-  }
-
-  private static String contrastifyForeground(final boolean dark, final String colorString, final boolean isNotHighContrast) {
-    if (isNotHighContrast) {
-      return colorString;
-    }
-
-    return dark ?
-           ColorUtil.toHex(ColorUtil.brighter(ColorUtil.fromHex(colorString), HC_FG_TONES)) :
-           ColorUtil.toHex(ColorUtil.darker(ColorUtil.fromHex(colorString), HC_FG_TONES));
-  }
-
-  public static Color contrastifyForeground(final boolean isDark, final Color color, final boolean isNotHighContrast) {
-    if (isNotHighContrast) {
-      return color;
-    }
-    final int alpha = color.getAlpha() / 255;
-
-    return ColorUtil.withAlpha(new ColorUIResource(isDark ?
-                                                   ColorUtil.brighter(color, HC_FG_TONES) :
-                                                   ColorUtil.darker(color, HC_FG_TONES)), alpha);
-  }
-
-  public static String contrastifyBackground(final boolean isDark, final String colorString, final boolean isNotHighContrast) {
-    if (isNotHighContrast) {
-      return colorString;
-    }
-
-    return isDark ?
-           ColorUtil.toHex(ColorUtil.darker(ColorUtil.fromHex(colorString), HC_BG_TONES)) :
-           ColorUtil.toHex(ColorUtil.brighter(ColorUtil.fromHex(colorString), HC_BG_TONES));
-  }
-
-  public static Color contrastifyBackground(final boolean isDark, final ColorUIResource color, final boolean isNotHighContrast) {
-    if (isNotHighContrast) {
-      return color;
-    }
-    final int alpha = color.getAlpha() / 255;
-
-    return ColorUtil.withAlpha(new ColorUIResource(isDark ?
-                                                   ColorUtil.darker(color, HC_BG_TONES) :
-                                                   ColorUtil.brighter(color, HC_BG_TONES)), alpha);
-  }
 
   /**
    * Parse rgb in the hex format #123
@@ -165,7 +115,7 @@ public enum MTColorUtils {
     b = normalizePercent(b);
     a = normalizeFraction(a);
 
-    return new Color((float) r / 100f, (float) g / 100f, (float) b / 100f, a);
+    return new Color((float) r / 100.0f, (float) g / 100.0f, (float) b / 100.0f, a);
   }
 
   /**
@@ -178,13 +128,14 @@ public enum MTColorUtils {
   /**
    * Parse a color from h,s,l,a in decimal format
    */
+  @SuppressWarnings("AssignmentToMethodParameter")
   public static Color getHSLa(int h, int s, int l, float a) {
     h = normalizeDegrees(h);
     s = normalizePercent(s);
     l = normalizePercent(l);
     a = normalizeFraction(a);
 
-    final float[] rgb = convertHSLToRGB((float) h / 359f, (float) s / 100f, (float) l / 100f);
+    final float[] rgb = convertHSLToRGB((float) h / 359.0f, (float) s / 100.0f, (float) l / 100.0f);
 
     return new Color(rgb[0], rgb[1], rgb[2], a);
   }
@@ -195,9 +146,9 @@ public enum MTColorUtils {
   public static int HSLtoRGB(final float h, final float s, final float l) {
     final float[] vals = convertHSLToRGB(h, s, l);
 
-    final int r = (int) (vals[0] * 255f + 0.5f);
-    final int g = (int) (vals[1] * 255f + 0.5f);
-    final int b = (int) (vals[2] * 255f + 0.5f);
+    final int r = (int) (vals[0] * 255.0f + 0.5f);
+    final int g = (int) (vals[1] * 255.0f + 0.5f);
+    final int b = (int) (vals[2] * 255.0f + 0.5f);
 
     return (255 << 24) | (r << 16) | (g << 8) | b;
   }
@@ -212,6 +163,7 @@ public enum MTColorUtils {
   /**
    * Converts rgb to hsl
    */
+  @SuppressWarnings("AssignmentToMethodParameter")
   public static float[] RGBtoHSL(final int r, final int g, final int b, float[] hsl) {
     if (hsl == null) {
       hsl = new float[3];
@@ -259,6 +211,8 @@ public enum MTColorUtils {
     return res;
   }
 
+  @SuppressWarnings({"AssignmentToMethodParameter",
+      "MethodWithMultipleReturnPoints"})
   private static float convertHueToRGB(final float m1, final float m2, float h) {
     if (h < 0.0f) {
       h++;
@@ -331,11 +285,7 @@ public enum MTColorUtils {
       h = 0.0f;
       s = 0.0f;
     } else {
-      if (l < 0.5f) {
-        s = delMax / (max + min);
-      } else {
-        s = delMax / (2.0f - max - min);
-      }
+      s = l < 0.5f ? delMax / (max + min) : delMax / (2.0f - max - min);
 
       final float dR = (((max - vR) / 6.0f) + (delMax / 2.0f)) / delMax;
       final float dG = (((max - vG) / 6.0f) + (delMax / 2.0f)) / delMax;
@@ -396,12 +346,16 @@ public enum MTColorUtils {
    * Converts to decimal
    */
   private static int toDecimal(final float f) {
-    return (int) (f * 255f + 0.5f);
+    return (int) (f * 255.0f + 0.5f);
   }
 
   /**
    * Parse a color in the rgb[a](r, g, b[, a]) format
    */
+  @SuppressWarnings({"StaticMethodOnlyUsedInOneClass",
+      "MagicCharacter",
+      "SingleCharacterStartsWith",
+      "ReuseOfLocalVariable"})
   @Nullable
   public static Color parseRGB(@NotNull final String text) {
     boolean isPercent = false;
@@ -503,19 +457,21 @@ public enum MTColorUtils {
    */
   @NotNull
   public static Color parseHex(@NotNull final String text) {
-    if (text.length() == 4) {
-      return getShortRGB(text.substring(1));
-    } else {
-      return getRGB(text.substring(1));
-    }
+    return text.length() == 4 ? getShortRGB(text.substring(1)) : getRGB(text.substring(1));
   }
 
+  @SuppressWarnings({"MagicCharacter",
+      "HardCodedStringLiteral"})
   @Nullable
   public static Color parseConstructor(@NotNull final String text) {
     boolean isFloat = false;
-    float fr = 0.0f, fg = 0.0f, fb = 0.0f;
+    float fr = 0.0f;
+    float fg = 0.0f;
+    float fb = 0.0f;
     float fa = 1.0f;
-    int ir = 0, ig = 0, ib = 0;
+    int ir = 0;
+    int ig = 0;
+    int ib = 0;
     int ia = 255;
     boolean alpha = false;
     final int ps = text.indexOf('(');
@@ -526,25 +482,25 @@ public enum MTColorUtils {
 
     final StringTokenizer tokenizer = new StringTokenizer(text.substring(ps + 1, pe), ",");
     final int params = tokenizer.countTokens();
-    String part = tokenizer.nextToken().trim();
+    @NonNls String part = tokenizer.nextToken().trim();
     if (part.endsWith("f")) {
       isFloat = true;
       fr = Float.parseFloat(part.substring(0, part.length() - 1));
     } else {
-      ir = ColorSearchEngine.parseInt(part);
+      ir = parseInt(part);
     }
 
     if (params >= 2) {
       part = tokenizer.nextToken().trim();
-      if (part.equals("true")) {
+      if ("true".equals(part)) {
         alpha = true;
-      } else if (part.equals("false")) {
+      } else if ("false".equals(part)) {
         alpha = false;
       } else if (part.endsWith("f")) {
         isFloat = true;
         fg = Float.parseFloat(part.substring(0, part.length() - 1));
       } else {
-        ig = ColorSearchEngine.parseInt(part);
+        ig = parseInt(part);
       }
 
       if (params >= 3) {
@@ -553,7 +509,7 @@ public enum MTColorUtils {
           isFloat = true;
           fb = Float.parseFloat(part.substring(0, part.length() - 1));
         } else {
-          ib = ColorSearchEngine.parseInt(part);
+          ib = parseInt(part);
         }
 
         if (params == 4) {
@@ -562,7 +518,7 @@ public enum MTColorUtils {
             isFloat = true;
             fa = Float.parseFloat(part.substring(0, part.length() - 1));
           } else {
-            ia = ColorSearchEngine.parseInt(part);
+            ia = parseInt(part);
           }
         }
       }

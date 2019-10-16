@@ -27,17 +27,20 @@
 package com.mallowigi.colors;
 
 import com.intellij.openapi.components.ServiceManager;
-import com.mallowigi.utils.XmlUtil;
+import com.intellij.openapi.util.Pair;
+import com.thoughtworks.xstream.XStream;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
+import java.net.URL;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
 public final class ColorsService {
+  private static final String COLORS_XML = "/config/colors.xml";
   private Map<Integer, String> svgColors;
   private Map<String, Integer> svgNames;
   private Map<Integer, String> javaColors;
@@ -51,32 +54,56 @@ public final class ColorsService {
     return ServiceManager.getService(ColorsService.class);
   }
 
+  private static Colors parseColorsFromXML() {
+    final URL xml = ColorsService.class.getResource(COLORS_XML);
+    @NonNls final XStream xStream = new XStream();
+    XStream.setupDefaultSecurity(xStream);
+    xStream.allowTypesByWildcard(new String[]{"com.mallowigi.colors.*"});
+
+    xStream.alias("colors", Colors.class);
+    xStream.alias("color", SingleColor.class);
+
+    xStream.useAttributeFor(SingleColor.class, "name");
+    xStream.useAttributeFor(SingleColor.class, "code");
+
+    try {
+      return (Colors) xStream.fromXML(xml);
+    } catch (final RuntimeException e) {
+      return new Colors();
+    }
+  }
+
+  private static int toColor(final int rgb) {
+    return rgb & 0xffffff;
+  }
+
   @NotNull
   public Map<Integer, String> getSVGColors() {
-    return svgColors;
+    return Collections.unmodifiableMap(svgColors);
   }
 
   @NotNull
   public Map<String, Integer> getSVGNames() {
-    return svgNames;
+    return Collections.unmodifiableMap(svgNames);
   }
 
   @NotNull
   public Map<Integer, String> getJavaColors() {
-    return javaColors;
+    return Collections.unmodifiableMap(javaColors);
   }
 
   @NotNull
   public Map<String, Integer> getJavaNames() {
-    return javaNames;
+    return Collections.unmodifiableMap(javaNames);
   }
 
   public String findSVGName(final Color color) {
-    final int rgb = color.getRGB() & 0xffffff;
+    final int rgb = toColor(color.getRGB());
 
     return svgColors.get(rgb);
   }
 
+  @Nullable
   public Color findSVGColor(final String name) {
     final Integer code = svgNames.get(name);
     if (code != null) {
@@ -87,11 +114,12 @@ public final class ColorsService {
   }
 
   public String findJavaName(final Color color) {
-    final int rgb = color.getRGB() & 0xffffff;
+    final int rgb = toColor(color.getRGB());
 
     return javaColors.get(rgb);
   }
 
+  @Nullable
   public Color findJavaColor(final String name) {
     final Integer code = javaNames.get(name);
     if (code != null) {
@@ -101,84 +129,59 @@ public final class ColorsService {
     return null;
   }
 
+  @SuppressWarnings("HardCodedStringLiteral")
   private void loadColors() {
-    try {
-      svgColors = new TreeMap<>();
-      svgNames = new TreeMap<>();
+    final Colors colors = parseColorsFromXML();
 
-      final Document doc = XmlUtil.loadDocument("/config/colors.xml");
-      final Element root = doc.getDocumentElement();
-      final NodeList ents = root.getElementsByTagName("color");
-      for (int i = 0; i < ents.getLength(); i++) {
-        final Element ent = (Element) ents.item(i);
+    svgColors = new TreeMap<>();
+    svgNames = new TreeMap<>();
 
-        svgColors.put(Integer.valueOf(ent.getAttribute("code"), 16), ent.getAttribute("name"));
-        svgNames.put(ent.getAttribute("name"), Integer.valueOf(ent.getAttribute("code"), 16));
-      }
-    } catch (final Exception e) {
+    for (final SingleColor col : colors.getColors()) {
+      svgColors.put(col.getColorInt(), col.getName());
+      svgNames.put(col.getName(), col.getColorInt());
     }
 
-    final Object[] colors = {
-        Color.black,
-        "black",
-        Color.blue,
-        "blue",
-        Color.cyan,
-        "cyan",
-        Color.darkGray,
-        "darkgray",
-        Color.gray,
-        "gray",
-        Color.green,
-        "green",
-        Color.lightGray,
-        "lightgray",
-        Color.magenta,
-        "magenta",
-        Color.orange,
-        "orange",
-        Color.pink,
-        "pink",
-        Color.red,
-        "red",
-        Color.white,
-        "white",
-        Color.yellow,
-        "yellow",
-        Color.BLACK,
-        "BLACK",
-        Color.BLUE,
-        "BLUE",
-        Color.CYAN,
-        "CYAN",
-        Color.DARK_GRAY,
-        "DARK_GRAY",
-        Color.GRAY,
-        "GRAY",
-        Color.GREEN,
-        "GREEN",
-        Color.LIGHT_GRAY,
-        "LIGHT_GRAY",
-        Color.MAGENTA,
-        "MAGENTA",
-        Color.ORANGE,
-        "ORANGE",
-        Color.PINK,
-        "PINK",
-        Color.RED,
-        "RED",
-        Color.WHITE,
-        "WHITE",
-        Color.YELLOW,
-        "YELLOW"
+    @NonNls final Pair[] jcolors = {
+        new Pair<>(Color.black, "black"),
+        new Pair<>(Color.blue, "blue"),
+        new Pair<>(Color.cyan, "cyan"),
+        new Pair<>(Color.darkGray, "darkgray"),
+        new Pair<>(Color.gray, "gray"),
+        new Pair<>(Color.green, "green"),
+        new Pair<>(Color.lightGray, "lightgray"),
+        new Pair<>(Color.magenta, "magenta"),
+        new Pair<>(Color.orange, "orange"),
+        new Pair<>(Color.pink, "pink"),
+        new Pair<>(Color.red, "red"),
+        new Pair<>(Color.white, "white"),
+        new Pair<>(Color.yellow, "yellow"),
+        new Pair<>(Color.BLACK, "BLACK"),
+        new Pair<>(Color.BLUE, "BLUE"),
+        new Pair<>(Color.CYAN, "CYAN"),
+        new Pair<>(Color.DARK_GRAY, "DARK_GRAY"),
+        new Pair<>(Color.GRAY, "GRAY"),
+        new Pair<>(Color.GREEN, "GREEN"),
+        new Pair<>(Color.LIGHT_GRAY, "LIGHT_GRAY"),
+        new Pair<>(Color.MAGENTA, "MAGENTA"),
+        new Pair<>(Color.ORANGE, "ORANGE"),
+        new Pair<>(Color.PINK, "PINK"),
+        new Pair<>(Color.RED, "RED"),
+        new Pair<>(Color.WHITE, "WHITE"),
+        new Pair<>(Color.YELLOW, "YELLOW"),
     };
 
     javaColors = new TreeMap<>();
     javaNames = new TreeMap<>();
-    for (int i = 0; i < colors.length; i += 2) {
-      final int col = ((Color) colors[i]).getRGB() & 0xffffff;
-      javaColors.put(col, (String) colors[i + 1]);
-      javaNames.put((String) colors[i + 1], col);
+
+    for (final Pair<Color, String> jcolor : jcolors) {
+      javaColors.put(toColor(jcolor.first.getRGB()), jcolor.second);
+      javaNames.put(jcolor.second, toColor(jcolor.first.getRGB()));
     }
+
+    //    for (int i = 0; i < colors.length; i += 2) {
+    //      final int col = ((Color) colors[i]).getRGB() & 0xffffff;
+    //      javaColors.put(col, (String) colors[i + 1]);
+    //      javaNames.put((String) colors[i + 1], col);
+    //    }
   }
 }

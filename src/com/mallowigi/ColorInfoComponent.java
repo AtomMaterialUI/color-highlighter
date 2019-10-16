@@ -26,7 +26,6 @@
 
 package com.mallowigi;
 
-import com.intellij.codeInsight.hint.HintUtil;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.BaseComponent;
@@ -38,37 +37,21 @@ import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.util.messages.MessageBusConnection;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public final class ColorInfoComponent implements BaseComponent, Disposable {
   private final EditorFactoryListener editorListener = new ColorInfoEditorListener();
-  private JLabel defaultHint;
 
-  /**
-   * Remove higlighters from editors
-   *
-   * @param editor the editor
-   */
-  private static void clearHighlighters(final Editor editor) {
-    // Remove highlighters
-    ColorInfoService.clearHighlighters(editor);
-  }
-
-  /**
-   * Clear popups
-   *
-   * @param editor the editor
-   */
-  private static void clearPopup(final Editor editor) {
-    ColorInfoService.clearPopup(editor);
+  @NonNls
+  @NotNull
+  @Override
+  public String getComponentName() {
+    return "ColorInfoComponent";
   }
 
   @Override
   public void initComponent() {
-    defaultHint = (JLabel) HintUtil.createInformationLabel("x");
-
     // Listen to editors
     final EditorFactory editorFactory = EditorFactory.getInstance();
     editorFactory.addEditorFactoryListener(editorListener, this);

@@ -2,7 +2,7 @@ package com.mallowigi.utils;
 
 import org.jetbrains.annotations.NotNull;
 
-public class EditorSelection {
+public final class EditorSelection {
   private final String line;
   private final int offset;
   private final int start;

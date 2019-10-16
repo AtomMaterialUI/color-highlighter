@@ -28,12 +28,16 @@ package com.mallowigi;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.*;
+import com.intellij.openapi.project.Project;
+import com.mallowigi.search.ColorSearchEngine;
+import com.mallowigi.utils.MatchRange;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionListener, EditorMouseListener, VisibleAreaListener {
   private final Editor editor;
@@ -73,19 +77,21 @@ final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionLis
 
   @Override
   public void mouseMoved(@NotNull final EditorMouseEvent e) {
-    //    final MouseEvent mouseEvent = e.getMouseEvent();
-    //    lastMouseLocation.setLocation(mouseEvent.getPoint());
-    //
-    //    // if ctrl is pressed
-    //    if ((e.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK) {
-    //      final Editor editor = e.getEditor();
-    //      final MatchRange range = ColorInfoService.getHyperLinkRange(editor, lastMouseLocation);
-    //      if (range != null) {
-    //        if (setHighlighter(editor, range)) {
-    //          editor.getContentComponent().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    //        }
-    //      }
-    //    }
+    final MouseEvent mouseEvent = e.getMouseEvent();
+    lastMouseLocation.setLocation(mouseEvent.getPoint());
+
+    // if ctrl is pressed
+    if ((e.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK) {
+      final Editor currEditor = e.getEditor();
+      final MatchRange range = ColorInfoService.getHyperLinkRange(currEditor, lastMouseLocation);
+
+      // Replace cursor with hand cursor upon hovering a color
+      if (range != null) {
+        if (ColorInfoService.setHighlighter(currEditor, range, lastMouseLocation)) {
+          currEditor.getContentComponent().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+      }
+    }
   }
 
   @Override
@@ -100,22 +106,27 @@ final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionLis
 
   @Override
   public void mouseClicked(final EditorMouseEvent event) {
-    //    if (!e.isConsumed() &&
-    //        (e.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK &&
-    //        e.getMouseEvent().getButton() == MouseEvent.BUTTON1) {
-    //      final Editor editor = e.getEditor();
-    //      final MatchRange range = getHyperLinkRange(editor);
-    //      if (range != null) {
-    //        final Color color = SearchEngine.getColor(range.getMatch());
-    //        if (color != null) {
-    //          final Project project = editor.getProject();
-    //          if (project != null) {
-    //            final ColorBrowserPlugin plugin = project.getComponent(ColorBrowserPlugin.class);
-    //            plugin.showAtCursor();
-    //          }
-    //        }
-    //      }
-    //    }
+    // If CTRL-CLICK
+    if (!event.isConsumed() &&
+        (event.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK &&
+        event.getMouseEvent().getButton() == MouseEvent.BUTTON1) {
+      final Editor eventEditor = event.getEditor();
+      final MatchRange range = ColorInfoService.getHyperLinkRange(eventEditor, lastMouseLocation);
+
+      if (range != null) {
+        final Color color = ColorSearchEngine.getColor(range.getMatch());
+        if (color == null) {
+          return;
+        }
+
+        final Project project = eventEditor.getProject();
+        if (project != null) {
+          //          final ColorBrowserPlugin plugin = project.getComponent(ColorBrowserPlugin.class);
+          //          plugin.showAtCursor();
+          // Show toolwindow
+        }
+      }
+    }
 
     ColorInfoService.clearHighlighters(event.getEditor());
   }

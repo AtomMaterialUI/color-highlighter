@@ -3,6 +3,7 @@ package com.mallowigi.search;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,10 +22,10 @@ public final class SearchResults {
 
   @NotNull
   public Map<Integer, Color> getColors() {
-    return colors;
+    return Collections.unmodifiableMap(colors);
   }
 
   void addColor(@NotNull final Color color) {
-      colors.put(color.getRGB(), color);
+    colors.put(color.getRGB(), color);
   }
 }

@@ -2,8 +2,8 @@ package com.mallowigi.search;
 
 import com.google.common.collect.Lists;
 import com.mallowigi.colors.ColorsService;
+import com.mallowigi.utils.ColorUtils;
 import com.mallowigi.utils.EditorSelection;
-import com.mallowigi.utils.MTColorUtils;
 import com.mallowigi.utils.MatchRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,6 +23,7 @@ public enum ColorSearchEngine {
   public static final String COLOR_UIRESOURCE_METHOD = "ColorUIResource.";
   public static final String COLOR = "Color";
   public static final String COLOR_UI_RESOURCE = "ColorUIResource";
+
   // region COLOR_PATTERNS
   private static final List<Pattern> COLOR_PATTERNS = Collections.unmodifiableList(
       Lists.newArrayList(
@@ -109,6 +110,7 @@ public enum ColorSearchEngine {
    * @param offset optional offset
    * @return a match range
    */
+  @SuppressWarnings("ObjectAllocationInLoop")
   @Nullable
   public static MatchRange findColorMatch(@NotNull final CharSequence line, final int p, final int offset) {
     int pos = p;
@@ -171,21 +173,21 @@ public enum ColorSearchEngine {
    * TODO use Factory
    */
   @Nullable
-  private static Color getColor(@NotNull final String text) {
+  public static Color getColor(@NotNull final String text) {
     final Color color;
     try {
       if (text.startsWith("#")) {
-        color = MTColorUtils.parseHex(text);
+        color = ColorUtils.parseHex(text);
       } else if (text.startsWith(RGB)) {
-        color = MTColorUtils.parseRGB(text);
+        color = ColorUtils.parseRGB(text);
       } else if (text.startsWith(HSL)) {
-        color = MTColorUtils.parseHSL(text);
+        color = ColorUtils.parseHSL(text);
       } else if (text.startsWith(COLOR_METHOD)) {
-        color = MTColorUtils.parseMethod(text, COLOR_METHOD);
+        color = ColorUtils.parseMethod(text, COLOR_METHOD);
       } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
-        color = MTColorUtils.parseMethod(text, COLOR_UIRESOURCE_METHOD);
+        color = ColorUtils.parseMethod(text, COLOR_UIRESOURCE_METHOD);
       } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
-        return MTColorUtils.parseConstructor(text);
+        return ColorUtils.parseConstructor(text);
       } else {
         color = ColorsService.getInstance().findSVGColor(text.toLowerCase());
       }
