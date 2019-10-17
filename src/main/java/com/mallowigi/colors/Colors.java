@@ -28,6 +28,7 @@ package com.mallowigi.colors;
 
 import com.intellij.util.xmlb.annotations.Property;
 
+import java.util.Collections;
 import java.util.Set;
 
 class Colors {
@@ -35,6 +36,6 @@ class Colors {
   private Set<SingleColor> colors;
 
   Set<SingleColor> getColors() {
-    return colors;
+    return Collections.unmodifiableSet(colors);
   }
 }

@@ -43,7 +43,7 @@ public final class ColorInfo {
     txtHSL = String.format("%d, %d%%, %d%%", toDegrees(hslComps[0]), toPercent(hslComps[1]), toPercent(hslComps[2]));
 
     shortHex = String.format(hexUppercase ? "#%1X%1X%1X" : "#%1x%1x%1x", color.getRed() / 16, color.getGreen() / 16,
-        color.getBlue() / 16);
+      color.getBlue() / 16);
     hex = String.format(hexUppercase ? "#%06X" : "#%06x", rgb);
     decimalRGB = String.format("rgb(%d, %d, %d)", color.getRed(), color.getGreen(), color.getBlue());
     percentRGB = String.format("rgb(%d%%, %d%%, %d%%)", toPercent(comps[0]), toPercent(comps[1]), toPercent(comps[2]));
@@ -62,7 +62,7 @@ public final class ColorInfo {
     colorUIResourceIII = String.format("ColorUIResource(%d, %d, %d)", color.getRed(), color.getGreen(), color.getBlue());
   }
 
-  private static boolean isHexUppercase() {
+  public static boolean isHexUppercase() {
     return hexUppercase;
   }
 

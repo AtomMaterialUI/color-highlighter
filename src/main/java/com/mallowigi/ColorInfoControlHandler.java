@@ -29,17 +29,21 @@ package com.mallowigi;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.SystemInfo;
 import com.mallowigi.search.ColorSearchEngine;
 import com.mallowigi.utils.MatchRange;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
+import static java.awt.event.InputEvent.META_DOWN_MASK;
+
 final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionListener, EditorMouseListener, VisibleAreaListener {
+  private static final int SHORTCUT_MODIFIER_MASK = SystemInfo.isMac ? META_DOWN_MASK : CTRL_DOWN_MASK;
   private final Editor editor;
   private final Point lastMouseLocation = new Point(0, 0);
 
@@ -68,7 +72,7 @@ final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionLis
    */
   @Override
   public void keyReleased(final KeyEvent e) {
-    if ((e.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != InputEvent.CTRL_DOWN_MASK) {
+    if ((e.getModifiersEx() & SHORTCUT_MODIFIER_MASK) != SHORTCUT_MODIFIER_MASK) {
       ColorInfoService.clearHighlighters(editor);
 
       editor.getContentComponent().setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
@@ -81,7 +85,7 @@ final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionLis
     lastMouseLocation.setLocation(mouseEvent.getPoint());
 
     // if ctrl is pressed
-    if ((e.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK) {
+    if ((e.getMouseEvent().getModifiersEx() & SHORTCUT_MODIFIER_MASK) == SHORTCUT_MODIFIER_MASK) {
       final Editor currEditor = e.getEditor();
       final MatchRange range = ColorInfoService.getHyperLinkRange(currEditor, lastMouseLocation);
 
@@ -108,7 +112,7 @@ final class ColorInfoControlHandler implements KeyListener, EditorMouseMotionLis
   public void mouseClicked(final EditorMouseEvent event) {
     // If CTRL-CLICK
     if (!event.isConsumed() &&
-        (event.getMouseEvent().getModifiersEx() & InputEvent.CTRL_DOWN_MASK) == InputEvent.CTRL_DOWN_MASK &&
+        (event.getMouseEvent().getModifiersEx() & SHORTCUT_MODIFIER_MASK) == SHORTCUT_MODIFIER_MASK &&
         event.getMouseEvent().getButton() == MouseEvent.BUTTON1) {
       final Editor eventEditor = event.getEditor();
       final MatchRange range = ColorInfoService.getHyperLinkRange(eventEditor, lastMouseLocation);

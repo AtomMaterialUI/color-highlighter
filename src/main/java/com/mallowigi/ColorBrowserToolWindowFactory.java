@@ -29,12 +29,15 @@ package com.mallowigi;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.mallowigi.ui.ColorBrowserToolWindow;
 import org.jetbrains.annotations.NotNull;
 
 public class ColorBrowserToolWindowFactory implements ToolWindowFactory {
 
   @Override
-  public void createToolWindowContent(@NotNull final Project project, @NotNull final ToolWindow toolWindow) {
+  public final void createToolWindowContent(@NotNull final Project project, @NotNull final ToolWindow toolWindow) {
     // Create the view
+    final ColorBrowserToolWindow colorBrowserToolWindow = new ColorBrowserToolWindow(project);
+    colorBrowserToolWindow.initComponent();
   }
 }

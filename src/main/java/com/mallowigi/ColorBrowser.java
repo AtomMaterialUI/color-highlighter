@@ -27,13 +27,21 @@
 package com.mallowigi;
 
 import com.intellij.openapi.components.BaseComponent;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 public final class ColorBrowser implements BaseComponent {
-  public static final String TOOL_WINDOW_ID = "ColorBrowser";
-  private final Project project;
+  static final String TOOL_WINDOW_ID = "ColorBrowser";
+  private final Project myProject;
 
-  ColorBrowser(final Project project) {
-    this.project = project;
+  public ColorBrowser(@NotNull final Project project) {
+    myProject = project;
+
   }
+
+  static ColorBrowser getInstance(final Project project) {
+    return ServiceManager.getService(project, ColorBrowser.class);
+  }
+
 }
