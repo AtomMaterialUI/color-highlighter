@@ -53,9 +53,8 @@ enum ColorInfoService {
   private static final Key<MatchRange> LINK_RANGE = Key.create("ColorLinkRange");
   @NonNls
   private static final Key<Popup> POPUP = Key.create("ColorLinkPopup");
-
   @NonNls
-  private static final JLabel DEFAULT_HINT = (JLabel) HintUtil.createInformationLabel("x");
+  private static final JComponent DEFAULT_HINT = HintUtil.createInformationLabel("x");
 
   /**
    * Remove higlighters from editors
@@ -114,7 +113,7 @@ enum ColorInfoService {
   /**
    * Highlight the color at the given range
    */
-  public static boolean setHighlighter(final Editor editor, final MatchRange range, final Point lastMouseLocation) {
+  static boolean setHighlighter(final Editor editor, final MatchRange range, final Point lastMouseLocation) {
     final MatchRange current = editor.getUserData(LINK_RANGE);
 
     if (!range.equals(current)) {
