@@ -1,7 +1,27 @@
 package com.mallowigi.ui;
 
+/*
+ * Color Browser - Color browser plugin for IDEA
+ * Copyright (C) 2006 Rick Maddy. All Rights Reserved.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -23,9 +43,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Random;
 
-public class ColorBrowserToolWindow extends JPanel {
+public class ColorBrowserToolWindow extends JPanel implements JDOMExternalizable {
 
-  private static final long serialVersionUID = 5990892904455904106L;
   private final Project project;
   private JPanel pnlMain;
   private JPanel pnlDetail;
@@ -57,6 +76,7 @@ public class ColorBrowserToolWindow extends JPanel {
     setColor(lastColor);
   }
 
+  @Override
   public void readExternal(final Element element) throws InvalidDataException {
     detailPanel.readExternal(element);
 
@@ -70,6 +90,7 @@ public class ColorBrowserToolWindow extends JPanel {
     }
   }
 
+  @Override
   public void writeExternal(final Element element) throws WriteExternalException {
     detailPanel.writeExternal(element);
 
@@ -169,4 +190,5 @@ public class ColorBrowserToolWindow extends JPanel {
       GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
       GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null));
   }
+
 }

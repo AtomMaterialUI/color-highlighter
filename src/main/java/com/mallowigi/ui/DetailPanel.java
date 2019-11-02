@@ -19,8 +19,10 @@ package com.mallowigi.ui;
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -34,7 +36,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DetailPanel {
+public class DetailPanel implements JDOMExternalizable {
+  private static final Logger logger = Logger.getInstance(DetailPanel.class.getName());
   private final ColorBrowserToolWindow toolWindow;
   private final ColorNameButtonListener colorNameButtonListener;
   private boolean isAdjusting = false;
@@ -73,6 +76,7 @@ public class DetailPanel {
   }
 
   public void setColor(final Color color) {
+    DetailPanel.logger.debug("setColor");
     if (color == null) {
       disable();
       return;
@@ -121,6 +125,7 @@ public class DetailPanel {
       info.getHsl(),
       info.getHsla()
     }));
+    DetailPanel.logger.debug("indexHtml=" + indexHtml);
     cbHtml.setSelectedIndex(indexHtml);
 
     cbColor.setEnabled(true);
@@ -145,6 +150,69 @@ public class DetailPanel {
     cbColorUIResource.setSelectedIndex(indexColorUIResource);
 
     isAdjusting = false;
+  }
+
+  @Override
+  public void readExternal(final Element element) throws InvalidDataException {
+    DetailPanel.logger.debug("readExternal");
+
+    String index = null;
+    Element elem = element.getChild("indexHtml");
+    if (elem != null) {
+      index = elem.getValue();
+    }
+    DetailPanel.logger.debug("index=" + index);
+    if (index != null && index.length() > 0) {
+      indexHtml = Integer.parseInt(index);
+      DetailPanel.logger.debug("indexHtml=" + indexHtml);
+    }
+    DetailPanel.logger.debug("indexHtml=" + indexHtml);
+
+    elem = element.getChild("indexColor");
+    if (elem != null) {
+      index = elem.getValue();
+    }
+    DetailPanel.logger.debug("index=" + index);
+    if (index != null && index.length() > 0) {
+      indexColor = Integer.parseInt(index);
+    }
+
+    elem = element.getChild("indexColorUIResource");
+    if (elem != null) {
+      index = elem.getValue();
+    }
+    DetailPanel.logger.debug("index=" + index);
+    if (index != null && index.length() > 0) {
+      indexColorUIResource = Integer.parseInt(index);
+    }
+
+    elem = element.getChild("hexUppercase");
+    if (elem != null) {
+      final String hex = elem.getValue();
+      cbHexCase.setSelected("Y".equals(hex));
+      ColorInfo.setHexUppercase("Y".equals(hex));
+    }
+  }
+
+  @Override
+  public void writeExternal(final Element element) throws WriteExternalException {
+    DetailPanel.logger.debug("writeExternal");
+
+    Element index = new Element("indexHtml");
+    index.addContent(Integer.toString(indexHtml));
+    element.addContent(index);
+
+    index = new Element("indexColor");
+    index.addContent(Integer.toString(indexColor));
+    element.addContent(index);
+
+    index = new Element("indexColorUIResource");
+    index.addContent(Integer.toString(indexColorUIResource));
+    element.addContent(index);
+
+    final Element hex = new Element("hexUppercase");
+    hex.addContent(cbHexCase.isSelected() ? "Y" : "N");
+    element.addContent(hex);
   }
 
   JComponent getMainComponent() {
@@ -174,65 +242,13 @@ public class DetailPanel {
   }
 
   void initComponent() {
+    DetailPanel.logger.debug("initComponent");
+    DetailPanel.logger.debug("indexHtml=" + indexHtml);
     isAdjusting = true;
     cbHtml.setSelectedIndex(indexHtml);
     cbColor.setSelectedIndex(indexColor);
     cbColorUIResource.setSelectedIndex(indexColorUIResource);
     isAdjusting = false;
-  }
-
-  void readExternal(final Element element) throws InvalidDataException {
-
-    String index = null;
-    Element elem = element.getChild("indexHtml");
-    if (elem != null) {
-      index = elem.getValue();
-    }
-    if (index != null && index.length() > 0) {
-      indexHtml = Integer.parseInt(index);
-    }
-
-    elem = element.getChild("indexColor");
-    if (elem != null) {
-      index = elem.getValue();
-    }
-    if (index != null && index.length() > 0) {
-      indexColor = Integer.parseInt(index);
-    }
-
-    elem = element.getChild("indexColorUIResource");
-    if (elem != null) {
-      index = elem.getValue();
-    }
-    if (index != null && index.length() > 0) {
-      indexColorUIResource = Integer.parseInt(index);
-    }
-
-    elem = element.getChild("hexUppercase");
-    if (elem != null) {
-      final String hex = elem.getValue();
-      cbHexCase.setSelected("Y".equals(hex));
-      ColorInfo.setHexUppercase("Y".equals(hex));
-    }
-  }
-
-  void writeExternal(final Element element) throws WriteExternalException {
-
-    Element index = new Element("indexHtml");
-    index.addContent(Integer.toString(indexHtml));
-    element.addContent(index);
-
-    index = new Element("indexColor");
-    index.addContent(Integer.toString(indexColor));
-    element.addContent(index);
-
-    index = new Element("indexColorUIResource");
-    index.addContent(Integer.toString(indexColorUIResource));
-    element.addContent(index);
-
-    final Element hex = new Element("hexUppercase");
-    hex.addContent(cbHexCase.isSelected() ? "Y" : "N");
-    element.addContent(hex);
   }
 
   private void setupControls(final Project project) {
