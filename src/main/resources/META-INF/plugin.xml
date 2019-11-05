@@ -43,11 +43,6 @@ Find colors in editors and colorize them with their color.
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
         <projectService serviceImplementation="com.mallowigi.ColorBrowser"/>
-
-        <toolWindow factoryClass="com.mallowigi.ColorBrowserToolWindowFactory"
-                    id="ColorBrowser"
-                    anchor="bottom"
-                    icon="AllIcons.Toolwindows.ToolWindowProject"></toolWindow>
     </extensions>
 
     <application-components>
