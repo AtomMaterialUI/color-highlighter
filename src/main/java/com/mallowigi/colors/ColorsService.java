@@ -142,32 +142,32 @@ public final class ColorsService {
     }
 
     @NonNls final Pair[] jcolors = {
-        new Pair<>(Color.black, "black"),
-        new Pair<>(Color.blue, "blue"),
-        new Pair<>(Color.cyan, "cyan"),
-        new Pair<>(Color.darkGray, "darkgray"),
-        new Pair<>(Color.gray, "gray"),
-        new Pair<>(Color.green, "green"),
-        new Pair<>(Color.lightGray, "lightgray"),
-        new Pair<>(Color.magenta, "magenta"),
-        new Pair<>(Color.orange, "orange"),
-        new Pair<>(Color.pink, "pink"),
-        new Pair<>(Color.red, "red"),
-        new Pair<>(Color.white, "white"),
-        new Pair<>(Color.yellow, "yellow"),
-        new Pair<>(Color.BLACK, "BLACK"),
-        new Pair<>(Color.BLUE, "BLUE"),
-        new Pair<>(Color.CYAN, "CYAN"),
-        new Pair<>(Color.DARK_GRAY, "DARK_GRAY"),
-        new Pair<>(Color.GRAY, "GRAY"),
-        new Pair<>(Color.GREEN, "GREEN"),
-        new Pair<>(Color.LIGHT_GRAY, "LIGHT_GRAY"),
-        new Pair<>(Color.MAGENTA, "MAGENTA"),
-        new Pair<>(Color.ORANGE, "ORANGE"),
-        new Pair<>(Color.PINK, "PINK"),
-        new Pair<>(Color.RED, "RED"),
-        new Pair<>(Color.WHITE, "WHITE"),
-        new Pair<>(Color.YELLOW, "YELLOW"),
+      new Pair<>(Color.black, "black"),
+      new Pair<>(Color.blue, "blue"),
+      new Pair<>(Color.cyan, "cyan"),
+      new Pair<>(Color.darkGray, "darkgray"),
+      new Pair<>(Color.gray, "gray"),
+      new Pair<>(Color.green, "green"),
+      new Pair<>(Color.lightGray, "lightgray"),
+      new Pair<>(Color.magenta, "magenta"),
+      new Pair<>(Color.orange, "orange"),
+      new Pair<>(Color.pink, "pink"),
+      new Pair<>(Color.red, "red"),
+      new Pair<>(Color.white, "white"),
+      new Pair<>(Color.yellow, "yellow"),
+      new Pair<>(Color.BLACK, "BLACK"),
+      new Pair<>(Color.BLUE, "BLUE"),
+      new Pair<>(Color.CYAN, "CYAN"),
+      new Pair<>(Color.DARK_GRAY, "DARK_GRAY"),
+      new Pair<>(Color.GRAY, "GRAY"),
+      new Pair<>(Color.GREEN, "GREEN"),
+      new Pair<>(Color.LIGHT_GRAY, "LIGHT_GRAY"),
+      new Pair<>(Color.MAGENTA, "MAGENTA"),
+      new Pair<>(Color.ORANGE, "ORANGE"),
+      new Pair<>(Color.PINK, "PINK"),
+      new Pair<>(Color.RED, "RED"),
+      new Pair<>(Color.WHITE, "WHITE"),
+      new Pair<>(Color.YELLOW, "YELLOW"),
     };
 
     javaColors = new TreeMap<>();
@@ -177,11 +177,5 @@ public final class ColorsService {
       javaColors.put(toColor(jcolor.first.getRGB()), jcolor.second);
       javaNames.put(jcolor.second, toColor(jcolor.first.getRGB()));
     }
-
-    //    for (int i = 0; i < colors.length; i += 2) {
-    //      final int col = ((Color) colors[i]).getRGB() & 0xffffff;
-    //      javaColors.put(col, (String) colors[i + 1]);
-    //      javaNames.put((String) colors[i + 1], col);
-    //    }
   }
 }

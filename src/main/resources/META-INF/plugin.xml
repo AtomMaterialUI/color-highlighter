@@ -36,20 +36,13 @@ Find colors in editors and colorize them with their color.
 
     <idea-version since-build="192.5728.12"/>
 
-
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
-        <projectService serviceImplementation="com.mallowigi.ColorBrowser"/>
+        <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"/>
     </extensions>
-
-    <application-components>
-        <component>
-            <implementation-class>com.mallowigi.ColorInfoComponent</implementation-class>
-        </component>
-    </application-components>
 
     <change-notes>
     </change-notes>
