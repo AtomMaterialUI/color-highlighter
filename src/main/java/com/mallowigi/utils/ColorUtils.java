@@ -38,19 +38,18 @@ import java.util.StringTokenizer;
  * Color Utils!
  */
 @SuppressWarnings({"StandardVariableNames",
-    "OverlyComplexBooleanExpression",
-    "StaticMethodOnlyUsedInOneClass",
-    "MagicCharacter",
-    "SingleCharacterStartsWith",
-    "ReuseOfLocalVariable",
-    "TypeMayBeWeakened",
-    "HardCodedStringLiteral",
-    "ClassWithTooManyMethods",
-    "AssignmentToMethodParameter",
-    "FloatingPointEquality",
-    "OverlyLongMethod",
-    "UseOfStringTokenizer",
-    "MethodWithMultipleReturnPoints"})
+  "OverlyComplexBooleanExpression",
+  "StaticMethodOnlyUsedInOneClass",
+  "MagicCharacter",
+  "SingleCharacterStartsWith",
+  "ReuseOfLocalVariable",
+  "HardCodedStringLiteral",
+  "ClassWithTooManyMethods",
+  "AssignmentToMethodParameter",
+  "FloatingPointEquality",
+  "OverlyLongMethod",
+  "UseOfStringTokenizer",
+  "MethodWithMultipleReturnPoints"})
 public enum ColorUtils {
   DEFAULT;
 
@@ -212,7 +211,7 @@ public enum ColorUtils {
   }
 
   @SuppressWarnings({"AssignmentToMethodParameter",
-      "MethodWithMultipleReturnPoints"})
+    "MethodWithMultipleReturnPoints"})
   private static float convertHueToRGB(final float m1, final float m2, float h) {
     if (h < 0.0f) {
       h++;
@@ -353,9 +352,9 @@ public enum ColorUtils {
    * Parse a color in the rgb[a](r, g, b[, a]) format
    */
   @SuppressWarnings({"StaticMethodOnlyUsedInOneClass",
-      "MagicCharacter",
-      "SingleCharacterStartsWith",
-      "ReuseOfLocalVariable"})
+    "MagicCharacter",
+    "SingleCharacterStartsWith",
+    "ReuseOfLocalVariable"})
   @Nullable
   public static Color parseRGB(@NotNull final String text) {
     boolean isPercent = false;
@@ -461,7 +460,7 @@ public enum ColorUtils {
   }
 
   @SuppressWarnings({"MagicCharacter",
-      "HardCodedStringLiteral"})
+    "HardCodedStringLiteral"})
   @Nullable
   public static Color parseConstructor(@NotNull final String text) {
     boolean isFloat = false;

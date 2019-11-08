@@ -57,8 +57,10 @@ public class ColorAnnotator implements Annotator {
                                  @NotNull final Color color,
                                  @NotNull final AnnotationHolder holder) {
     final Annotation annotation = holder.createInfoAnnotation(elementToAnnotate, null);
+    if (GutterColorRenderer.isGutterColorEnabled()) {
+      annotation.setGutterIconRenderer(new GutterColorRenderer(color));
+    }
     annotation.setTextAttributes(createTextAttributeKey(color));
-
   }
 
   private static TextAttributesKey createTextAttributeKey(@NotNull final Color color) {
