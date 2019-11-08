@@ -26,13 +26,9 @@
 
 package com.mallowigi.utils;
 
-import com.mallowigi.colors.ColorsService;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.StringTokenizer;
 
 /**
  * Color Utils!
@@ -40,18 +36,19 @@ import java.util.StringTokenizer;
 @SuppressWarnings({"StandardVariableNames",
   "OverlyComplexBooleanExpression",
   "StaticMethodOnlyUsedInOneClass",
-  "MagicCharacter",
   "SingleCharacterStartsWith",
-  "ReuseOfLocalVariable",
-  "HardCodedStringLiteral",
-  "ClassWithTooManyMethods",
   "AssignmentToMethodParameter",
   "FloatingPointEquality",
-  "OverlyLongMethod",
-  "UseOfStringTokenizer",
   "MethodWithMultipleReturnPoints"})
 public enum ColorUtils {
   DEFAULT;
+
+  public static final char OPEN_PAREN = '(';
+  public static final char CLOSE_PAREN = ')';
+  @NonNls
+  public static final String COMMA = ",";
+  @NonNls
+  public static final String PERCENT = "%";
 
   /**
    * Parse rgb in the hex format #123
@@ -348,211 +345,4 @@ public enum ColorUtils {
     return (int) (f * 255.0f + 0.5f);
   }
 
-  /**
-   * Parse a color in the rgb[a](r, g, b[, a]) format
-   */
-  @SuppressWarnings({"StaticMethodOnlyUsedInOneClass",
-    "MagicCharacter",
-    "SingleCharacterStartsWith",
-    "ReuseOfLocalVariable"})
-  @Nullable
-  public static Color parseRGB(@NotNull final String text) {
-    boolean isPercent = false;
-    float a = 1.0f;
-    final int r;
-    final int g;
-    final int b;
-    final int parenStart = text.indexOf('(');
-    final int parenEnd = text.indexOf(')');
-
-    if (parenStart == -1 || parenEnd == -1) {
-      return null;
-    }
-
-    final StringTokenizer tokenizer = new StringTokenizer(text.substring(parenStart + 1, parenEnd), ","); // split by ,
-
-    // Parse r, g, b and a
-    String part = tokenizer.nextToken().trim();
-    if (part.endsWith("%")) {
-      isPercent = true;
-      r = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      r = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith("%")) {
-      isPercent = true;
-      g = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      g = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith("%")) {
-      isPercent = true;
-      b = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      b = Integer.parseInt(part);
-    }
-
-    if (tokenizer.hasMoreTokens()) {
-      part = tokenizer.nextToken().trim();
-      a = Float.parseFloat(part);
-    }
-
-    if (isPercent) {
-      return getPercentRGBa(r, g, b, a);
-    } else {
-      return getDecimalRGBa(r, g, b, a);
-    }
-  }
-
-  /**
-   * Parse a color in the hsl[a](h, s, l[, a]) format
-   */
-  @Nullable
-  public static Color parseHSL(@NotNull final String text) {
-    float a = 1.0f;
-    final int h;
-    final int s;
-    final int l;
-    final int parenStart = text.indexOf('(');
-    final int parenEnd = text.indexOf(')');
-
-    if (parenStart == -1 || parenEnd == -1) {
-      return null;
-    }
-
-    final StringTokenizer tokenizer = new StringTokenizer(text.substring(parenStart + 1, parenEnd), ",");
-    String part = tokenizer.nextToken().trim();
-
-    h = Integer.parseInt(part);
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith("%")) {
-      s = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      s = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith("%")) {
-      l = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      l = Integer.parseInt(part);
-    }
-
-    if (tokenizer.hasMoreTokens()) {
-      part = tokenizer.nextToken().trim();
-      a = Float.parseFloat(part);
-    }
-
-    return getHSLa(h, s, l, a);
-  }
-
-  /**
-   * parse a color in the hex format
-   */
-  @NotNull
-  public static Color parseHex(@NotNull final String text) {
-    return text.length() == 4 ? getShortRGB(text.substring(1)) : getRGB(text.substring(1));
-  }
-
-  @SuppressWarnings({"MagicCharacter",
-    "HardCodedStringLiteral"})
-  @Nullable
-  public static Color parseConstructor(@NotNull final String text) {
-    boolean isFloat = false;
-    float fr = 0.0f;
-    float fg = 0.0f;
-    float fb = 0.0f;
-    float fa = 1.0f;
-    int ir = 0;
-    int ig = 0;
-    int ib = 0;
-    int ia = 255;
-    boolean alpha = false;
-    final int ps = text.indexOf('(');
-    final int pe = text.indexOf(')');
-    if (ps == -1 || pe == -1) {
-      return null;
-    }
-
-    final StringTokenizer tokenizer = new StringTokenizer(text.substring(ps + 1, pe), ",");
-    final int params = tokenizer.countTokens();
-    @NonNls String part = tokenizer.nextToken().trim();
-    if (part.endsWith("f")) {
-      isFloat = true;
-      fr = Float.parseFloat(part.substring(0, part.length() - 1));
-    } else {
-      ir = parseInt(part);
-    }
-
-    if (params >= 2) {
-      part = tokenizer.nextToken().trim();
-      if ("true".equals(part)) {
-        alpha = true;
-      } else if ("false".equals(part)) {
-        alpha = false;
-      } else if (part.endsWith("f")) {
-        isFloat = true;
-        fg = Float.parseFloat(part.substring(0, part.length() - 1));
-      } else {
-        ig = parseInt(part);
-      }
-
-      if (params >= 3) {
-        part = tokenizer.nextToken().trim();
-        if (part.endsWith("f")) {
-          isFloat = true;
-          fb = Float.parseFloat(part.substring(0, part.length() - 1));
-        } else {
-          ib = parseInt(part);
-        }
-
-        if (params == 4) {
-          part = tokenizer.nextToken().trim();
-          if (part.endsWith("f")) {
-            isFloat = true;
-            fa = Float.parseFloat(part.substring(0, part.length() - 1));
-          } else {
-            ia = parseInt(part);
-          }
-        }
-      }
-    }
-
-    if (isFloat) {
-      return new Color(fr, fg, fb, fa);
-    } else {
-      if (params == 1) {
-        return new Color(ir);
-      } else if (params == 2) {
-        return new Color(ir, alpha);
-      } else {
-        return new Color(ir, ig, ib, ia);
-      }
-    }
-  }
-
-  @Nullable
-  public static Color parseMethod(@NotNull final String text, final String s) {
-    final String name = text.substring(s.length());
-    return ColorsService.getInstance().findJavaColor(name);
-  }
-
-  private static int parseInt(final String part) {
-    final int res;
-
-    if (part.toLowerCase().startsWith("0x")) {
-      res = Integer.parseInt(part.substring(2), 16);
-    } else if (part.startsWith("0") && part.length() > 1) {
-      res = Integer.parseInt(part.substring(1), 8);
-    } else {
-      res = Integer.parseInt(part);
-    }
-
-    return res;
-  }
 }
