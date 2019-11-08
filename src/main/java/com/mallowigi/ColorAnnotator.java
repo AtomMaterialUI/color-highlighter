@@ -33,7 +33,6 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLiteralValue;
 import com.intellij.ui.ColorUtil;
 import com.intellij.ui.Gray;
@@ -44,7 +43,7 @@ import java.awt.*;
 
 public class ColorAnnotator implements Annotator {
 
-  private static boolean isTargetElement(final PsiElement element, final PsiFile file) {
+  private static boolean isTargetElement(final PsiElement element) {
     final Object text = ((PsiLiteralValue) element).getValue();
     return text instanceof String;
   }
@@ -58,7 +57,7 @@ public class ColorAnnotator implements Annotator {
                                  @NotNull final AnnotationHolder holder) {
     final Annotation annotation = holder.createInfoAnnotation(elementToAnnotate, null);
     if (GutterColorRenderer.isGutterColorEnabled()) {
-      annotation.setGutterIconRenderer(new GutterColorRenderer(color));
+      annotation.setGutterIconRenderer(new GutterColorRenderer(color, elementToAnnotate));
     }
     annotation.setTextAttributes(createTextAttributeKey(color));
   }
@@ -78,7 +77,7 @@ public class ColorAnnotator implements Annotator {
       return;
     }
 
-    if (!isTargetElement(element, holder.getCurrentAnnotationSession().getFile())) {
+    if (!isTargetElement(element)) {
       return;
     }
 

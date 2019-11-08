@@ -27,8 +27,17 @@
 package com.mallowigi;
 
 import com.intellij.codeInsight.daemon.LineMarkerSettings;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorLineMarkerProvider;
+import com.intellij.ui.ColorPicker;
+import com.intellij.ui.ColorUtil;
 import com.intellij.util.ui.ColorIcon;
 import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.JBUI;
@@ -43,10 +52,12 @@ import java.util.Objects;
 final class GutterColorRenderer extends GutterIconRenderer {
   private static final int ICON_SIZE = 12;
   @NonNls
-  private final Color color;
+  final Color color;
+  final PsiElement elementToAnnotate;
 
-  GutterColorRenderer(final Color color) {
+  GutterColorRenderer(final Color color, final PsiElement elementToAnnotate) {
     this.color = color;
+    this.elementToAnnotate = elementToAnnotate;
   }
 
   static boolean isGutterColorEnabled() {
@@ -70,6 +81,44 @@ final class GutterColorRenderer extends GutterIconRenderer {
     return "Choose Color";
   }
 
+  @NotNull
+  @NonNls
+  @Override
+  public AnAction getClickAction() {
+    return new AnAction("Choose Color...") {
+      @Override
+      public void actionPerformed(@NotNull final AnActionEvent e) {
+        final Editor editor = e.getData(CommonDataKeys.EDITOR);
+        if (editor == null) {
+          return;
+        }
+
+        final Color currentColor = color;
+        if (currentColor == null) {
+          return;
+        }
+
+        ColorPicker.showColorPickerPopup(e.getProject(), currentColor, (newColor, l) -> applyColor(currentColor, newColor, editor));
+      }
+
+      private void applyColor(final Color currentColor, final Color newColor, final Editor editor) {
+        if (newColor == null || newColor.equals(currentColor)) {
+          return;
+        }
+
+        @NonNls final String newColorHex = String.format("\"#%s\"", ColorUtil.toHex(newColor));
+        final Project project = elementToAnnotate.getProject();
+
+        WriteCommandAction.writeCommandAction(project, elementToAnnotate.getContainingFile()).run(
+          () -> editor.getDocument().replaceString(
+            elementToAnnotate.getTextOffset(),
+            elementToAnnotate.getTextOffset() + newColorHex.length(),
+            newColorHex)
+        );
+      }
+    };
+  }
+
   @Override
   public boolean isNavigateAction() {
     return true;
@@ -84,15 +133,13 @@ final class GutterColorRenderer extends GutterIconRenderer {
       return false;
     }
     final GutterColorRenderer renderer = (GutterColorRenderer) obj;
-    return color.equals(renderer.getColor());
+    return color.equals(renderer.color);
   }
 
+  @SuppressWarnings("ObjectInstantiationInEqualsHashCode")
   @Override
   public int hashCode() {
     return Objects.hash(color);
   }
 
-  public Color getColor() {
-    return color;
-  }
 }

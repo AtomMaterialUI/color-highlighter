@@ -539,11 +539,7 @@ public enum ColorUtils {
   @Nullable
   public static Color parseMethod(@NotNull final String text, final String s) {
     final String name = text.substring(s.length());
-    final Color color = ColorsService.getInstance().findJavaColor(name);
-    if (color != null) {
-      return color;
-    }
-    return null;
+    return ColorsService.getInstance().findJavaColor(name);
   }
 
   private static int parseInt(final String part) {
