@@ -97,7 +97,7 @@ public enum ColorSearchEngine {
    */
   @Nullable
   public static Color getColor(@NotNull final String text) {
-    return ColorParserFactory.parseColor(text);
+    return ColorParserFactory.getParser(text).parseColor(text);
   }
 
 }

@@ -26,7 +26,7 @@
 
 package com.mallowigi.search.parsers;
 
-import java.awt.*;
+import java.util.regex.Pattern;
 
 public enum ColorParserFactory {
   ;
@@ -36,12 +36,11 @@ public enum ColorParserFactory {
   private static final String HSL = "hsl";
   private static final String COLOR = "Color";
   private static final String COLOR_UI_RESOURCE = "ColorUIResource";
+  private static final Pattern NO_HEX_PATTERN = Pattern.compile(
+    "((\\p{XDigit}{6}\\b)|(\\p{XDigit}{3}\\b))"
+  );
 
-  public static Color parseColor(final String text) {
-    return getParser(text).parseColor(text);
-  }
-
-  private static ColorParser getParser(final String text) {
+  public static ColorParser getParser(final String text) {
     try {
       if (text.startsWith("#")) {
         return new HexColorParser();
@@ -49,6 +48,8 @@ public enum ColorParserFactory {
         return new RGBColorParser();
       } else if (text.startsWith(HSL)) {
         return new HSLColorParser();
+      } else if (NO_HEX_PATTERN.matcher(text).find()) {
+        return new NoHexColorParser();
         //      } else if (text.startsWith(COLOR_METHOD)) {
         //        return new ColorMethodParser(COLOR_METHOD);
         //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
