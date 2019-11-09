@@ -32,17 +32,25 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 public final class HexColorParser implements ColorParser {
-  /**
-   * parse a color in the hex format
-   */
-  @NotNull
-  private static Color parseHex(@NotNull final String text) {
-    return text.length() == 4 ? ColorUtils.getShortRGB(text.substring(1)) : ColorUtils.getRGB(text.substring(1));
+  private final int offset;
+
+  HexColorParser(final boolean withHash) {
+    offset = withHash ? 1 : 0;
   }
 
   @Override
   public Color parseColor(final String text) {
     return parseHex(text);
+  }
+
+  /**
+   * parse a color in the hex format
+   */
+  @NotNull
+  private Color parseHex(@NotNull final String text) {
+    return text.length() == 3 + offset ?
+           ColorUtils.getShortRGB(text.substring(offset)) :
+           ColorUtils.getRGB(text.substring(offset));
   }
 
 }

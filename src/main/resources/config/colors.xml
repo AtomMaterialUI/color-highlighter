@@ -15,6 +15,7 @@
         <color name="blue" code="0000ff"/>
         <color name="blueviolet" code="8a2be2"/>
         <color name="brown" code="a52a2a"/>
+        <color name="buff" code="F0DC82"/>
         <color name="burlywood" code="deb887"/>
         <color name="cadetblue" code="5f9ea0"/>
         <color name="chartreuse" code="7fff00"/>
@@ -25,25 +26,32 @@
         <color name="crimson" code="dc143c"/>
         <color name="cyan" code="00ffff"/>
         <color name="darkblue" code="00008b"/>
+        <color name="darkbrown" code="5C4033"/>
+        <color name="darkbuff" code="976638"/>
         <color name="darkcyan" code="008b8b"/>
+        <color name="darkgold" code="EEBC1D"/>
         <color name="darkgoldenrod" code="b8860b"/>
-        <color name="darkgray" code="a9a9a9"/>
+        <color name="darkgray" code="404040"/>
         <color name="darkgreen" code="006400"/>
-        <color name="darkgray" code="a9a9a9"/>
         <color name="darkgrey" code="a9a9a9"/>
+        <color name="darkivory" code="F2E58F"/>
         <color name="darkkhaki" code="bdb76b"/>
         <color name="darkmagenta" code="8b008b"/>
+        <color name="darkmustard" code="7C7C40"/>
         <color name="darkolivegreen" code="556b2f"/>
         <color name="darkorange" code="ff8c00"/>
         <color name="darkorchid" code="9932cc"/>
+        <color name="darkpink" code="E75480"/>
         <color name="darkred" code="8b0000"/>
         <color name="darksalmon" code="e9967a"/>
+        <color name="darksilver" code="AFAFAF"/>
         <color name="darkseagreen" code="8fbc8f"/>
         <color name="darkslateblue" code="483d8b"/>
         <color name="darkslategray" code="2f4f4f"/>
         <color name="darkslategrey" code="2f4f4f"/>
         <color name="darkturquoise" code="00ced1"/>
         <color name="darkviolet" code="9400d3"/>
+        <color name="darkyellow" code="FFCC00"/>
         <color name="deeppink" code="ff1493"/>
         <color name="deepskyblue" code="00bfff"/>
         <color name="dimgray" code="696969"/>
@@ -71,20 +79,33 @@
         <color name="lavenderblush" code="fff0f5"/>
         <color name="lawngreen" code="7cfc00"/>
         <color name="lemonchiffon" code="fffacd"/>
+        <color name="lightblack" code="808080"/>
         <color name="lightblue" code="add8e6"/>
+        <color name="lightbrown" code="9966FF"/>
+        <color name="lightbuff" code="ECD9B0"/>
         <color name="lightcoral" code="f08080"/>
         <color name="lightcyan" code="e0ffff"/>
+        <color name="lightgold" code="F1E5AC"/>
+        <color name="lightgoldenrod" code="FFEC8B"/>
         <color name="lightgoldenrodyellow" code="fafad2"/>
         <color name="lightgray" code="d3d3d3"/>
         <color name="lightgreen" code="90ee90"/>
         <color name="lightgrey" code="d3d3d3"/>
+        <color name="lightivory" code="FFF8C9"/>
+        <color name="lightmagenta" code="FF77FF"/>
+        <color name="lightmustard" code="EEDD62"/>
+        <color name="lightorange" code="D9A465"/>
         <color name="lightpink" code="ffb6c1"/>
+        <color name="lightred" code="FF3333"/>
         <color name="lightsalmon" code="ffa07a"/>
         <color name="lightseagreen" code="20b2aa"/>
+        <color name="lightsilver" code="E1E1E1"/>
         <color name="lightskyblue" code="87cefa"/>
         <color name="lightslategray" code="778899"/>
         <color name="lightslategrey" code="778899"/>
         <color name="lightsteelblue" code="b0c4de"/>
+        <color name="lightturquoise" code="AFE4DE"/>
+        <color name="lightviolet" code="7A5299"/>
         <color name="lightyellow" code="ffffe0"/>
         <color name="lime" code="00ff00"/>
         <color name="limegreen" code="32cd32"/>
@@ -104,6 +125,7 @@
         <color name="mintcream" code="f5fffa"/>
         <color name="mistyrose" code="ffe4e1"/>
         <color name="moccasin" code="ffe4b5"/>
+        <color name="mustard" code="FFDB58"/>
         <color name="navajowhite" code="ffdead"/>
         <color name="navy" code="000080"/>
         <color name="oldlace" code="fdf5e6"/>
