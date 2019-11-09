@@ -73,6 +73,10 @@ public class ColorAnnotator implements Annotator {
 
   @Override
   public final void annotate(@NotNull final PsiElement element, @NotNull final AnnotationHolder holder) {
+    if (!ColorHighlightSettings.isPluginEnabled()) {
+      return;
+    }
+
     if (!(element instanceof PsiLiteralValue)) {
       return;
     }

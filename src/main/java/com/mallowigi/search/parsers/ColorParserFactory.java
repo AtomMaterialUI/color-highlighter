@@ -36,7 +36,7 @@ public enum ColorParserFactory {
   private static final String HSL = "hsl";
   private static final String COLOR = "Color";
   private static final String COLOR_UI_RESOURCE = "ColorUIResource";
-  private static final Pattern NO_HEX_PATTERN = Pattern.compile("(\\b[a-f0-9]{3,6}\\b)");
+  private static final Pattern NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,6}\\b)");
 
   public static ColorParser getParser(final String text) {
     try {
