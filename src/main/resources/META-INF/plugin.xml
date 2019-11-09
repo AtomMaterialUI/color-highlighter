@@ -31,7 +31,9 @@
     <vendor email="heliosaian@gmail.com" url="https://github.com/mallowigi">Mallowigi</vendor>
 
     <description><![CDATA[
-Find colors in editors and colorize them with their color.
+This plugin highlights colors in editors in order to make them more stand out.
+
+This does the same as "Show CSS Color preview as background", only for all languages!
     ]]></description>
 
     <idea-version since-build="192.5728.12"/>
