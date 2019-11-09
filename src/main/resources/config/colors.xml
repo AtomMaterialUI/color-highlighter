@@ -29,6 +29,7 @@
         <color name="darkgoldenrod" code="b8860b"/>
         <color name="darkgray" code="a9a9a9"/>
         <color name="darkgreen" code="006400"/>
+        <color name="darkgray" code="a9a9a9"/>
         <color name="darkgrey" code="a9a9a9"/>
         <color name="darkkhaki" code="bdb76b"/>
         <color name="darkmagenta" code="8b008b"/>
@@ -122,6 +123,7 @@
         <color name="plum" code="dda0dd"/>
         <color name="powderblue" code="b0e0e6"/>
         <color name="purple" code="800080"/>
+        <color name="rebeccapurple" code="663399"/>
         <color name="red" code="ff0000"/>
         <color name="rosybrown" code="bc8f8f"/>
         <color name="royalblue" code="4169e1"/>

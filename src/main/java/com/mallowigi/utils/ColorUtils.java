@@ -26,7 +26,9 @@
 
 package com.mallowigi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -35,7 +37,6 @@ import java.awt.*;
  */
 @SuppressWarnings({"StandardVariableNames",
   "OverlyComplexBooleanExpression",
-  "StaticMethodOnlyUsedInOneClass",
   "SingleCharacterStartsWith",
   "AssignmentToMethodParameter",
   "FloatingPointEquality",
@@ -53,8 +54,9 @@ public enum ColorUtils {
   /**
    * Parse rgb in the hex format #123
    */
-  public static Color getShortRGB(final String rgb) {
-    assert rgb.length() == 3;
+  @NotNull
+  public static Color getShortRGB(final String hex) {
+    final String rgb = normalizeRGB(hex, 3);
 
     final int r = Integer.parseInt(rgb.substring(0, 1), 16);
     final int g = Integer.parseInt(rgb.substring(1, 2), 16);
@@ -63,17 +65,34 @@ public enum ColorUtils {
     return new Color(r, g, b);
   }
 
+  @NonNls
+  private static String padZeros(final int num, final String color) {
+    return StringUtil.repeat("0", num) + color;
+  }
+
   /**
    * Parse rgb in the hex format #123456
    */
-  public static Color getRGB(final String rrggbb) {
-    assert rrggbb.length() == 6;
+  @NotNull
+  public static Color getRGB(final String hex) {
+    final String rgb = normalizeRGB(hex, 6);
 
-    final int r = Integer.parseInt(rrggbb.substring(0, 2), 16);
-    final int g = Integer.parseInt(rrggbb.substring(2, 4), 16);
-    final int b = Integer.parseInt(rrggbb.substring(4, 6), 16);
+    final int r = Integer.parseInt(rgb.substring(0, 2), 16);
+    final int g = Integer.parseInt(rgb.substring(2, 4), 16);
+    final int b = Integer.parseInt(rgb.substring(4, 6), 16);
 
     return new Color(r, g, b);
+  }
+
+  @NotNull
+  private static String normalizeRGB(final String hex, final int i) {
+    String rgb = hex;
+    if (rgb.length() < i) {
+      rgb = padZeros(i - rgb.length(), rgb);
+    } else if (rgb.length() > i) {
+      rgb = rgb.substring(0, i);
+    }
+    return rgb;
   }
 
   /**
@@ -111,7 +130,7 @@ public enum ColorUtils {
     b = normalizePercent(b);
     a = normalizeFraction(a);
 
-    return new Color((float) r / 100.0f, (float) g / 100.0f, (float) b / 100.0f, a);
+    return new Color(r / 100.0f, g / 100.0f, b / 100.0f, a);
   }
 
   /**
@@ -131,7 +150,7 @@ public enum ColorUtils {
     l = normalizePercent(l);
     a = normalizeFraction(a);
 
-    final float[] rgb = convertHSLToRGB((float) h / 359.0f, (float) s / 100.0f, (float) l / 100.0f);
+    final float[] rgb = convertHSLToRGB(h / 359.0f, s / 100.0f, l / 100.0f);
 
     return new Color(rgb[0], rgb[1], rgb[2], a);
   }

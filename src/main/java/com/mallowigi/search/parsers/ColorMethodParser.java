@@ -40,7 +40,7 @@ public final class ColorMethodParser implements ColorParser {
   }
 
   @Nullable
-  public static Color parseMethod(@NotNull final String text, final String s) {
+  private static Color parseMethod(@NotNull final String text, final String s) {
     final String name = text.substring(s.length());
     return ColorsService.getInstance().findJavaColor(name);
   }

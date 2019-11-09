@@ -36,26 +36,24 @@ public enum ColorParserFactory {
   private static final String HSL = "hsl";
   private static final String COLOR = "Color";
   private static final String COLOR_UI_RESOURCE = "ColorUIResource";
-  private static final Pattern NO_HEX_PATTERN = Pattern.compile(
-    "((\\p{XDigit}{6}\\b)|(\\p{XDigit}{3}\\b))"
-  );
+  private static final Pattern NO_HEX_PATTERN = Pattern.compile("([a-f0-9]{3,6}\\b)");
 
   public static ColorParser getParser(final String text) {
     try {
       if (text.startsWith("#")) {
-        return new HexColorParser();
+        return new HexColorParser(true);
       } else if (text.startsWith(RGB)) {
         return new RGBColorParser();
       } else if (text.startsWith(HSL)) {
         return new HSLColorParser();
       } else if (NO_HEX_PATTERN.matcher(text).find()) {
-        return new NoHexColorParser();
-        //      } else if (text.startsWith(COLOR_METHOD)) {
-        //        return new ColorMethodParser(COLOR_METHOD);
-        //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
-        //        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
-        //      } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
-        //        return new ColorCtorParser();
+        return new HexColorParser(false);
+      } else if (text.startsWith(COLOR_METHOD)) {
+        return new ColorMethodParser(COLOR_METHOD);
+      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
+        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
+      } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
+        return new ColorCtorParser();
       } else {
         return new SVGColorParser();
       }
