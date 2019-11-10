@@ -31,20 +31,16 @@ import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.options.BeanConfigurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import org.jetbrains.annotations.NonNls;
 
-public final class ColorHighlightSettings extends BeanConfigurable<WebEditorOptions> implements UnnamedConfigurable {
+public final class ColorHighlightSettings extends BeanConfigurable<WebEditorOptions> {
   @NonNls
   private static final String COLOR_HIGHLIGHT = "COLOR_HIGHLIGHT";
 
   public ColorHighlightSettings() {
     super(WebEditorOptions.getInstance());
-    if (PropertiesComponent.getInstance().getValue(COLOR_HIGHLIGHT) == null) {
-      PropertiesComponent.getInstance().setValue(COLOR_HIGHLIGHT, true);
-    }
 
     checkBox("ColorHighlighter: Show colors inline",
       ColorHighlightSettings::isPluginEnabled,
@@ -52,11 +48,11 @@ public final class ColorHighlightSettings extends BeanConfigurable<WebEditorOpti
   }
 
   static boolean isPluginEnabled() {
-    return PropertiesComponent.getInstance().getBoolean(COLOR_HIGHLIGHT);
+    return PropertiesComponent.getInstance().getBoolean(COLOR_HIGHLIGHT, true);
   }
 
   private static void applySettings(final boolean value) {
-    PropertiesComponent.getInstance().setValue(COLOR_HIGHLIGHT, value);
+    PropertiesComponent.getInstance().setValue(COLOR_HIGHLIGHT, value, true);
   }
 
   @Override
