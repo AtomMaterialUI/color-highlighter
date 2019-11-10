@@ -28,6 +28,7 @@ package com.mallowigi.search.parsers;
 
 import java.awt.*;
 
+@FunctionalInterface
 public interface ColorParser {
   Color parseColor(final String text);
 }

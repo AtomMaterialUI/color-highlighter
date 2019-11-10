@@ -39,26 +39,22 @@ public enum ColorParserFactory {
   private static final Pattern NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,6}\\b)");
 
   public static ColorParser getParser(final String text) {
-    try {
-      if (text.startsWith("#")) {
-        return new HexColorParser(true);
-      } else if (text.startsWith(RGB)) {
-        return new RGBColorParser();
-      } else if (text.startsWith(HSL)) {
-        return new HSLColorParser();
-      } else if (NO_HEX_PATTERN.matcher(text).find()) {
-        return new HexColorParser(false);
-        //      } else if (text.startsWith(COLOR_METHOD)) {
-        //        return new ColorMethodParser(COLOR_METHOD);
-        //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
-        //        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
-        //      } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
-        //        return new ColorCtorParser();
-      } else {
-        return new SVGColorParser();
-      }
-    } catch (final NumberFormatException e) {
-      return new NullParser();
+    if (text.startsWith("#") && text.length() > 1) {
+      return new HexColorParser(true);
+    } else if (text.startsWith(RGB)) {
+      return new RGBColorParser();
+    } else if (text.startsWith(HSL)) {
+      return new HSLColorParser();
+    } else if (NO_HEX_PATTERN.matcher(text).find()) {
+      return new HexColorParser(false);
+      //      } else if (text.startsWith(COLOR_METHOD)) {
+      //        return new ColorMethodParser(COLOR_METHOD);
+      //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
+      //        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
+      //      } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
+      //        return new ColorCtorParser();
+    } else {
+      return new SVGColorParser();
     }
   }
 }
