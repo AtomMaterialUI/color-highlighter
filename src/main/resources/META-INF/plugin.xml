@@ -41,11 +41,13 @@ This does the same as "Show CSS Color preview as background", only for all langu
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true">org.jetbrains.plugins.yaml</depends>
+    <depends optional="true">org.jetbrains.plugins.json</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
         <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"/>
         <annotator language="yaml" implementationClass="com.mallowigi.YamlColorAnnotator"/>
+        <annotator language="JSON" implementationClass="com.mallowigi.JsonColorAnnotator"/>
 
         <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
     </extensions>
