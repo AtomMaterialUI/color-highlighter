@@ -129,7 +129,7 @@ public final class ColorsService {
     return null;
   }
 
-  @SuppressWarnings("HardCodedStringLiteral")
+  @SuppressWarnings("FeatureEnvy")
   private void loadColors() {
     final Colors colors = parseColorsFromXML();
 

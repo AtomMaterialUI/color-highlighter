@@ -38,6 +38,7 @@ public enum ColorParserFactory {
   private static final String COLOR_UI_RESOURCE = "ColorUIResource";
   private static final Pattern NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,6}\\b)");
 
+  @SuppressWarnings("IfStatementWithTooManyBranches")
   public static ColorParser getParser(final String text) {
     if (text.startsWith("#") && text.length() > 1) {
       return new HexColorParser(true);

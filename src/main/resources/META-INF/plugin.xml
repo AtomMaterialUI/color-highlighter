@@ -43,8 +43,7 @@ This does the same as "Show CSS Color preview as background", only for all langu
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
-        <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"
-        />
+        <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"/>
         <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
     </extensions>
 

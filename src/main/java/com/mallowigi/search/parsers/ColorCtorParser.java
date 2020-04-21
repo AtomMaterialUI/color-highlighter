@@ -33,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.util.StringTokenizer;
 
+@SuppressWarnings({"OverlyComplexMethod",
+  "OverlyLongMethod"})
 public final class ColorCtorParser implements ColorParser {
   @SuppressWarnings({"MagicCharacter"
   })
@@ -112,7 +114,7 @@ public final class ColorCtorParser implements ColorParser {
 
   }
 
-  private static int parseInt(final String part) {
+  private static int parseInt(@NonNls final String part) {
     final int res;
 
     if (part.toLowerCase().startsWith("0x")) {

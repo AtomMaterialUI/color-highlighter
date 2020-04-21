@@ -43,7 +43,6 @@ import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,12 +74,13 @@ final class GutterColorRenderer extends GutterIconRenderer {
 
   }
 
-  @Nullable
+  @NotNull
   @Override
   public String getTooltipText() {
     return "Choose Color";
   }
 
+  @SuppressWarnings("OverlyComplexAnonymousInnerClass")
   @NotNull
   @NonNls
   @Override

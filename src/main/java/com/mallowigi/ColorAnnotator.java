@@ -26,12 +26,11 @@
 
 package com.mallowigi;
 
-import com.intellij.lang.annotation.Annotation;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.*;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLiteralValue;
 import com.intellij.ui.ColorUtil;
@@ -41,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class ColorAnnotator implements Annotator {
+public class ColorAnnotator implements Annotator, DumbAware {
 
   private static boolean isTargetElement(final PsiElement element) {
     final Object text = ((PsiLiteralValue) element).getValue();
@@ -55,19 +54,25 @@ public class ColorAnnotator implements Annotator {
   private static void doAnnotate(@NotNull final PsiElement elementToAnnotate,
                                  @NotNull final Color color,
                                  @NotNull final AnnotationHolder holder) {
-    final Annotation annotation = holder.createInfoAnnotation(elementToAnnotate, null);
+    AnnotationBuilder annotationBuilder = holder.newAnnotation(HighlightSeverity.INFORMATION, "");
+    annotationBuilder = annotationBuilder
+      .range(elementToAnnotate)
+      .textAttributes(createTextAttributeKey(color));
+
     if (GutterColorRenderer.isGutterColorEnabled()) {
-      annotation.setGutterIconRenderer(new GutterColorRenderer(color, elementToAnnotate));
+      annotationBuilder = annotationBuilder.gutterIconRenderer(new GutterColorRenderer(color, elementToAnnotate));
     }
-    annotation.setTextAttributes(createTextAttributeKey(color));
+    annotationBuilder.create();
   }
 
+  @SuppressWarnings("deprecation")
   private static TextAttributesKey createTextAttributeKey(@NotNull final Color color) {
     final TextAttributes attributes = new TextAttributes();
     final Color background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
     final Color mix = ColorUtil.mix(background, color, color.getAlpha() / 255.0D);
     attributes.setBackgroundColor(mix);
     attributes.setForegroundColor(ColorUtil.isDark(mix) ? Gray._254 : Gray._1);
+
     return TextAttributesKey.createTextAttributesKey("MT_COLOR_" + mix.hashCode(), attributes);
   }
 

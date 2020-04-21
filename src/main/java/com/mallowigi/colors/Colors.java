@@ -31,7 +31,7 @@ import com.intellij.util.xmlb.annotations.Property;
 import java.util.Collections;
 import java.util.Set;
 
-class Colors {
+final class Colors {
   @Property
   private Set<SingleColor> colors;
 

@@ -38,7 +38,6 @@ public final class RGBColorParser implements ColorParser {
    * Parse a color in the rgb[a](r, g, b[, a]) format
    */
   @SuppressWarnings({
-    "SingleCharacterStartsWith",
     "ReuseOfLocalVariable",
     "UseOfStringTokenizer",
     "DuplicatedCode",
