@@ -80,8 +80,12 @@ public enum ColorUtils {
     final int r = Integer.parseInt(rgb.substring(0, 2), 16);
     final int g = Integer.parseInt(rgb.substring(2, 4), 16);
     final int b = Integer.parseInt(rgb.substring(4, 6), 16);
-
-    return new Color(r, g, b);
+    try {
+      final int a = Integer.parseInt(rgb.substring(6, 8), 16);
+      return new Color(r, g, b, a);
+    } catch (Exception e) {
+      return new Color(r, g, b);
+    }
   }
 
   @NotNull
