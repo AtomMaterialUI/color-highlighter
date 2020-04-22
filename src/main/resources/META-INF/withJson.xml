@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator language="JSON" implementationClass="com.mallowigi.JsonColorAnnotator"/>
+    </extensions>
+</idea-plugin>

@@ -46,7 +46,7 @@ public class JavaColorUiResourceAnnotator extends ColorAnnotator {
       return;
     }
 
-    if (!PsiUtilCore.getElementType(element).toString().equals("NEW_EXPRESSION")) {
+    if (!PsiUtilCore.getElementType(element).toString().equals("INTEGER_LITERAL")) {
       return;
     }
 

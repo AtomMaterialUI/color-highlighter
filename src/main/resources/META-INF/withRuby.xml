@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator language="ruby" implementationClass="com.mallowigi.RubyColorAnnotator"/>
+    </extensions>
+</idea-plugin>

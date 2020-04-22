@@ -34,8 +34,8 @@ import java.awt.*;
 public final class HexColorParser implements ColorParser {
   private final int offset;
 
-  HexColorParser(final boolean withHash) {
-    offset = withHash ? 1 : 0;
+  HexColorParser(final String prefix) {
+    offset = prefix.length();
   }
 
   @Override
