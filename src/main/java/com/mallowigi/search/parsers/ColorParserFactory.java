@@ -34,8 +34,8 @@ public enum ColorParserFactory {
   private static final String COLOR_UIRESOURCE_METHOD = "ColorUIResource.";
   private static final String RGB = "rgb";
   private static final String HSL = "hsl";
-  private static final String COLOR = "Color";
-  private static final String COLOR_UI_RESOURCE = "ColorUIResource";
+  private static final String COLOR = "new Color";
+  private static final String COLOR_UI_RESOURCE = "new ColorUIResource";
   private static final Pattern NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,8}\\b)");
 
   @SuppressWarnings("IfStatementWithTooManyBranches")
@@ -46,14 +46,14 @@ public enum ColorParserFactory {
       return new RGBColorParser();
     } else if (text.startsWith(HSL)) {
       return new HSLColorParser();
+    } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
+      return new ColorCtorParser();
     } else if (NO_HEX_PATTERN.matcher(text).find()) {
       return new HexColorParser(false);
       //      } else if (text.startsWith(COLOR_METHOD)) {
       //        return new ColorMethodParser(COLOR_METHOD);
       //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
       //        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
-      //      } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
-      //        return new ColorCtorParser();
     } else {
       return new SVGColorParser();
     }

@@ -48,6 +48,7 @@ This does the same as "Show CSS Color preview as background", only for all langu
         <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"/>
         <annotator language="yaml" implementationClass="com.mallowigi.YamlColorAnnotator"/>
         <annotator language="JSON" implementationClass="com.mallowigi.JsonColorAnnotator"/>
+        <annotator language="JAVA" implementationClass="com.mallowigi.JavaColorUiResourceAnnotator"/>
 
         <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
     </extensions>
