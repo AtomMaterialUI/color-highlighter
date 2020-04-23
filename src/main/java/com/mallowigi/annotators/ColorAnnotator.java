@@ -24,7 +24,7 @@
  *
  */
 
-package com.mallowigi;
+package com.mallowigi.annotators;
 
 import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -33,30 +33,59 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLiteralValue;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.ui.ColorUtil;
 import com.intellij.ui.Gray;
+import com.mallowigi.ColorHighlightSettings;
+import com.mallowigi.GutterColorRenderer;
 import com.mallowigi.search.ColorSearchEngine;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class YamlColorAnnotator extends ColorAnnotator {
-  static boolean isTargetElement(final PsiElement element) {
-    final Object text = element.getText();
-    return text != null;
+public class ColorAnnotator implements Annotator {
+
+  boolean isTargetElement(final PsiElement element) {
+    final Object text = ((PsiLiteralValue) element).getValue();
+    return text instanceof String;
+  }
+
+  static Color getColor(final String colorText) {
+    return ColorSearchEngine.getColor(colorText);
+  }
+
+  static void doAnnotate(@NotNull final PsiElement elementToAnnotate,
+                         @NotNull final Color color,
+                         @NotNull final AnnotationHolder holder) {
+    AnnotationBuilder annotationBuilder = holder.newAnnotation(HighlightSeverity.INFORMATION, "");
+    annotationBuilder = annotationBuilder
+      .range(elementToAnnotate)
+      .textAttributes(createTextAttributeKey(color));
+
+    if (GutterColorRenderer.isGutterColorEnabled()) {
+      annotationBuilder = annotationBuilder.gutterIconRenderer(new GutterColorRenderer(color, elementToAnnotate));
+    }
+    annotationBuilder.create();
+  }
+
+  private static TextAttributesKey createTextAttributeKey(@NotNull final Color color) {
+    final TextAttributes attributes = new TextAttributes();
+    final Color background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
+    final Color mix = ColorUtil.mix(background, color, color.getAlpha() / 255.0D);
+    attributes.setBackgroundColor(mix);
+    attributes.setForegroundColor(ColorUtil.isDark(mix) ? Gray._254 : Gray._1);
+
+    return TextAttributesKey.createTextAttributesKey("MT_COLOR_" + mix.hashCode(), attributes);
   }
 
   @Override
-  public final void annotate(@NotNull final PsiElement element, @NotNull final AnnotationHolder holder) {
+  public void annotate(@NotNull final PsiElement element, @NotNull final AnnotationHolder holder) {
     if (!ColorHighlightSettings.isPluginEnabled()) {
       return;
     }
 
-    if (!PsiUtilCore.getElementType(element).toString().equals("text")) {
+    if (!(element instanceof PsiLiteralValue)) {
       return;
     }
 
@@ -64,7 +93,8 @@ public class YamlColorAnnotator extends ColorAnnotator {
       return;
     }
 
-    final String value = element.getText();
+    final PsiLiteralValue literal = (PsiLiteralValue) element;
+    final String value = (String) literal.getValue();
     final Color color = getColor(value);
 
     if (color != null) {

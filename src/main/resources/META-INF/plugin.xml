@@ -28,26 +28,29 @@
     <id>com.mallowigi.colorHighlighter</id>
     <name>Color Highlighter</name>
     <version>@version@</version>
+    <category>Appearance</category>
     <vendor email="heliosaian@gmail.com" url="https://github.com/mallowigi">Mallowigi</vendor>
 
     <description><![CDATA[
 This plugin highlights colors in editors in order to make them more stand out.
 
-This does the same as "Show CSS Color preview as background", only for all languages!
+This does the same as "Show CSS Color preview as background", only for most languages!
     ]]></description>
 
-    <idea-version since-build="192.5728.12"/>
+    <idea-version since-build="201.7223.18"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
-    <depends optional="true" config-file="withJson.xml">org.jetbrains.plugins.json</depends>
+    <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
     <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
+
+    <resource-bundle>com.mallowigi.messages.ColorHighlighterBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
-        <annotator language="" implementationClass="com.mallowigi.ColorAnnotator"/>
-        <annotator language="JAVA" implementationClass="com.mallowigi.JavaColorUiResourceAnnotator"/>
+        <annotator language="" implementationClass="com.mallowigi.annotators.ColorAnnotator"/>
+        <annotator language="JAVA" implementationClass="com.mallowigi.annotators.JavaColorUiResourceAnnotator"/>
 
         <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
     </extensions>

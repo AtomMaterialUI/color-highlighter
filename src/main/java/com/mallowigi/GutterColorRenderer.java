@@ -48,22 +48,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-final class GutterColorRenderer extends GutterIconRenderer {
+public final class GutterColorRenderer extends GutterIconRenderer {
   private static final int ICON_SIZE = 12;
   @NonNls
-  final Color color;
-  final PsiElement elementToAnnotate;
+  private final Color color;
+  private final PsiElement elementToAnnotate;
 
-  GutterColorRenderer(final Color color, final PsiElement elementToAnnotate) {
+  public GutterColorRenderer(final Color color, final PsiElement elementToAnnotate) {
     this.color = color;
     this.elementToAnnotate = elementToAnnotate;
   }
 
-  static boolean isGutterColorEnabled() {
+  public static boolean isGutterColorEnabled() {
     return LineMarkerSettings.getSettings().isEnabled(ColorLineMarkerProvider.INSTANCE);
   }
 
-  @SuppressWarnings("UnstableApiUsage")
   @NotNull
   @Override
   public Icon getIcon() {

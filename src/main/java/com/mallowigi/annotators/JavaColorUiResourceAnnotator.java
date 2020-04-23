@@ -24,18 +24,20 @@
  *
  */
 
-package com.mallowigi;
+package com.mallowigi.annotators;
 
-import com.intellij.json.psi.JsonStringLiteral;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
+import com.mallowigi.ColorHighlightSettings;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+@SuppressWarnings("CallToSuspiciousStringMethod")
 public class JavaColorUiResourceAnnotator extends ColorAnnotator {
-  static boolean isTargetElement(final PsiElement element) {
+  @Override
+  boolean isTargetElement(final PsiElement element) {
     final Object text = element.getText();
     return text != null;
   }
@@ -46,7 +48,7 @@ public class JavaColorUiResourceAnnotator extends ColorAnnotator {
       return;
     }
 
-    if (!PsiUtilCore.getElementType(element).toString().equals("INTEGER_LITERAL")) {
+    if (!"INTEGER_LITERAL".equals(PsiUtilCore.getElementType(element).toString())) { // NON-NLS
       return;
     }
 

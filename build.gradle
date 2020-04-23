@@ -71,6 +71,17 @@ markdownToHtml {
 
 version = System.getenv("pluginVersion") ?: pluginVersion
 
+def pluginsDependencies = [
+        'java',
+        'java-i18n',
+        'JavaScriptLanguage',
+        'DatabaseTools',
+        'CSS',
+        'properties',
+        'yaml',
+        'org.jetbrains.plugins.ruby:201.6668.113',
+]
+
 intellij {
     pluginName 'Color Highlighter'
     type 'IU'
@@ -93,6 +104,8 @@ intellij {
         username System.getenv("publishUsername") ?: publishUsername
         password System.getenv("publishPassword") ?: publishPassword
     }
+
+    setPlugins(*pluginsDependencies)
 
 //    runIde {
 //        jbrVersion '11_0_3b312'

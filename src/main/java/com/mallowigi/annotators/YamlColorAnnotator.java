@@ -24,21 +24,22 @@
  *
  */
 
-package com.mallowigi;
+package com.mallowigi.annotators;
 
-import com.intellij.json.psi.JsonStringLiteral;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLiteralValue;
 import com.intellij.psi.util.PsiUtilCore;
+import com.mallowigi.ColorHighlightSettings;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class JsonColorAnnotator extends ColorAnnotator {
-  static boolean isTargetElement(final PsiElement element) {
-    final Object text = ((JsonStringLiteral) element).getValue();
-    return text instanceof String;
+@SuppressWarnings("CallToSuspiciousStringMethod")
+public class YamlColorAnnotator extends ColorAnnotator {
+  @Override
+  boolean isTargetElement(final PsiElement element) {
+    final Object text = element.getText();
+    return text != null;
   }
 
   @Override
@@ -47,7 +48,7 @@ public class JsonColorAnnotator extends ColorAnnotator {
       return;
     }
 
-    if (!(element instanceof JsonStringLiteral)) {
+    if (!"text".equals(PsiUtilCore.getElementType(element).toString())) {
       return;
     }
 
@@ -55,8 +56,7 @@ public class JsonColorAnnotator extends ColorAnnotator {
       return;
     }
 
-    final JsonStringLiteral literal = (JsonStringLiteral) element;
-    final String value = (String) literal.getValue();
+    final String value = element.getText();
     final Color color = getColor(value);
 
     if (color != null) {

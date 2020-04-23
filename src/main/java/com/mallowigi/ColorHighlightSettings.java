@@ -47,7 +47,7 @@ public final class ColorHighlightSettings extends BeanConfigurable<WebEditorOpti
       ColorHighlightSettings::applySettings);
   }
 
-  static boolean isPluginEnabled() {
+  public static boolean isPluginEnabled() {
     return PropertiesComponent.getInstance().getBoolean(COLOR_HIGHLIGHT, true);
   }
 

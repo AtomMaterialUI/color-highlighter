@@ -1,5 +1,5 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="yaml" implementationClass="com.mallowigi.YamlColorAnnotator"/>
+        <annotator language="yaml" implementationClass="com.mallowigi.annotators.YamlColorAnnotator"/>
     </extensions>
 </idea-plugin>
