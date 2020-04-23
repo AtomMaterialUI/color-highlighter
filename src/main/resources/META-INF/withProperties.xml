@@ -1,5 +1,5 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="Properties" implementationClass="com.mallowigi.annotators.PropertiesColorAnnotator"/>
+        <highlightVisitor implementation="com.mallowigi.visitors.PropertiesVisitor"/>
     </extensions>
 </idea-plugin>
