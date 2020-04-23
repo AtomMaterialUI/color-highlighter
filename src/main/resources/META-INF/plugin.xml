@@ -47,6 +47,8 @@ This does the same as "Show CSS Color preview as background", only for most lang
     <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
     <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
+    <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
+    <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
 
     <resource-bundle>com.mallowigi.messages.ColorHighlighterBundle</resource-bundle>
 
