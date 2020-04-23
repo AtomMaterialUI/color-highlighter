@@ -27,6 +27,9 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
+        gradlePluginPortal()
+        maven { url "https://maven-central.storage-download.googleapis.com/repos/central/data/" }
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
     }
     dependencies {
         classpath 'org.kordamp:markdown-gradle-plugin:1.0.0'
@@ -77,9 +80,15 @@ def pluginsDependencies = [
         'JavaScriptLanguage',
         'DatabaseTools',
         'CSS',
+        'platform-images',
+        'Groovy',
         'properties',
         'yaml',
+        "org.jetbrains.kotlin:$kotlinVersion-release-IJ2020.1-1",
+        'org.intellij.scala:2020.1.27',
+        'Dart:201.6668.124',
         'org.jetbrains.plugins.ruby:201.6668.113',
+        'com.jetbrains.php:201.6668.113'
 ]
 
 intellij {
