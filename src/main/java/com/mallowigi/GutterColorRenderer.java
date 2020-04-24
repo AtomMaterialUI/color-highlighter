@@ -35,12 +35,12 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.ui.ColorChooser;
 import com.intellij.ui.ColorLineMarkerProvider;
-import com.intellij.ui.ColorPicker;
 import com.intellij.ui.ColorUtil;
+import com.intellij.ui.scale.JBUIScale;
 import com.intellij.util.ui.ColorIcon;
 import com.intellij.util.ui.EmptyIcon;
-import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,16 +67,16 @@ public final class GutterColorRenderer extends GutterIconRenderer {
   @Override
   public Icon getIcon() {
     if (color != null) {
-      return JBUI.scale(new ColorIcon(ICON_SIZE, color));
+      return JBUIScale.scaleIcon(new ColorIcon(ICON_SIZE, color));
     }
-    return JBUI.scale(EmptyIcon.create(ICON_SIZE));
+    return JBUIScale.scaleIcon(EmptyIcon.create(ICON_SIZE));
 
   }
 
   @NotNull
   @Override
   public String getTooltipText() {
-    return "Choose Color";
+    return ColorHighlighterBundle.message("choose.color");
   }
 
   @SuppressWarnings("OverlyComplexAnonymousInnerClass")
@@ -84,7 +84,7 @@ public final class GutterColorRenderer extends GutterIconRenderer {
   @NonNls
   @Override
   public AnAction getClickAction() {
-    return new AnAction("Choose Color...") {
+    return new AnAction(ColorHighlighterBundle.message("choose.color1")) {
       @Override
       public void actionPerformed(@NotNull final AnActionEvent e) {
         final Editor editor = e.getData(CommonDataKeys.EDITOR);
@@ -97,15 +97,24 @@ public final class GutterColorRenderer extends GutterIconRenderer {
           return;
         }
 
-        ColorPicker.showColorPickerPopup(e.getProject(), currentColor, (newColor, l) -> applyColor(currentColor, newColor, editor));
+        final Color newColor = ColorChooser.chooseColor(
+          editor.getProject(),
+          editor.getComponent(),
+          ColorHighlighterBundle.message("replace.color"),
+          currentColor,
+          true
+        );
+        applyColor(currentColor, newColor, editor, true);
+        //        ColorPicker.showColorPickerPopup(e.getProject(), currentColor, (newColor, l) -> applyColor(currentColor, newColor,
+        //       editor));
       }
 
-      private void applyColor(final Color currentColor, final Color newColor, final Editor editor) {
+      private void applyColor(final Color currentColor, final Color newColor, final Editor editor, final boolean withAlpha) {
         if (newColor == null || newColor.equals(currentColor)) {
           return;
         }
 
-        @NonNls final String newColorHex = String.format("\"#%s\"", ColorUtil.toHex(newColor));
+        @NonNls final String newColorHex = String.format("#%s", ColorUtil.toHex(newColor, withAlpha));
         final Project project = elementToAnnotate.getProject();
 
         WriteCommandAction.writeCommandAction(project, elementToAnnotate.getContainingFile()).run(
@@ -141,4 +150,9 @@ public final class GutterColorRenderer extends GutterIconRenderer {
     return Objects.hash(color);
   }
 
+  @NotNull
+  @Override
+  public Alignment getAlignment() {
+    return Alignment.RIGHT;
+  }
 }

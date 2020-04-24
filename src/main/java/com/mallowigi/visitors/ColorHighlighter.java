@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorUtil;
 import com.intellij.ui.Gray;
+import com.mallowigi.GutterColorRenderer;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -31,13 +32,13 @@ final class ColorHighlighter {
   }
 
   static HighlightInfo highlightColor(final PsiElement element, final Color color) {
-
-    return getHighlightInfoBuilder(color).range(element).create();
+    return getHighlightInfoBuilder(color, element).range(element).create();
   }
 
   @NotNull
-  private static HighlightInfo.Builder getHighlightInfoBuilder(final Color color) {
+  private static HighlightInfo.Builder getHighlightInfoBuilder(final Color color, final PsiElement element) {
     return HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
+                        .gutterIconRenderer(new GutterColorRenderer(color, element))
                         .textAttributes(getAttributesFlyweight(color));
   }
 }

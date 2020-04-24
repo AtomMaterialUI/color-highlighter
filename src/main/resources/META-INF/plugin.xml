@@ -34,10 +34,31 @@
     <description><![CDATA[
 This plugin highlights colors in editors in order to make them more stand out.
 
-This does the same as "Show CSS Color preview as background", only for most languages!
+This does the same as "Show CSS Color preview as background", only for more languages!
+
+Supported languages:
+- XML
+- HTML
+- JavaScript
+- TypeScript
+- Properties
+- YAML
+- Python
+- PHP
+- Ruby
+- Scala
+- Java
+- Kotlin
+- Go
+- ObjectiveC
+- Swift
+
+More to come!
+
+PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
     ]]></description>
 
-    <idea-version since-build="201.7223.18"/>
+    <idea-version since-build="201.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
@@ -53,7 +74,7 @@ This does the same as "Show CSS Color preview as background", only for most lang
     <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
     <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
 
-    <resource-bundle>com.mallowigi.messages.ColorHighlighterBundle</resource-bundle>
+    <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
