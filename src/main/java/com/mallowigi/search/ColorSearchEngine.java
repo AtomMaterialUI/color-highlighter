@@ -95,10 +95,12 @@ public enum ColorSearchEngine {
    * Try to parse a color using the provided formats
    * TODO use Factory
    */
+  @SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
   @Nullable
   public static Color getColor(@NotNull final String text) {
     try {
-      return ColorParserFactory.getParser(text).parseColor(text);
+      final String normalizedText = text.replaceAll("\"", "").replaceAll("'", "");
+      return ColorParserFactory.getParser(normalizedText).parseColor(normalizedText);
     } catch (final RuntimeException e) {
       return null;
     }
