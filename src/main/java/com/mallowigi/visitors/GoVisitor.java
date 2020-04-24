@@ -6,14 +6,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
 import com.mallowigi.search.ColorSearchEngine;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.kotlin.psi.KtFile;
 
 import java.awt.*;
 
 public class GoVisitor extends ColorVisitor {
   @Override
   public boolean suitableForFile(@NotNull final PsiFile file) {
-    return file instanceof KtFile;
+    return file.getFileElementType().toString().equals("GO_FILE");
   }
 
   @Override
