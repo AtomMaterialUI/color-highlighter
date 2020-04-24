@@ -31,6 +31,7 @@ final class ColorHighlighter {
   }
 
   static HighlightInfo highlightColor(final PsiElement element, final Color color) {
+
     return getHighlightInfoBuilder(color).range(element).create();
   }
 

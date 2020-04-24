@@ -4,6 +4,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.mallowigi.ColorHighlightSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,9 +29,6 @@ public abstract class ColorVisitor implements HighlightVisitor {
                          final boolean updateWholeFile,
                          @NotNull final HighlightInfoHolder holder,
                          @NotNull final Runnable action) {
-    //    if (!ColorHighlightSettings.isPluginEnabled()) {
-    //      return false;
-    //    }
 
     myHolder = holder;
     myColorHighlighter = new ColorHighlighter();
@@ -50,6 +48,10 @@ public abstract class ColorVisitor implements HighlightVisitor {
 
   void highlight(final PsiElement element, final Color color) {
     assert myHolder != null;
+    if (!ColorHighlightSettings.isPluginEnabled()) {
+      return;
+    }
+
     myHolder.add(ColorHighlighter.highlightColor(element, color));
   }
 
