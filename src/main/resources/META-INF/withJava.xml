@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.JavaVisitor"/>
+    </extensions>
+</idea-plugin>

@@ -41,6 +41,7 @@ This does the same as "Show CSS Color preview as background", only for most lang
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
+    <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
     <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
     <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
     <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
@@ -48,7 +49,8 @@ This does the same as "Show CSS Color preview as background", only for most lang
     <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
     <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
-    <!--    <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>-->
+    <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
 
     <resource-bundle>com.mallowigi.messages.ColorHighlighterBundle</resource-bundle>
 
@@ -56,7 +58,6 @@ This does the same as "Show CSS Color preview as background", only for most lang
         <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
 
         <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
-        <highlightVisitor implementation="com.mallowigi.visitors.JavaVisitor"/>
 
         <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
     </extensions>

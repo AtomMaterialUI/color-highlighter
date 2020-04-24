@@ -84,11 +84,12 @@ def pluginsDependencies = [
         'Groovy',
         'properties',
         'yaml',
-        'org.jetbrains.plugins.go:201.6668.60.126',
-        "org.jetbrains.kotlin:$kotlinVersion-release-IJ2020.1-1",
-        'org.intellij.scala:2020.1.27',
-        'org.jetbrains.plugins.ruby:201.6668.113',
-        'com.jetbrains.php:201.6668.113'
+        "Pythonid:$pyVersion",
+        "org.jetbrains.plugins.go:$goVersion",
+        "org.jetbrains.kotlin:$kotlinVersion",
+        "org.intellij.scala:$scalaVersion",
+        "org.jetbrains.plugins.ruby:$rubyVersion",
+        "com.jetbrains.php:$phpVersion"
 ]
 
 intellij {

@@ -17,7 +17,7 @@ public abstract class ColorVisitor implements HighlightVisitor {
 
   @Override
   public boolean suitableForFile(@NotNull final PsiFile file) {
-    return false;
+    return true;
   }
 
   @Override
