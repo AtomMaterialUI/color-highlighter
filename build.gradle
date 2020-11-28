@@ -38,7 +38,7 @@ buildscript {
 
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.18'
+    id 'org.jetbrains.intellij' version '0.6.5'
 }
 
 repositories {
@@ -48,14 +48,10 @@ repositories {
 
 
 dependencies {
-    compile('com.thoughtworks.xstream:xstream:1.4.11.1') {
-//        exclude group: 'xmlpull', module: 'xmlpull'
-//        exclude group: 'xpp3', module: 'xpp3_min'
-    }
-
+    compile 'com.thoughtworks.xstream:xstream:1.4.11.1'
 }
-apply plugin: 'org.kordamp.markdown.convert'
 
+apply plugin: 'org.kordamp.markdown.convert'
 apply plugin: 'java'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -116,8 +112,4 @@ intellij {
     }
 
     setPlugins(*pluginsDependencies)
-
-//    runIde {
-//        jbrVersion '11_0_3b312'
-//    }
 }
