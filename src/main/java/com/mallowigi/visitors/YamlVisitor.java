@@ -4,6 +4,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ArrayUtil;
 import com.mallowigi.search.ColorSearchEngine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.psi.YAMLFile;
@@ -18,7 +19,7 @@ public class YamlVisitor extends ColorVisitor {
 
   @Override
   public void visit(@NotNull final PsiElement element) {
-    if (!"text".equals(PsiUtilCore.getElementType(element).toString())) {
+    if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring")) {
       return;
     }
 

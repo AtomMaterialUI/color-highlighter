@@ -30,10 +30,9 @@ import com.intellij.codeInsight.daemon.LineMarkerSettings;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorChooser;
 import com.intellij.ui.ColorLineMarkerProvider;
@@ -46,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.util.Objects;
 
 public final class GutterColorRenderer extends GutterIconRenderer {
@@ -104,25 +104,14 @@ public final class GutterColorRenderer extends GutterIconRenderer {
           currentColor,
           true
         );
-        applyColor(currentColor, newColor, editor, true);
-        //        ColorPicker.showColorPickerPopup(e.getProject(), currentColor, (newColor, l) -> applyColor(currentColor, newColor,
-        //       editor));
+        copyColor(currentColor, newColor, editor);
       }
 
-      private void applyColor(final Color currentColor, final Color newColor, final Editor editor, final boolean withAlpha) {
+      private void copyColor(final Color currentColor, final Color newColor, final Editor editor) {
         if (newColor == null || newColor.equals(currentColor)) {
           return;
         }
-
-        @NonNls final String newColorHex = String.format("#%s", ColorUtil.toHex(newColor, withAlpha));
-        final Project project = elementToAnnotate.getProject();
-
-        WriteCommandAction.writeCommandAction(project, elementToAnnotate.getContainingFile()).run(
-          () -> editor.getDocument().replaceString(
-            elementToAnnotate.getTextOffset(),
-            elementToAnnotate.getTextOffset() + newColorHex.length(),
-            newColorHex)
-        );
+        CopyPasteManager.getInstance().setContents(new StringSelection(ColorUtil.toHex(newColor, true)));
       }
     };
   }
