@@ -58,7 +58,7 @@ More to come!
 PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
     ]]></description>
 
-    <idea-version since-build="201.*"/>
+    <idea-version since-build="211.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
