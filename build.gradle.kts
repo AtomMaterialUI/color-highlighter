@@ -32,7 +32,7 @@ plugins {
   // Kotlin support
   id("org.jetbrains.kotlin.jvm") version "1.5.0-M2"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-  id("org.jetbrains.intellij") version "0.7.2"
+  id("org.jetbrains.intellij") version "1.0"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
   id("org.jetbrains.changelog") version "1.1.2"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
@@ -43,14 +43,21 @@ plugins {
 
 group = properties("pluginGroup")
 version = properties("pluginVersion")
+val depsGoVersion: String = properties("depsGoVersion")
+val depsKotlinVersion: String = properties("depsKotlinVersion")
+val depsPhpVersion: String = properties("depsPhpVersion")
+val depsPyVersion: String = properties("depsPyVersion")
+val depsRubyVersion: String = properties("depsRubyVersion")
+val depsScalaVersion: String = properties("depsScalaVersion")
 
 // Configure project's dependencies
 repositories {
   mavenCentral()
-  jcenter()
-  maven("https://www.jetbrains.com/intellij-repository/snapshots")
-  maven("https://www.jetbrains.com/intellij-repository/releases")
-  maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
+  maven(url = "https://maven-central.storage-download.googleapis.com/repos/central/data/")
+  maven(url = "https://maven.aliyun.com/nexus/content/groups/public/")
+  maven(url = "https://repo.eclipse.org/content/groups/releases/")
+  maven(url = "https://www.jetbrains.com/intellij-repository/releases")
+  maven(url = "https://www.jetbrains.com/intellij-repository/snapshots")
 }
 
 dependencies {
@@ -64,20 +71,32 @@ dependencies {
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-  pluginName = properties("pluginName")
-  version = properties("platformVersion")
-  type = properties("platformType")
-  downloadSources = true
-  instrumentCode = true
-  updateSinceUntilBuild = true
-  alternativeIdePath = properties("idePath")
+  pluginName.set(properties("pluginName"))
+  version.set(properties("platformVersion"))
+  type.set(properties("platformType"))
+  downloadSources.set(true)
+  instrumentCode.set(true)
+  updateSinceUntilBuild.set(true)
+//  localPath.set(properties("idePath"))
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-  setPlugins(*properties("platformPlugins")
-      .split(',')
-      .map(String::trim)
-      .filter(String::isNotEmpty)
-      .toTypedArray())
+  plugins.set(listOf(
+      "java",
+      "java-i18n",
+      "JavaScriptLanguage",
+      "DatabaseTools",
+      "javax.swing.text.html.CSS",
+      "platform-images",
+      "org.codehaus.groovy.ant.Groovy",
+      "properties",
+      "yaml",
+      "Pythonid:$depsPyVersion",
+      "org.jetbrains.plugins.go:$depsGoVersion",
+      "org.jetbrains.kotlin:$depsKotlinVersion",
+      "org.intellij.scala:$depsScalaVersion",
+      "org.jetbrains.plugins.ruby:$depsRubyVersion",
+      "com.jetbrains.php:$depsPhpVersion"
+  ))
 }
 
 // Configure gradle-changelog-plugin plugin.
@@ -125,9 +144,9 @@ tasks {
   }
 
   patchPluginXml {
-    version(properties("pluginVersion"))
-    sinceBuild(properties("pluginSinceBuild"))
-    untilBuild(properties("pluginUntilBuild"))
+    version.set(properties("pluginVersion"))
+    sinceBuild.set(properties("pluginSinceBuild"))
+    untilBuild.set(properties("pluginUntilBuild"))
 
     // Get the latest available change notes from the changelog file
 //    changeNotes(
@@ -142,7 +161,7 @@ tasks {
   }
 
   runPluginVerifier {
-    ideVersions(properties("pluginVerifierIdeVersions"))
+    ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map { it.trim() }.toList())
   }
 
   buildSearchableOptions {
@@ -151,6 +170,6 @@ tasks {
 
   publishPlugin {
 //    dependsOn("patchChangelog")
-    token(file("./publishToken").readText())
+    token.set(file("./publishToken").readText())
   }
 }
