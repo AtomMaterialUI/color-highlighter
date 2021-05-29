@@ -83,11 +83,10 @@ intellij {
   plugins.set(listOf(
       "java",
       "java-i18n",
-      "JavaScriptLanguage",
       "DatabaseTools",
-      "javax.swing.text.html.CSS",
+      "CSS",
       "platform-images",
-      "org.codehaus.groovy.ant.Groovy",
+      "Groovy",
       "properties",
       "yaml",
       "Pythonid:$depsPyVersion",
