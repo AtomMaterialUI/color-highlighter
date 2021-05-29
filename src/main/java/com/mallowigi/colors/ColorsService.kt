@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,159 +23,121 @@
  *
  *
  */
+package com.mallowigi.colors
 
-package com.mallowigi.colors;
+import com.intellij.openapi.components.ServiceManager
+import com.intellij.openapi.util.Pair
+import com.mallowigi.colors.ColorsService
+import com.thoughtworks.xstream.XStream
+import java.awt.Color
+import java.util.*
 
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.util.Pair;
-import com.thoughtworks.xstream.XStream;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class ColorsService private constructor() {
+  private var svgColors: MutableMap<Int, String?>? = null
+  private var svgNames: MutableMap<String?, Int>? = null
+  private var javaColors: MutableMap<Int, String>? = null
+  private var javaNames: MutableMap<String, Int>? = null
 
-import java.awt.*;
-import java.net.URL;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+  val sVGColors: Map<Int, String?>
+    get() = Collections.unmodifiableMap(svgColors)
 
-public final class ColorsService {
-  private static final String COLORS_XML = "/config/colors.xml";
-  private Map<Integer, String> svgColors;
-  private Map<String, Integer> svgNames;
-  private Map<Integer, String> javaColors;
-  private Map<String, Integer> javaNames;
+  val sVGNames: Map<String?, Int>
+    get() = Collections.unmodifiableMap(svgNames)
 
-  private ColorsService() {
-    loadColors();
+  fun getJavaColors(): Map<Int, String> = Collections.unmodifiableMap(javaColors)
+
+  fun getJavaNames(): Map<String, Int> = Collections.unmodifiableMap(javaNames)
+
+  fun findSVGName(color: Color): String? {
+    val rgb = toColor(color.rgb)
+    return (svgColors ?: return null)[rgb]
   }
 
-  public static ColorsService getInstance() {
-    return ServiceManager.getService(ColorsService.class);
+  fun findSVGColor(name: String?): Color? {
+    val code = (svgNames ?: return null)[name]
+    return if (code != null) Color(code) else null
   }
 
-  private static Colors parseColorsFromXML() {
-    final URL xml = ColorsService.class.getResource(COLORS_XML);
-    @NonNls final XStream xStream = new XStream();
-    XStream.setupDefaultSecurity(xStream);
-    xStream.allowTypesByWildcard(new String[]{"com.mallowigi.colors.*"});
+  fun findJavaName(color: Color): String? {
+    val rgb = toColor(color.rgb)
+    return (javaColors ?: return null)[rgb]
+  }
 
-    xStream.alias("colors", Colors.class);
-    xStream.alias("color", SingleColor.class);
+  fun findJavaColor(name: String): Color? {
+    val code = (javaNames ?: return null)[name]
+    return if (code != null) Color(code) else null
+  }
 
-    xStream.useAttributeFor(SingleColor.class, "name");
-    xStream.useAttributeFor(SingleColor.class, "code");
-
-    try {
-      return (Colors) xStream.fromXML(xml);
-    } catch (final RuntimeException e) {
-      return new Colors();
+  private fun loadColors() {
+    val colors = parseColorsFromXML()
+    svgColors = TreeMap()
+    svgNames = TreeMap()
+    for (col: SingleColor in colors.colors ?: return) {
+      (svgColors as TreeMap<Int, String?>)[col.colorInt] = col.name
+      (svgNames as TreeMap<String?, Int>)[col.name] = col.colorInt
+    }
+    val jcolors = arrayOf<Pair<Color, String>>(
+      Pair(Color.black, "black"),
+      Pair(Color.blue, "blue"),
+      Pair(Color.cyan, "cyan"),
+      Pair(Color.darkGray, "darkgray"),
+      Pair(Color.gray, "gray"),
+      Pair(Color.green, "green"),
+      Pair(Color.lightGray, "lightgray"),
+      Pair(Color.magenta, "magenta"),
+      Pair(Color.orange, "orange"),
+      Pair(Color.pink, "pink"),
+      Pair(Color.red, "red"),
+      Pair(Color.white, "white"),
+      Pair(Color.yellow, "yellow"),
+      Pair(Color.BLACK, "BLACK"),
+      Pair(Color.BLUE, "BLUE"),
+      Pair(Color.CYAN, "CYAN"),
+      Pair(Color.DARK_GRAY, "DARK_GRAY"),
+      Pair(Color.GRAY, "GRAY"),
+      Pair(Color.GREEN, "GREEN"),
+      Pair(Color.LIGHT_GRAY, "LIGHT_GRAY"),
+      Pair(Color.MAGENTA, "MAGENTA"),
+      Pair(Color.ORANGE, "ORANGE"),
+      Pair(Color.PINK, "PINK"),
+      Pair(Color.RED, "RED"),
+      Pair(Color.WHITE, "WHITE"),
+      Pair(Color.YELLOW, "YELLOW"))
+    javaColors = TreeMap()
+    javaNames = TreeMap()
+    for (jcolor: Pair<Color, String> in jcolors) {
+      (javaColors as TreeMap<Int, String>)[toColor(jcolor.first.rgb)] = jcolor.second
+      (javaNames as TreeMap<String, Int>)[jcolor.second] = toColor(jcolor.first.rgb)
     }
   }
 
-  private static int toColor(final int rgb) {
-    return rgb & 0xffffff;
-  }
+  companion object {
+    private const val COLORS_XML = "/config/colors.xml"
 
-  @NotNull
-  public Map<Integer, String> getSVGColors() {
-    return Collections.unmodifiableMap(svgColors);
-  }
+    @JvmStatic
+    val instance: ColorsService
+      get() = ServiceManager.getService(ColorsService::class.java)
 
-  @NotNull
-  public Map<String, Integer> getSVGNames() {
-    return Collections.unmodifiableMap(svgNames);
-  }
-
-  @NotNull
-  public Map<Integer, String> getJavaColors() {
-    return Collections.unmodifiableMap(javaColors);
-  }
-
-  @NotNull
-  public Map<String, Integer> getJavaNames() {
-    return Collections.unmodifiableMap(javaNames);
-  }
-
-  public String findSVGName(final Color color) {
-    final int rgb = toColor(color.getRGB());
-
-    return svgColors.get(rgb);
-  }
-
-  @Nullable
-  public Color findSVGColor(final String name) {
-    final Integer code = svgNames.get(name);
-    if (code != null) {
-      return new Color(code);
+    private fun parseColorsFromXML(): Colors {
+      val xml = ColorsService::class.java.getResource(COLORS_XML)
+      val xStream = XStream()
+      XStream.setupDefaultSecurity(xStream)
+      xStream.allowTypesByWildcard(arrayOf("com.mallowigi.colors.*"))
+      xStream.alias("colors", Colors::class.java)
+      xStream.alias("color", SingleColor::class.java)
+      xStream.useAttributeFor(SingleColor::class.java, "name")
+      xStream.useAttributeFor(SingleColor::class.java, "code")
+      return try {
+        xStream.fromXML(xml) as Colors
+      } catch (e: RuntimeException) {
+        Colors()
+      }
     }
 
-    return null;
+    private fun toColor(rgb: Int): Int = rgb and 0xffffff
   }
 
-  public String findJavaName(final Color color) {
-    final int rgb = toColor(color.getRGB());
-
-    return javaColors.get(rgb);
-  }
-
-  @Nullable
-  public Color findJavaColor(final String name) {
-    final Integer code = javaNames.get(name);
-    if (code != null) {
-      return new Color(code);
-    }
-
-    return null;
-  }
-
-  @SuppressWarnings("FeatureEnvy")
-  private void loadColors() {
-    final Colors colors = parseColorsFromXML();
-
-    svgColors = new TreeMap<>();
-    svgNames = new TreeMap<>();
-
-    for (final SingleColor col : colors.getColors()) {
-      svgColors.put(col.getColorInt(), col.getName());
-      svgNames.put(col.getName(), col.getColorInt());
-    }
-
-    @NonNls final Pair[] jcolors = {
-      new Pair<>(Color.black, "black"),
-      new Pair<>(Color.blue, "blue"),
-      new Pair<>(Color.cyan, "cyan"),
-      new Pair<>(Color.darkGray, "darkgray"),
-      new Pair<>(Color.gray, "gray"),
-      new Pair<>(Color.green, "green"),
-      new Pair<>(Color.lightGray, "lightgray"),
-      new Pair<>(Color.magenta, "magenta"),
-      new Pair<>(Color.orange, "orange"),
-      new Pair<>(Color.pink, "pink"),
-      new Pair<>(Color.red, "red"),
-      new Pair<>(Color.white, "white"),
-      new Pair<>(Color.yellow, "yellow"),
-      new Pair<>(Color.BLACK, "BLACK"),
-      new Pair<>(Color.BLUE, "BLUE"),
-      new Pair<>(Color.CYAN, "CYAN"),
-      new Pair<>(Color.DARK_GRAY, "DARK_GRAY"),
-      new Pair<>(Color.GRAY, "GRAY"),
-      new Pair<>(Color.GREEN, "GREEN"),
-      new Pair<>(Color.LIGHT_GRAY, "LIGHT_GRAY"),
-      new Pair<>(Color.MAGENTA, "MAGENTA"),
-      new Pair<>(Color.ORANGE, "ORANGE"),
-      new Pair<>(Color.PINK, "PINK"),
-      new Pair<>(Color.RED, "RED"),
-      new Pair<>(Color.WHITE, "WHITE"),
-      new Pair<>(Color.YELLOW, "YELLOW"),
-    };
-
-    javaColors = new TreeMap<>();
-    javaNames = new TreeMap<>();
-
-    for (final Pair<Color, String> jcolor : jcolors) {
-      javaColors.put(toColor(jcolor.first.getRGB()), jcolor.second);
-      javaNames.put(jcolor.second, toColor(jcolor.first.getRGB()));
-    }
+  init {
+    loadColors()
   }
 }

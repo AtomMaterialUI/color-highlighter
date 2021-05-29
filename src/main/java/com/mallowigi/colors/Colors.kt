@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,19 +23,13 @@
  *
  *
  */
+package com.mallowigi.colors
 
-package com.mallowigi.colors;
+import com.intellij.util.xmlb.annotations.Property
+import java.util.*
 
-import com.intellij.util.xmlb.annotations.Property;
-
-import java.util.Collections;
-import java.util.Set;
-
-final class Colors {
+internal class Colors {
   @Property
-  private Set<SingleColor> colors;
-
-  Set<SingleColor> getColors() {
-    return Collections.unmodifiableSet(colors);
-  }
+  val colors: Set<SingleColor>? = null
+    get() = Collections.unmodifiableSet(field)
 }

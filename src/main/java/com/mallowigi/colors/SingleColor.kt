@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,27 +23,17 @@
  *
  *
  */
+package com.mallowigi.colors
 
-package com.mallowigi.colors;
+import com.intellij.util.xmlb.annotations.Property
 
-import com.intellij.util.xmlb.annotations.Property;
-
-final class SingleColor {
+internal class SingleColor {
   @Property
-  private String name;
+  val name: String? = null
 
   @Property
-  private String code;
+  val code: String? = null
 
-  String getName() {
-    return name;
-  }
-
-  String getCode() {
-    return code;
-  }
-
-  Integer getColorInt() {
-    return Integer.valueOf(code, 16);
-  }
+  val colorInt: Int
+    get() = Integer.valueOf(code, 16)
 }
