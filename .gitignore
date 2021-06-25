@@ -3,7 +3,7 @@
 
 # IntelliJ
 out/
-.idea/
+.idea/*
 *.iml
 
 # Gradle
@@ -16,3 +16,5 @@ classes/
 src/test/resources/
 
 publishToken
+!.idea/icon.svg
+!.idea/saveactions_settings.xml
