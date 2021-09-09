@@ -48,9 +48,11 @@ public final class HexColorParser implements ColorParser {
    */
   @NotNull
   private Color parseHex(@NotNull final String text) {
-    return text.length() == 3 + offset ?
-           ColorUtils.getShortRGB(text.substring(offset)) :
-           ColorUtils.getRGB(text.substring(offset));
+    if (text.length() == 3 + offset)
+      return ColorUtils.getShortRGB(text.substring(offset));
+    else if (text.length() == 8 + offset)
+      return ColorUtils.getARGB(text.substring(offset));
+    return ColorUtils.getRGB(text.substring(offset));
   }
 
 }

@@ -88,6 +88,20 @@ public enum ColorUtils {
     }
   }
 
+  /**
+   * Parse argb in the hex format #12345678
+   */
+  @NotNull
+  public static Color getARGB(final String hex) {
+    final String rgb = normalizeRGB(hex, 8);
+
+    final int a = Integer.parseInt(rgb.substring(0, 2), 16);
+    final int r = Integer.parseInt(rgb.substring(2, 4), 16);
+    final int g = Integer.parseInt(rgb.substring(4, 6), 16);
+    final int b = Integer.parseInt(rgb.substring(6, 8), 16);
+    return new Color(r, g, b, a);
+  }
+
   @NotNull
   private static String normalizeRGB(final String hex, final int i) {
     String rgb = hex;
