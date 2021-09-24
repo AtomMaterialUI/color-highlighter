@@ -1,0 +1,25 @@
+{
+  "labels": [
+    "dependencies"
+  ],
+  "commitBodyTable": true,
+  "prHourlyLimit": 6,
+  "prConcurrentLimit": 6,
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "semanticCommitType": "chore",
+      "automerge": true,
+      "semanticCommits": true
+    }
+  ],
+  "extends": [
+    "config:base",
+    "config:semverAllMonthly"
+  ]
+}
