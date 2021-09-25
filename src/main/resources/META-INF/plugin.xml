@@ -58,7 +58,7 @@
     PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
     ]]></description>
 
-  <idea-version since-build="211.*" />
+  <idea-version since-build="211.*"/>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.intellij.modules.lang</depends>
@@ -77,22 +77,24 @@
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="com.mallowigi.colors.ColorsService" />
+    <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
 
-    <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig" />
+    <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
                              groupId="appearance"
                              dynamic="true"
-                             id="ColorHighlighterConfig" />
+                             id="ColorHighlighterConfig"/>
 
-    <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig" />
+    <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
                              groupId="appearance"
                              dynamic="true"
                              parentId="ColorHighlighterConfig"
-                             id="CustomColorsConfig" />
+                             id="CustomColorsConfig"/>
 
-    <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor" />
+    <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
+    <codeInsight.lineMarkerProvider language=""
+                                    implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
   </extensions>
 
   <change-notes>

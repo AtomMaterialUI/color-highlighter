@@ -23,22 +23,31 @@
  *
  *
  */
+package com.mallowigi.gutter
 
-package com.mallowigi
+import com.intellij.codeInsight.daemon.GutterName
+import com.intellij.codeInsight.daemon.LineMarkerInfo
+import com.intellij.codeInsight.daemon.LineMarkerProviderDescriptor
+import com.intellij.codeInsight.daemon.LineMarkerSettings
+import com.intellij.icons.AllIcons
+import com.intellij.psi.PsiElement
+import com.intellij.ui.ColorLineMarkerProvider
+import com.mallowigi.ColorHighlighterBundle.message
+import javax.swing.Icon
 
-import com.intellij.DynamicBundle
-import org.jetbrains.annotations.NonNls
-import org.jetbrains.annotations.PropertyKey
-import java.util.function.Supplier
+class GutterColorLineMarkerProvider : LineMarkerProviderDescriptor() {
 
-private const val BUNDLE: @NonNls String = "messages.ColorHighlighterBundle"
+  override fun getName(): @GutterName String = message("GutterColorDescriptor.name")
 
-object ColorHighlighterBundle : DynamicBundle(BUNDLE) {
+  override fun getIcon(): Icon = AllIcons.Gutter.Colors
 
-  @JvmStatic
-  fun message(key: @PropertyKey(resourceBundle = BUNDLE) String, vararg params: Any?): String = getMessage(key, *params)
+  override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? = null
 
-  @JvmStatic
-  fun messagePointer(key: @PropertyKey(resourceBundle = BUNDLE) String, vararg params: Any?): Supplier<String> =
-    getLazyMessage(key, *params)
+  companion object {
+    private val INSTANCE: ColorLineMarkerProvider = ColorLineMarkerProvider()
+
+    fun isEnabled(): Boolean {
+      return LineMarkerSettings.getSettings().isEnabled(INSTANCE)
+    }
+  }
 }
