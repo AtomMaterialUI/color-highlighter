@@ -23,30 +23,37 @@
  *
  *
  */
-package com.mallowigi.colors
+package com.mallowigi.config.ui.internal
 
-import com.intellij.util.xmlb.annotations.Property
-import java.io.Serializable
+import com.intellij.util.Function
+import com.intellij.util.ui.table.TableModelEditor.DialogItemEditor
+import com.mallowigi.colors.SingleColor
 
-class SingleColor internal constructor(
-  @field:Property var name: String = "",
-  @field:Property var code: String = "",
-) : Serializable {
+/**
+ * Associations table item editor
+ *
+ */
+class AssociationsTableItemEditor : DialogItemEditor<SingleColor> {
+  override fun getItemClass(): Class<out SingleColor> = SingleColor::class.java
 
-  val colorInt: Int
-    get() = Integer.valueOf(code, 16)
+  override fun clone(item: SingleColor, forInPlaceEditing: Boolean): SingleColor = SingleColor(
+    item.name,
+    item.code
+  )
 
-  fun apply(other: SingleColor) {
-    name = other.name
-    code = other.code
+  override fun applyEdited(oldItem: SingleColor, newItem: SingleColor): Unit = oldItem.apply(newItem)
+
+  override fun isEditable(item: SingleColor): Boolean = !item.isEmpty
+
+  override fun isEmpty(item: SingleColor): Boolean = item.isEmpty
+
+  override fun edit(
+    item: SingleColor,
+    mutator: Function<in SingleColor, out SingleColor>,
+    isAdd: Boolean,
+  ) {
+    val settings = clone(item, true)
+    mutator.`fun`(item).apply(settings)
   }
 
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
-
-  override fun toString(): String = "$name: $code"
-
-  companion object {
-    private const val serialVersionUID: Long = -1L
-  }
 }

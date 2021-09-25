@@ -23,30 +23,20 @@
  *
  *
  */
-package com.mallowigi.colors
 
-import com.intellij.util.xmlb.annotations.Property
-import java.io.Serializable
+package com.mallowigi.listeners
 
-class SingleColor internal constructor(
-  @field:Property var name: String = "",
-  @field:Property var code: String = "",
-) : Serializable {
+import com.intellij.util.messages.Topic
+import com.mallowigi.config.custom.CustomColorsConfig
 
-  val colorInt: Int
-    get() = Integer.valueOf(code, 16)
+fun interface CustomColorsNotifier {
 
-  fun apply(other: SingleColor) {
-    name = other.name
-    code = other.code
-  }
-
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
-
-  override fun toString(): String = "$name: $code"
+  fun configChanged(config: CustomColorsConfig?)
 
   companion object {
-    private const val serialVersionUID: Long = -1L
+    @Topic.AppLevel
+    @JvmField
+    val TOPIC: Topic<CustomColorsNotifier> = Topic.create("Custom Colors", CustomColorsNotifier::class.java)
   }
+
 }

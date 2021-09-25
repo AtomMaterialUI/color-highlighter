@@ -23,30 +23,6 @@
  *
  *
  */
-package com.mallowigi.colors
 
-import com.intellij.util.xmlb.annotations.Property
-import java.io.Serializable
+rootProject.name = "color-highlighter"
 
-class SingleColor internal constructor(
-  @field:Property var name: String = "",
-  @field:Property var code: String = "",
-) : Serializable {
-
-  val colorInt: Int
-    get() = Integer.valueOf(code, 16)
-
-  fun apply(other: SingleColor) {
-    name = other.name
-    code = other.code
-  }
-
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
-
-  override fun toString(): String = "$name: $code"
-
-  companion object {
-    private const val serialVersionUID: Long = -1L
-  }
-}

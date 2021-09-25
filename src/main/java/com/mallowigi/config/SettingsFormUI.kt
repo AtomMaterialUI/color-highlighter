@@ -23,30 +23,23 @@
  *
  *
  */
-package com.mallowigi.colors
+package com.mallowigi.config
 
-import com.intellij.util.xmlb.annotations.Property
-import java.io.Serializable
+import javax.swing.JComponent
 
-class SingleColor internal constructor(
-  @field:Property var name: String = "",
-  @field:Property var code: String = "",
-) : Serializable {
+interface SettingsFormUI<
+  Form : SettingsFormUI<Form, Config>,
+  Config : SettingsConfig<Form, Config>,
+  > {
+  val content: JComponent?
 
-  val colorInt: Int
-    get() = Integer.valueOf(code, 16)
+  fun init()
 
-  fun apply(other: SingleColor) {
-    name = other.name
-    code = other.code
-  }
+  fun afterStateSet()
 
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
+  fun dispose()
 
-  override fun toString(): String = "$name: $code"
+  fun setFormState(config: Config)
 
-  companion object {
-    private const val serialVersionUID: Long = -1L
-  }
+  fun isModified(config: Config): Boolean
 }

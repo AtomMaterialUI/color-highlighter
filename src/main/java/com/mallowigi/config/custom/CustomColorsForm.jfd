@@ -1,0 +1,39 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "messages"
+	"i18n.bundleName": "ColorHighlighterBundle"
+	"i18n.keyPrefix": "SelectForm"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[369,grow,fill]"
+			"$rowConstraints": "[][270,grow,fill][]"
+		} ) {
+			name: "this"
+			"border": new javax.swing.border.TitledBorder( null, "Custom Colors Editor", 2, 2 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "explanation"
+				"text": new FormMessage( null, "CustomColorsForm.explanation.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, -1, false )
+				"foreground": new com.jformdesigner.model.SwingColor( "inactiveCaptionText" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "0[grow,fill]0"
+				"$rowConstraints": "0[grow]0"
+			} ) {
+				name: "colorsPanel"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1,grow"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

@@ -28,19 +28,22 @@
 
 fun properties(key: String) = project.findProperty(key).toString()
 
+fun fileProperties(key: String) = project.findProperty(key).toString().let { if (it.isNotEmpty()) file(it) else null }
+
+
 plugins {
   // Java support
   id("java")
   // Kotlin support
-  id("org.jetbrains.kotlin.jvm") version "1.5.20"
+  id("org.jetbrains.kotlin.jvm") version "1.5.31"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-  id("org.jetbrains.intellij") version "1.0"
+  id("org.jetbrains.intellij") version "1.1.6"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-  id("org.jetbrains.changelog") version "1.1.2"
+  id("org.jetbrains.changelog") version "1.3.0"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
-  id("io.gitlab.arturbosch.detekt") version "1.17.1"
+  id("io.gitlab.arturbosch.detekt") version "1.18.1"
   // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
-  id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+  id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = properties("pluginGroup")
@@ -63,10 +66,8 @@ repositories {
 }
 
 dependencies {
-  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.17.1")
-  implementation("com.thoughtworks.xstream:xstream:1.4.16")
-  implementation("org.javassist:javassist:3.27.0-GA")
-  implementation("com.mixpanel:mixpanel-java:1.5.0")
+  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.1")
+  implementation("com.thoughtworks.xstream:xstream:1.4.18")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20")
 }
 
@@ -83,32 +84,34 @@ intellij {
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
   plugins.set(listOf(
-      "java",
-      "java-i18n",
-      "DatabaseTools",
-      "CSS",
-      "platform-images",
-      "Groovy",
-      "properties",
-      "yaml",
-      "Pythonid:$depsPyVersion",
-      "org.jetbrains.plugins.go:$depsGoVersion",
-      "org.jetbrains.kotlin:$depsKotlinVersion",
-      "org.intellij.scala:$depsScalaVersion",
-      "org.jetbrains.plugins.ruby:$depsRubyVersion",
-      "com.jetbrains.php:$depsPhpVersion"
+    "java",
+    "java-i18n",
+    "DatabaseTools",
+    "CSS",
+    "platform-images",
+    "Groovy",
+    "properties",
+    "yaml",
+    "Pythonid:$depsPyVersion",
+    "org.jetbrains.plugins.go:$depsGoVersion",
+    "org.jetbrains.kotlin:$depsKotlinVersion",
+    "org.intellij.scala:$depsScalaVersion",
+    "org.jetbrains.plugins.ruby:$depsRubyVersion",
+    "com.jetbrains.php:$depsPhpVersion"
   ))
 }
 
 // Configure gradle-changelog-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-changelog-plugin
-//changelog {
-//  path = "${project.projectDir}/docs/CHANGELOG.md"
-//  version = properties("pluginVersion")
-//  keepUnreleasedSection = true
-//  unreleasedTerm = "Changelog"
-//  groups = emptyList()
-//}
+changelog {
+  path.set("${project.projectDir}/docs/CHANGELOG.md")
+  version.set(properties("pluginVersion"))
+  header.set(provider { version.get() })
+  itemPrefix.set("-")
+  keepUnreleasedSection.set(true)
+  unreleasedTerm.set("[Unreleased]")
+  groups.set(listOf("Features", "Fixes", "Other", "Bump"))
+}
 
 // Configure detekt plugin.
 // Read more: https://detekt.github.io/detekt/kotlindsl.html
@@ -131,10 +134,15 @@ tasks {
   }
   withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check", "-Xjvm-default=enable")
   }
 
   withType<io.gitlab.arturbosch.detekt.Detekt> {
     jvmTarget = "1.8"
+  }
+
+  withType<Copy> {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 
   sourceSets {
@@ -150,15 +158,9 @@ tasks {
     untilBuild.set(properties("pluginUntilBuild"))
 
     // Get the latest available change notes from the changelog file
-//    changeNotes(
-//        closure {
-//          File(projectDir, "docs/CHANGELOG.md")
-//              .readText()
-//              .lines()
-//              .joinToString("\n")
-//              .run { markdownToHTML(this) }
-//        }
-//    )
+    changeNotes.set(
+      changelog.getLatest().toHTML()
+    )
   }
 
   runPluginVerifier {
@@ -172,5 +174,9 @@ tasks {
   publishPlugin {
 //    dependsOn("patchChangelog")
     token.set(file("./publishToken").readText())
+  }
+
+  runIde {
+    ideDir.set(fileProperties("idePath"))
   }
 }

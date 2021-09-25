@@ -25,65 +25,76 @@
   -->
 
 <idea-plugin>
-    <id>com.mallowigi.colorHighlighter</id>
-    <name>Color Highlighter</name>
-    <version>@version@</version>
-    <category>Appearance</category>
-    <vendor email="elior@material-theme.com" url="https://github.com/mallowigi">AtomMaterial</vendor>
+  <id>com.mallowigi.colorHighlighter</id>
+  <name>Color Highlighter</name>
+  <version>@version@</version>
+  <category>Appearance</category>
+  <vendor email="elior@material-theme.com" url="https://github.com/mallowigi">AtomMaterial</vendor>
 
-    <description><![CDATA[
-This plugin highlights colors in editors in order to make them more stand out.
+  <description><![CDATA[
+    This plugin highlights colors in editors in order to make them more stand out.
 
-This does the same as "Show CSS Color preview as background", only for more languages!
+    This does the same as "Show CSS Color preview as background", only for more languages!
 
-Supported languages:
-- XML
-- HTML
-- JavaScript
-- TypeScript
-- Properties
-- YAML
-- Python
-- PHP
-- Ruby
-- Scala
-- Java
-- Kotlin
-- Go
-- ObjectiveC
-- Swift
+    Supported languages:
+    - XML
+    - HTML
+    - JavaScript
+    - TypeScript
+    - Properties
+    - YAML
+    - Python
+    - PHP
+    - Ruby
+    - Scala
+    - Java
+    - Kotlin
+    - Go
+    - ObjectiveC
+    - Swift
 
-More to come!
+    More to come!
 
-PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
+    PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
     ]]></description>
 
-    <idea-version since-build="211.*"/>
+  <idea-version since-build="211.*" />
 
-    <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.lang</depends>
-    <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
-    <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
-    <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
-    <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
-    <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
-    <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
-    <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
-    <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
-    <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
-    <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
-    <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
+  <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
+  <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
+  <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
+  <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
+  <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
+  <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
+  <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
+  <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
+  <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
+  <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
+  <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
 
-    <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
+  <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.mallowigi.colors.ColorsService" />
 
-        <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
+    <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig" />
+    <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
+                             groupId="appearance"
+                             dynamic="true"
+                             id="ColorHighlighterConfig" />
 
-        <editorAppearanceConfigurable instance="com.mallowigi.ColorHighlightSettings"/>
-    </extensions>
+    <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig" />
+    <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
+                             groupId="appearance"
+                             dynamic="true"
+                             parentId="ColorHighlighterConfig"
+                             id="CustomColorsConfig" />
 
-    <change-notes>
-    </change-notes>
+    <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor" />
+  </extensions>
+
+  <change-notes>
+  </change-notes>
 </idea-plugin>
