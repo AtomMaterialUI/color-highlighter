@@ -23,35 +23,20 @@
  *
  *
  */
-package com.mallowigi.gutter
 
-import com.intellij.codeInsight.daemon.GutterName
-import com.intellij.codeInsight.daemon.LineMarkerInfo
-import com.intellij.codeInsight.daemon.LineMarkerProviderDescriptor
-import com.intellij.codeInsight.daemon.LineMarkerSettings
-import com.intellij.psi.PsiElement
-import com.intellij.ui.ColorLineMarkerProvider
-import com.mallowigi.ColorHighlighterBundle.message
-import com.mallowigi.ColorHighlighterIcons
+@file:Suppress("PropertyName")
+
+package com.mallowigi
+
+import com.intellij.ui.IconManager
 import javax.swing.Icon
 
-/**
- * Gutter color line marker provider: option to toggle gutter display
- *
- */
-class GutterColorLineMarkerProvider : LineMarkerProviderDescriptor() {
+fun load(path: String): Icon {
+  return IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java)
+}
 
-  override fun getName(): @GutterName String = message("GutterColorDescriptor.name")
-
-  override fun getIcon(): Icon = ColorHighlighterIcons.Gutter.Inline
-
-  override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? = null
-
-  companion object {
-    private val INSTANCE: ColorLineMarkerProvider = ColorLineMarkerProvider()
-
-    fun isEnabled(): Boolean {
-      return LineMarkerSettings.getSettings().isEnabled(INSTANCE)
-    }
+object ColorHighlighterIcons {
+  object Gutter {
+    val Inline: Icon = load("icons/gutter/inline.svg")
   }
 }
