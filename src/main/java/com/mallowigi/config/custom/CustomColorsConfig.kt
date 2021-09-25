@@ -28,6 +28,7 @@ package com.mallowigi.config.custom
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.SettingsCategory
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
@@ -40,7 +41,8 @@ import java.util.Objects
 
 @State(
   name = "Custom Colors",
-  storages = [Storage("color-highlighter-custom.xml")] // NON-NLS:
+  storages = [Storage("color-highlighter.xml")],
+  category = SettingsCategory.UI
 )
 class CustomColorsConfig : PersistentStateComponent<CustomColorsConfig>,
   SettingsConfig<CustomColorsForm, CustomColorsConfig> {

@@ -33,7 +33,7 @@ import com.mallowigi.colors.SingleColor
  * Associations table item editor
  *
  */
-class AssociationsTableItemEditor : DialogItemEditor<SingleColor> {
+class CustomColorsTableItemEditor : DialogItemEditor<SingleColor> {
   override fun getItemClass(): Class<out SingleColor> = SingleColor::class.java
 
   override fun clone(item: SingleColor, forInPlaceEditing: Boolean): SingleColor = SingleColor(

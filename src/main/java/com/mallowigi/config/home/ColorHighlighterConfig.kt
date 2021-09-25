@@ -28,6 +28,7 @@ package com.mallowigi.config.home
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.SettingsCategory
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
@@ -37,7 +38,8 @@ import com.mallowigi.listeners.ColorHighlighterNotifier
 
 @State(
   name = "Color Highlighter Settings",
-  storages = [Storage("color-highlighter.xml")] // NON-NLS:
+  storages = [Storage("color-highlighter.xml")],
+  category = SettingsCategory.UI
 )
 class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   SettingsConfig<ColorHighlighterSettingsForm, ColorHighlighterConfig> {

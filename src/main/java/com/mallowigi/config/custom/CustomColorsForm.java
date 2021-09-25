@@ -39,8 +39,8 @@ import com.mallowigi.colors.SingleColor;
 import com.mallowigi.config.SettingsFormUI;
 import com.mallowigi.config.ui.columns.ColorEditableColumnInfo;
 import com.mallowigi.config.ui.columns.NameEditableColumnInfo;
-import com.mallowigi.config.ui.internal.AssociationsTableItemEditor;
-import com.mallowigi.config.ui.internal.AssociationsTableModelEditor;
+import com.mallowigi.config.ui.internal.CustomColorsTableItemEditor;
+import com.mallowigi.config.ui.internal.CustomColorsTableModelEditor;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +59,7 @@ import java.util.ResourceBundle;
 public final class CustomColorsForm extends JPanel implements SettingsFormUI<CustomColorsForm, CustomColorsConfig>, Disposable {
   private final transient ColumnInfo[] columns = {
     new NameEditableColumnInfo(this, true),
-    new ColorEditableColumnInfo(this, true),
+    new ColorEditableColumnInfo(this),
   };
 
   // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -69,7 +69,7 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
   // JFormDesigner - End of variables declaration  //GEN-END:variables
 
   private JComponent customColorsTable;
-  private @Nullable AssociationsTableModelEditor<SingleColor> customColorsEditor;
+  private @Nullable CustomColorsTableModelEditor<SingleColor> customColorsEditor;
 
   @Override
   public void init() {
@@ -123,8 +123,8 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
   }
 
   private void createTable() {
-    final AssociationsTableItemEditor itemEditor = new AssociationsTableItemEditor();
-    customColorsEditor = new AssociationsTableModelEditor<>(columns,
+    final CustomColorsTableItemEditor itemEditor = new CustomColorsTableItemEditor();
+    customColorsEditor = new CustomColorsTableModelEditor<>(columns,
       itemEditor,
       ColorHighlighterBundle.message("no.custom.colors"));
     customColorsTable = customColorsEditor.createComponent();
@@ -159,11 +159,11 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
     //======== colorsPanel ========
     {
       colorsPanel.setLayout(new MigLayout(
-        "hidemode 3",
+        "fill,hidemode 3,aligny top",
         // columns
         "0[grow,fill]0",
         // rows
-        "0[grow]0"));
+        "0[grow,top]0"));
     }
     add(colorsPanel, "cell 0 1,grow");
     // JFormDesigner - End of component initialization  //GEN-END:initComponents

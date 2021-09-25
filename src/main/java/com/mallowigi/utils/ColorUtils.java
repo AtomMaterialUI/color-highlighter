@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,8 @@
 package com.mallowigi.utils;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.ui.ColorUtil;
+import com.intellij.ui.Gray;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +39,6 @@ import java.awt.*;
  */
 @SuppressWarnings({"StandardVariableNames",
   "OverlyComplexBooleanExpression",
-  "SingleCharacterStartsWith",
   "AssignmentToMethodParameter",
   "FloatingPointEquality",
   "MethodWithMultipleReturnPoints"})
@@ -50,6 +51,19 @@ public enum ColorUtils {
   public static final String COMMA = ",";
   @NonNls
   public static final String PERCENT = "%";
+
+  public static final String HASH = "#";
+
+  public static Color getHex(final String hex) {
+    if (!hex.startsWith(HASH)) {
+      return getRGB(hex);
+    }
+    return getRGB(hex.substring(1));
+  }
+
+  public static Gray getSuitableForeground(final Color color) {
+    return ColorUtil.isDark(color) ? Gray._254 : Gray._1;
+  }
 
   /**
    * Parse rgb in the hex format #123
@@ -83,18 +97,18 @@ public enum ColorUtils {
     try {
       final int a = Integer.parseInt(rgb.substring(6, 8), 16);
       return new Color(r, g, b, a);
-    } catch (Exception e) {
+    } catch (final Exception e) {
       return new Color(r, g, b);
     }
   }
 
   @NotNull
-  private static String normalizeRGB(final String hex, final int i) {
+  private static String normalizeRGB(final String hex, final int desiredLength) {
     String rgb = hex;
-    if (rgb.length() < i) {
-      rgb = padZeros(i - rgb.length(), rgb);
-    } else if (rgb.length() > i) {
-      rgb = rgb.substring(0, i);
+    if (rgb.length() < desiredLength) {
+      rgb = padZeros(desiredLength - rgb.length(), rgb);
+    } else if (rgb.length() > desiredLength) {
+      rgb = rgb.substring(0, desiredLength);
     }
     return rgb;
   }

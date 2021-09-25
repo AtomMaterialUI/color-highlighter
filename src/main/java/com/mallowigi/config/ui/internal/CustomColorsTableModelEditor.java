@@ -27,16 +27,14 @@ package com.mallowigi.config.ui.internal;
 
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.TableSpeedSearch;
-import com.intellij.ui.TableUtil;
-import com.intellij.ui.ToolbarDecorator;
-import com.intellij.ui.table.JBTable;
+import com.intellij.ui.*;
 import com.intellij.ui.table.TableView;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.*;
 import com.intellij.util.ui.table.ComboBoxTableCellEditor;
 import com.intellij.util.xmlb.XmlSerializer;
+import com.mallowigi.colors.SingleColor;
+import com.mallowigi.utils.ColorUtils;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +43,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,21 +53,20 @@ import java.util.List;
   "AccessingNonPublicFieldOfAnotherObject",
   "MagicNumber",
   "unused"})
-public final class AssociationsTableModelEditor<T> extends CollectionModelEditor<T, CollectionItemEditor<T>> {
+public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor<T, CollectionItemEditor<T>> {
   private final TableView<T> table;
   private final ToolbarDecorator toolbarDecorator;
 
   private final MyListTableModel model;
 
-  public AssociationsTableModelEditor(final ColumnInfo @NotNull [] columns,
+  public CustomColorsTableModelEditor(final ColumnInfo @NotNull [] columns,
                                       @NotNull final CollectionItemEditor<T> itemEditor,
                                       @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) final String emptyText) {
     this(Collections.emptyList(), columns, itemEditor, emptyText);
   }
 
-  @SuppressWarnings({"MagicNumber",
-    "BreakStatement"})
-  private AssociationsTableModelEditor(@NotNull final List<T> items,
+  @SuppressWarnings("MagicNumber")
+  private CustomColorsTableModelEditor(@NotNull final List<T> items,
                                        final ColumnInfo @NotNull [] columns,
                                        @NotNull final CollectionItemEditor<T> itemEditor,
                                        @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) final String emptyText) {
@@ -76,6 +75,8 @@ public final class AssociationsTableModelEditor<T> extends CollectionModelEditor
     model = new MyListTableModel(columns, new ArrayList<>(items));
     table = new TableView<>(model);
     table.setStriped(true);
+    table.setShowColumns(true);
+    table.setRowHeight(40);
     table.setMaxItemsForSizeCalculation(20);
     table.setIgnoreRepaint(true);
     table.setFillsViewportHeight(true);
@@ -83,49 +84,50 @@ public final class AssociationsTableModelEditor<T> extends CollectionModelEditor
     table.setDefaultEditor(Enum.class, ComboBoxTableCellEditor.INSTANCE);
     table.setEnableAntialiasing(true);
     table.setPreferredScrollableViewportSize(JBUI.size(200, -1));
-    table.setVisibleRowCount(JBTable.PREFERRED_SCROLLABLE_VIEWPORT_HEIGHT_IN_ROWS);
+    table.setVisibleRowCount(20);
     new TableSpeedSearch(table);
-    final ColumnInfo firstColumn = columns[0];
-    if ((firstColumn.getColumnClass() == boolean.class || firstColumn.getColumnClass() == Boolean.class) && firstColumn.getName().isEmpty()) {
-      TableUtil.setupCheckboxColumn(table.getColumnModel().getColumn(0), 0);
-      JBTable.setupCheckboxShortcut(table, 0);
-    }
-
-    boolean needTableHeader = false;
-    for (final ColumnInfo column : columns) {
-      if (!StringUtil.isEmpty(column.getName())) {
-        needTableHeader = true;
-        break;
-      }
-    }
-
-    if (!needTableHeader) {
-      table.setTableHeader(null);
-    }
 
     table.getEmptyText().setFont(UIUtil.getLabelFont().deriveFont(24.0f));
     table.getEmptyText().setText(emptyText);
+
+    // Add actions
     toolbarDecorator = ToolbarDecorator.createDecorator(table, this);
-    toolbarDecorator.disableAddAction();
-    toolbarDecorator.disableRemoveAction();
-    toolbarDecorator.disableUpDownActions();
+
+    // Color picker listening
+    new ClickListener() {
+      @Override
+      public boolean onClick(@NotNull final MouseEvent event, final int clickCount) {
+        final int row = table.rowAtPoint(event.getPoint());
+        final int column = 1;
+
+        if (row >= 0 && row < table.getRowCount()) {
+          final Object colorValue = model.getValueAt(row, column);
+          final Color modelColor = ColorUtils.getHex((String) colorValue);
+
+          ColorPicker.showColorPickerPopup(null, modelColor,
+            (color, source) -> ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color)));
+          return true;
+        }
+        return false;
+      }
+    }.installOn(table);
   }
 
   @SuppressWarnings("unused")
   public static <T> void cloneUsingXmlSerialization(@NotNull final T oldItem, @NotNull final T newItem) {
-    final Element serialized = com.intellij.configurationStore.XmlSerializer.serialize(oldItem);
+    final Element serialized = XmlSerializer.serialize(oldItem);
     if (serialized != null) {
       XmlSerializer.deserializeInto(newItem, serialized);
     }
   }
 
   @NotNull
-  public AssociationsTableModelEditor<T> enabled(final boolean value) {
+  public CustomColorsTableModelEditor<T> enabled(final boolean value) {
     table.setEnabled(value);
     return this;
   }
 
-  public AssociationsTableModelEditor<T> modelListener(@NotNull final DataChangedListener<T> listener) {
+  public CustomColorsTableModelEditor<T> modelListener(@NotNull final DataChangedListener<T> listener) {
     model.dataChangedListener = listener;
     model.addTableModelListener(listener);
     return this;

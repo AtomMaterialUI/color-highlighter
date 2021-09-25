@@ -33,6 +33,7 @@ import com.intellij.ui.components.fields.ExtendableTextField
 import com.intellij.util.ui.table.TableModelEditor.EditableColumnInfo
 import com.mallowigi.ColorHighlighterBundle
 import com.mallowigi.colors.SingleColor
+import com.mallowigi.utils.ColorUtils
 import javax.swing.table.DefaultTableCellRenderer
 import javax.swing.table.TableCellEditor
 import javax.swing.table.TableCellRenderer
@@ -43,7 +44,7 @@ import javax.swing.table.TableCellRenderer
  * @property parent the Parent class
  */
 @Suppress("UnstableApiUsage")
-class ColorEditableColumnInfo(private val parent: Disposable, private val editable: Boolean) :
+class ColorEditableColumnInfo(private val parent: Disposable) :
   EditableColumnInfo<SingleColor?, String>(ColorHighlighterBundle.message("CustomColorsForm.columns.color")) {
   override fun valueOf(item: SingleColor?): String? = item?.code
 
@@ -57,7 +58,15 @@ class ColorEditableColumnInfo(private val parent: Disposable, private val editab
   }
 
   override fun getRenderer(item: SingleColor?): TableCellRenderer? {
-    return ValidatingTableCellRendererWrapper(DefaultTableCellRenderer())
+    return ValidatingTableCellRendererWrapper(object : DefaultTableCellRenderer() {
+      override fun repaint() {
+        if (item?.code != null) {
+          val bgColor = ColorUtils.getHex(item.code)
+          background = bgColor
+          foreground = ColorUtils.getSuitableForeground(bgColor)
+        }
+      }
+    })
       .withCellValidator { value: Any?, _: Int, _: Int ->
         if (value == null || value == "") {
           return@withCellValidator ValidationInfo(ColorHighlighterBundle.message("CustomColorsForm.ColorEditor.empty"))
@@ -67,5 +76,6 @@ class ColorEditableColumnInfo(private val parent: Disposable, private val editab
       }
   }
 
-  override fun isCellEditable(item: SingleColor?): Boolean = editable
+  override fun isCellEditable(item: SingleColor?): Boolean = false
 }
+
