@@ -60,7 +60,7 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
           editor.component,
           message("replace.color"),
           currentColor,
-          true
+          false
         )
         copyColor(currentColor, newColor)
       }
@@ -76,14 +76,14 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
   override fun isNavigateAction(): Boolean = true
 
   override fun equals(other: Any?): Boolean {
-    if (this === other) {
-      return true
+    return when {
+      this === other -> true
+      other == null || javaClass != other.javaClass -> false
+      else -> {
+        val renderer = other as GutterColorRenderer
+        color == renderer.color
+      }
     }
-    if (other == null || javaClass != other.javaClass) {
-      return false
-    }
-    val renderer = other as GutterColorRenderer
-    return color == renderer.color
   }
 
   override fun hashCode(): Int = Objects.hash(color)

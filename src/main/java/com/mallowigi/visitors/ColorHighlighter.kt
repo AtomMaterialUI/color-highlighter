@@ -35,6 +35,7 @@ import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.psi.PsiElement
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
+import com.mallowigi.gutter.GutterColorLineMarkerProvider
 import com.mallowigi.gutter.GutterColorRenderer
 import java.awt.Color
 
@@ -58,8 +59,14 @@ internal object ColorHighlighter {
   fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
     getHighlightInfoBuilder(color).range(element!!).create()
 
-  private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder =
-    HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
-      .gutterIconRenderer(GutterColorRenderer(color))
+  private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder {
+    var newHighlightInfo = HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
       .textAttributes(getAttributesFlyweight(color))
+
+    if (GutterColorLineMarkerProvider.isEnabled()) {
+      newHighlightInfo = newHighlightInfo.gutterIconRenderer(GutterColorRenderer(color))
+    }
+
+    return newHighlightInfo
+  }
 }

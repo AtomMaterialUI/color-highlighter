@@ -30,7 +30,6 @@ import com.intellij.codeInsight.daemon.LineMarkerInfo
 import com.intellij.codeInsight.daemon.LineMarkerProviderDescriptor
 import com.intellij.codeInsight.daemon.LineMarkerSettings
 import com.intellij.psi.PsiElement
-import com.intellij.ui.ColorLineMarkerProvider
 import com.mallowigi.ColorHighlighterBundle.message
 import com.mallowigi.ColorHighlighterIcons
 import javax.swing.Icon
@@ -48,10 +47,8 @@ class GutterColorLineMarkerProvider : LineMarkerProviderDescriptor() {
   override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? = null
 
   companion object {
-    private val INSTANCE: ColorLineMarkerProvider = ColorLineMarkerProvider()
+    private val INSTANCE: GutterColorLineMarkerProvider = GutterColorLineMarkerProvider()
 
-    fun isEnabled(): Boolean {
-      return LineMarkerSettings.getSettings().isEnabled(INSTANCE)
-    }
+    fun isEnabled(): Boolean = LineMarkerSettings.getSettings().isEnabled(INSTANCE)
   }
 }
