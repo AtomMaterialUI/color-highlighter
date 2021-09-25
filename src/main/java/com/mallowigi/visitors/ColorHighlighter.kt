@@ -23,48 +23,43 @@
  *
  *
  */
+package com.mallowigi.visitors
 
-package com.mallowigi.visitors;
+import com.intellij.codeInsight.daemon.impl.HighlightInfo
+import com.intellij.codeInsight.daemon.impl.HighlightInfoType
+import com.intellij.codeInsight.daemon.impl.HighlightInfoType.HighlightInfoTypeImpl
+import com.intellij.lang.annotation.HighlightSeverity
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
+import com.intellij.openapi.editor.colors.EditorColorsManager
+import com.intellij.openapi.editor.markup.TextAttributes
+import com.intellij.psi.PsiElement
+import com.intellij.ui.ColorUtil
+import com.intellij.ui.Gray
+import com.mallowigi.gutter.GutterColorRenderer
+import java.awt.Color
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
-import com.intellij.lang.annotation.HighlightSeverity;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.psi.PsiElement;
-import com.intellij.ui.ColorUtil;
-import com.intellij.ui.Gray;
-import com.mallowigi.gutter.GutterColorRenderer;
-import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
-
-final class ColorHighlighter {
-  private static final HighlightInfoType COLOR_ELEMENT = new HighlightInfoType.HighlightInfoTypeImpl(
+internal object ColorHighlighter {
+  private val COLOR_ELEMENT: HighlightInfoType = HighlightInfoTypeImpl(
     HighlightSeverity.INFORMATION,
     DefaultLanguageHighlighterColors.CONSTANT
-  );
+  )
 
-  private static TextAttributes getAttributesFlyweight(@NotNull final Color color) {
-    final TextAttributes attributes = new TextAttributes();
-    final Color background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
-    final Color mix = ColorUtil.mix(background, color, color.getAlpha() / 255.0D);
+  private fun getAttributesFlyweight(color: Color): TextAttributes {
+    val attributes = TextAttributes()
+    val background = EditorColorsManager.getInstance().globalScheme.defaultBackground
+    val mix = ColorUtil.mix(background, color, color.alpha / 255.0)
 
     return TextAttributes.fromFlyweight(
-      attributes.getFlyweight()
+      attributes.flyweight
         .withBackground(mix)
-        .withForeground(ColorUtil.isDark(mix) ? Gray._254 : Gray._1));
+        .withForeground(if (ColorUtil.isDark(mix)) Gray._254 else Gray._1))
   }
 
-  static HighlightInfo highlightColor(final PsiElement element, final Color color) {
-    return getHighlightInfoBuilder(color).range(element).create();
-  }
+  fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
+    getHighlightInfoBuilder(color).range(element!!).create()
 
-  @NotNull
-  private static HighlightInfo.Builder getHighlightInfoBuilder(final Color color) {
-    return HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
-      .gutterIconRenderer(new GutterColorRenderer(color))
-      .textAttributes(getAttributesFlyweight(color));
-  }
+  private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder =
+    HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
+      .gutterIconRenderer(GutterColorRenderer(color))
+      .textAttributes(getAttributesFlyweight(color))
 }

@@ -74,7 +74,7 @@ abstract class ColorVisitor : HighlightVisitor {
    * @param element element representing a color
    * @param color color
    */
-  fun highlight(element: PsiElement?, color: Color?) {
+  fun highlight(element: PsiElement?, color: Color) {
     if (!instance.isEnabled) return
 
     assert(highlightInfoHolder != null)

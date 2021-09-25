@@ -1,39 +1,49 @@
-package com.mallowigi.visitors;
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ *
+ */
 
-import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiUtilCore;
-import com.mallowigi.search.ColorSearchEngine;
-import org.jetbrains.annotations.NotNull;
+package com.mallowigi.visitors
 
-import java.awt.*;
+import com.intellij.codeInsight.daemon.impl.HighlightVisitor
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
+import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorSearchEngine
 
-@SuppressWarnings("CallToSuspiciousStringMethod")
-public class AppCodeVisitor extends ColorVisitor {
-  @Override
-  public boolean suitableForFile(@NotNull final PsiFile file) {
-    return file.toString().contains("OCFile") || file.getClass().toString().contains("SwiftFile"); // NON-NLS
+class AppCodeVisitor : ColorVisitor() {
+  override fun suitableForFile(file: PsiFile): Boolean =
+    file.toString().contains("OCFile") || file.javaClass.toString().contains("SwiftFile")
+
+  override fun visit(element: PsiElement) {
+    val type = PsiUtilCore.getElementType(element).toString()
+    if ("STRING_LITERAL" != type && "ISTRING_CONTENT" != type) return
+
+    val value = element.text
+    val color = ColorSearchEngine.getColor(value)
+    color?.let { highlight(element, it) }
   }
 
-  @Override
-  public void visit(@NotNull final PsiElement element) {
-    final String type = PsiUtilCore.getElementType(element).toString();
-    if (!"STRING_LITERAL".equals(type) && !"ISTRING_CONTENT".equals(type)) { // NON-NLS
-      return;
-    }
-
-    final String value = element.getText();
-    final Color color = ColorSearchEngine.getColor(value);
-
-    if (color != null) {
-      highlight(element, color);
-    }
-  }
-
-  @NotNull
-  @Override
-  public HighlightVisitor clone() {
-    return new AppCodeVisitor();
-  }
+  override fun clone(): HighlightVisitor = AppCodeVisitor()
 }
