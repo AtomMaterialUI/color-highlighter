@@ -41,7 +41,7 @@ import java.awt.*;
   "OverlyComplexBooleanExpression",
   "AssignmentToMethodParameter",
   "FloatingPointEquality",
-  "MethodWithMultipleReturnPoints"})
+  "MethodWithMultipleReturnPoints", "MagicNumber", "NumericCastThatLosesPrecision"})
 public enum ColorUtils {
   DEFAULT;
 
@@ -59,6 +59,10 @@ public enum ColorUtils {
       return getRGB(hex);
     }
     return getRGB(hex.substring(1));
+  }
+
+  public static String toHex(final Color color) {
+    return ColorUtil.toHex(color);
   }
 
   public static Gray getSuitableForeground(final Color color) {
@@ -100,6 +104,14 @@ public enum ColorUtils {
     } catch (final Exception e) {
       return new Color(r, g, b);
     }
+  }
+
+  public static String toRGB(final Color color) {
+    return String.format("rgb(%d, %d, %d)", color.getRed(), color.getGreen(), color.getBlue());
+  }
+
+  public static String toRGBA(final Color color) {
+    return String.format("rgb(%s, %s, %s,%d)", color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
   }
 
   @NotNull
@@ -171,6 +183,18 @@ public enum ColorUtils {
     final float[] rgb = convertHSLToRGB(h / 359.0f, s / 100.0f, l / 100.0f);
 
     return new Color(rgb[0], rgb[1], rgb[2], a);
+  }
+
+  public static String toHSL(final Color color) {
+    final float[] hsl = new float[3];
+    RGBtoHSL(color.getRed(), color.getGreen(), color.getBlue(), hsl);
+    return String.format("hsl(%f, %f, %f)", hsl[0], hsl[1], hsl[2]);
+  }
+
+  public static String toHSLA(final Color color) {
+    final float[] hsl = new float[3];
+    RGBtoHSL(color.getRed(), color.getGreen(), color.getBlue(), hsl);
+    return String.format("hsl(%f, %f, %f, %d)", hsl[0], hsl[1], hsl[2], color.getAlpha());
   }
 
   /**
@@ -245,7 +269,7 @@ public enum ColorUtils {
   }
 
   @SuppressWarnings({"AssignmentToMethodParameter",
-    "MethodWithMultipleReturnPoints"})
+    "MethodWithMultipleReturnPoints", "OverlyComplexArithmeticExpression"})
   private static float convertHueToRGB(final float m1, final float m2, float h) {
     if (h < 0.0f) {
       h++;
@@ -267,40 +291,6 @@ public enum ColorUtils {
 
   private static float[] convertRGBToHSL(final int r, final int g, final int b) {
     final float[] res = new float[3];
-
-        /*
-        var_R = ( R / 255 )                     //Where RGB values = 0 � 255
-        var_G = ( G / 255 )
-        var_B = ( B / 255 )
-
-        var_Min = min( var_R, var_G, var_B )    //Min. value of RGB
-        var_Max = max( var_R, var_G, var_B )    //Max. value of RGB
-        del_Max = var_Max - var_Min             //Delta RGB value
-
-        L = ( var_Max + var_Min ) / 2
-
-        if ( del_Max == 0 )                     //This is a gray, no chroma...
-        {
-           H = 0                                //HSL results = 0 � 1
-           S = 0
-        }
-        else                                    //Chromatic data...
-        {
-           if ( L < 0.5 ) S = del_Max / ( var_Max + var_Min )
-           else           S = del_Max / ( 2 - var_Max - var_Min )
-
-           del_R = ( ( ( var_Max - var_R ) / 6 ) + ( del_Max / 2 ) ) / del_Max
-           del_G = ( ( ( var_Max - var_G ) / 6 ) + ( del_Max / 2 ) ) / del_Max
-           del_B = ( ( ( var_Max - var_B ) / 6 ) + ( del_Max / 2 ) ) / del_Max
-
-           if      ( var_R == var_Max ) H = del_B - del_G
-           else if ( var_G == var_Max ) H = ( 1 / 3 ) + del_R - del_B
-           else if ( var_B == var_Max ) H = ( 2 / 3 ) + del_G - del_R
-
-           if ( H < 0 ) ; H += 1
-           if ( H > 1 ) ; H -= 1
-        }
-        */
 
     final float vR = r / 255.0f;
     final float vG = g / 255.0f;
@@ -328,7 +318,7 @@ public enum ColorUtils {
         h = dB - dG;
       } else if (vG == max) {
         h = (1.0f / 3.0f) + dR - dB;
-      } else /* if (vB == max) */ {
+      } else {
         h = (2.0f / 3.0f) + dG - dR;
       }
 

@@ -25,9 +25,7 @@
  */
 package com.mallowigi.gutter
 
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.markup.GutterIconRenderer
 import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.ui.ColorChooser
@@ -36,6 +34,7 @@ import com.intellij.ui.scale.JBUIScale
 import com.intellij.util.ui.ColorIcon
 import com.intellij.util.ui.EmptyIcon
 import com.mallowigi.ColorHighlighterBundle.message
+import com.mallowigi.gutter.actions.*
 import org.jetbrains.annotations.NonNls
 import java.awt.Color
 import java.awt.datatransfer.StringSelection
@@ -49,6 +48,16 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
   }
 
   override fun getTooltipText(): String = message("choose.color")
+
+  override fun getPopupMenuActions(): ActionGroup {
+    return DefaultActionGroup(
+      CopyHexAction(color),
+      CopyRgbAction(color),
+      CopyRgbaAction(color),
+      CopyHslAction(color),
+      CopyHslaAction(color)
+    )
+  }
 
   override fun getClickAction(): @NonNls AnAction {
     return object : AnAction(message("choose.color1")) {
