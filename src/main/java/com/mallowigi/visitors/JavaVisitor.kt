@@ -31,18 +31,42 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.search.ColorSearchEngine
+import com.mallowigi.search.parsers.ColorCtorParser
+import com.mallowigi.search.parsers.ColorMethodParser
+import com.mallowigi.search.parsers.ColorParser
 
 class JavaVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is PsiJavaFile
 
   override fun visit(element: PsiElement) {
-    if ("INTEGER_LITERAL" != PsiUtilCore.getElementType(element).toString()) return
+    val type = PsiUtilCore.getElementType(element).toString()
+    if ("INTEGER_LITERAL" != type && "NEW_EXPRESSION" != type) return
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 
   override fun clone(): HighlightVisitor = JavaVisitor()
+
+  override fun shouldParseText(text: String): Boolean {
+    val prefixes = setOf(COLOR.text,
+      COLOR_METHOD.text,
+      COLOR_UI_RESOURCE.text,
+      COLOR_UIRESOURCE_METHOD.text
+    )
+
+    return prefixes.any { text.startsWith(it) }
+  }
+
+  override fun getParser(text: String): ColorParser {
+    return when {
+      (text.startsWith(COLOR.text) || text.startsWith(COLOR_UI_RESOURCE.text)) -> ColorCtorParser()
+      text.startsWith(COLOR_METHOD.text) -> ColorMethodParser(COLOR_METHOD.text)
+      text.startsWith(COLOR_UIRESOURCE_METHOD.text) -> ColorMethodParser(COLOR_UIRESOURCE_METHOD.text)
+      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+    }
+  }
 }

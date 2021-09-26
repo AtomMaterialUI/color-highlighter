@@ -40,7 +40,7 @@ class AnyVisitor : ColorVisitor() {
 
     val value = element.value
     if (value is String) {
-      val color = ColorSearchEngine.getColor((value as String?)!!)
+      val color = ColorSearchEngine.getColor((value as String?)!!, this)
       color?.let { highlight(element, it) }
     }
   }

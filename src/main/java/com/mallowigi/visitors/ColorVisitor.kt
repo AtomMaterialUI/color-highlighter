@@ -30,13 +30,14 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.config.home.ColorHighlighterConfig.Companion.instance
+import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
 
 /**
  * Color visitor: This is the class that will colorize the texts representing colors
  *
  */
-abstract class ColorVisitor : HighlightVisitor {
+abstract class ColorVisitor : HighlightVisitor, LangVisitor {
   private var highlightInfoHolder: HighlightInfoHolder? = null
 
   /**
@@ -80,4 +81,8 @@ abstract class ColorVisitor : HighlightVisitor {
     assert(highlightInfoHolder != null)
     highlightInfoHolder!!.add(ColorHighlighter.highlightColor(element, color))
   }
+
+  override fun shouldParseText(text: String): Boolean = false
+
+  override fun getParser(text: String): ColorParser? = null
 }

@@ -40,7 +40,7 @@ class RubyVisitor : ColorVisitor() {
     if ("string content" != PsiUtilCore.getElementType(element).toString()) return
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

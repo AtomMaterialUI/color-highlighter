@@ -32,45 +32,44 @@ import java.util.*
 class HSLColorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseHSL(text!!)
 
-  companion object {
-    /**
-     * Parse a color in the hsl[a](h, s, l[, a]) format
-     */
-    private fun parseHSL(text: String): Color? {
-      var a = 1.0f
-      val hue: Int
-      val saturation: Int
-      val luminance: Int
-      val parenStart = text.indexOf(ColorUtils.OPEN_PAREN)
-      val parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN)
-      if (parenStart == -1 || parenEnd == -1) {
-        return null
-      }
-      val tokenizer = StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA)
-      if (tokenizer.countTokens() < 3) {
-        return null
-      }
-
-      // Parse h, s, l and a
-      var part = tokenizer.nextToken().trim { it <= ' ' }
-      hue = part.toInt()
-      part = tokenizer.nextToken().trim { it <= ' ' }
-      saturation = if (part.endsWith(ColorUtils.PERCENT)) {
-        part.substring(0, part.length - 1).toInt()
-      } else {
-        part.toInt()
-      }
-      part = tokenizer.nextToken().trim { it <= ' ' }
-      luminance = if (part.endsWith(ColorUtils.PERCENT)) {
-        part.substring(0, part.length - 1).toInt()
-      } else {
-        part.toInt()
-      }
-      if (tokenizer.hasMoreTokens()) {
-        part = tokenizer.nextToken().trim { it <= ' ' }
-        a = part.toFloat()
-      }
-      return ColorUtils.getHSLa(hue, saturation, luminance, a)
+  /**
+   * Parse a color in the hsl[a](h, s, l[, a]) format
+   */
+  private fun parseHSL(text: String): Color? {
+    var a = 1.0f
+    val hue: Int
+    val saturation: Int
+    val luminance: Int
+    val parenStart = text.indexOf(ColorUtils.OPEN_PAREN)
+    val parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN)
+    if (parenStart == -1 || parenEnd == -1) {
+      return null
     }
+    val tokenizer = StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA)
+    if (tokenizer.countTokens() < 3) {
+      return null
+    }
+
+    // Parse h, s, l and a
+    var part = tokenizer.nextToken().trim { it <= ' ' }
+    hue = part.toInt()
+    part = tokenizer.nextToken().trim { it <= ' ' }
+    saturation = if (part.endsWith(ColorUtils.PERCENT)) {
+      part.substring(0, part.length - 1).toInt()
+    } else {
+      part.toInt()
+    }
+    part = tokenizer.nextToken().trim { it <= ' ' }
+    luminance = if (part.endsWith(ColorUtils.PERCENT)) {
+      part.substring(0, part.length - 1).toInt()
+    } else {
+      part.toInt()
+    }
+    if (tokenizer.hasMoreTokens()) {
+      part = tokenizer.nextToken().trim { it <= ' ' }
+      a = part.toFloat()
+    }
+    return ColorUtils.getHSLa(hue, saturation, luminance, a)
   }
 }
+

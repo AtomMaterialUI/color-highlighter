@@ -41,7 +41,7 @@ class AppCodeVisitor : ColorVisitor() {
     if ("STRING_LITERAL" != type && "ISTRING_CONTENT" != type) return
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

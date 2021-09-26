@@ -41,7 +41,7 @@ class GoVisitor : ColorVisitor() {
     if ("STRING_LITERAL" != PsiUtilCore.getElementType(element).toString()) return
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

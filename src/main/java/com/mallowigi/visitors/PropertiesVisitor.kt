@@ -40,7 +40,7 @@ class PropertiesVisitor : ColorVisitor() {
     if (element !is PropertyValueImpl) return
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

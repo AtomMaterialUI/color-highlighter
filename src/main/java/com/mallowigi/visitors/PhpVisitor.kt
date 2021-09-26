@@ -40,7 +40,7 @@ class PhpVisitor : ColorVisitor() {
     if (element !is StringLiteralExpression) return
 
     val value = element.contents
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

@@ -39,9 +39,9 @@ class PythonVisitor : ColorVisitor() {
 
   override fun visit(element: PsiElement) {
     if (element !is PyPlainStringElement) return
-    
+
     val value = (element as PyStringElement).content
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

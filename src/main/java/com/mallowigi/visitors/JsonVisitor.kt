@@ -39,7 +39,7 @@ class JsonVisitor : ColorVisitor() {
   override fun visit(element: PsiElement) {
     if (element !is JsonStringLiteral) return
 
-    val color = ColorSearchEngine.getColor(element.value)
+    val color = ColorSearchEngine.getColor(element.value, this)
     color?.let { highlight(element, it) }
   }
 

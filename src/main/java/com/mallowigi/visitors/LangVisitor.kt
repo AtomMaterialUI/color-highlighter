@@ -23,16 +23,12 @@
  *
  *
  */
-package com.mallowigi.search.parsers
 
-import com.mallowigi.colors.ColorsService.Companion.instance
-import java.awt.Color
+package com.mallowigi.visitors
 
-class ColorMethodParser internal constructor(private val colorMethod: String) : ColorParser {
-  override fun parseColor(text: String?): Color? = parseMethod(text!!, colorMethod)
+import com.mallowigi.search.parsers.ColorParser
 
-  private fun parseMethod(text: String, s: String): Color? {
-    val name = text.substring(s.length)
-    return instance.findJavaColor(name)
-  }
+interface LangVisitor {
+  fun shouldParseText(text: String): Boolean
+  fun getParser(text: String): ColorParser?
 }

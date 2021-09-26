@@ -40,11 +40,12 @@ class YamlVisitor : ColorVisitor() {
   override fun visit(element: PsiElement) {
     if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring"))
       return
-    
+
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
+
 
   override fun clone(): HighlightVisitor = YamlVisitor()
 }

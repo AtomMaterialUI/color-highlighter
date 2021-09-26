@@ -39,7 +39,7 @@ class KotlinVisitor : ColorVisitor() {
   override fun visit(element: PsiElement) {
     if ("INTEGER_CONSTANT" != PsiUtilCore.getElementType(element).toString()) return
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

@@ -38,9 +38,9 @@ class ScalaVisitor : ColorVisitor() {
 
   override fun visit(element: PsiElement) {
     if (element !is ScIntegerLiteral) return
-    
+
     val value = element.text
-    val color = ColorSearchEngine.getColor(value)
+    val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 

@@ -23,16 +23,16 @@
  *
  *
  */
-package com.mallowigi.search.parsers
 
-import com.mallowigi.colors.ColorsService.Companion.instance
-import java.awt.Color
+package com.mallowigi.search
 
-class ColorMethodParser internal constructor(private val colorMethod: String) : ColorParser {
-  override fun parseColor(text: String?): Color? = parseMethod(text!!, colorMethod)
 
-  private fun parseMethod(text: String, s: String): Color? {
-    val name = text.substring(s.length)
-    return instance.findJavaColor(name)
-  }
+enum class ColorPrefixes(val text: String) {
+  COLOR_METHOD("Color."),
+  COLOR_UIRESOURCE_METHOD("ColorUIResource."),
+  RGB("rgb"),
+  HSL("hsl"),
+  OX("0x"),
+  COLOR("new Color"),
+  COLOR_UI_RESOURCE("new ColorUIResource"),
 }

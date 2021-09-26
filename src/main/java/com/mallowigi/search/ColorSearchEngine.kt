@@ -27,6 +27,7 @@
 package com.mallowigi.search
 
 import com.mallowigi.search.parsers.ColorParserFactory
+import com.mallowigi.visitors.ColorVisitor
 import java.awt.Color
 import java.util.regex.Pattern
 
@@ -93,10 +94,10 @@ object ColorSearchEngine {
   /**
    * Try to parse a color using the provided formats
    */
-  fun getColor(text: String): Color? {
+  fun getColor(text: String, visitor: ColorVisitor): Color? {
     return try {
       val normalizedText = text.replace("\"".toRegex(), "").replace("'".toRegex(), "")
-      ColorParserFactory.getParser(normalizedText).parseColor(normalizedText)
+      ColorParserFactory.getParser(normalizedText, visitor).parseColor(normalizedText)
     } catch (e: RuntimeException) {
       null
     }

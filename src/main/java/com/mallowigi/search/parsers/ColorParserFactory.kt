@@ -25,32 +25,27 @@
  */
 package com.mallowigi.search.parsers
 
+import com.mallowigi.search.ColorPrefixes.*
+import com.mallowigi.visitors.LangVisitor
 import java.util.regex.Pattern
 
 object ColorParserFactory {
-  private const val COLOR_METHOD = "Color."
-  private const val COLOR_UIRESOURCE_METHOD = "ColorUIResource."
-  private const val RGB = "rgb"
-  private const val HSL = "hsl"
-  private const val OX = "0x"
-  private const val COLOR = "new Color"
-  private const val COLOR_UI_RESOURCE = "new ColorUIResource"
-  private val NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,8}\\b)")
+
+  private val NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,8}[^-])")
   const val HASH: String = "#"
 
-  fun getParser(text: String): ColorParser {
-    //    } else if (text.startsWith(COLOR) || text.startsWith(COLOR_UI_RESOURCE)) {
-    //      return new ColorCtorParser();
-    //      } else if (text.startsWith(COLOR_METHOD)) {
-    //        return new ColorMethodParser(COLOR_METHOD);
-    //      } else if (text.startsWith(COLOR_UIRESOURCE_METHOD)) {
-    //        return new ColorMethodParser(COLOR_UIRESOURCE_METHOD);
+  fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
     return when {
       text.startsWith(HASH) && text.length > 1 -> HexColorParser(HASH)
-      text.startsWith(RGB) -> RGBColorParser()
-      text.startsWith(HSL) -> HSLColorParser()
-      text.startsWith(OX) -> HexColorParser(OX)
+      text.startsWith(RGB.text) -> RGBColorParser()
+      text.startsWith(HSL.text) -> HSLColorParser()
+      text.startsWith(OX.text) -> HexColorParser(OX.text)
       NO_HEX_PATTERN.matcher(text).find() -> HexColorParser("")
+
+      // If the lang visitor should parse the text, retrieve the parser
+      langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: SVGColorParser()
+
+
       else -> SVGColorParser()
     }
   }
