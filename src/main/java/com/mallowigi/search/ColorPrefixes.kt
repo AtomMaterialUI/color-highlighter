@@ -29,10 +29,9 @@ package com.mallowigi.search
 
 enum class ColorPrefixes(val text: String) {
   COLOR_METHOD("Color."),
-  COLOR_UIRESOURCE_METHOD("ColorUIResource."),
+  JBCOLOR("JBColor."),
   RGB("rgb"),
   HSL("hsl"),
   OX("0x"),
-  COLOR("new Color"),
-  COLOR_UI_RESOURCE("new ColorUIResource"),
+  COLOR("new Color(")
 }

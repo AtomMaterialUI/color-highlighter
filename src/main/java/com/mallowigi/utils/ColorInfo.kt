@@ -32,6 +32,12 @@ import com.mallowigi.colors.ColorsService.Companion.instance
 import java.awt.Color
 import kotlin.math.roundToInt
 
+/**
+ * Service storing many kinds of text format for a color
+ *
+ * @property color
+ * @constructor Create empty Color info
+ */
 data class ColorInfo(val color: Color) {
   val txtRGB: String
   val txtHSB: String
@@ -55,6 +61,7 @@ data class ColorInfo(val color: Color) {
   val colorUIResourceIII: String
 
   init {
+    // TODO: these should be methods, and replace the ones in the ColorUtils
     val argb = color.rgb
     val rgb = argb and 0xffffff
     val comps = color.getRGBComponents(null)

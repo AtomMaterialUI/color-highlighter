@@ -32,6 +32,9 @@ import java.awt.*;
   "unused",
   "ClassWithTooManyFields"})
 public class Colors {
+  Color test = new Color(12, 23, 32);
+
+
   Color ALICEBLUE = new ColorUIResource(0xf0f8ff);
   Color ALIZARIN = new ColorUIResource(0xe74c3c);
   Color AMETHYST = new ColorUIResource(0x9b59b6);

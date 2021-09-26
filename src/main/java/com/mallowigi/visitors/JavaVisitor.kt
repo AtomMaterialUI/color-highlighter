@@ -52,10 +52,10 @@ class JavaVisitor : ColorVisitor() {
   override fun clone(): HighlightVisitor = JavaVisitor()
 
   override fun shouldParseText(text: String): Boolean {
-    val prefixes = setOf(COLOR.text,
+    val prefixes = setOf(
+      COLOR.text,
       COLOR_METHOD.text,
-      COLOR_UI_RESOURCE.text,
-      COLOR_UIRESOURCE_METHOD.text
+      JBCOLOR.text
     )
 
     return prefixes.any { text.startsWith(it) }
@@ -63,9 +63,9 @@ class JavaVisitor : ColorVisitor() {
 
   override fun getParser(text: String): ColorParser {
     return when {
-      (text.startsWith(COLOR.text) || text.startsWith(COLOR_UI_RESOURCE.text)) -> ColorCtorParser()
+      text.startsWith(COLOR.text) -> ColorCtorParser()
       text.startsWith(COLOR_METHOD.text) -> ColorMethodParser(COLOR_METHOD.text)
-      text.startsWith(COLOR_UIRESOURCE_METHOD.text) -> ColorMethodParser(COLOR_UIRESOURCE_METHOD.text)
+      text.startsWith(JBCOLOR.text) -> ColorMethodParser(JBCOLOR.text)
       else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
     }
   }

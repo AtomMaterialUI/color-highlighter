@@ -25,7 +25,7 @@
  */
 package com.mallowigi.search.parsers
 
-import org.jetbrains.annotations.NonNls
+import com.mallowigi.colors.JavaColorCtor
 import java.awt.Color
 import java.util.*
 
@@ -33,77 +33,45 @@ class ColorCtorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {
-    var isFloat = false
-    var fr = 0.0f
-    var fg = 0.0f
-    var fb = 0.0f
-    var fa = 1.0f
-    var ir = 0
-    var ig = 0
-    var ib = 0
-    var ia = 255
-    var alpha = false
-    val ps = text.indexOf('(')
-    val pe = text.indexOf(')')
-    if (ps == -1 || pe == -1) {
-      return null
-    }
-    val tokenizer = StringTokenizer(text.substring(ps + 1, pe), ",")
-    val params = tokenizer.countTokens()
-    var part = tokenizer.nextToken().trim { it <= ' ' }
-    if (part.endsWith("f")) {
-      isFloat = true
-      fr = part.substring(0, part.length - 1).toFloat()
-    } else {
-      ir = parseInt(part)
-    }
-    if (params >= 2) {
-      part = tokenizer.nextToken().trim { it <= ' ' }
-      if ("true" == part) {
-        alpha = true
-      } else if ("false" == part) {
-        alpha = false
-      } else if (part.endsWith("f")) {
-        isFloat = true
-        fg = part.substring(0, part.length - 1).toFloat()
-      } else {
-        ig = parseInt(part)
-      }
-      if (params >= 3) {
-        part = tokenizer.nextToken().trim { it <= ' ' }
-        if (part.endsWith("f")) {
-          isFloat = true
-          fb = part.substring(0, part.length - 1).toFloat()
-        } else {
-          ib = parseInt(part)
-        }
-        if (params == 4) {
-          part = tokenizer.nextToken().trim { it <= ' ' }
-          if (part.endsWith("f")) {
-            isFloat = true
-            fa = part.substring(0, part.length - 1).toFloat()
-          } else {
-            ia = parseInt(part)
-          }
-        }
-      }
-    }
-    return when {
-      isFloat -> Color(fr, fg, fb, fa)
-      else -> when (params) {
-        1 -> Color(ir)
-        2 -> Color(ir, alpha)
-        else -> Color(ir, ig, ib, ia)
-      }
-    }
-  }
+    val javaColorCtor = JavaColorCtor()
+    javaColorCtor.run {
+      startParen = text.indexOf('(')
+      endParen = text.indexOf(')')
 
-  private fun parseInt(part: @NonNls String?): Int {
-    val res: Int = when {
-      part!!.lowercase(Locale.getDefault()).startsWith("0x") -> part.substring(2).toInt(16)
-      part.startsWith("0") && part.length > 1 -> part.substring(1).toInt(8)
-      else -> part.toInt()
+      if (startParen == -1 || endParen == -1) return null
+
+      // tokenize the string into "red,green,blue"
+      val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
+      val params = tokenizer.countTokens()
+      var next = getNextNumber(tokenizer)
+
+      // float support: sets floatRed/intRed
+      parseRed(next)
+
+      if (params >= 2) {
+        next = getNextNumber(tokenizer)
+        parseGreen(next)
+      }
+
+      if (params >= 3) {
+        next = getNextNumber(tokenizer)
+        parseBlue(next)
+      }
+
+      if (params == 4) {
+        parseAlpha(next)
+      }
+
+      return when {
+        isFloat -> Color(floatRed, floatGreen, floatBlue, floatAlpha)
+        else -> when (params) {
+          1 -> Color(intRed)
+          2 -> Color(intRed, alpha)
+          else -> Color(intRed, intGreen, intBlue, intAlpha)
+        }
+      }
     }
-    return res
   }
 }
+
+
