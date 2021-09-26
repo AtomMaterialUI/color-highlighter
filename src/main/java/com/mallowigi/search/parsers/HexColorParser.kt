@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,34 +23,23 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-package com.mallowigi.search.parsers;
+import com.mallowigi.utils.ColorUtils
+import java.awt.Color
 
-import com.mallowigi.utils.ColorUtils;
-import org.jetbrains.annotations.NotNull;
+class HexColorParser internal constructor(prefix: String) : ColorParser {
+  private val offset: Int
 
-import java.awt.*;
-
-public final class HexColorParser implements ColorParser {
-  private final int offset;
-
-  HexColorParser(final String prefix) {
-    offset = prefix.length();
+  init {
+    offset = prefix.length
   }
 
-  @Override
-  public Color parseColor(final String text) {
-    return parseHex(text);
-  }
+  override fun parseColor(text: String?): Color = parseHex(text!!)
 
   /**
    * parse a color in the hex format
    */
-  @NotNull
-  private Color parseHex(@NotNull final String text) {
-    return text.length() == 3 + offset ?
-           ColorUtils.getShortRGB(text.substring(offset)) :
-           ColorUtils.getRGB(text.substring(offset));
-  }
-
+  private fun parseHex(text: String): Color =
+    if (text.length == 3 + offset) ColorUtils.getShortRGB(text.substring(offset)) else ColorUtils.getRGB(text.substring(offset))
 }

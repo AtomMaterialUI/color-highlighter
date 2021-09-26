@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,71 +23,54 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-package com.mallowigi.search.parsers;
+import com.mallowigi.utils.ColorUtils
+import java.awt.Color
+import java.util.*
 
-import com.mallowigi.utils.ColorUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class HSLColorParser : ColorParser {
+  override fun parseColor(text: String?): Color? = parseHSL(text!!)
 
-import java.awt.*;
-import java.util.StringTokenizer;
+  companion object {
+    /**
+     * Parse a color in the hsl[a](h, s, l[, a]) format
+     */
+    private fun parseHSL(text: String): Color? {
+      var a = 1.0f
+      val hue: Int
+      val saturation: Int
+      val luminance: Int
+      val parenStart = text.indexOf(ColorUtils.OPEN_PAREN)
+      val parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN)
+      if (parenStart == -1 || parenEnd == -1) {
+        return null
+      }
+      val tokenizer = StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA)
+      if (tokenizer.countTokens() < 3) {
+        return null
+      }
 
-public final class HSLColorParser implements ColorParser {
-  /**
-   * Parse a color in the hsl[a](h, s, l[, a]) format
-   */
-  @SuppressWarnings({"UseOfStringTokenizer",
-    "ReuseOfLocalVariable",
-    "DuplicatedCode",
-    "IfMayBeConditional"})
-  @Nullable
-  private static Color parseHSL(@NotNull final String text) {
-    float a = 1.0f;
-    final int hue;
-    final int saturation;
-    final int luminance;
-    final int parenStart = text.indexOf(ColorUtils.OPEN_PAREN);
-    final int parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN);
-
-    if (parenStart == -1 || parenEnd == -1) {
-      return null;
+      // Parse h, s, l and a
+      var part = tokenizer.nextToken().trim { it <= ' ' }
+      hue = part.toInt()
+      part = tokenizer.nextToken().trim { it <= ' ' }
+      saturation = if (part.endsWith(ColorUtils.PERCENT)) {
+        part.substring(0, part.length - 1).toInt()
+      } else {
+        part.toInt()
+      }
+      part = tokenizer.nextToken().trim { it <= ' ' }
+      luminance = if (part.endsWith(ColorUtils.PERCENT)) {
+        part.substring(0, part.length - 1).toInt()
+      } else {
+        part.toInt()
+      }
+      if (tokenizer.hasMoreTokens()) {
+        part = tokenizer.nextToken().trim { it <= ' ' }
+        a = part.toFloat()
+      }
+      return ColorUtils.getHSLa(hue, saturation, luminance, a)
     }
-
-    final StringTokenizer tokenizer = new StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA);
-    if (tokenizer.countTokens() < 3) {
-      return null;
-    }
-
-    // Parse h, s, l and a
-    String part = tokenizer.nextToken().trim();
-
-    hue = Integer.parseInt(part);
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith(ColorUtils.PERCENT)) {
-      saturation = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      saturation = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith(ColorUtils.PERCENT)) {
-      luminance = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      luminance = Integer.parseInt(part);
-    }
-
-    if (tokenizer.hasMoreTokens()) {
-      part = tokenizer.nextToken().trim();
-      a = Float.parseFloat(part);
-    }
-
-    return ColorUtils.getHSLa(hue, saturation, luminance, a);
-  }
-
-  @Override
-  public Color parseColor(final String text) {
-    return parseHSL(text);
   }
 }

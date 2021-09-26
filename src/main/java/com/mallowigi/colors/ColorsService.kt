@@ -25,7 +25,7 @@
  */
 package com.mallowigi.colors
 
-import com.intellij.openapi.components.ServiceManager
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.util.Pair
 import com.mallowigi.colors.ColorsService
 import com.thoughtworks.xstream.XStream
@@ -116,7 +116,7 @@ class ColorsService private constructor() {
 
     @JvmStatic
     val instance: ColorsService
-      get() = ServiceManager.getService(ColorsService::class.java)
+      get() = ApplicationManager.getApplication().getService(ColorsService::class.java)
 
     private fun parseColorsFromXML(): Colors {
       val xml = ColorsService::class.java.getResource(COLORS_XML)

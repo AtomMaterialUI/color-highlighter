@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Elior Boukhobza
+ * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,79 +23,62 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-package com.mallowigi.search.parsers;
+import com.mallowigi.utils.ColorUtils
+import java.awt.Color
+import java.util.*
 
-import com.mallowigi.utils.ColorUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class RGBColorParser : ColorParser {
+  override fun parseColor(text: String?): Color? = parseRGB(text!!)
 
-import java.awt.*;
-import java.util.StringTokenizer;
+  companion object {
+    /**
+     * Parse a color in the rgb[a](r, g, b[, a]) format
+     */
+    private fun parseRGB(text: String): Color? {
+      var isPercent = false
+      var a = 1.0f
+      val red: Int
+      val green: Int
+      val blue: Int
+      val parenStart = text.indexOf(ColorUtils.OPEN_PAREN)
+      val parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN)
+      if (parenStart == -1 || parenEnd == -1) {
+        return null
+      }
+      val tokenizer = StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA) // split by ,
+      if (tokenizer.countTokens() < 3) {
+        return null
+      }
 
-public final class RGBColorParser implements ColorParser {
-  /**
-   * Parse a color in the rgb[a](r, g, b[, a]) format
-   */
-  @SuppressWarnings({
-    "ReuseOfLocalVariable",
-    "UseOfStringTokenizer",
-    "DuplicatedCode",
-    "OverlyLongMethod"})
-  @Nullable
-  private static Color parseRGB(@NotNull final String text) {
-    boolean isPercent = false;
-    float a = 1.0f;
-    final int red;
-    final int green;
-    final int blue;
-    final int parenStart = text.indexOf(ColorUtils.OPEN_PAREN);
-    final int parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN);
-
-    if (parenStart == -1 || parenEnd == -1) {
-      return null;
+      // Parse r, g, b and a
+      var part = tokenizer.nextToken().trim { it <= ' ' }
+      if (part.endsWith(ColorUtils.PERCENT)) {
+        isPercent = true
+        red = part.substring(0, part.length - 1).toInt()
+      } else {
+        red = part.toInt()
+      }
+      part = tokenizer.nextToken().trim { it <= ' ' }
+      if (part.endsWith(ColorUtils.PERCENT)) {
+        isPercent = true
+        green = part.substring(0, part.length - 1).toInt()
+      } else {
+        green = part.toInt()
+      }
+      part = tokenizer.nextToken().trim { it <= ' ' }
+      if (part.endsWith(ColorUtils.PERCENT)) {
+        isPercent = true
+        blue = part.substring(0, part.length - 1).toInt()
+      } else {
+        blue = part.toInt()
+      }
+      if (tokenizer.hasMoreTokens()) {
+        part = tokenizer.nextToken().trim { it <= ' ' }
+        a = part.toFloat()
+      }
+      return if (isPercent) ColorUtils.getPercentRGBa(red, green, blue, a) else ColorUtils.getDecimalRGBa(red, green, blue, a)
     }
-
-    final StringTokenizer tokenizer = new StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA); // split by ,
-    if (tokenizer.countTokens() < 3) {
-      return null;
-    }
-
-    // Parse r, g, b and a
-    String part = tokenizer.nextToken().trim();
-    if (part.endsWith(ColorUtils.PERCENT)) {
-      isPercent = true;
-      red = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      red = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith(ColorUtils.PERCENT)) {
-      isPercent = true;
-      green = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      green = Integer.parseInt(part);
-    }
-
-    part = tokenizer.nextToken().trim();
-    if (part.endsWith(ColorUtils.PERCENT)) {
-      isPercent = true;
-      blue = Integer.parseInt(part.substring(0, part.length() - 1));
-    } else {
-      blue = Integer.parseInt(part);
-    }
-
-    if (tokenizer.hasMoreTokens()) {
-      part = tokenizer.nextToken().trim();
-      a = Float.parseFloat(part);
-    }
-
-    return isPercent ? ColorUtils.getPercentRGBa(red, green, blue, a) : ColorUtils.getDecimalRGBa(red, green, blue, a);
-  }
-
-  @Override
-  public Color parseColor(final String text) {
-    return parseRGB(text);
   }
 }
