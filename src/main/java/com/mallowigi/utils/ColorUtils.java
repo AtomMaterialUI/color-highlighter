@@ -111,7 +111,7 @@ public enum ColorUtils {
   }
 
   public static String toRGBA(final Color color) {
-    return String.format("rgb(%s, %s, %s,%d)", color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+    return String.format("rgb(%s, %s, %s, %d)", color.getRed(), color.getGreen(), color.getBlue(), (color.getAlpha() / 255));
   }
 
   @NotNull
@@ -188,13 +188,13 @@ public enum ColorUtils {
   public static String toHSL(final Color color) {
     final float[] hsl = new float[3];
     RGBtoHSL(color.getRed(), color.getGreen(), color.getBlue(), hsl);
-    return String.format("hsl(%f, %f, %f)", hsl[0], hsl[1], hsl[2]);
+    return String.format("hsl(%d, %d%%, %d%%)", Math.round(hsl[0] * 100), Math.round(hsl[1] * 100), Math.round(hsl[2] * 100));
   }
 
   public static String toHSLA(final Color color) {
     final float[] hsl = new float[3];
     RGBtoHSL(color.getRed(), color.getGreen(), color.getBlue(), hsl);
-    return String.format("hsl(%f, %f, %f, %d)", hsl[0], hsl[1], hsl[2], color.getAlpha());
+    return String.format("hsl(%d, %d%%, %d%%, %d)", Math.round(hsl[0] * 100), Math.round(hsl[1] * 100), Math.round(hsl[2] * 100), (color.getAlpha() / 255));
   }
 
   /**

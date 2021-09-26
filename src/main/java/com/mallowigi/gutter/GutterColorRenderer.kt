@@ -55,7 +55,21 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
       CopyRgbAction(color),
       CopyRgbaAction(color),
       CopyHslAction(color),
-      CopyHslaAction(color)
+      CopyHslaAction(color),
+      CopyJavaColorResource(color),
+      CopyKotlinColorResource(color),
+      CopyJavaRgb(color),
+      CopyJavaRgba(color),
+      CopyKotlinRgb(color),
+      CopyKotlinRgba(color),
+      CopyNetRgb(color),
+      CopyNetArgb(color),
+      CopyNSColorHsb(color),
+      CopyNSColorHsba(color),
+      CopyUIColorHsb(color),
+      CopyUIColorHsba(color),
+      CopySwiftHsb(color),
+      CopySwiftHsba(color)
     )
   }
 
