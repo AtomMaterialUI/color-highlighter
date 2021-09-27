@@ -40,9 +40,11 @@ import com.mallowigi.search.parsers.ColorParser
 class JavaVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is PsiJavaFile
 
+  private val allowedTypes = listOf("INTEGER_LITERAL", "NEW_EXPRESSION", "REFERENCE_EXPRESSION")
+
   override fun visit(element: PsiElement) {
     val type = PsiUtilCore.getElementType(element).toString()
-    if ("INTEGER_LITERAL" != type && "NEW_EXPRESSION" != type) return
+    if (type !in allowedTypes) return
 
     val value = element.text
     val color = ColorSearchEngine.getColor(value, this)

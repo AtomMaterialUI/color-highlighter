@@ -30,7 +30,11 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.search.ColorSearchEngine
+import com.mallowigi.search.parsers.ColorCtorParser
+import com.mallowigi.search.parsers.ColorParser
+import com.mallowigi.search.parsers.NSColorParser
 
 class AppCodeVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean =
@@ -46,4 +50,23 @@ class AppCodeVisitor : ColorVisitor() {
   }
 
   override fun clone(): HighlightVisitor = AppCodeVisitor()
+
+  override fun shouldParseText(text: String): Boolean {
+    val prefixes = setOf(
+      NS_COLOR.text,
+      SWIFT_COLOR.text,
+      UI_COLOR.text,
+    )
+
+    return prefixes.any { text.startsWith(it) }
+  }
+
+  override fun getParser(text: String): ColorParser {
+    return when {
+      text.startsWith(NS_COLOR.text) -> NSColorParser()
+      text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
+      text.startsWith(UI_COLOR.text) -> NSColorParser()
+      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+    }
+  }
 }
