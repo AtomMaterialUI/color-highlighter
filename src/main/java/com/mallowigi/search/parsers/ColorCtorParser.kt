@@ -25,7 +25,7 @@
  */
 package com.mallowigi.search.parsers
 
-import com.mallowigi.colors.JavaColorCtor
+import com.mallowigi.colors.ColorData
 import java.awt.Color
 import java.util.*
 
@@ -33,8 +33,8 @@ class ColorCtorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {
-    val javaColorCtor = JavaColorCtor()
-    javaColorCtor.run {
+    val colorData = ColorData()
+    colorData.run {
       startParen = text.indexOf('(')
       endParen = text.indexOf(')')
 

@@ -27,14 +27,18 @@
 package com.mallowigi.colors
 
 import org.jetbrains.annotations.NonNls
+import java.lang.Float.parseFloat
 import java.util.*
 
 
-class JavaColorCtor(
+class ColorData(
   var isFloat: Boolean = false,
   var floatRed: Float = 0.0f,
   var floatGreen: Float = 0.0f,
   var floatBlue: Float = 0.0f,
+  var floatHue: Float = 0.0f,
+  var floatSaturation: Float = 0.0f,
+  var floatBrightness: Float = 0.0f,
   var floatAlpha: Float = 1.0f,
   var intRed: Int = 0,
   var intGreen: Int = 0,
@@ -79,7 +83,24 @@ class JavaColorCtor(
     else -> intAlpha = parseInt(part)
   }
 
+  fun parseHue(part: String) {
+    floatHue = parseFloat(part)
+  }
+
+
+  fun parseSaturation(part: String) {
+    floatSaturation = parseFloat(part)
+  }
+
+
+  fun parseBrightness(part: String) {
+    floatBrightness = parseFloat(part)
+  }
+
+
   fun getNextNumber(tokenizer: StringTokenizer): String = tokenizer.nextToken().trim { it <= ' ' }
+
+  fun getNextParam(next: String): String = next.split(":")[1]
 
   private fun parseInt(part: @NonNls String?): Int {
     return when {

@@ -27,12 +27,11 @@ package com.mallowigi.search.parsers
 
 import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.visitors.LangVisitor
-import java.util.regex.Pattern
 
 object ColorParserFactory {
 
-  private val NO_HEX_PATTERN = Pattern.compile("(\\b[a-fA-F0-9]{3,8}[^-])")
-  const val HASH: String = "#"
+  private val NO_HEX_PATTERN = """(\\b[a-fA-F0-9]{3,8}\\b)""".toRegex()
+  private const val HASH: String = "#"
 
   fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
     return when {
@@ -40,7 +39,7 @@ object ColorParserFactory {
       text.startsWith(RGB.text) -> RGBColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
-      NO_HEX_PATTERN.matcher(text).find() -> HexColorParser("")
+      NO_HEX_PATTERN.matches(text) -> HexColorParser("")
 
       // If the lang visitor should parse the text, retrieve the parser
       langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: SVGColorParser()
