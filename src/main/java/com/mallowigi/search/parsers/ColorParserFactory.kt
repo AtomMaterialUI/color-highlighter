@@ -30,7 +30,7 @@ import com.mallowigi.visitors.LangVisitor
 
 object ColorParserFactory {
 
-  private val NO_HEX_PATTERN = """(\\b[a-fA-F0-9]{3,8}\\b)""".toRegex()
+  private val NO_HEX_PATTERN = """(\\b[a-fA-F0-9]{6,8}\\b)""".toRegex()
   private const val HASH: String = "#"
 
   fun getParser(text: String, langVisitor: LangVisitor): ColorParser {

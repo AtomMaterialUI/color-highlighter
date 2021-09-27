@@ -102,7 +102,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
 
         if (row >= 0 && row < table.getRowCount()) {
           final Object colorValue = model.getValueAt(row, column);
-          final Color modelColor = ColorUtils.getHex((String) colorValue);
+          final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
 
           ColorPicker.showColorPickerPopup(null, modelColor,
             (color, source) -> ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color)));
@@ -230,8 +230,8 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
         final T item = getItem(rowIndex);
         final Object oldValue = column.valueOf(item);
         if (column.getColumnClass() == String.class
-            ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
-            : !Comparing.equal(oldValue, aValue)) {
+          ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
+          : !Comparing.equal(oldValue, aValue)) {
 
           column.setValue(helper.getMutable(item, rowIndex), aValue);
           if (dataChangedListener != null) {
