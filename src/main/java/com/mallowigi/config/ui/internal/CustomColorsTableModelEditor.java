@@ -94,23 +94,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
     toolbarDecorator = ToolbarDecorator.createDecorator(table, this);
 
     // Color picker listening
-    new ClickListener() {
-      @Override
-      public boolean onClick(@NotNull final MouseEvent event, final int clickCount) {
-        final int row = table.rowAtPoint(event.getPoint());
-        final int column = 1;
-
-        if (row >= 0 && row < table.getRowCount()) {
-          final Object colorValue = model.getValueAt(row, column);
-          final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
-
-          ColorPicker.showColorPickerPopup(null, modelColor,
-            (color, source) -> ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color)));
-          return true;
-        }
-        return false;
-      }
-    }.installOn(table);
+    new CustomColorsClickListener().installOn(table);
   }
 
   @SuppressWarnings("unused")
@@ -179,13 +163,13 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
     }
 
     helper.reset(model.items);
-    return Collections.unmodifiableList(model.items);
+    return model.items;
   }
 
   @NotNull
   @Override
   protected List<T> getItems() {
-    return Collections.unmodifiableList(model.items);
+    return model.items;
   }
 
   @Override
@@ -219,7 +203,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
 
     @Override
     public void setItems(@NotNull final List<T> items) {
-      this.items = Collections.unmodifiableList(items);
+      this.items = items;
       super.setItems(items);
     }
 
@@ -229,6 +213,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
         @SuppressWarnings("unchecked") final ColumnInfo<T, Object> column = getColumnInfos()[columnIndex];
         final T item = getItem(rowIndex);
         final Object oldValue = column.valueOf(item);
+
         if (column.getColumnClass() == String.class
           ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
           : !Comparing.equal(oldValue, aValue)) {
@@ -242,4 +227,22 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
     }
   }
 
+  private class CustomColorsClickListener extends ClickListener {
+    @Override
+    public final boolean onClick(@NotNull final MouseEvent event, final int clickCount) {
+      final Point point = event.getPoint();
+      final int row = table.rowAtPoint(point);
+      final int column = table.columnAtPoint(point);
+
+      if (row >= 0 && row < table.getRowCount() && column == 1) {
+        final Object colorValue = model.getValueAt(row, 1);
+        final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
+
+        ColorPicker.showColorPickerPopup(null, modelColor,
+          (color, source) -> ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color)));
+        return true;
+      }
+      return false;
+    }
+  }
 }

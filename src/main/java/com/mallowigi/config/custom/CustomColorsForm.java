@@ -47,7 +47,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 @SuppressWarnings({"FieldCanBeLocal",
@@ -92,7 +91,7 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
     customColorsEditor = null;
   }
 
-  public void setFormState(final CustomColorsConfig config) {
+  public void setFormState(final @NotNull CustomColorsConfig config) {
     ApplicationManager.getApplication().invokeLater(() -> {
       if (customColorsEditor != null) {
         customColorsEditor.reset(config.getCustomColors().getTheAssociations());
@@ -115,7 +114,7 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
 
   public CustomColors getCustomColors() {
     assert customColorsEditor != null;
-    return new CustomColors(Collections.unmodifiableList(customColorsEditor.getModel().getItems()));
+    return new CustomColors(customColorsEditor.getModel().getItems());
   }
 
   private void createTables() {

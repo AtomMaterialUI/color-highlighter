@@ -87,7 +87,7 @@ class CustomColors : Serializable {
 
   fun findCustomColor(colorName: String): SingleColor? =
     values().stream()
-      .filter { (name, code): SingleColor -> name == colorName }
+      .filter { (name, _): SingleColor -> name == colorName }
       .findAny()
       .orElse(null)
 
