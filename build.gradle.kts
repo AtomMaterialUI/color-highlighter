@@ -92,6 +92,7 @@ intellij {
     "Groovy",
     "properties",
     "yaml",
+    "markdown",
     "Pythonid:$depsPyVersion",
     "org.jetbrains.plugins.go:$depsGoVersion",
     "org.jetbrains.kotlin:$depsKotlinVersion",
