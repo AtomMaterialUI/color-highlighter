@@ -30,6 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorCtorParser
@@ -41,6 +42,8 @@ class KotlinVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is KtFile
 
   private val allowedTypes = listOf("INTEGER_CONSTANT", "CALL_EXPRESSION", "REFERENCE_EXPRESSION")
+
+  private val config = ColorHighlighterConfig.instance
 
   override fun visit(element: PsiElement) {
     val type = PsiUtilCore.getElementType(element).toString()
@@ -54,24 +57,30 @@ class KotlinVisitor : ColorVisitor() {
   override fun clone(): HighlightVisitor = KotlinVisitor()
 
   override fun shouldParseText(text: String): Boolean {
+    // todo add settings for those
     val prefixes = setOf(
-      KT_COLOR.text,
-      COLOR_METHOD.text,
       JBCOLOR.text,
       COLOR_ARGB.text,
       COLOR_RGB.text
     )
 
-    return prefixes.any { text.startsWith(it) }
+    return when {
+      config.isKotlinColorCtorEnabled -> text.startsWith(KT_COLOR.text)
+      config.isKotlinColorMethodEnabled -> text.startsWith(COLOR_METHOD.text)
+      else -> false
+    }
+
+//    return prefixes.any { text.startsWith(it) }
   }
 
   override fun getParser(text: String): ColorParser {
     return when {
       text.startsWith(KT_COLOR.text) -> ColorCtorParser()
-      text.startsWith(COLOR_ARGB.text) -> ColorCtorParser()
-      text.startsWith(COLOR_RGB.text) -> ColorCtorParser()
       text.startsWith(COLOR_METHOD.text) -> ColorMethodParser(COLOR_METHOD.text)
-      text.startsWith(JBCOLOR.text) -> ColorMethodParser(JBCOLOR.text)
+      // todo
+//      text.startsWith(COLOR_ARGB.text) -> ColorCtorParser()
+//      text.startsWith(COLOR_RGB.text) -> ColorCtorParser()
+//      text.startsWith(JBCOLOR.text) -> ColorMethodParser(JBCOLOR.text)
       else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
     }
   }

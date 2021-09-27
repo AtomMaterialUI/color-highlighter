@@ -46,17 +46,44 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   @Property
   var isEnabled: Boolean = true
 
+  @Property
+  var isHexDetectEnabled: Boolean = true
+
+  @Property
+  var isJavaColorCtorEnabled: Boolean = true
+
+  @Property
+  var isJavaColorMethodEnabled: Boolean = true
+
+  @Property
+  var isKotlinColorCtorEnabled: Boolean = true
+
+  @Property
+  var isKotlinColorMethodEnabled: Boolean = true
+
+
   override fun getState(): ColorHighlighterConfig = this
 
   override fun loadState(state: ColorHighlighterConfig): Unit = XmlSerializerUtil.copyBean(state, this)
 
   override fun applySettings(form: ColorHighlighterSettingsForm) {
     isEnabled = form.getIsEnabled()
+    isHexDetectEnabled = form.isHexDetectEnabled
+    isJavaColorCtorEnabled = form.isJavaColorCtorEnabled
+    isJavaColorMethodEnabled = form.isJavaColorMethodEnabled
+    isKotlinColorCtorEnabled = form.isKotlinColorCtorEnabled
+    isKotlinColorMethodEnabled = form.isKotlinColorMethodEnabled
     fireChanged()
   }
 
   override fun resetSettings() {
     isEnabled = true
+    isHexDetectEnabled = true
+    isJavaColorCtorEnabled = true
+    isJavaColorMethodEnabled = true
+    isKotlinColorCtorEnabled = true
+    isKotlinColorMethodEnabled = true
+    fireChanged()
   }
 
   override fun fireChanged(): Unit = ApplicationManager.getApplication().messageBus
@@ -68,6 +95,46 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
 
   fun toggleEnabled() {
     isEnabled = !isEnabled
+  }
+  //endregion
+
+  //region Hex Detect Enabled
+  fun isHexDetectEnabledChanged(isEnabled: Boolean): Boolean = this.isHexDetectEnabled != isEnabled
+
+  fun toggleHexDetectEnabled() {
+    isHexDetectEnabled = !isHexDetectEnabled
+  }
+  //endregion
+
+  //region Java Color Ctor Enabled
+  fun isJavaColorCtorEnabledChanged(isEnabled: Boolean): Boolean = this.isJavaColorCtorEnabled != isEnabled
+
+  fun toggleJavaColorCtorEnabled() {
+    isJavaColorCtorEnabled = !isJavaColorCtorEnabled
+  }
+  //endregion
+
+  //region Kotlin Color Ctor Enabled
+  fun isKotlinColorCtorEnabledChanged(isEnabled: Boolean): Boolean = this.isKotlinColorCtorEnabled != isEnabled
+
+  fun toggleKotlinColorCtorEnabled() {
+    isKotlinColorCtorEnabled = !isKotlinColorCtorEnabled
+  }
+  //endregion
+
+  //region Java Color Method Enabled
+  fun isJavaColorMethodEnabledChanged(isEnabled: Boolean): Boolean = this.isJavaColorMethodEnabled != isEnabled
+
+  fun toggleJavaColorMethodEnabled() {
+    isJavaColorMethodEnabled = !isJavaColorMethodEnabled
+  }
+  //endregion
+
+  //region Kotlin Color Ctor Enabled
+  fun isKotlinColorMethodEnabledChanged(isEnabled: Boolean): Boolean = this.isKotlinColorMethodEnabled != isEnabled
+
+  fun toggleKotlinColorMethodEnabled() {
+    isKotlinColorMethodEnabled = !isKotlinColorMethodEnabled
   }
   //endregion
 

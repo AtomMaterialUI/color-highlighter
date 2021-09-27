@@ -52,13 +52,15 @@ class AppCodeVisitor : ColorVisitor() {
   override fun clone(): HighlightVisitor = AppCodeVisitor()
 
   override fun shouldParseText(text: String): Boolean {
-    val prefixes = setOf(
-      NS_COLOR.text,
-      SWIFT_COLOR.text,
-      UI_COLOR.text,
-    )
-
-    return prefixes.any { text.startsWith(it) }
+//    val prefixes = setOf(
+//      NS_COLOR.text,
+//      SWIFT_COLOR.text,
+//      UI_COLOR.text,
+//    )
+//
+//    return prefixes.any { text.startsWith(it) }
+    // todo
+    return false
   }
 
   override fun getParser(text: String): ColorParser {

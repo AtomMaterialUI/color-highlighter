@@ -26,6 +26,7 @@
 package com.mallowigi.search.parsers
 
 import com.mallowigi.config.custom.CustomColorsConfig
+import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.visitors.LangVisitor
 
@@ -38,6 +39,7 @@ object ColorParserFactory {
 
   private val NO_HEX_PATTERN = """(\b[a-fA-F0-9]{6,8}\b)""".toRegex()
   private const val HASH: String = "#"
+  private val config = ColorHighlighterConfig.instance
 
   fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
     val customColors = CustomColorsConfig.instance.customColors
@@ -47,7 +49,8 @@ object ColorParserFactory {
       text.startsWith(RGB.text) -> RGBColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
-      NO_HEX_PATTERN.matches(text) -> HexColorParser("")
+
+      config.isHexDetectEnabled && NO_HEX_PATTERN.matches(text) -> HexColorParser("")
 
       // If the lang visitor should parse the text, retrieve the parser
       langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: PredefinedColorParser()
