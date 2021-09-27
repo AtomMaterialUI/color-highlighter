@@ -28,9 +28,14 @@ package com.mallowigi.search.parsers
 import com.mallowigi.search.ColorPrefixes.*
 import com.mallowigi.visitors.LangVisitor
 
+/**
+ * Color parser factory: get the color parser according to the text pattern
+ *
+ * @constructor Create empty Color parser factory
+ */
 object ColorParserFactory {
 
-  private val NO_HEX_PATTERN = """(\\b[a-fA-F0-9]{6,8}\\b)""".toRegex()
+  private val NO_HEX_PATTERN = """(\b[a-fA-F0-9]{6,8}\b)""".toRegex()
   private const val HASH: String = "#"
 
   fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
@@ -42,10 +47,10 @@ object ColorParserFactory {
       NO_HEX_PATTERN.matches(text) -> HexColorParser("")
 
       // If the lang visitor should parse the text, retrieve the parser
-      langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: SVGColorParser()
+      langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: PredefinedColorParser()
 
-
-      else -> SVGColorParser()
+      // Parse from PredefinedColors
+      else -> PredefinedColorParser()
     }
   }
 }

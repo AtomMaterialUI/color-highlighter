@@ -29,6 +29,12 @@ import com.mallowigi.colors.ColorData
 import java.awt.Color
 import java.util.*
 
+/**
+ * Parse a color in the objectiveC format
+ *
+ * TODO
+ *
+ */
 class NSColorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseMethodCall(text!!)
 

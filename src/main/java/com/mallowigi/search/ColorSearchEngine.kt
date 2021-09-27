@@ -33,6 +33,9 @@ import java.util.regex.Pattern
 
 object ColorSearchEngine {
   // region COLOR_PATTERNS
+  /**
+   * List of color patterns. Currently unused.
+   */
   private val COLOR_PATTERNS = listOf(
     Pattern.compile(
       "((#\\p{XDigit}{6}\\b)|(#\\p{XDigit}{3}\\b))"
@@ -93,6 +96,8 @@ object ColorSearchEngine {
   // endregion
   /**
    * Try to parse a color using the provided formats
+   * @param text text to parse
+   * @param visitor a Language Visitor to provide additional formats (ex: Color() for Java/Kotlin)
    */
   fun getColor(text: String, visitor: ColorVisitor): Color? {
     return try {

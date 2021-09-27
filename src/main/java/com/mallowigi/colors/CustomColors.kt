@@ -31,7 +31,7 @@ import java.io.Serializable
 import java.util.Map.copyOf
 
 /**
- * Custom colors
+ * This is the serialized data class for user custom colors from xml
  */
 @Suppress("MemberNameEqualsClassName", "unused")
 class CustomColors : Serializable {

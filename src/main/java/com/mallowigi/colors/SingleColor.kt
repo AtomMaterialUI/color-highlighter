@@ -28,7 +28,13 @@ package com.mallowigi.colors
 import com.intellij.util.xmlb.annotations.Property
 import java.io.Serializable
 
-class SingleColor internal constructor(
+/**
+ * Represents a Single color: name + code
+ *
+ * @property name
+ * @property code
+ */
+data class SingleColor internal constructor(
   @field:Property var name: String = "",
   @field:Property var code: String = "",
 ) : Serializable {
@@ -45,8 +51,4 @@ class SingleColor internal constructor(
     get() = name.isEmpty() || code.isEmpty()
 
   override fun toString(): String = "$name: $code"
-
-  companion object {
-    private const val serialVersionUID: Long = -1L
-  }
 }

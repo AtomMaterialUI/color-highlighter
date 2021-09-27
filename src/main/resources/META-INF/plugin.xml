@@ -77,7 +77,7 @@
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="com.mallowigi.colors.ColorsService"/>
+    <applicationService serviceImplementation="com.mallowigi.colors.PredefinedColors"/>
 
     <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"

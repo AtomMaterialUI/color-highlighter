@@ -29,38 +29,32 @@ import com.mallowigi.colors.ColorData
 import java.awt.Color
 import java.util.*
 
+/**
+ * Parses colors in the form `Color(a,b,c)`
+ *
+ */
 class ColorCtorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {
     val colorData = ColorData()
     colorData.run {
-      startParen = text.indexOf('(')
-      endParen = text.indexOf(')')
+      init(text)
 
       if (startParen == -1 || endParen == -1) return null
 
       // tokenize the string into "red,green,blue"
       val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
       val params = tokenizer.countTokens()
-      var next = getNextNumber(tokenizer)
 
-      // float support: sets floatRed/intRed
-      parseRed(next)
-
-      if (params >= 2) {
-        next = getNextNumber(tokenizer)
-        parseGreen(next)
-      }
-
-      if (params >= 3) {
-        next = getNextNumber(tokenizer)
-        parseBlue(next)
-      }
-
-      if (params == 4) {
-        parseAlpha(next)
-      }
+      // parse red part
+      getNextNumber(tokenizer).also { parseRed(it) }
+      // parse green part
+      if (params >= 2) getNextNumber(tokenizer).also { parseGreen(it) }
+      // parse blue part
+      if (params >= 3) getNextNumber(tokenizer).also { parseBlue(it) }
+      // parse alpha
+      if (params == 4) getNextNumber(tokenizer).also { parseAlpha(it) }
 
       return when {
         isFloat -> Color(floatRed, floatGreen, floatBlue, floatAlpha)

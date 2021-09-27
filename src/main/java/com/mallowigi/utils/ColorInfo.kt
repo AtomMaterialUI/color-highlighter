@@ -28,7 +28,7 @@
 
 package com.mallowigi.utils
 
-import com.mallowigi.colors.ColorsService.Companion.instance
+import com.mallowigi.colors.PredefinedColors
 import java.awt.Color
 import kotlin.math.roundToInt
 
@@ -91,10 +91,10 @@ data class ColorInfo(val color: Color) {
   }
 
   val sVGName: String?
-    get() = instance.findSVGName(color)
+    get() = PredefinedColors.instance.findSVGName(color)
 
   val javaName: String?
-    get() = instance.findJavaName(color)
+    get() = PredefinedColors.instance.findJavaName(color)
 
   companion object {
     var isHexUppercase: Boolean = false

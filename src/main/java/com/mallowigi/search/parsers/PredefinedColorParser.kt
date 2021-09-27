@@ -25,10 +25,14 @@
  */
 package com.mallowigi.search.parsers
 
-import com.mallowigi.colors.ColorsService.Companion.instance
+import com.mallowigi.colors.PredefinedColors
 import java.awt.Color
 import java.util.*
 
-class SVGColorParser : ColorParser {
-  override fun parseColor(text: String?): Color? = instance.findSVGColor(text!!.lowercase(Locale.getDefault()))
+/**
+ * Look for a predefined color of the given text
+ *
+ */
+class PredefinedColorParser : ColorParser {
+  override fun parseColor(text: String?): Color? = PredefinedColors.instance.findSVGColor(text!!.lowercase(Locale.getDefault()))
 }

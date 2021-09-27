@@ -25,14 +25,19 @@
  */
 package com.mallowigi.search.parsers
 
-import com.mallowigi.colors.ColorsService.Companion.instance
+import com.mallowigi.colors.PredefinedColors
 import java.awt.Color
 
+/**
+ * Parses colors in the form `Color.xxx`
+ *
+ * @property colorMethod - prefix to offset from
+ */
 class ColorMethodParser internal constructor(private val colorMethod: String) : ColorParser {
   override fun parseColor(text: String?): Color? = parseMethod(text!!, colorMethod)
 
-  private fun parseMethod(text: String, s: String): Color? {
-    val name = text.substring(s.length)
-    return instance.findJavaColor(name)
+  private fun parseMethod(text: String, prefix: String): Color? {
+    val name = text.substring(prefix.length)
+    return PredefinedColors.instance.findJavaColor(name)
   }
 }

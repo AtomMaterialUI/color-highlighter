@@ -25,10 +25,15 @@
  */
 package com.mallowigi.search.parsers
 
+import com.mallowigi.colors.ColorData
 import com.mallowigi.utils.ColorUtils
 import java.awt.Color
 import java.util.*
 
+/**
+ * Parse text in the form `hsl(h,s,l,[,a])`
+ *
+ */
 class HSLColorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseHSL(text!!)
 
@@ -36,40 +41,24 @@ class HSLColorParser : ColorParser {
    * Parse a color in the hsl[a](h, s, l[, a]) format
    */
   private fun parseHSL(text: String): Color? {
-    var a = 1.0f
-    val hue: Int
-    val saturation: Int
-    val luminance: Int
-    val parenStart = text.indexOf(ColorUtils.OPEN_PAREN)
-    val parenEnd = text.indexOf(ColorUtils.CLOSE_PAREN)
-    if (parenStart == -1 || parenEnd == -1) {
-      return null
-    }
-    val tokenizer = StringTokenizer(text.substring(parenStart + 1, parenEnd), ColorUtils.COMMA)
-    if (tokenizer.countTokens() < 3) {
-      return null
-    }
+    val colorData = ColorData()
+    colorData.run {
+      init(text)
+      if (startParen == -1 || endParen == -1) return null
 
-    // Parse h, s, l and a
-    var part = tokenizer.nextToken().trim { it <= ' ' }
-    hue = part.toInt()
-    part = tokenizer.nextToken().trim { it <= ' ' }
-    saturation = if (part.endsWith(ColorUtils.PERCENT)) {
-      part.substring(0, part.length - 1).toInt()
-    } else {
-      part.toInt()
+      // tokenize the string into "hue,saturation,luminance"
+      val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
+      val params = tokenizer.countTokens()
+      if (params < 3) return null
+
+      getNextNumber(tokenizer).also { parseHue(it) }
+      getNextNumber(tokenizer).also { parseSaturation(it) }
+      getNextNumber(tokenizer).also { parseBrightness(it) }
+
+      if (tokenizer.hasMoreTokens()) getNextNumber(tokenizer).also { parseAlpha(it) }
+
+      return ColorUtils.getHSLa(floatHue.toInt(), floatSaturation.toInt(), floatBrightness.toInt(), floatAlpha)
     }
-    part = tokenizer.nextToken().trim { it <= ' ' }
-    luminance = if (part.endsWith(ColorUtils.PERCENT)) {
-      part.substring(0, part.length - 1).toInt()
-    } else {
-      part.toInt()
-    }
-    if (tokenizer.hasMoreTokens()) {
-      part = tokenizer.nextToken().trim { it <= ' ' }
-      a = part.toFloat()
-    }
-    return ColorUtils.getHSLa(hue, saturation, luminance, a)
   }
 }
 

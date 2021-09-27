@@ -28,6 +28,11 @@ package com.mallowigi.search.parsers
 import com.mallowigi.utils.ColorUtils
 import java.awt.Color
 
+/**
+ * Parse a color in the hex format
+ *
+ * @param prefix - the prefix to offset with
+ */
 class HexColorParser internal constructor(prefix: String) : ColorParser {
   private val offset: Int
 
@@ -41,5 +46,8 @@ class HexColorParser internal constructor(prefix: String) : ColorParser {
    * parse a color in the hex format
    */
   private fun parseHex(text: String): Color =
-    if (text.length == 3 + offset) ColorUtils.getShortRGB(text.substring(offset)) else ColorUtils.getRGB(text.substring(offset))
+    when (text.length) {
+      3 + offset -> ColorUtils.getShortRGB(text.substring(offset))
+      else -> ColorUtils.getRGB(text.substring(offset))
+    }
 }
