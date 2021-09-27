@@ -26,6 +26,7 @@
 
 package com.mallowigi.config.home
 
+import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.SettingsCategory
@@ -73,6 +74,8 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isJavaColorMethodEnabled = form.isJavaColorMethodEnabled
     isKotlinColorCtorEnabled = form.isKotlinColorCtorEnabled
     isKotlinColorMethodEnabled = form.isKotlinColorMethodEnabled
+
+    LafManager.getInstance().updateUI()
     fireChanged()
   }
 
@@ -83,6 +86,8 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isJavaColorMethodEnabled = true
     isKotlinColorCtorEnabled = true
     isKotlinColorMethodEnabled = true
+
+    LafManager.getInstance().updateUI()
     fireChanged()
   }
 

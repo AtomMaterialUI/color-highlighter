@@ -31,7 +31,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.config.home.ColorHighlighterConfig
-import com.mallowigi.search.ColorPrefixes.*
+import com.mallowigi.search.ColorPrefixes.COLOR_METHOD
+import com.mallowigi.search.ColorPrefixes.KT_COLOR
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorCtorParser
 import com.mallowigi.search.parsers.ColorMethodParser
@@ -58,11 +59,11 @@ class KotlinVisitor : ColorVisitor() {
 
   override fun shouldParseText(text: String): Boolean {
     // todo add settings for those
-    val prefixes = setOf(
-      JBCOLOR.text,
-      COLOR_ARGB.text,
-      COLOR_RGB.text
-    )
+//    val prefixes = setOf(
+//      JBCOLOR.text,
+//      COLOR_ARGB.text,
+//      COLOR_RGB.text
+//    )
 
     return when {
       config.isKotlinColorCtorEnabled -> text.startsWith(KT_COLOR.text)

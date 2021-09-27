@@ -32,6 +32,7 @@ package com.mallowigi.config.home;
 
 import com.intellij.openapi.Disposable;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.mallowigi.FeatureLoader;
 import com.mallowigi.config.SettingsFormUI;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NotNull;
@@ -53,6 +54,16 @@ public final class ColorHighlighterSettingsForm extends JPanel
   @Override
   public void init() {
     initComponents();
+    toggleFeatures();
+  }
+
+  private void toggleFeatures() {
+    if (!FeatureLoader.getInstance().isJavaEnabled()) {
+      javaPanel.hide();
+    }
+    if (!FeatureLoader.getInstance().isKotlinEnabled()) {
+      kotlinPanel.hide();
+    }
   }
 
   @Override

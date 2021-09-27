@@ -54,8 +54,6 @@
     - Swift
 
     More to come!
-
-    PS: You can disable the highlighting at Settings > Editor > Appearance > "Show inline colors"
     ]]></description>
 
   <idea-version since-build="211.*"/>
@@ -77,6 +75,8 @@
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.mallowigi.FeatureLoader"/>
+
     <applicationService serviceImplementation="com.mallowigi.colors.PredefinedColors"/>
 
     <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig"/>
