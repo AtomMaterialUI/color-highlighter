@@ -44,11 +44,11 @@ class PredefinedColors {
       get() = ApplicationManager.getApplication().getService(PredefinedColors::class.java)
   }
 
-  private var svgColors: MutableMap<Int, String?>? = null
-  private var svgNames: MutableMap<String?, Int>? = null
+  private lateinit var svgColors: MutableMap<Int, String?>
+  private lateinit var svgNames: MutableMap<String?, Int>
 
-  private var javaColors: MutableMap<Int, String>? = null
-  private var javaNames: MutableMap<String, Int>? = null
+  private lateinit var javaColors: MutableMap<Int, String>
+  private lateinit var javaNames: MutableMap<String, Int>
 
   /**
    * Find svgName from Color
@@ -58,7 +58,7 @@ class PredefinedColors {
    */
   fun findSVGName(color: Color): String? {
     val rgb = toColor(color.rgb)
-    return (svgColors ?: return null)[rgb]
+    return svgColors[rgb]
   }
 
   /**
@@ -68,8 +68,8 @@ class PredefinedColors {
    * @return
    */
   fun findSVGColor(name: String?): Color? {
-    val code = (svgNames ?: return null)[name]
-    return if (code != null) Color(code) else null
+    val code = svgNames[name] ?: return null
+    return Color(code)
   }
 
   /**
@@ -80,7 +80,7 @@ class PredefinedColors {
    */
   fun findJavaName(color: Color): String? {
     val rgb = toColor(color.rgb)
-    return (javaColors ?: return null)[rgb]
+    return javaColors[rgb]
   }
 
   /**
@@ -90,8 +90,8 @@ class PredefinedColors {
    * @return
    */
   fun findJavaColor(name: String): Color? {
-    val code = (javaNames ?: return null)[name]
-    return if (code != null) Color(code) else null
+    val code = javaNames[name] ?: return null
+    return Color(code)
   }
 
   /**

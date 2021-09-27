@@ -26,37 +26,15 @@
 package com.mallowigi.search.parsers
 
 import com.mallowigi.config.custom.CustomColorsConfig
-import com.mallowigi.search.ColorPrefixes.*
-import com.mallowigi.visitors.LangVisitor
+import java.awt.Color
+import java.util.*
 
 /**
- * Color parser factory: get the color parser according to the text pattern
+ * Look for a custom color of the given text
  *
- * @constructor Create empty Color parser factory
  */
-object ColorParserFactory {
+class CustomColorParser : ColorParser {
+  override fun parseColor(text: String?): Color? = getColor(text!!.lowercase(Locale.getDefault()))
 
-  private val NO_HEX_PATTERN = """(\b[a-fA-F0-9]{6,8}\b)""".toRegex()
-  private const val HASH: String = "#"
-
-  fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
-    val customColors = CustomColorsConfig.instance.customColors
-
-    return when {
-      text.startsWith(HASH) && text.length > 1 -> HexColorParser(HASH)
-      text.startsWith(RGB.text) -> RGBColorParser()
-      text.startsWith(HSL.text) -> HSLColorParser()
-      text.startsWith(OX.text) -> HexColorParser(OX.text)
-      NO_HEX_PATTERN.matches(text) -> HexColorParser("")
-
-      // If the lang visitor should parse the text, retrieve the parser
-      langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: PredefinedColorParser()
-
-      // custom colors
-      text in customColors -> CustomColorParser()
-
-      // Parse from PredefinedColors
-      else -> PredefinedColorParser()
-    }
-  }
+  private fun getColor(colorName: String): Color? = CustomColorsConfig.instance.customColors.getColor(colorName)
 }

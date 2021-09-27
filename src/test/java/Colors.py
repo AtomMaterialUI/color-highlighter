@@ -1,6 +1,7 @@
 class Colors:
     def __init__(self):
         self.colors = {
+          "dsa":"000000",
             "aliceblue": "f0f8ff",
             "alizarin": "e74c3c",
             "amethyst": "9b59b6",

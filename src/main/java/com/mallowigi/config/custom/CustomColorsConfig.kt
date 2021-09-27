@@ -37,7 +37,7 @@ import com.mallowigi.colors.CustomColors
 import com.mallowigi.colors.SingleColor
 import com.mallowigi.config.SettingsConfig
 import com.mallowigi.listeners.CustomColorsNotifier
-import java.util.Objects
+import java.util.*
 
 @State(
   name = "Custom Colors",

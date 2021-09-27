@@ -27,6 +27,7 @@ package com.mallowigi.colors
 
 import com.intellij.util.xmlb.annotations.Property
 import com.intellij.util.xmlb.annotations.XCollection
+import java.awt.Color
 import java.io.Serializable
 import java.util.Map.copyOf
 
@@ -84,12 +85,19 @@ class CustomColors : Serializable {
    */
   private fun values(): List<SingleColor> = customColors.values.toList()
 
-  fun findMatchingAssociation(name: String): SingleColor? =
+  fun findCustomColor(colorName: String): SingleColor? =
     values().stream()
-      .filter { customColor: SingleColor -> customColor.name == name }
+      .filter { (name, code): SingleColor -> name == colorName }
       .findAny()
       .orElse(null)
 
   fun getTheAssociations(): List<SingleColor> = values()
+
+  operator fun contains(text: String): Boolean = customColors.containsKey(text)
+
+  fun getColor(colorName: String): Color? {
+    val foundColor = customColors[colorName] ?: return null
+    return Color(foundColor.colorInt)
+  }
 
 }
