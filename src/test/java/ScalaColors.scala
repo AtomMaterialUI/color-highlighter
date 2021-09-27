@@ -5,7 +5,7 @@ import java.awt._
 //remove if not needed
 import scala.collection.JavaConversions._
 
-class Colors {
+class ScalaColors {
 
   var ALICEBLUE: Color = new ColorUIResource(0xf0f8ff)
 
