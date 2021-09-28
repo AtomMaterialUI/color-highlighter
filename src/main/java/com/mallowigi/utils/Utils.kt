@@ -23,19 +23,19 @@
  *
  *
  */
-package com.mallowigi
 
-import com.intellij.openapi.application.ApplicationManager
+package com.mallowigi.utils
 
-class FeatureLoader {
-  var isRiderEnabled: Boolean = false
-  var isJavaEnabled: Boolean = false
-  var isKotlinEnabled: Boolean = false
-  var isMarkdownEnabled: Boolean = false
+import com.intellij.ide.plugins.IdeaPluginDescriptor
+import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.openapi.extensions.PluginId
+import com.mallowigi.ColorHighlighterBundle
 
-  companion object {
-    @JvmStatic
-    val instance: FeatureLoader
-      get() = ApplicationManager.getApplication().getService(FeatureLoader::class.java)
-  }
+
+fun getPlugin(): IdeaPluginDescriptor? = PluginManagerCore.getPlugin(PluginId.getId("com.mallowigi.colorHighlighter"))
+
+
+fun getVersion(): String {
+  val plugin: IdeaPluginDescriptor? = getPlugin()
+  return if (plugin != null) plugin.version else ColorHighlighterBundle.message("plugin.version")
 }

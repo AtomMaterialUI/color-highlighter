@@ -65,6 +65,15 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   @Property
   var isRiderColorMethodEnabled: Boolean = true
 
+  @Property
+  var isTextEnabled: Boolean = true
+
+  @Property
+  var isMarkdownEnabled: Boolean = true
+
+  @Property
+  var version: String = "7.0.0"
+
 
   override fun getState(): ColorHighlighterConfig = this
 
@@ -78,8 +87,10 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isKotlinColorCtorEnabled = form.isKotlinColorCtorEnabled
     isKotlinColorMethodEnabled = form.isKotlinColorMethodEnabled
     isRiderColorMethodEnabled = form.isRiderColorMethodEnabled
+    isTextEnabled = form.isTextEnabled
+    isMarkdownEnabled = form.isMarkdownEnabled
 
-    LafManager.getInstance().updateUI()
+    ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
     fireChanged()
   }
 
@@ -91,8 +102,10 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isKotlinColorCtorEnabled = true
     isKotlinColorMethodEnabled = true
     isRiderColorMethodEnabled = true
+    isTextEnabled = true
+    isMarkdownEnabled = true
 
-    LafManager.getInstance().updateUI()
+    ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
     fireChanged()
   }
 
@@ -155,6 +168,23 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isRiderColorMethodEnabled = !isRiderColorMethodEnabled
   }
   //endregion
+
+  //region Text Enabled
+  fun isTextEnabledChanged(isEnabled: Boolean): Boolean = this.isTextEnabled != isEnabled
+
+  fun toggleTextEnabled() {
+    isTextEnabled = !isTextEnabled
+  }
+  //endregion
+
+  //region Markdown Enabled
+  fun isMarkdownEnabledChanged(isEnabled: Boolean): Boolean = this.isMarkdownEnabled != isEnabled
+
+  fun toggleMarkdownEnabled() {
+    isMarkdownEnabled = !isMarkdownEnabled
+  }
+  //endregion
+
 
   companion object {
     @JvmStatic

@@ -28,4 +28,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <highlightVisitor implementation="com.mallowigi.visitors.MarkdownVisitor"/>
   </extensions>
+
+  <applicationListeners>
+    <listener class="com.mallowigi.startup.MarkdownVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
 </idea-plugin>

@@ -58,15 +58,11 @@ public final class ColorHighlighterSettingsForm extends JPanel
   }
 
   private void toggleFeatures() {
-    if (!FeatureLoader.getInstance().isJavaEnabled()) {
-      javaPanel.hide();
-    }
-    if (!FeatureLoader.getInstance().isKotlinEnabled()) {
-      kotlinPanel.hide();
-    }
-    if (!FeatureLoader.getInstance().isRiderEnabled()) {
-      riderPanel.hide();
-    }
+    final FeatureLoader featureLoader = FeatureLoader.getInstance();
+    if (!featureLoader.isJavaEnabled()) javaPanel.hide();
+    if (!featureLoader.isKotlinEnabled()) kotlinPanel.hide();
+    if (!featureLoader.isRiderEnabled()) riderPanel.hide();
+    if (!featureLoader.isMarkdownEnabled()) markdownPanel.hide();
   }
 
   @Override
@@ -88,6 +84,8 @@ public final class ColorHighlighterSettingsForm extends JPanel
     setIsKotlinColorCtorEnabled(config.isKotlinColorCtorEnabled());
     setIsKotlinColorMethodEnabled(config.isKotlinColorMethodEnabled());
     setIsRiderColorMethodEnabled(config.isRiderColorMethodEnabled());
+    setIsTextEnabled(config.isTextEnabled());
+    setIsMarkdownEnabled(config.isMarkdownEnabled());
   }
 
   @Override
@@ -99,6 +97,8 @@ public final class ColorHighlighterSettingsForm extends JPanel
     isModified = isModified || config.isKotlinColorCtorEnabledChanged(getIsKotlinColorCtorEnabled());
     isModified = isModified || config.isKotlinColorMethodEnabledChanged(getIsKotlinColorMethodEnabled());
     isModified = isModified || config.isRiderColorMethodEnabledChanged(getIsRiderColorMethodEnabled());
+    isModified = isModified || config.isTextEnabledChanged(getIsTextEnabled());
+    isModified = isModified || config.isMarkdownEnabledChanged(getIsMarkdownEnabled());
     return isModified;
   }
 
@@ -122,6 +122,12 @@ public final class ColorHighlighterSettingsForm extends JPanel
     riderPanel = new JPanel();
     riderSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.riderSeparator.text"));
     riderColorMethodCheckbox = new JCheckBox();
+    textPanel = new JPanel();
+    textPanelSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.textPanelSeparator.text"));
+    textCheckbox = new JCheckBox();
+    markdownPanel = new JPanel();
+    markdownSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.markdownSeparator.text"));
+    markdownCheckbox = new JCheckBox();
 
     //======== this ========
     setLayout(new MigLayout(
@@ -131,6 +137,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       // rows
       "0[shrink 0,top]rel" +
         "[shrink 0,top]rel" +
+        "[]" +
         "[]"));
 
     //======== globalPanel ========
@@ -179,7 +186,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       colorMethodCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.colorMethodCheckbox.toolTipText"));
       javaPanel.add(colorMethodCheckbox, "cell 0 2,aligny top,growy 0");
     }
-    add(javaPanel, "cell 0 1,aligny top,grow 100 0");
+    add(javaPanel, "cell 0 2,aligny top,grow 100 0");
 
     //======== kotlinPanel ========
     {
@@ -204,7 +211,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       colorKtMethodCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"));
       kotlinPanel.add(colorKtMethodCheckbox, "cell 0 2,aligny top,growy 0");
     }
-    add(kotlinPanel, "cell 1 1,aligny top,grow 100 0");
+    add(kotlinPanel, "cell 1 2,aligny top,grow 100 0");
 
     //======== riderPanel ========
     {
@@ -223,7 +230,45 @@ public final class ColorHighlighterSettingsForm extends JPanel
       riderColorMethodCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.riderColorMethodCheckbox.toolTipText"));
       riderPanel.add(riderColorMethodCheckbox, "cell 0 1,aligny top,growy 0");
     }
-    add(riderPanel, "cell 0 2,aligny top,grow 100 0");
+    add(riderPanel, "cell 0 3,aligny top,grow 100 0");
+
+    //======== textPanel ========
+    {
+      textPanel.setBorder(null);
+      textPanel.setLayout(new MigLayout(
+        "fillx,hidemode 3,align left top",
+        // columns
+        "0[left]0",
+        // rows
+        "[]" +
+          "[]"));
+      textPanel.add(textPanelSeparator, "cell 0 0,growx,gapx 0,gapy 10 10");
+
+      //---- textCheckbox ----
+      textCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.textCheckbox.text"));
+      textCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.textCheckbox.toolTipText"));
+      textPanel.add(textCheckbox, "cell 0 1,aligny top,growy 0");
+    }
+    add(textPanel, "cell 0 1,aligny top,grow 100 0");
+
+    //======== markdownPanel ========
+    {
+      markdownPanel.setBorder(null);
+      markdownPanel.setLayout(new MigLayout(
+        "fillx,hidemode 3,align left top",
+        // columns
+        "0[left]0",
+        // rows
+        "[]" +
+          "[]"));
+      markdownPanel.add(markdownSeparator, "cell 0 0,growx,gapx 0,gapy 10 10");
+
+      //---- markdownCheckbox ----
+      markdownCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.markdownCheckbox.text"));
+      markdownCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.markdownCheckbox.toolTipText"));
+      markdownPanel.add(markdownCheckbox, "cell 0 1,aligny top,growy 0");
+    }
+    add(markdownPanel, "cell 1 1,aligny top,grow 100 0");
     // JFormDesigner - End of component initialization  //GEN-END:initComponents
   }
 
@@ -244,6 +289,12 @@ public final class ColorHighlighterSettingsForm extends JPanel
   private JPanel riderPanel;
   private JComponent riderSeparator;
   private JCheckBox riderColorMethodCheckbox;
+  private JPanel textPanel;
+  private JComponent textPanelSeparator;
+  private JCheckBox textCheckbox;
+  private JPanel markdownPanel;
+  private JComponent markdownSeparator;
+  private JCheckBox markdownCheckbox;
   // JFormDesigner - End of variables declaration  //GEN-END:variables
 
   //region Global Enabled
@@ -313,6 +364,26 @@ public final class ColorHighlighterSettingsForm extends JPanel
 
   private void setIsRiderColorMethodEnabled(final boolean isRiderColorMethodEnabled) {
     riderColorMethodCheckbox.setSelected(isRiderColorMethodEnabled);
+  }
+  //endregion
+
+  //region Text Enabled
+  public boolean getIsTextEnabled() {
+    return textCheckbox.isSelected();
+  }
+
+  private void setIsTextEnabled(final boolean isTextEnabled) {
+    textCheckbox.setSelected(isTextEnabled);
+  }
+  //endregion
+
+  //region Markdown Enabled
+  public boolean getIsMarkdownEnabled() {
+    return markdownCheckbox.isSelected();
+  }
+
+  private void setIsMarkdownEnabled(final boolean isMarkdownEnabled) {
+    markdownCheckbox.setSelected(isMarkdownEnabled);
   }
   //endregion
 

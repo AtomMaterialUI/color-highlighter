@@ -25,17 +25,28 @@
  */
 package com.mallowigi
 
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.startup.StartupActivity
+import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.utils.ColorHighlighterNotifications
+import com.mallowigi.utils.getVersion
 
-class FeatureLoader {
-  var isRiderEnabled: Boolean = false
-  var isJavaEnabled: Boolean = false
-  var isKotlinEnabled: Boolean = false
-  var isMarkdownEnabled: Boolean = false
+class UpdatesComponent : StartupActivity.Background {
+  private var config: ColorHighlighterConfig = ColorHighlighterConfig.instance
 
-  companion object {
-    @JvmStatic
-    val instance: FeatureLoader
-      get() = ApplicationManager.getApplication().getService(FeatureLoader::class.java)
+  override fun runActivity(project: Project) {
+    config = ColorHighlighterConfig.instance
+    projectOpened(project)
+  }
+
+  private fun projectOpened(project: Project) {
+    // Show new version notification
+    val pluginVersion = getVersion()
+    val updated = pluginVersion != config.version
+    config.version = pluginVersion
+
+    if (updated) {
+      ColorHighlighterNotifications.showUpdate(project)
+    }
   }
 }

@@ -30,12 +30,15 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.search.ColorSearchEngine
 
 class MarkdownVisitor : ColorVisitor() {
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.endsWith(".md")
+  override fun suitableForFile(file: PsiFile): Boolean =
+    file.name.matches(".*\\.(md|mdx)$".toRegex())
 
   override fun visit(element: PsiElement) {
+    if (!ColorHighlighterConfig.instance.isMarkdownEnabled) return
     val type = PsiUtilCore.getElementType(element).toString()
     if (type != "Markdown:Markdown:TEXT") return
 
