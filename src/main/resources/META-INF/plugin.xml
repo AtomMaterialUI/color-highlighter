@@ -39,7 +39,7 @@
     <div>
       <img
         src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
-        alt="logo" width="640">
+        alt="logo" width="256">
     </div>
     <hr>
 
@@ -71,101 +71,101 @@
     <br>
 
     <hr>
-    <h3>Features</h3>
+    <h2>Features</h2>
     <ul>
       <li>Preview most common color formats:</li>
-      <li>Hex: <code>(#rgb, #rrggbb, #rrggbbaa)</code></li>
-      <li>RGB <code>rgb(red, green, blue[, alpha])</code></li>
-      <li>HSL <code>hsl(hue, saturation, luminance[, alpha])</code></li>
-      <li>0x <code>0xRRGGBBAA</code></li>
-      <li>Java/Kotlin Color function <code>[new ]Color(r, g, b)</code></li>
-      <li>Java/Kotlin Color properties <code>Color.XXXX</code></li>
-      <li>C# Color methods <code>Color.FromArgb(red, green, blue)</code></li>
-      <li>Web Colors <code>(red, green, khaki, goldenrod...)</code></li>
-      <li>FlatUI Colors <code>(emerald, carrot, amethyst...)</code></li>
-      <li><strong>Custom Colors (define your own custom colors!)</strong></li>
-      <li></li>
+      <ul>
+        <li>Hex: <code>(#rgb, #rrggbb, #rrggbbaa)</code></li>
+        <li>RGB <code>rgb(red, green, blue[, alpha])</code></li>
+        <li>HSL <code>hsl(hue, saturation, luminance[, alpha])</code></li>
+        <li>0x <code>0xRRGGBBAA</code></li>
+        <li>Java/Kotlin Color function <code>[new ]Color(r, g, b)</code></li>
+        <li>Java/Kotlin Color properties <code>Color.XXXX</code></li>
+        <li>C# Color methods <code>Color.FromArgb(red, green, blue)</code></li>
+        <li>Web Colors <code>(red, green, khaki, goldenrod...)</code></li>
+        <li>FlatUI Colors <code>(emerald, carrot, amethyst...)</code></li>
+        <li><strong>Custom Colors (define your own custom colors!)</strong></li>
+      </ul>
       <li>Also displays the color in the gutter, with options to <strong>copy to clipboard in different
         formats!</strong></li>
     </ul>
     <br>
 
-
-    <h3>Donate</h3>
+    <h2>Donate</h2>
     <p>This theme is backed up by <a
       href="https://opencollective.com/atom-material-themes-and-plugins">OpenCollective</a>.
       If you like this plugin, don't hesitate to
       give it a star or donate via <a href="https://www.paypal.me/mallowigi">Paypal</a> or <a
         href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
-
     <br>
-    <h3>Screenshots</h3>
 
-    <h4>PHP</h4>
+    <h2>Screenshots</h2>
+
+    <h3>PHP</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png" alt="PHP"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Python</h4>
+    <h3>Python</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png" alt="Python"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
     <h4>Ruby</h4>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png" alt="Ruby"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
     <h4>Go</h4>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Objective C</h4>
+    <h3>Objective C</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png" alt="ObjectiveC"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Swift</h4>
+    <h3>Swift</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png" alt="Swift"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>JavaScript</h4>
+    <h3>JavaScript</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png" alt="JavaScript"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Kotlin</h4>
+    <h3>Kotlin</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png" alt="Kotlin"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Java</h4>
+    <h3>Java</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png" alt="Java"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>JSON</h4>
+    <h3>JSON</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png" alt="JSON"
-      style="max-width: 100%;"></a>
+    ></a>
 
 
-    <h4>Properties</h4>
+    <h3>Properties</h3>
     <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
       alt="Properties"
-      style="max-width: 100%;"></a>
+    ></a>
     ]]>
   </description>
 
