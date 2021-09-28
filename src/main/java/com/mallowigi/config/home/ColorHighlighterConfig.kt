@@ -62,6 +62,9 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   @Property
   var isKotlinColorMethodEnabled: Boolean = true
 
+  @Property
+  var isRiderColorMethodEnabled: Boolean = true
+
 
   override fun getState(): ColorHighlighterConfig = this
 
@@ -74,6 +77,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isJavaColorMethodEnabled = form.isJavaColorMethodEnabled
     isKotlinColorCtorEnabled = form.isKotlinColorCtorEnabled
     isKotlinColorMethodEnabled = form.isKotlinColorMethodEnabled
+    isRiderColorMethodEnabled = form.isRiderColorMethodEnabled
 
     LafManager.getInstance().updateUI()
     fireChanged()
@@ -86,6 +90,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isJavaColorMethodEnabled = true
     isKotlinColorCtorEnabled = true
     isKotlinColorMethodEnabled = true
+    isRiderColorMethodEnabled = true
 
     LafManager.getInstance().updateUI()
     fireChanged()
@@ -135,11 +140,19 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   }
   //endregion
 
-  //region Kotlin Color Ctor Enabled
+  //region Kotlin Color Method Enabled
   fun isKotlinColorMethodEnabledChanged(isEnabled: Boolean): Boolean = this.isKotlinColorMethodEnabled != isEnabled
 
   fun toggleKotlinColorMethodEnabled() {
     isKotlinColorMethodEnabled = !isKotlinColorMethodEnabled
+  }
+  //endregion
+
+  //region Rider Color Method Enabled
+  fun isRiderColorMethodEnabledChanged(isEnabled: Boolean): Boolean = this.isRiderColorMethodEnabled != isEnabled
+
+  fun toggleRiderColorMethodEnabled() {
+    isRiderColorMethodEnabled = !isRiderColorMethodEnabled
   }
   //endregion
 

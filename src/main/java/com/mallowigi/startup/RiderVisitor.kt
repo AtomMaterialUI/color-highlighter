@@ -23,18 +23,15 @@
  *
  *
  */
-package com.mallowigi
+package com.mallowigi.startup
 
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.ide.AppLifecycleListener
+import com.mallowigi.FeatureLoader
 
-class FeatureLoader {
-  var isRiderEnabled: Boolean = false
-  var isJavaEnabled: Boolean = false
-  var isKotlinEnabled: Boolean = false
-
-  companion object {
-    @JvmStatic
-    val instance: FeatureLoader
-      get() = ApplicationManager.getApplication().getService(FeatureLoader::class.java)
+class RiderVisitor : AppLifecycleListener {
+  override fun appFrameCreated(commandLineArgs: MutableList<String>) {
+    FeatureLoader.instance.isRiderEnabled = true
   }
+
 }
+

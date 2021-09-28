@@ -64,6 +64,9 @@ public final class ColorHighlighterSettingsForm extends JPanel
     if (!FeatureLoader.getInstance().isKotlinEnabled()) {
       kotlinPanel.hide();
     }
+    if (!FeatureLoader.getInstance().isRiderEnabled()) {
+      riderPanel.hide();
+    }
   }
 
   @Override
@@ -84,6 +87,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
     setIsJavaColorMethodEnabled(config.isJavaColorMethodEnabled());
     setIsKotlinColorCtorEnabled(config.isKotlinColorCtorEnabled());
     setIsKotlinColorMethodEnabled(config.isKotlinColorMethodEnabled());
+    setIsRiderColorMethodEnabled(config.isRiderColorMethodEnabled());
   }
 
   @Override
@@ -94,6 +98,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
     isModified = isModified || config.isJavaColorMethodEnabledChanged(getIsJavaColorMethodEnabled());
     isModified = isModified || config.isKotlinColorCtorEnabledChanged(getIsKotlinColorCtorEnabled());
     isModified = isModified || config.isKotlinColorMethodEnabledChanged(getIsKotlinColorMethodEnabled());
+    isModified = isModified || config.isRiderColorMethodEnabledChanged(getIsRiderColorMethodEnabled());
     return isModified;
   }
 
@@ -114,15 +119,19 @@ public final class ColorHighlighterSettingsForm extends JPanel
     kotlinSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.kotlinSeparator.text"));
     colorKtCtorCheckbox = new JCheckBox();
     colorKtMethodCheckbox = new JCheckBox();
+    riderPanel = new JPanel();
+    riderSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.riderSeparator.text"));
+    riderColorMethodCheckbox = new JCheckBox();
 
     //======== this ========
     setLayout(new MigLayout(
-      "fillx,hidemode 3,align left top",
+      "fillx,insets panel,hidemode 3,align left top",
       // columns
       "0[left]0",
       // rows
       "0[shrink 0,top]rel" +
-        "[shrink 0,top]rel"));
+        "[shrink 0,top]rel" +
+        "[]"));
 
     //======== globalPanel ========
     {
@@ -196,6 +205,25 @@ public final class ColorHighlighterSettingsForm extends JPanel
       kotlinPanel.add(colorKtMethodCheckbox, "cell 0 2,aligny top,growy 0");
     }
     add(kotlinPanel, "cell 1 1,aligny top,grow 100 0");
+
+    //======== riderPanel ========
+    {
+      riderPanel.setBorder(null);
+      riderPanel.setLayout(new MigLayout(
+        "fillx,hidemode 3,align left top",
+        // columns
+        "0[left]0",
+        // rows
+        "[]" +
+          "[]"));
+      riderPanel.add(riderSeparator, "cell 0 0,growx,gapx 0,gapy 10 10");
+
+      //---- riderColorMethodCheckbox ----
+      riderColorMethodCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.riderColorMethodCheckbox.text"));
+      riderColorMethodCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.riderColorMethodCheckbox.toolTipText"));
+      riderPanel.add(riderColorMethodCheckbox, "cell 0 1,aligny top,growy 0");
+    }
+    add(riderPanel, "cell 0 2,aligny top,grow 100 0");
     // JFormDesigner - End of component initialization  //GEN-END:initComponents
   }
 
@@ -213,6 +241,9 @@ public final class ColorHighlighterSettingsForm extends JPanel
   private JComponent kotlinSeparator;
   private JCheckBox colorKtCtorCheckbox;
   private JCheckBox colorKtMethodCheckbox;
+  private JPanel riderPanel;
+  private JComponent riderSeparator;
+  private JCheckBox riderColorMethodCheckbox;
   // JFormDesigner - End of variables declaration  //GEN-END:variables
 
   //region Global Enabled
@@ -265,7 +296,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
   }
   //endregion
 
-  //region Kotlin Color Methood Enabled
+  //region Kotlin Color Method Enabled
   public boolean getIsKotlinColorMethodEnabled() {
     return colorKtMethodCheckbox.isSelected();
   }
@@ -274,4 +305,15 @@ public final class ColorHighlighterSettingsForm extends JPanel
     colorKtMethodCheckbox.setSelected(isKotlinColorMethodEnabled);
   }
   //endregion
+
+  //region Rider Color Method Enabled
+  public boolean getIsRiderColorMethodEnabled() {
+    return riderColorMethodCheckbox.isSelected();
+  }
+
+  private void setIsRiderColorMethodEnabled(final boolean isRiderColorMethodEnabled) {
+    riderColorMethodCheckbox.setSelected(isRiderColorMethodEnabled);
+  }
+  //endregion
+
 }

@@ -70,8 +70,9 @@
   <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
   <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
   <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
-  <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.c-capable</depends>
+  <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
   <depends optional="true" config-file="withMarkdown.xml">org.intellij.plugins.markdown</depends>
+  <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
 
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
