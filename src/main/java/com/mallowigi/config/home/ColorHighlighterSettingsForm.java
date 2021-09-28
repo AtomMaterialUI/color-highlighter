@@ -63,6 +63,9 @@ public final class ColorHighlighterSettingsForm extends JPanel
     if (!featureLoader.isKotlinEnabled()) kotlinPanel.hide();
     if (!featureLoader.isRiderEnabled()) riderPanel.hide();
     if (!featureLoader.isMarkdownEnabled()) markdownPanel.hide();
+
+    // todo remove that once we figured how to tokenize text files
+    textPanel.hide();
   }
 
   @Override
@@ -249,7 +252,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       textCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.textCheckbox.toolTipText"));
       textPanel.add(textCheckbox, "cell 0 1,aligny top,growy 0");
     }
-    add(textPanel, "cell 0 1,aligny top,grow 100 0");
+    add(textPanel, "cell 0 4,aligny top,grow 100 0");
 
     //======== markdownPanel ========
     {
@@ -268,7 +271,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       markdownCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.markdownCheckbox.toolTipText"));
       markdownPanel.add(markdownCheckbox, "cell 0 1,aligny top,growy 0");
     }
-    add(markdownPanel, "cell 1 1,aligny top,grow 100 0");
+    add(markdownPanel, "cell 0 1 2 1,aligny top,grow 100 0");
     // JFormDesigner - End of component initialization  //GEN-END:initComponents
   }
 

@@ -24,7 +24,7 @@
 #
 #
 
-colors[0].@name=aliceblue
+aliceblue
 colors[0].@code=f0f8ff
 colors[1].@name=alizarin
 colors[1].@code=e74c3c

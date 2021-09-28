@@ -38,7 +38,7 @@
     <hr/>
     <div>
       <img
-        src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.svg?sanitize=true"
+        src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.svg"
         alt="logo" width="640">
     </div>
     <hr>
@@ -49,7 +49,6 @@
     <br>
     <p>Currently supported languages:</p>
     <ul>
-      <li>Text</li>
       <li>XML</li>
       <li>HTML</li>
       <li>JavaScript</li>
@@ -62,7 +61,7 @@
       <li>Scala</li>
       <li>Java</li>
       <li>Kotlin</li>
-      <li>ObjectiveC</li>
+      <li>Objective-C</li>
       <li>Swift</li>
       <li>C</li>
       <li>C++</li>
@@ -98,7 +97,78 @@
       If you like this plugin, don't hesitate to
       give it a star or donate via <a href="https://www.paypal.me/mallowigi">Paypal</a> or <a
         href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
-    ]]></description>
+
+    <br>
+    <h3>Screenshots</h3>
+
+    <h4>PHP</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png" alt="PHP"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Python</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png" alt="Python"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Ruby</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png" alt="Ruby"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Go</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Objective C</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png" alt="ObjectiveC"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Swift</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png" alt="Swift"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>JavaScript</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png" alt="JavaScript"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Kotlin</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png" alt="Kotlin"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Java</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png" alt="Java"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>JSON</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png" alt="JSON"
+      style="max-width: 100%;"></a>
+    </p>
+
+    <h4>Properties</h4>
+    <p><img
+      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
+      alt="Properties"
+      style="max-width: 100%;"></a>
+    </p>
+    ]]>
+  </description>
 
   <idea-version since-build="211.*"/>
 
@@ -124,6 +194,7 @@
     <applicationService serviceImplementation="com.mallowigi.FeatureLoader"/>
 
     <applicationService serviceImplementation="com.mallowigi.colors.PredefinedColors"/>
+    <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"/>
 
     <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
@@ -139,7 +210,9 @@
                              id="CustomColorsConfig"/>
 
     <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
-    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>
+
+    <!--    TODO : not working because texts are not tokenizing elements -->
+    <!--    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>-->
 
     <codeInsight.lineMarkerProvider language=""
                                     implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
