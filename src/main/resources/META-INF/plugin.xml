@@ -38,7 +38,7 @@
     <hr/>
     <div>
       <img
-        src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.svg"
+        src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
         alt="logo" width="640">
     </div>
     <hr>
@@ -102,71 +102,70 @@
     <h3>Screenshots</h3>
 
     <h4>PHP</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png" alt="PHP"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Python</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png" alt="Python"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Ruby</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png" alt="Ruby"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Go</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Objective C</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png" alt="ObjectiveC"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Swift</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png" alt="Swift"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>JavaScript</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png" alt="JavaScript"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Kotlin</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png" alt="Kotlin"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Java</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png" alt="Java"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>JSON</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png" alt="JSON"
       style="max-width: 100%;"></a>
-    </p>
+
 
     <h4>Properties</h4>
-    <p><img
+    <img
       src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
       alt="Properties"
       style="max-width: 100%;"></a>
-    </p>
     ]]>
   </description>
 
