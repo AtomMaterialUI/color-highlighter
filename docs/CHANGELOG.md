@@ -4,9 +4,16 @@
 
 ---
 
+## 9.1.0
+
+### Fixes:
+
+- Fix fatal error with JGoodies
+
 ## 9.0.0
 
 ### Features:
+
 - The project has been reworked again. Now it's even easier to add new languages!
 - Add Settings Page inside _Editor Settings_ to toggle highlighting on and off
 - Support for Rider's languages (**C, C++, C#**)
@@ -33,11 +40,13 @@
 - Update Notifications
 
 ### Fixes
+
 - Remove detection of 3-5 digits as a color. No more coloring `100`, `1000` etc.
 - Fix wrong detection of UUIDs as colors
 - Repaint editors on save
 
 ### Other
+
 - The project has been entirely rewritten in Kotlin (except for setting pages)
 - Color Highlighting Settings are feature dependent (no Kotlin settings if the plugin is off)
 - Work on the documentation
@@ -51,7 +60,9 @@
 ## 7.0.0
 
 ### Bump
+
 ``
+
 - Support for 2021.1
 
 ## 6.0.0
@@ -76,7 +87,9 @@
 
 ### Features
 
-This plugin has been reworked from the ground up, and therefore *tries* to support all languages as much as possible. But currently it fully supports:
+This plugin has been reworked from the ground up, and therefore *tries* to support all languages as much as possible.
+But currently it fully supports:
+
 - XML
 - HTML
 - JavaScript
