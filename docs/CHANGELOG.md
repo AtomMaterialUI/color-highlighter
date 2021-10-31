@@ -4,6 +4,10 @@
 
 ---
 
+## 9.1.1
+
+- Fix fatal error with JavaVisitor
+
 ## 9.1.0
 
 ### Fixes:

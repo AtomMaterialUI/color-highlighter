@@ -172,7 +172,7 @@
   <idea-version since-build="211.*"/>
 
   <depends>com.intellij.modules.platform</depends>
-  <depends optional="true" config-file="withJava.xml">com.intellij.modules.lang</depends>
+  <depends optional="true" config-file="withLang.xml">com.intellij.modules.lang</depends>
   <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
   <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
   <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
@@ -207,14 +207,6 @@
                              dynamic="true"
                              parentId="ColorHighlighterConfig"
                              id="CustomColorsConfig"/>
-
-    <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
-
-    <!--    TODO : not working because texts are not tokenizing elements -->
-    <!--    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>-->
-
-    <codeInsight.lineMarkerProvider language=""
-                                    implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
 
     <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
 
