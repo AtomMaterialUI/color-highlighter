@@ -1,103 +1,38 @@
-<!--
-  ~ The MIT License (MIT)
-  ~
-  ~ Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
-  ~
-  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
-  ~ of this software and associated documentation files (the "Software"), to deal
-  ~ in the Software without restriction, including without limitation the rights
-  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  ~ copies of the Software, and to permit persons to whom the Software is
-  ~ furnished to do so, subject to the following conditions:
-  ~
-  ~ The above copyright notice and this permission notice shall be included in all
-  ~ copies or substantial portions of the Software.
-  ~
-  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  ~ SOFTWARE.
-  ~
-  ~
-  -->
-
 <h1>Changelog</h1>
 
 <h2>[Unreleased]</h2>
 
-<hr/>
+<hr />
+
+<h2>9.1.1</h2>
+
+<ul><li>Fix fatal error with JavaVisitor</li></ul>
 
 <h2>9.1.0</h2>
 
 <h3>Fixes:</h3>
 
-<ul>
-  <li>Fix fatal error with JGoodies</li>
-</ul>
+<ul><li>Fix fatal error with JGoodies</li></ul>
 
 <h2>9.0.0</h2>
 
 <h3>Features:</h3>
 
-<ul>
-  <li>The project has been reworked again. Now it's even easier to add new languages!</li>
-  <li>Add Settings Page inside <em>Editor Settings</em> to toggle highlighting on and off</li>
-  <li>Support for Rider's languages (<strong>C, C++, C#</strong>)</li>
-  <li>Support for <strong>Markdown</strong></li>
-  <li>Add finer settings to toggle specific highlightings only:
-    <ul>
-      <li>Toggle automatic detection of hexadecimal strings (no more coloring numbers indiscriminately)</li>
-      <li>Java/Kotlin <code>new Color()</code> format</li>
-      <li>Java/Kotlin <code>Color.XXX</code> format</li>
-      <li>C# <code>Color.FromArgb()</code> format</li>
-      <li><strong>Markdown</strong> color highlighting</li>
-    </ul>
-  </li>
-  <li><strong>Ability to define your own colors</strong></li>
-  <li>Toggle gutter's color previews from the <em>Gutter settings</em></li>
-  <li>Copy color to clipboard into different formats when <em>right clicking</em> on the gutter's color preview:
-    <ul>
-      <li>Hexadecimal</li>
-      <li><code>rgb</code> and <code>rgba</code></li>
-      <li><code>hsl</code> and <code>hsla</code></li>
-      <li>Java's <code>new Color()</code> and <code>ColorUIResource</code></li>
-      <li>Kotlin's <code>Color()</code> and <code>ColorUIResource</code></li>
-      <li>Objective-C's <code>[NSColor ]</code></li>
-      <li>Objective-C's <code>[UIColor ]</code></li>
-      <li>Swift's <code>NSColor()</code></li>
-      <li>Android's <code>Color.argb()</code>, <code>Color.rgb()</code></li>
-      <li>C#'s <code>Color.FromArgb()</code></li>
-    </ul>
-  </li>
-  <li>Update Notifications</li>
-</ul>
+<ul><li>The project has been reworked again. Now it's even easier to add new languages!</li><li>Add Settings Page inside <em>Editor Settings</em> to toggle highlighting on and off</li><li>Support for Rider's languages (<strong>C, C++, C#</strong>)</li><li>Support for <strong>Markdown</strong></li><li>Add finer settings to toggle specific highlightings only:<ul><li>Toggle automatic detection of hexadecimal strings (no more coloring numbers indiscriminately)</li><li>Java/Kotlin <code>new Color()</code> format</li><li>Java/Kotlin <code>Color.XXX</code> format</li><li>C# <code>Color.FromArgb()</code> format</li><li><strong>Markdown</strong> color highlighting</li></ul></li><li><strong>Ability to define your own colors</strong></li><li>Toggle gutter's color previews from the <em>Gutter settings</em></li><li>Copy color to clipboard into different formats when <em>right clicking</em> on the gutter's color preview:<ul><li>Hexadecimal</li><li><code>rgb</code> and <code>rgba</code></li><li><code>hsl</code> and <code>hsla</code></li><li>Java's <code>new Color()</code> and <code>ColorUIResource</code></li><li>Kotlin's <code>Color()</code> and <code>ColorUIResource</code></li><li>Objective-C's <code>[NSColor ]</code></li><li>Objective-C's <code>[UIColor ]</code></li><li>Swift's <code>NSColor()</code></li><li>Android's <code>Color.argb()</code>, <code>Color.rgb()</code></li><li>C#'s <code>Color.FromArgb()</code></li></ul></li><li>Update Notifications</li></ul>
 
 <h3>Fixes</h3>
 
-<ul>
-  <li>Remove detection of 3-5 digits as a color. No more coloring <code>100</code>, <code>1000</code> etc.</li>
-  <li>Fix wrong detection of UUIDs as colors</li>
-  <li>Repaint editors on save</li>
-</ul>
+<ul><li>Remove detection of 3-5 digits as a color. No more coloring <code>100</code>, <code>1000</code> etc.</li><li>Fix wrong detection of UUIDs as colors</li><li>Repaint editors on save</li></ul>
 
 <h3>Other</h3>
 
-<ul>
-  <li>The project has been entirely rewritten in Kotlin (except for setting pages)</li>
-  <li>Color Highlighting Settings are feature dependent (no Kotlin settings if the plugin is off)</li>
-  <li>Work on the documentation</li>
-</ul>
+<ul><li>The project has been entirely rewritten in Kotlin (except for setting pages)</li><li>Color Highlighting Settings are feature dependent (no Kotlin settings if the plugin is off)</li><li>Work on the documentation</li></ul>
 
 <h2>8.0.0</h2>
 
 <h3>Other</h3>
 
-<ul>
-  <li>Convert project to Kotlin</li>
-</ul>
+<ul><li>Convert project to Kotlin</li></ul>
 
 <h2>7.0.0</h2>
 
@@ -105,58 +40,34 @@
 
 <p>``</p>
 
-<ul>
-  <li>Support for 2021.1</li>
-</ul>
+<ul><li>Support for 2021.1</li></ul>
 
 <h2>6.0.0</h2>
 
 <h3>Bump</h3>
 
-<ul>
-  <li>Upgrade dependencies</li>
-</ul>
+<ul><li>Upgrade dependencies</li></ul>
 
 <h2>5.0.0</h2>
 
 <h3>Bump</h3>
 
-<ul>
-  <li>Support to 2021.1</li>
-</ul>
+<ul><li>Support to 2021.1</li></ul>
 
 <h2>4.0.0</h2>
 
 <h3>Bump</h3>
 
-<ul>
-  <li>Support for 2020.3</li>
-</ul>
+<ul><li>Support for 2020.3</li></ul>
 
 <h2>3.0.0</h2>
 
 <h3>Features</h3>
 
-<p>This plugin has been reworked from the ground up, and therefore <em>tries</em> to support all languages as much as
-  possible.
-  But currently it fully supports:</p>
+<p>This plugin has been reworked from the ground up, and therefore <em>tries</em> to support all languages as much as possible.
+But currently it fully supports:</p>
 
-<ul>
-  <li>XML</li>
-  <li>HTML</li>
-  <li>JavaScript</li>
-  <li>TypeScript</li>
-  <li>Properties</li>
-  <li>YAML</li>
-  <li>Python</li>
-  <li>Ruby</li>
-  <li>Java (ColorUiResource)</li>
-  <li>Kotlin (ColorUiResource)</li>
-  <li>Scala (ColorUiResource)</li>
-  <li>Go</li>
-  <li>Objective C</li>
-  <li>Swift</li>
-</ul>
+<ul><li>XML</li><li>HTML</li><li>JavaScript</li><li>TypeScript</li><li>Properties</li><li>YAML</li><li>Python</li><li>Ruby</li><li>Java (ColorUiResource)</li><li>Kotlin (ColorUiResource)</li><li>Scala (ColorUiResource)</li><li>Go</li><li>Objective C</li><li>Swift</li></ul>
 
 <p>More to come!</p>
 
@@ -164,14 +75,10 @@
 
 <h3>Bump</h3>
 
-<ul>
-  <li>Upgrade to 2019.1</li>
-</ul>
+<ul><li>Upgrade to 2019.1</li></ul>
 
 <h2>1.0.0</h2>
 
 <h3>Bump</h3>
 
-<ul>
-  <li>First version of the plugin</li>
-</ul>
+<ul><li>First version of the plugin</li></ul>

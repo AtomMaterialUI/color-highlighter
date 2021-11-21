@@ -4,6 +4,12 @@
 
 ---
 
+## 9.2.0
+
+### Fixes:
+
+- Change hexadecimal rgba codes parsing by parsing the alpha channel on the left instead of the right
+
 ## 9.1.1
 
 - Fix fatal error with JavaVisitor

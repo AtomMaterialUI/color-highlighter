@@ -48,6 +48,7 @@ class HexColorParser internal constructor(prefix: String) : ColorParser {
   private fun parseHex(text: String): Color =
     when (text.length) {
       3 + offset -> ColorUtils.getShortRGB(text.substring(offset))
+      8 + offset -> ColorUtils.getRGBA(text.substring(offset))
       else -> ColorUtils.getRGB(text.substring(offset))
     }
 }

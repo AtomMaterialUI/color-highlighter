@@ -84,6 +84,21 @@ object ColorUtils {
     }
   }
 
+  fun getRGBA(hex: String): Color {
+    val rgb = normalizeRGB(hex, 8)
+    val a = rgb.substring(0, 2).toInt(16)
+    val r = rgb.substring(2, 4).toInt(16)
+    val g = rgb.substring(4, 6).toInt(16)
+    val b = rgb.substring(6, 8).toInt(16)
+
+    return try {
+      Color(r, g, b, a)
+    } catch (e: Exception) {
+      Color(a, r, g)
+    }
+  }
+
+
   fun toRGB(color: Color): String = String.format("rgb(%d, %d, %d)", color.red, color.green, color.blue)
 
   fun toRGBA(color: Color): String =
