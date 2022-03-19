@@ -94,7 +94,7 @@ repositories {
 dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
   implementation("com.jgoodies:jgoodies-forms:1.9.0")
-  implementation("com.thoughtworks.xstream:xstream:1.4.18")
+  implementation("com.thoughtworks.xstream:xstream:1.4.19")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
 }
 
