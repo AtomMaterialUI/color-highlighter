@@ -35,9 +35,9 @@ import java.util.*
 internal class Colors {
   @Property
   val svgColors: Set<SingleColor>? = null
-    get() = Collections.unmodifiableSet(field)
+    get() = field?.let { Collections.unmodifiableSet(it) }
 
   @Property
   val javaColors: Set<SingleColor>? = null
-    get() = Collections.unmodifiableSet(field)
+    get() = field?.let { Collections.unmodifiableSet(it) }
 }

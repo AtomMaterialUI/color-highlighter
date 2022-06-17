@@ -95,8 +95,8 @@ class CustomColors : Serializable {
 
   operator fun contains(text: String): Boolean = customColors.containsKey(text)
 
-  fun getColor(colorName: String): Color? {
-    val foundColor = customColors[colorName] ?: return null
+  fun getColor(name: String): Color? {
+    val foundColor = customColors[name] ?: return null
     return Color(foundColor.colorInt)
   }
 

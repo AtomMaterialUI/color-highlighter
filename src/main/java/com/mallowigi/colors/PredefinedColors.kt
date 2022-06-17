@@ -130,7 +130,6 @@ class PredefinedColors {
   private fun parseColorsFromXML(): Colors {
     val xml = PredefinedColors::class.java.getResource(COLORS_XML)
     val xStream = XStream()
-    XStream.setupDefaultSecurity(xStream)
     xStream.allowTypesByWildcard(arrayOf("com.mallowigi.colors.*"))
     xStream.alias("colors", Colors::class.java)
     xStream.alias("color", SingleColor::class.java)

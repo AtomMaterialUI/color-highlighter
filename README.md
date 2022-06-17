@@ -100,4 +100,4 @@ by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
 ## Authors:
 
-- Elior Boukhobza (mallowigi)](https://github.com/mallowigi)
+- [Elior Boukhobza (mallowigi)](https://github.com/mallowigi)
