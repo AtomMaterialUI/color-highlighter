@@ -57,12 +57,21 @@ public final class ColorHighlighterSettingsForm extends JPanel
     toggleFeatures();
   }
 
+  @SuppressWarnings("MethodWithMoreThanThreeNegations")
   private void toggleFeatures() {
     final FeatureLoader featureLoader = FeatureLoader.getInstance();
-    if (!featureLoader.isJavaEnabled()) javaPanel.hide();
-    if (!featureLoader.isKotlinEnabled()) kotlinPanel.hide();
-    if (!featureLoader.isRiderEnabled()) riderPanel.hide();
-    if (!featureLoader.isMarkdownEnabled()) markdownPanel.hide();
+    if (!featureLoader.isJavaEnabled()) {
+      javaPanel.hide();
+    }
+    if (!featureLoader.isKotlinEnabled()) {
+      kotlinPanel.hide();
+    }
+    if (!featureLoader.isRiderEnabled()) {
+      riderPanel.hide();
+    }
+    if (!featureLoader.isMarkdownEnabled()) {
+      markdownPanel.hide();
+    }
 
     // todo remove that once we figured how to tokenize text files
     textPanel.hide();
@@ -82,6 +91,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
   public void setFormState(final @NotNull ColorHighlighterConfig config) {
     setIsEnabled(config.isEnabled());
     setIsHexDetectEnabled(config.isHexDetectEnabled());
+    setIsRgbaEnabled(config.isRgbaEnabled());
     setIsJavaColorCtorEnabled(config.isJavaColorCtorEnabled());
     setIsJavaColorMethodEnabled(config.isJavaColorMethodEnabled());
     setIsKotlinColorCtorEnabled(config.isKotlinColorCtorEnabled());
@@ -95,6 +105,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
   public boolean isModified(final @NotNull ColorHighlighterConfig config) {
     boolean isModified = config.isEnabledChanged(getIsEnabled());
     isModified = isModified || config.isHexDetectEnabledChanged(getIsHexDetectEnabled());
+    isModified = isModified || config.isRgbaEnabledChanged(getIsRgbaEnabled());
     isModified = isModified || config.isJavaColorCtorEnabledChanged(getIsJavaColorCtorEnabled());
     isModified = isModified || config.isJavaColorMethodEnabledChanged(getIsJavaColorMethodEnabled());
     isModified = isModified || config.isKotlinColorCtorEnabledChanged(getIsKotlinColorCtorEnabled());
@@ -114,6 +125,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
     globalSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.globalSeparator.text"));
     enableCheckbox = new JCheckBox();
     colorParsingCheckbox = new JCheckBox();
+    rgbaCheckbox = new JCheckBox();
     javaPanel = new JPanel();
     javaSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.javaSeparator.text"));
     colorCtorCheckbox = new JCheckBox();
@@ -152,6 +164,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
         // rows
         "0[]" +
           "[]" +
+          "[]" +
           "[]"));
       globalPanel.add(globalSeparator, "cell 0 0,growx,gapx 0,gapy 10 10");
 
@@ -163,6 +176,11 @@ public final class ColorHighlighterSettingsForm extends JPanel
       colorParsingCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.colorParsingCheckbox.text"));
       colorParsingCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.colorParsingCheckbox.toolTipText"));
       globalPanel.add(colorParsingCheckbox, "cell 0 2,aligny top,growy 0");
+
+      //---- rgbaCheckbox ----
+      rgbaCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.rgbaCheckbox.text"));
+      rgbaCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.rgbaCheckbox.toolTipText"));
+      globalPanel.add(rgbaCheckbox, "cell 0 3,aligny top,growy 0");
     }
     add(globalPanel, "cell 0 0 2 1,aligny top,grow 100 0");
 
@@ -281,6 +299,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
   private JComponent globalSeparator;
   private JCheckBox enableCheckbox;
   private JCheckBox colorParsingCheckbox;
+  private JCheckBox rgbaCheckbox;
   private JPanel javaPanel;
   private JComponent javaSeparator;
   private JCheckBox colorCtorCheckbox;
@@ -317,6 +336,16 @@ public final class ColorHighlighterSettingsForm extends JPanel
 
   private void setIsHexDetectEnabled(final boolean isHexDetectEnabled) {
     colorParsingCheckbox.setSelected(isHexDetectEnabled);
+  }
+  //endregion
+
+  //region RGBA Enabled
+  public boolean getIsRgbaEnabled() {
+    return rgbaCheckbox.isSelected();
+  }
+
+  private void setIsRgbaEnabled(final boolean isRgbaEnabled) {
+    rgbaCheckbox.setSelected(isRgbaEnabled);
   }
   //endregion
 

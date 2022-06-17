@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.5.1.409" Java: "17.0.3" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
@@ -15,7 +15,7 @@ new FormModel {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 				"$columnConstraints": "0[left]0"
-				"$rowConstraints": "0[][][]"
+				"$rowConstraints": "0[][][][]"
 				"$layoutConstraints": "fillx,hidemode 3,align left top"
 			} ) {
 				name: "globalPanel"
@@ -37,6 +37,13 @@ new FormModel {
 					"toolTipText": new FormMessage( null, "ColorHighlighterSettingsForm.colorParsingCheckbox.toolTipText" )
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 2,aligny top,growy 0"
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "rgbaCheckbox"
+					"text": new FormMessage( null, "ColorHighlighterSettingsForm.rgbaCheckbox.text" )
+					"toolTipText": new FormMessage( null, "ColorHighlighterSettingsForm.rgbaCheckbox.toolTipText" )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 3,aligny top,growy 0"
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 0 2 1,aligny top,grow 100 0"

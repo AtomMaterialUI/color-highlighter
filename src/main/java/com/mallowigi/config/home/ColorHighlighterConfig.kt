@@ -51,6 +51,9 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   var isHexDetectEnabled: Boolean = true
 
   @Property
+  var isRgbaEnabled: Boolean = false
+
+  @Property
   var isJavaColorCtorEnabled: Boolean = true
 
   @Property
@@ -82,6 +85,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   override fun applySettings(form: ColorHighlighterSettingsForm) {
     isEnabled = form.getIsEnabled()
     isHexDetectEnabled = form.isHexDetectEnabled
+    isRgbaEnabled = form.isRgbaEnabled
     isJavaColorCtorEnabled = form.isJavaColorCtorEnabled
     isJavaColorMethodEnabled = form.isJavaColorMethodEnabled
     isKotlinColorCtorEnabled = form.isKotlinColorCtorEnabled
@@ -97,6 +101,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   override fun resetSettings() {
     isEnabled = true
     isHexDetectEnabled = true
+    isRgbaEnabled = false
     isJavaColorCtorEnabled = true
     isJavaColorMethodEnabled = true
     isKotlinColorCtorEnabled = true
@@ -126,6 +131,14 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
 
   fun toggleHexDetectEnabled() {
     isHexDetectEnabled = !isHexDetectEnabled
+  }
+  //endregion
+
+  //region RGBA Enabled
+  fun isRgbaEnabledChanged(isEnabled: Boolean): Boolean = this.isRgbaEnabled != isEnabled
+
+  fun toggleRgbaEnabled() {
+    isRgbaEnabled = !isRgbaEnabled
   }
   //endregion
 
