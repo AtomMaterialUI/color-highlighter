@@ -42,7 +42,12 @@ import com.mallowigi.search.parsers.ColorParser
 class JavaVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is PsiJavaFile
 
-  private val allowedTypes = listOf("INTEGER_LITERAL", "NEW_EXPRESSION", "REFERENCE_EXPRESSION")
+  private val allowedTypes = listOf(
+    "INTEGER_LITERAL",
+    "STRING_LITERAL",
+    "NEW_EXPRESSION",
+    "REFERENCE_EXPRESSION"
+  )
 
   private val config = ColorHighlighterConfig.instance
 

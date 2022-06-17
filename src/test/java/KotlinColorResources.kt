@@ -28,6 +28,9 @@ import java.awt.Color
 import javax.swing.plaf.ColorUIResource
 
 class KotlinColorResources {
+  private val COLOR: String = "#b0b0b0"
+  private val COLOR2: String = """#b0b0b0"""
+
   var ALICEBLUE: Color = ColorUIResource(0xf0f8ff)
   var ALIZARIN: Color = ColorUIResource(0xe74c3c)
   var AMETHYST: Color = ColorUIResource(0x9b59b6)

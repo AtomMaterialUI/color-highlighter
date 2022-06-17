@@ -42,7 +42,12 @@ import org.jetbrains.kotlin.psi.KtFile
 class KotlinVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is KtFile
 
-  private val allowedTypes = listOf("INTEGER_CONSTANT", "CALL_EXPRESSION", "REFERENCE_EXPRESSION")
+  private val allowedTypes = listOf(
+    "INTEGER_CONSTANT",
+    "STRING_TEMPLATE",
+    "CALL_EXPRESSION",
+    "REFERENCE_EXPRESSION"
+  )
 
   private val config = ColorHighlighterConfig.instance
 
