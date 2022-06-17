@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -91,6 +91,7 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
     customColorsEditor = null;
   }
 
+  @Override
   public void setFormState(final @NotNull CustomColorsConfig config) {
     ApplicationManager.getApplication().invokeLater(() -> {
       if (customColorsEditor != null) {
@@ -100,15 +101,13 @@ public final class CustomColorsForm extends JPanel implements SettingsFormUI<Cus
     });
   }
 
+  @Override
   public boolean isModified(@Nullable final CustomColorsConfig config) {
     if (config == null) {
       return false;
     }
 
-    boolean modified = false;
-    if (customColorsEditor != null) {
-      modified = config.isCustomColorsModified(customColorsEditor.getModel().getItems());
-    }
+    final boolean modified = customColorsEditor != null && config.isCustomColorsModified(customColorsEditor.getModel().getItems());
     return modified;
   }
 

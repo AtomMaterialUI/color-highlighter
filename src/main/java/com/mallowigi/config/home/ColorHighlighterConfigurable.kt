@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2021 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,11 +30,9 @@ import com.mallowigi.ColorHighlighterBundle
 import com.mallowigi.config.ConfigurableBase
 import org.jetbrains.annotations.Nls
 import org.jetbrains.annotations.NonNls
-import java.util.Objects
+import java.util.*
 
-/**
- * Configurable for Custom Associations
- */
+/** Configurable for Custom Associations. */
 class ColorHighlighterConfigurable : ConfigurableBase<ColorHighlighterSettingsForm, ColorHighlighterConfig>(),
   SearchableConfigurable {
   override val config: ColorHighlighterConfig
