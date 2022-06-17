@@ -29,19 +29,18 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiLiteralValue
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
 
 class JSVisitor : ColorVisitor() {
-  private val allowedTypes = listOf("INTEGER_LITERAL", "STRING_LITERAL")
-
+  private val allowedTypes = listOf(
+    "JS:NUMERIC_LITERAL",
+    "JS:STRING_LITERAL"
+  )
 
   override fun suitableForFile(file: PsiFile): Boolean = true
 
   override fun visit(element: PsiElement) {
-    if (element !is PsiLiteralValue) return
-
     val type = PsiUtilCore.getElementType(element).toString()
     if (type !in allowedTypes) return
 
