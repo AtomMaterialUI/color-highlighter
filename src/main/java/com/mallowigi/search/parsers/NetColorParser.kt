@@ -43,18 +43,14 @@ class NetColorParser(val prefix: String) : ColorParser {
 
       if (startParen == -1 || endParen == -1) return null
 
-      // tokenize the string into "red,green,blue"
+      // tokenize the string into "alpha,red,green,blue"
       val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
       val params = tokenizer.countTokens()
 
-      // parse red part
-      getNextNumber(tokenizer).also { parseRed(it) }
-      // parse green part
-      if (params >= 2) getNextNumber(tokenizer).also { parseGreen(it) }
-      // parse blue part
-      if (params >= 3) getNextNumber(tokenizer).also { parseBlue(it) }
-      // parse alpha
-      if (params == 4) getNextNumber(tokenizer).also { parseAlpha(it) }
+      getNextNumber(tokenizer).also { parseAlpha(it) }
+      if (params >= 2) getNextNumber(tokenizer).also { parseRed(it) }
+      if (params >= 3) getNextNumber(tokenizer).also { parseGreen(it) }
+      if (params == 4) getNextNumber(tokenizer).also { parseBlue(it) }
 
       return when {
         isFloat -> Color(floatRed, floatGreen, floatBlue, floatAlpha)
