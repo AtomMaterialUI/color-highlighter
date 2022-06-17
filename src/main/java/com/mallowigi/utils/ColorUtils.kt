@@ -30,6 +30,7 @@ package com.mallowigi.utils
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
+import com.mallowigi.config.home.ColorHighlighterConfig
 import java.awt.Color
 import kotlin.math.max
 import kotlin.math.min
@@ -43,7 +44,7 @@ object ColorUtils {
   const val CLOSE_PAREN: Char = ')'
   const val COMMA: String = ","
   const val PERCENT: String = "%"
-  const val HASH: Char = '#'
+  private const val HASH: Char = '#'
 
   fun getHex(hex: String): Color = when {
     !hex.startsWith(HASH) -> getRGB(hex)
@@ -86,10 +87,32 @@ object ColorUtils {
 
   fun getRGBA(hex: String): Color {
     val rgb = normalizeRGB(hex, 8)
+    val rgbaEnabled = ColorHighlighterConfig.instance.isRgbaEnabled
+
+    return when {
+      rgbaEnabled -> getArgb(rgb)
+      else -> getRgba(rgb)
+    }
+  }
+
+  private fun getArgb(rgb: String): Color {
     val a = rgb.substring(0, 2).toInt(16)
     val r = rgb.substring(2, 4).toInt(16)
     val g = rgb.substring(4, 6).toInt(16)
     val b = rgb.substring(6, 8).toInt(16)
+
+    return try {
+      Color(r, g, b, a)
+    } catch (e: Exception) {
+      Color(a, r, g)
+    }
+  }
+
+  private fun getRgba(rgb: String): Color {
+    val r = rgb.substring(0, 2).toInt(16)
+    val g = rgb.substring(2, 4).toInt(16)
+    val b = rgb.substring(4, 6).toInt(16)
+    val a = rgb.substring(6, 8).toInt(16)
 
     return try {
       Color(r, g, b, a)
@@ -179,7 +202,6 @@ object ColorUtils {
     return Color(rgb[0], rgb[1], rgb[2], alpha)
   }
 
-  @Suppress("FunctionName")
   fun toHSL(color: Color): String {
     val hsl = FloatArray(3)
     RGBtoHSL(color.red, color.green, color.blue, hsl)
@@ -199,11 +221,9 @@ object ColorUtils {
       color.alpha / 255)
   }
 
-  /**
-   * Converts hsl to rgb
-   */
+  /** Converts hsl to rgb. */
   @Suppress("FunctionName")
-  fun HSLtoRGB(h: Float, s: Float, l: Float): Int {
+  private fun HSLtoRGB(h: Float, s: Float, l: Float): Int {
     val vals = convertHSLToRGB(h, s, l)
     val r = (vals[0] * 255.0f + 0.5f).toInt()
     val g = (vals[1] * 255.0f + 0.5f).toInt()
@@ -211,9 +231,7 @@ object ColorUtils {
     return 255 shl 24 or (r shl 16) or (g shl 8) or b
   }
 
-  /**
-   * Get a color from hsl
-   */
+  /** Get a color from hsl. */
   fun getHSLColor(h: Float, s: Float, l: Float): Color = Color(HSLtoRGB(h, s, l))
 
   /**

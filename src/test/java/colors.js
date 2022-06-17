@@ -32,7 +32,7 @@
     },
     {
       '@name': 'alizarin',
-      '@code': 'e74c3c',
+      '@code': 'e74c3c50',
     },
     {
       '@name': 'amethyst',
