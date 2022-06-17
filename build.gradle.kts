@@ -51,6 +51,7 @@ plugins {
 group = properties("pluginGroup")
 version = properties("pluginVersion")
 
+val depsDartVersion: String = properties("depsDartVersion")
 val depsGoVersion: String = properties("depsGoVersion")
 val depsKotlinVersion: String = properties("depsKotlinVersion")
 val depsPhpVersion: String = properties("depsPhpVersion")
@@ -91,6 +92,7 @@ intellij {
     "java",
     "java-i18n",
     "DatabaseTools",
+    "Dart:$depsDartVersion",
     "CSS",
     "platform-images",
     "Groovy",
