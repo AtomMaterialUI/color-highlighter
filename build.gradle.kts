@@ -134,7 +134,7 @@ tasks {
     }
     withType<KotlinCompile> {
       kotlinOptions.jvmTarget = it
-      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check", "-Xjvm-default=all")
+      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check", "-Xjvm-default=enable")
     }
   }
 
@@ -188,19 +188,13 @@ tasks {
   }
 
   runIde {
-    ideDir.set(fileProperties("idePath"))
+//    ideDir.set(fileProperties("idePath"))
   }
 
   register("markdownToHtml") {
     val input = File("./docs/CHANGELOG.md")
     File("./docs/CHANGELOG.html").run {
       writeText(markdownToHTML(input.readText()))
-//      changelog.getAll().forEach { v, contents ->
-//        run {
-//          appendText(v)
-//          appendText(contents.toHTML())
-//        }
-//      }
     }
   }
 }

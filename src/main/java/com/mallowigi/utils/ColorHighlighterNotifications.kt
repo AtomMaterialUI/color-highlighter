@@ -25,15 +25,20 @@
  */
 package com.mallowigi.utils
 
-import com.intellij.notification.*
+import com.intellij.notification.Notification
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
+import com.intellij.notification.Notifications
 import com.intellij.notification.impl.NotificationsManagerImpl
+import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.Balloon
+import com.intellij.openapi.util.NlsContexts
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.BalloonLayoutData
 import com.intellij.ui.awt.RelativePoint
 import com.mallowigi.ColorHighlighterBundle.message
-import org.jetbrains.annotations.NonNls
+import org.jetbrains.annotations.NotNull
 import java.awt.Point
 import java.util.*
 
@@ -42,12 +47,12 @@ import java.util.*
  * Notifications support
  */
 object ColorHighlighterNotifications {
-  private const val CHANNEL: @NonNls String = "Color Highlighter Notifications"
+  private const val CHANNEL: String = "Color Highlighter Notifications"
 
   /**
    * Show the update notification
    *
-   * @param project  the project to display in
+   * @param project the project to display in
    */
   @JvmStatic
   fun showUpdate(project: Project) {
@@ -65,6 +70,7 @@ object ColorHighlighterNotifications {
    * @param project
    * @param content
    */
+  @Suppress("unused")
   @JvmStatic
   fun showSimple(project: Project, content: String) {
     val notification = createNotification("", content, NotificationType.INFORMATION)
@@ -72,35 +78,41 @@ object ColorHighlighterNotifications {
   }
 
   /**
-   * Shows [Notification] in [ColorHighlighterNotifications.CHANNEL] group.
+   * Shows [Notification] in [ColorHighlighterNotifications.CHANNEL]
+   * group.
    *
-   * @param project  current project
-   * @param title    notification title
-   * @param content  notification text
-   * @param type     notification type
-   * @param listener optional listener
+   * @param project current project
+   * @param title notification title
+   * @param content notification text
+   * @param type notification type
+   * @param action optional listener
    */
+  @Suppress("unused")
   @JvmStatic
   fun showWithListener(
     project: Project,
-    title: String,
-    content: String,
+    @NlsContexts.NotificationTitle title: String,
+    @NlsContexts.NotificationContent content: String,
     type: NotificationType,
-    listener: NotificationListener?,
+    action: AnAction,
   ) {
-    val notification = createNotification(title, content, type, listener)
+    val notification = createNotification(title, content, type, action)
     Notifications.Bus.notify(notification, project)
   }
 
   /**
    * Create a notification
    *
-   * @param title    notification title
-   * @param content  the content
-   * @param type     the type (sticky...)
+   * @param title notification title
+   * @param content the content
+   * @param type the type (sticky...)
    * @return new notification to be displayed
    */
-  private fun createNotification(title: String, content: String, type: NotificationType): Notification {
+  private fun createNotification(
+    @NlsContexts.NotificationTitle title: String,
+    @NlsContexts.NotificationContent content: String,
+    type: NotificationType
+  ): Notification {
     val group = NotificationGroupManager.getInstance().getNotificationGroup(CHANNEL)
     return group.createNotification(title, content, type)
   }
@@ -108,27 +120,25 @@ object ColorHighlighterNotifications {
   /**
    * Create a notification
    *
-   * @param title    notification title
-   * @param content  the content
-   * @param type     the type (sticky...)
-   * @param listener listener
+   * @param title notification title
+   * @param content the content
+   * @param type the type (sticky...)
+   * @param action listener
    * @return new notification to be displayed
    */
   private fun createNotification(
-    title: String,
-    content: String,
+    @NlsContexts.NotificationTitle title: String,
+    @NlsContexts.NotificationContent content: String,
     type: NotificationType,
-    listener: NotificationListener?,
-  ): Notification {
-    assert(listener != null)
-    return createNotification(title, content, type).setListener(listener!!)
-  }
+    @NotNull action: AnAction,
+  ): Notification = createNotification(title, content, type).addAction(action)
+
 
   /**
-   * Show a notification using the Balloon API instead of the bus
-   * Credit to @vladsch
+   * Show a notification using the Balloon API instead of the bus Credit
+   * to @vladsch
    *
-   * @param project      the project to display into
+   * @param project the project to display into
    * @param notification the notification to display
    */
   private fun showFullNotification(project: Project, notification: Notification) {
