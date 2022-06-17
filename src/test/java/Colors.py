@@ -1,7 +1,7 @@
 class Colors:
     def __init__(self):
+        pink = 0x80cbcf
         self.colors = {
-          "berroca":"000000",
             "aliceblue": "f0f8ff",
             "alizarin": "e74c3c",
             "amethyst": "9b59b6",

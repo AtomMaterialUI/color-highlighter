@@ -30,6 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.jetbrains.python.psi.PyFile
+import com.jetbrains.python.psi.PyNumericLiteralExpression
 import com.jetbrains.python.psi.PyPlainStringElement
 import com.jetbrains.python.psi.PyStringElement
 import com.mallowigi.search.ColorSearchEngine
@@ -38,11 +39,15 @@ class PythonVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is PyFile
 
   override fun visit(element: PsiElement) {
-    if (element !is PyPlainStringElement) return
-
-    val value = (element as PyStringElement).content
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    if (element is PyPlainStringElement) {
+      val value = (element as PyStringElement).content
+      val color = ColorSearchEngine.getColor(value, this)
+      color?.let { highlight(element, it) }
+    } else if (element is PyNumericLiteralExpression) {
+      val value = element.text
+      val color = ColorSearchEngine.getColor(value, this)
+      color?.let { highlight(element, it) }
+    }
   }
 
   override fun clone(): HighlightVisitor = PythonVisitor()
