@@ -72,9 +72,6 @@ public final class ColorHighlighterSettingsForm extends JPanel
     if (!featureLoader.isMarkdownEnabled()) {
       markdownPanel.hide();
     }
-
-    // todo remove that once we figured how to tokenize text files
-    textPanel.hide();
   }
 
   @Override
@@ -150,10 +147,11 @@ public final class ColorHighlighterSettingsForm extends JPanel
       // columns
       "0[left]0",
       // rows
-      "0[shrink 0,top]rel" +
-        "[shrink 0,top]rel" +
-        "[]" +
-        "[]"));
+      "0[shrink 0,top]0" +
+        "[shrink 0,top]0" +
+        "[]0" +
+        "[]0" +
+        "[]0"));
 
     //======== globalPanel ========
     {

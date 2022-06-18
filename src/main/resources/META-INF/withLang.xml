@@ -27,8 +27,7 @@
 <idea-plugin>
   <extensions defaultExtensionNs="com.intellij">
     <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
-    <!--    TODO : not working because texts are not tokenizing elements -->
-    <!--    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>-->
+    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>
     <codeInsight.lineMarkerProvider language=""
                                     implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
   </extensions>

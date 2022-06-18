@@ -59,6 +59,12 @@ internal object ColorHighlighter {
   fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
     getHighlightInfoBuilder(color).range(element!!).create()
 
+  fun highlightColor(range: IntRange, color: Color): HighlightInfo? {
+    return getHighlightInfoBuilder(color)
+      .range(range.first, range.last)
+      .create()
+  }
+
   private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder {
     var newHighlightInfo = HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
       .textAttributes(getAttributesFlyweight(color))

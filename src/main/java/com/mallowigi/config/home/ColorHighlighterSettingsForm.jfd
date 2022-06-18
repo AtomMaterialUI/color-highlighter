@@ -10,7 +10,7 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "fillx,insets panel,hidemode 3,align left top"
 			"$columnConstraints": "0[left]0"
-			"$rowConstraints": "0[shrink 0,top]rel[shrink 0,top]rel[][]"
+			"$rowConstraints": "0[shrink 0,top]0[shrink 0,top]0[]0[]0[]0"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {

@@ -33,17 +33,31 @@ import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.search.ColorSearchEngine
 
 class TextVisitor : ColorVisitor() {
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.(txt|log|rst)$".toRegex())
 
   override fun visit(element: PsiElement) {
     if (!ColorHighlighterConfig.instance.isTextEnabled) return
     val value = element.text
-    if (value is String) {
-      val color = ColorSearchEngine.getColor((value as String?)!!, this)
-      color?.let { highlight(element, it) }
+    if (value is String) splitText(value)
+  }
+
+  private fun splitText(text: String) {
+    val blocks = text.split(Regex("\\b"))
+    var cursor = 0
+    blocks.forEach { block ->
+      visitElement(Pair(IntRange(cursor, cursor + block.length), block))
+      cursor += block.length
     }
+  }
+
+  private fun visitElement(element: Pair<IntRange, String>) {
+    val (range, text) = element
+    val color = ColorSearchEngine.getColor(text, this)
+    color?.let { highlight(it, range) }
   }
 
   override fun clone(): HighlightVisitor = TextVisitor()
 }
+

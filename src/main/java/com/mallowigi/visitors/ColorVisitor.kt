@@ -82,6 +82,12 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor {
     highlightInfoHolder!!.add(ColorHighlighter.highlightColor(element, color))
   }
 
+  fun highlight(color: Color, range: IntRange) {
+    if (!instance.isEnabled) return
+    assert(highlightInfoHolder != null)
+    highlightInfoHolder!!.add(ColorHighlighter.highlightColor(range, color))
+  }
+
   override fun shouldParseText(text: String): Boolean = false
 
   override fun getParser(text: String): ColorParser? = null
