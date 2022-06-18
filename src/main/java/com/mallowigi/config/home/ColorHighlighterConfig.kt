@@ -26,6 +26,7 @@
 
 package com.mallowigi.config.home
 
+import com.intellij.application.options.editor.WebEditorOptions
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
@@ -69,7 +70,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   var isRiderColorMethodEnabled: Boolean = true
 
   @Property
-  var isTextEnabled: Boolean = true
+  var isTextEnabled: Boolean = false
 
   @Property
   var isMarkdownEnabled: Boolean = true
@@ -94,6 +95,8 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isTextEnabled = form.isTextEnabled
     isMarkdownEnabled = form.isMarkdownEnabled
 
+    WebEditorOptions.getInstance().isShowCssInlineColorPreview = form.isCssColorEnabled;
+
     ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
     fireChanged()
   }
@@ -107,7 +110,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isKotlinColorCtorEnabled = true
     isKotlinColorMethodEnabled = true
     isRiderColorMethodEnabled = true
-    isTextEnabled = true
+    isTextEnabled = false
     isMarkdownEnabled = true
 
     ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
@@ -197,6 +200,8 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
     isMarkdownEnabled = !isMarkdownEnabled
   }
   //endregion
+
+  fun isCssColorEnabledChanged(isEnabled: Boolean): Boolean = WebEditorOptions.getInstance().isShowCssInlineColorPreview != isEnabled
 
 
   companion object {

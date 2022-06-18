@@ -30,6 +30,7 @@
 
 package com.mallowigi.config.home;
 
+import com.intellij.application.options.editor.WebEditorOptions;
 import com.intellij.openapi.Disposable;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.mallowigi.FeatureLoader;
@@ -61,16 +62,16 @@ public final class ColorHighlighterSettingsForm extends JPanel
   private void toggleFeatures() {
     final FeatureLoader featureLoader = FeatureLoader.getInstance();
     if (!featureLoader.isJavaEnabled()) {
-      javaPanel.hide();
+      javaPanel.setVisible(false);
     }
     if (!featureLoader.isKotlinEnabled()) {
-      kotlinPanel.hide();
+      kotlinPanel.setVisible(false);
     }
     if (!featureLoader.isRiderEnabled()) {
-      riderPanel.hide();
+      riderPanel.setVisible(false);
     }
     if (!featureLoader.isMarkdownEnabled()) {
-      markdownPanel.hide();
+      markdownPanel.setVisible(false);
     }
   }
 
@@ -96,8 +97,10 @@ public final class ColorHighlighterSettingsForm extends JPanel
     setIsRiderColorMethodEnabled(config.isRiderColorMethodEnabled());
     setIsTextEnabled(config.isTextEnabled());
     setIsMarkdownEnabled(config.isMarkdownEnabled());
+    setCssColorEnabled();
   }
 
+  @SuppressWarnings("OverlyComplexMethod")
   @Override
   public boolean isModified(final @NotNull ColorHighlighterConfig config) {
     boolean isModified = config.isEnabledChanged(getIsEnabled());
@@ -110,6 +113,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
     isModified = isModified || config.isRiderColorMethodEnabledChanged(getIsRiderColorMethodEnabled());
     isModified = isModified || config.isTextEnabledChanged(getIsTextEnabled());
     isModified = isModified || config.isMarkdownEnabledChanged(getIsMarkdownEnabled());
+    isModified = isModified || config.isCssColorEnabledChanged(isCssColorEnabled());
     return isModified;
   }
 
@@ -123,6 +127,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
     enableCheckbox = new JCheckBox();
     colorParsingCheckbox = new JCheckBox();
     rgbaCheckbox = new JCheckBox();
+    cssCheckbox = new JCheckBox();
     javaPanel = new JPanel();
     javaSeparator = compFactory.createSeparator(bundle.getString("ColorHighlighterSettingsForm.javaSeparator.text"));
     colorCtorCheckbox = new JCheckBox();
@@ -163,6 +168,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
         "0[]" +
           "[]" +
           "[]" +
+          "[]" +
           "[]"));
       globalPanel.add(globalSeparator, "cell 0 0,growx,gapx 0,gapy 10 10");
 
@@ -179,6 +185,11 @@ public final class ColorHighlighterSettingsForm extends JPanel
       rgbaCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.rgbaCheckbox.text"));
       rgbaCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.rgbaCheckbox.toolTipText"));
       globalPanel.add(rgbaCheckbox, "cell 0 3,aligny top,growy 0");
+
+      //---- cssCheckbox ----
+      cssCheckbox.setText(bundle.getString("ColorHighlighterSettingsForm.cssCheckbox.text"));
+      cssCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.cssCheckbox.toolTipText"));
+      globalPanel.add(cssCheckbox, "cell 0 4");
     }
     add(globalPanel, "cell 0 0 2 1,aligny top,grow 100 0");
 
@@ -249,7 +260,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
       riderColorMethodCheckbox.setToolTipText(bundle.getString("ColorHighlighterSettingsForm.riderColorMethodCheckbox.toolTipText"));
       riderPanel.add(riderColorMethodCheckbox, "cell 0 1,aligny top,growy 0");
     }
-    add(riderPanel, "cell 0 3,aligny top,grow 100 0");
+    add(riderPanel, "cell 0 3 2 1,aligny top,grow 100 0");
 
     //======== textPanel ========
     {
@@ -298,6 +309,7 @@ public final class ColorHighlighterSettingsForm extends JPanel
   private JCheckBox enableCheckbox;
   private JCheckBox colorParsingCheckbox;
   private JCheckBox rgbaCheckbox;
+  private JCheckBox cssCheckbox;
   private JPanel javaPanel;
   private JComponent javaSeparator;
   private JCheckBox colorCtorCheckbox;
@@ -417,4 +429,14 @@ public final class ColorHighlighterSettingsForm extends JPanel
   }
   //endregion
 
+  //region CSS Preview
+  public boolean isCssColorEnabled() {
+    return cssCheckbox.isSelected();
+  }
+
+  private void setCssColorEnabled() {
+    final boolean showCssInlineColorPreview = WebEditorOptions.getInstance().isShowCssInlineColorPreview();
+    cssCheckbox.setSelected(showCssInlineColorPreview);
+  }
+  //endregion
 }
