@@ -31,10 +31,5 @@
     <!--    <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>-->
     <codeInsight.lineMarkerProvider language=""
                                     implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
-
   </extensions>
-
-  <applicationListeners>
-    <listener class="com.mallowigi.startup.JavaVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
-  </applicationListeners>
 </idea-plugin>
