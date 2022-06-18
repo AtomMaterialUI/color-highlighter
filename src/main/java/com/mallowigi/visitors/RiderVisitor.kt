@@ -62,7 +62,7 @@ class RiderVisitor : ColorVisitor() {
 
   override fun getParser(text: String): ColorParser {
     return when {
-      text.contains(COLOR_FROM_ARGB.text) -> NetColorParser(COLOR_FROM_ARGB.text)
+      text.contains(COLOR_FROM_ARGB.text) -> NetColorParser()
       else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
     }
   }

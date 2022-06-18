@@ -29,11 +29,8 @@ import com.mallowigi.colors.ColorData
 import java.awt.Color
 import java.util.*
 
-/**
- * Parses colors in the form `Color.FromArgb(a,b,c)`
- *
- */
-class NetColorParser(val prefix: String) : ColorParser {
+/** Parses colors in the form `Color.FromArgb(a,b,c)` */
+class NetColorParser : ColorParser {
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {

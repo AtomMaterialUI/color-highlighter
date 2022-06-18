@@ -127,7 +127,7 @@ data class ColorData(
 
   /** Parse alpha part of a `Color(r,g,b,a)` form. */
   fun parseAlpha(part: String): Unit = when {
-    part.endsWith("f") -> {
+    part.endsWith("f") || part.contains('.') -> {
       isFloat = true
       floatAlpha = part.substring(0, part.length - 1).toFloat()
     }
@@ -137,7 +137,7 @@ data class ColorData(
       floatAlpha = part.substring(0, part.length - 1).toFloat()
     }
 
-    else -> floatAlpha = parseFloat(part)
+    else -> intAlpha = parseInt(part)
   }
 
   /** Parse hue part of a `Color(h,s,l)` form. */
