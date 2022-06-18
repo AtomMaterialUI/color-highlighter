@@ -37,7 +37,7 @@ plugins {
   // Java support
   id("java")
   // Kotlin support
-  id("org.jetbrains.kotlin.jvm") version "1.6.10"
+  id("org.jetbrains.kotlin.jvm") version "1.7.0"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
   id("org.jetbrains.intellij") version "1.7.0-SNAPSHOT"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
@@ -73,7 +73,7 @@ dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")
   implementation("com.jgoodies:jgoodies-forms:1.9.0")
   implementation("com.thoughtworks.xstream:xstream:1.4.19")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.0")
 }
 
 // Configure gradle-intellij-plugin plugin.
