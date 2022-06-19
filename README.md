@@ -12,7 +12,7 @@
 
 - Colorize different color formats directly in the code
   - `HEX` with or without hash (`#`) with alpha support
-  - `rgb()` and `rgba()`
+  - `rgb()`, `argb()` and `rgba()`
   - `hsl()` and `hsla()`
   - Java/Kotlin/Scala -> `ColorUiResource`
   - Java/Kotlin: `[new ]Color(r, g, b[, a])`
@@ -39,8 +39,10 @@
   - Swift
   - C
   - C++
-  - C# (**NEW**)
-  - Markdown (**NEW**)
+  - C#
+  - Markdown
+  - Dart (**NEW**)
+  - Text (**NEW**, *Experimental*)
 
 - Ability to preview color in the gutter
 - Options to copy gutter color in different formats (rgb, hsl, etc)

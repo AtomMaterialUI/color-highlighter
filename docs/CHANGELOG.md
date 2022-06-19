@@ -4,6 +4,19 @@
 
 ---
 
+## 11.0.0
+
+### Features
+
+- **Dart** support
+- Option to parse colors as `rgba` instead of `argb`
+- Color Preview for _Stylesheets_ (CSS, SASS...) and _Markup_ (XML, HTML...)
+- **Experimental**: Text files color parsing
+- Support for numeric literals parsing (`0x...`) in JavaScript, TypeScript and Python
+
+### Fixes
+- Fix `Color.FromArgb` parsing in C#
+
 ## 9.2.0
 
 ### Fixes:
