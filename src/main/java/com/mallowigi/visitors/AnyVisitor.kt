@@ -33,7 +33,9 @@ import com.intellij.psi.PsiLiteralValue
 import com.mallowigi.search.ColorSearchEngine
 
 class AnyVisitor : ColorVisitor() {
-  override fun suitableForFile(file: PsiFile): Boolean = true
+
+  override fun suitableForFile(file: PsiFile): Boolean =
+    !extensions.contains(file.virtualFile.extension)
 
   override fun visit(element: PsiElement) {
     if (element !is PsiLiteralValue) return
@@ -46,4 +48,34 @@ class AnyVisitor : ColorVisitor() {
   }
 
   override fun clone(): HighlightVisitor = AnyVisitor()
+
+  companion object {
+    val extensions: Set<String> = setOf(
+      "js",
+      "cjs",
+      "mjs",
+      "jsx",
+      "dart",
+      "tsx",
+      "ts",
+      "java",
+      "kt",
+      "php",
+      "phpt",
+      "py",
+      "rb",
+      "rbs",
+      "go",
+      "swift",
+      "objc",
+      "scala",
+      "json",
+      "md",
+      "mdx",
+      "properties",
+      "yml",
+      "yaml",
+      "asp",
+      "cs")
+  }
 }
