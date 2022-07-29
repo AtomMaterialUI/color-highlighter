@@ -4,6 +4,12 @@
 
 ---
 
+## 12.0.0
+
+### Fixes
+
+- Fix the double icon in Gutter for supported files
+
 ## 11.0.0
 
 ### Features

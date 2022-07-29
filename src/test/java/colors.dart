@@ -24,7 +24,6 @@
  *
  */
 
-ColorUtil.hex("#ff0000")
 {
   colors: [
     {
