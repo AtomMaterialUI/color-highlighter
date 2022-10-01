@@ -29,7 +29,6 @@ package com.mallowigi.gutter.actions
 import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 
-
 class CopyKotlinRgba(override val color: Color?) : CopyColorAction(ColorHighlighterBundle.message("actions.copyKotlinRgba"), color) {
   override fun colorFormat(newColor: Color): String =
     "Color(${newColor.red},${newColor.green},${newColor.blue},${newColor.alpha})"

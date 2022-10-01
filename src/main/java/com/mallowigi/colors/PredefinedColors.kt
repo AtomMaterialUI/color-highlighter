@@ -31,24 +31,19 @@ import java.awt.Color
 import java.util.*
 
 /**
- * PredefinedColors: This is the service containing the predefined colors from the XML file
- *
+ * PredefinedColors: This is the service containing the predefined colors
+ * from the XML file.
  */
 class PredefinedColors {
-
-  companion object {
-    private const val COLORS_XML = "/config/colors.xml"
-
-    @JvmStatic
-    val instance: PredefinedColors
-      get() = ApplicationManager.getApplication().getService(PredefinedColors::class.java)
-  }
-
   private lateinit var svgColors: MutableMap<Int, String?>
   private lateinit var svgNames: MutableMap<String?, Int>
 
   private lateinit var javaColors: MutableMap<Int, String>
   private lateinit var javaNames: MutableMap<String, Int>
+
+  init {
+    loadColors()
+  }
 
   /**
    * Find svgName from Color
@@ -56,6 +51,7 @@ class PredefinedColors {
    * @param color
    * @return
    */
+  @Suppress("unused")
   fun findSVGName(color: Color): String? {
     val rgb = toColor(color.rgb)
     return svgColors[rgb]
@@ -78,6 +74,7 @@ class PredefinedColors {
    * @param color
    * @return
    */
+  @Suppress("unused")
   fun findJavaName(color: Color): String? {
     val rgb = toColor(color.rgb)
     return javaColors[rgb]
@@ -94,10 +91,7 @@ class PredefinedColors {
     return Color(code)
   }
 
-  /**
-   * Load colors from XML
-   *
-   */
+  /** Load colors from XML. */
   private fun loadColors() {
     parseColorsFromXML().also {
       loadSVGColors(it)
@@ -115,7 +109,6 @@ class PredefinedColors {
     }
   }
 
-
   private fun loadJavaColors(colors: Colors) {
     javaColors = TreeMap()
     javaNames = TreeMap()
@@ -125,7 +118,6 @@ class PredefinedColors {
       (javaNames as TreeMap<String, Int>)[col.name] = col.colorInt
     }
   }
-
 
   private fun parseColorsFromXML(): Colors {
     val xml = PredefinedColors::class.java.getResource(COLORS_XML)
@@ -143,10 +135,14 @@ class PredefinedColors {
     }
   }
 
+  private fun toColor(rgb: Int): Int = rgb and MASK
 
-  private fun toColor(rgb: Int): Int = rgb and 0xffffff
+  companion object {
+    private const val COLORS_XML = "/config/colors.xml"
+    private const val MASK = 0xffffff
 
-  init {
-    loadColors()
+    @JvmStatic
+    val instance: PredefinedColors
+      get() = ApplicationManager.getApplication().getService(PredefinedColors::class.java)
   }
 }

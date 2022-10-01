@@ -34,10 +34,13 @@ import java.io.Serializable
  * @property name
  * @property code
  */
+@Suppress("Detekt:DataClassShouldBeImmutable", "Detekt:DataClassContainsFunctions") // Need to disable this for now
 data class SingleColor internal constructor(
   @field:Property var name: String = "",
   @field:Property var code: String = "",
 ) : Serializable {
+  val isEmpty: Boolean
+    get() = name.isEmpty() || code.isEmpty()
 
   val colorInt: Int
     get() = Integer.valueOf(code, 16)
@@ -46,9 +49,6 @@ data class SingleColor internal constructor(
     name = other.name
     code = other.code
   }
-
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
 
   override fun toString(): String = "$name: $code"
 }

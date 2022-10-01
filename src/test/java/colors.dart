@@ -30,6 +30,10 @@
       '@name': 'alizarin',
       '@code': 0xffffff,
     },
+{
+'@name': 'alizarin',
+'@code': 'ffffff50',
+},
     {
       '@name': 'alizarin',
       '@code': 0x80cbc4,

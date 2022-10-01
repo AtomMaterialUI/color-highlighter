@@ -37,7 +37,7 @@ plugins {
   // Java support
   id("java")
   // Kotlin support
-  id("org.jetbrains.kotlin.jvm") version "1.7.10"
+  id("org.jetbrains.kotlin.jvm") version "1.7.20"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
   id("org.jetbrains.intellij") version "1.9.0"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
@@ -73,7 +73,7 @@ dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
   implementation("com.jgoodies:jgoodies-forms:1.9.0")
   implementation("com.thoughtworks.xstream:xstream:1.4.19")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -89,18 +89,17 @@ intellij {
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
   plugins.set(listOf(
-    "java",
-    "java-i18n",
-    "DatabaseTools",
+    "com.intellij.java",
+    "com.intellij.java-i18n",
+    "com.intellij.database",
+    "com.intellij.css",
+    "com.intellij.properties",
+    "org.jetbrains.plugins.yaml",
+    "org.intellij.plugins.markdown",
+    "org.jetbrains.kotlin",
     "Dart:$depsDartVersion",
-    "css-impl",
-    "properties",
-    "yaml",
-    "markdown",
-    "Kotlin",
     "Pythonid:$depsPyVersion",
     "org.jetbrains.plugins.go:$depsGoVersion",
-//    "org.jetbrains.kotlin:$depsKotlinVersion",
     "org.intellij.scala:$depsScalaVersion",
     "org.jetbrains.plugins.ruby:$depsRubyVersion",
     "com.jetbrains.php:$depsPhpVersion"

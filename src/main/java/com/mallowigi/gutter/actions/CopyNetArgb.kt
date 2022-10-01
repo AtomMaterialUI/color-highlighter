@@ -29,7 +29,6 @@ package com.mallowigi.gutter.actions
 import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 
-
 class CopyNetArgb(override val color: Color?) : CopyColorAction(ColorHighlighterBundle.message("actions.copyNetArgb"), color) {
   override fun colorFormat(newColor: Color): String =
     "Color.FromArgb(${newColor.alpha},${newColor.red},${newColor.green},${newColor.blue})"

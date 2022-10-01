@@ -32,7 +32,6 @@ import com.intellij.openapi.project.DumbAwareAction
 import java.awt.Color
 import java.awt.datatransfer.StringSelection
 
-
 abstract class CopyColorAction(val text: String, open val color: Color?) : DumbAwareAction(text) {
 
   override fun actionPerformed(e: AnActionEvent): Unit = copyColor()

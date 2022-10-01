@@ -29,7 +29,6 @@ package com.mallowigi.gutter.actions
 import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 
-
 class CopyJavaRgb(override val color: Color?) : CopyColorAction(ColorHighlighterBundle.message("actions.copyJavaRgb"), color) {
   override fun colorFormat(newColor: Color): String =
     "new Color(${newColor.red},${newColor.green},${newColor.blue})"

@@ -51,6 +51,8 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
 
   override fun getPopupMenuActions(): ActionGroup {
     return DefaultActionGroup(
+      CopyAndroidArgb(color),
+      CopyAndroidRgb(color),
       CopyHexAction(color),
       CopyRgbAction(color),
       CopyRgbaAction(color),

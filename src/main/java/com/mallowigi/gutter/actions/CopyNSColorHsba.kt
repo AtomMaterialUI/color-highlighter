@@ -30,7 +30,6 @@ import com.mallowigi.ColorHighlighterBundle
 import com.mallowigi.utils.ColorUtils
 import java.awt.Color
 
-
 class CopyNSColorHsba(override val color: Color?) : CopyColorAction(ColorHighlighterBundle.message("actions.copyNsColorHsla"), color) {
   override fun colorFormat(newColor: Color): String {
     val hsl = FloatArray(3)

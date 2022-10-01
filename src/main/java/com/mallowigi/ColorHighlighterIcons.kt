@@ -31,9 +31,7 @@ package com.mallowigi
 import com.intellij.ui.IconManager
 import javax.swing.Icon
 
-fun load(path: String): Icon {
-  return IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java)
-}
+fun load(path: String): Icon = IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java)
 
 object ColorHighlighterIcons {
   object Gutter {

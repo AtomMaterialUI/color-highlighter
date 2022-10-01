@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NonNls
 import java.lang.Float.parseFloat
 import java.util.*
 
-
 /**
  * This data class serves as a container for color parsing. Used in the
  * different parsers.
@@ -53,7 +52,7 @@ import java.util.*
  * @property endParen
  */
 @Suppress("DuplicatedCode")
-data class ColorData(
+class ColorData(
   var isPercent: Boolean = false,
   var isFloat: Boolean = false,
   var floatRed: Float = 0.0f,
@@ -189,11 +188,9 @@ data class ColorData(
    */
   fun getNextParam(next: String): String = next.split(":")[1]
 
-  private fun parseInt(part: @NonNls String?): Int {
-    return when {
-      part!!.lowercase(Locale.getDefault()).startsWith("0x") -> part.substring(2).toInt(16)
-      part.startsWith("0") && part.length > 1 -> part.substring(1).toInt(8)
-      else -> part.toInt()
-    }
+  private fun parseInt(part: @NonNls String?): Int = when {
+    part!!.lowercase(Locale.getDefault()).startsWith("0x") -> part.substring(2).toInt(16)
+    part.startsWith("0") && part.length > 1 -> part.substring(1).toInt(8)
+    else -> part.toInt()
   }
 }

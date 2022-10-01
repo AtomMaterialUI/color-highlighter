@@ -42,10 +42,7 @@ import org.jetbrains.annotations.NotNull
 import java.awt.Point
 import java.util.*
 
-
-/**
- * Notifications support
- */
+/** Notifications support. */
 object ColorHighlighterNotifications {
   private const val CHANNEL: String = "Color Highlighter Notifications"
 
@@ -78,8 +75,7 @@ object ColorHighlighterNotifications {
   }
 
   /**
-   * Shows [Notification] in [ColorHighlighterNotifications.CHANNEL]
-   * group.
+   * Shows [Notification] in [ColorHighlighterNotifications.CHANNEL] group.
    *
    * @param project current project
    * @param title notification title
@@ -132,7 +128,6 @@ object ColorHighlighterNotifications {
     type: NotificationType,
     @NotNull action: AnAction,
   ): Notification = createNotification(title, content, type).addAction(action)
-
 
   /**
    * Show a notification using the Balloon API instead of the bus Credit

@@ -41,6 +41,7 @@ import javax.swing.table.TableCellRenderer
  * Editable column info for association name
  *
  * @property parent the Parent class
+ * @property editable whether its editable
  */
 @Suppress("UnstableApiUsage")
 class NameEditableColumnInfo(private val parent: Disposable, private val editable: Boolean) :

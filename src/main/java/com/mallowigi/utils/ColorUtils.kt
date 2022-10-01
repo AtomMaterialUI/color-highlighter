@@ -36,9 +36,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToLong
 
-/**
- * Color Utils!
- */
+/** Color Utils! */
+@Suppress("Detekt:MagicNumber")
 object ColorUtils {
   const val OPEN_PAREN: Char = '('
   const val CLOSE_PAREN: Char = ')'
@@ -55,9 +54,7 @@ object ColorUtils {
 
   fun getSuitableForeground(color: Color?): Gray = if (ColorUtil.isDark(color!!)) Gray._254 else Gray._1
 
-  /**
-   * Parse rgb in the hex format #123
-   */
+  /** Parse rgb in the hex format #123. */
   fun getShortRGB(hex: String): Color {
     val rgb = normalizeRGB(hex, 3)
     val r = rgb.substring(0, 1).toInt(16)
@@ -68,9 +65,7 @@ object ColorUtils {
 
   private fun padZeros(num: Int, color: String): String = StringUtil.repeat("0", num) + color
 
-  /**
-   * Parse rgb in the hex format #123456
-   */
+  /** Parse rgb in the hex format #123456. */
   fun getRGB(hex: String): Color {
     val rgb = normalizeRGB(hex, 6)
     val r = rgb.substring(0, 2).toInt(16)
@@ -121,7 +116,6 @@ object ColorUtils {
     }
   }
 
-
   fun toRGB(color: Color): String = String.format("rgb(%d, %d, %d)", color.red, color.green, color.blue)
 
   fun toRGBA(color: Color): String =
@@ -138,14 +132,10 @@ object ColorUtils {
     return rgb
   }
 
-  /**
-   * Parse a color from r,g,b in decimal format
-   */
+  /** Parse a color from r,g,b in decimal format. */
   fun getDecimalRGB(r: Int, g: Int, b: Int): Color = getDecimalRGBa(r, g, b, 1.0f)
 
-  /**
-   * Parse a color from r,g,b,a in decimal format
-   */
+  /** Parse a color from r,g,b,a in decimal format. */
   fun getDecimalRGBa(r: Int, g: Int, b: Int, a: Float): Color {
     var red = r
     var green = g
@@ -158,14 +148,10 @@ object ColorUtils {
     return Color(red, green, blue, alpha)
   }
 
-  /**
-   * Parse a color from r,g,b in percent format
-   */
+  /** Parse a color from r,g,b in percent format. */
   fun getPercentRGB(r: Int, g: Int, b: Int): Color = getPercentRGBa(r, g, b, 1.0f)
 
-  /**
-   * Parse a color from r,g,b,a in percent format
-   */
+  /** Parse a color from r,g,b,a in percent format. */
   fun getPercentRGBa(r: Int, g: Int, b: Int, a: Float): Color {
     var red = r
     var green = g
@@ -179,14 +165,10 @@ object ColorUtils {
     return Color(red / 100.0f, green / 100.0f, blue / 100.0f, alpha)
   }
 
-  /**
-   * Parse a color from h,s,l in decimal format
-   */
+  /** Parse a color from h,s,l in decimal format. */
   fun getHSL(h: Int, s: Int, l: Int): Color = getHSLa(h, s, l, 1.0f)
 
-  /**
-   * Parse a color from h,s,l,a in decimal format
-   */
+  /** Parse a color from h,s,l,a in decimal format. */
   fun getHSLa(h: Int, s: Int, l: Int, a: Float): Color {
     var hue = h
     var saturation = s
@@ -234,9 +216,7 @@ object ColorUtils {
   /** Get a color from hsl. */
   fun getHSLColor(h: Float, s: Float, l: Float): Color = Color(HSLtoRGB(h, s, l))
 
-  /**
-   * Converts rgb to hsl
-   */
+  /** Converts rgb to hsl. */
   @Suppress("FunctionName")
   fun RGBtoHSL(r: Int, g: Int, b: Int, hsl: FloatArray?): FloatArray {
     var res = hsl
@@ -310,28 +290,18 @@ object ColorUtils {
     return res
   }
 
-  /**
-   * Ensure a number is between 0 and 255
-   */
+  /** Ensure a number is between 0 and 255. */
   private fun normalizeDecimal(x: Int): Int = max(0, min(x, 255))
 
-  /**
-   * Ensure a number is between 0 and 100
-   */
+  /** Ensure a number is between 0 and 100. */
   private fun normalizePercent(x: Int): Int = max(0, min(x, 100))
 
-  /**
-   * Ensure a number is between 0 and 360
-   */
+  /** Ensure a number is between 0 and 360. */
   private fun normalizeDegrees(x: Int): Int = max(0, min(x % 360, 359))
 
-  /**
-   * Ensure a number is between 0 and 1
-   */
+  /** Ensure a number is between 0 and 1. */
   private fun normalizeFraction(f: Float): Float = max(0.0f, max(f, 1.0f))
 
-  /**
-   * Converts to decimal
-   */
+  /** Converts to decimal. */
   private fun toDecimal(f: Float): Int = (f * 255.0f + 0.5f).toInt()
 }

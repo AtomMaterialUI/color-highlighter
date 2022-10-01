@@ -30,7 +30,6 @@ import com.intellij.ui.ColorUtil
 import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 
-
 class CopyJavaColorResource(override val color: Color?) : CopyColorAction(ColorHighlighterBundle.message("actions.copyJavaResource"), color) {
   override fun colorFormat(newColor: Color): String {
     val toHex = ColorUtil.toHex(newColor)
