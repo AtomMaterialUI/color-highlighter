@@ -57,6 +57,7 @@ val depsPhpVersion: String = properties("depsPhpVersion")
 val depsPyVersion: String = properties("depsPyVersion")
 val depsRubyVersion: String = properties("depsRubyVersion")
 val depsScalaVersion: String = properties("depsScalaVersion")
+val depsRVersion: String = properties("depsRVersion")
 
 // Configure project's dependencies
 repositories {
@@ -101,7 +102,8 @@ intellij {
     "org.jetbrains.plugins.go:$depsGoVersion",
     "org.intellij.scala:$depsScalaVersion",
     "org.jetbrains.plugins.ruby:$depsRubyVersion",
-    "com.jetbrains.php:$depsPhpVersion"
+    "com.jetbrains.php:$depsPhpVersion",
+    "R4Intellij:$depsRVersion"
   ))
 }
 

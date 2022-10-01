@@ -52,6 +52,7 @@
   <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
   <depends optional="true" config-file="withDart.xml">Dart</depends>
   <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
+  <depends optional="true" config-file="withR.xml">R4Intellij</depends>
 
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
