@@ -33,10 +33,13 @@ import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
 
 class JSVisitor : ColorVisitor() {
+
   private val allowedTypes = listOf(
     "JS:NUMERIC_LITERAL",
     "JS:STRING_LITERAL"
   )
+
+  override fun clone(): HighlightVisitor = JSVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean = true
 
@@ -49,5 +52,4 @@ class JSVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = JSVisitor()
 }

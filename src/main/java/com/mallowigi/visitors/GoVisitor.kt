@@ -34,6 +34,9 @@ import com.mallowigi.search.ColorSearchEngine
 import java.util.*
 
 class GoVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = GoVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean =
     "GO_FILE" == Objects.requireNonNull(file.fileElementType).toString()
 
@@ -45,5 +48,4 @@ class GoVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = GoVisitor()
 }

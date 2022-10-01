@@ -41,4 +41,5 @@ object ColorHighlighterBundle : DynamicBundle(BUNDLE) {
   @JvmStatic
   fun messagePointer(key: @PropertyKey(resourceBundle = BUNDLE) String, vararg params: Any?): Supplier<String> =
     getLazyMessage(key, *params)
+
 }

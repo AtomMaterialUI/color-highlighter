@@ -35,17 +35,19 @@ import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.yaml.psi.YAMLFile
 
 class YamlVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = YamlVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is YAMLFile
 
   override fun visit(element: PsiElement) {
-    if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring"))
+    if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring")) {
       return
+    }
 
     val value = element.text
     val color = ColorSearchEngine.getColor(value, this)
     color?.let { highlight(element, it) }
   }
 
-
-  override fun clone(): HighlightVisitor = YamlVisitor()
 }

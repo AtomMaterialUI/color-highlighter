@@ -32,6 +32,7 @@ import com.mallowigi.utils.ColorHighlighterNotifications
 import com.mallowigi.utils.getVersion
 
 class UpdatesComponent : StartupActivity.Background {
+
   private var config: ColorHighlighterConfig = ColorHighlighterConfig.instance
 
   override fun runActivity(project: Project) {
@@ -49,4 +50,5 @@ class UpdatesComponent : StartupActivity.Background {
       ColorHighlighterNotifications.showUpdate(project)
     }
   }
+
 }

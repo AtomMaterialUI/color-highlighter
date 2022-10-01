@@ -32,7 +32,7 @@
     },
 {
 '@name': 'alizarin',
-'@code': 'ffffff50',
+'@code': 'ff000050',
 },
     {
       '@name': 'alizarin',

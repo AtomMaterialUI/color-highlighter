@@ -35,36 +35,23 @@ import java.util.*
  * from the XML file.
  */
 class PredefinedColors {
-  private lateinit var svgColors: MutableMap<Int, String?>
-  private lateinit var svgNames: MutableMap<String?, Int>
-
   private lateinit var javaColors: MutableMap<Int, String>
   private lateinit var javaNames: MutableMap<String, Int>
+  private lateinit var svgColors: MutableMap<Int, String?>
+  private lateinit var svgNames: MutableMap<String?, Int>
 
   init {
     loadColors()
   }
 
   /**
-   * Find svgName from Color
-   *
-   * @param color
-   * @return
-   */
-  @Suppress("unused")
-  fun findSVGName(color: Color): String? {
-    val rgb = toColor(color.rgb)
-    return svgColors[rgb]
-  }
-
-  /**
-   * Find a svgColor from a name
+   * Find java color from name
    *
    * @param name
    * @return
    */
-  fun findSVGColor(name: String?): Color? {
-    val code = svgNames[name] ?: return null
+  fun findJavaColor(name: String): Color? {
+    val code = javaNames[name] ?: return null
     return Color(code)
   }
 
@@ -81,14 +68,26 @@ class PredefinedColors {
   }
 
   /**
-   * Find java color from name
+   * Find a svgColor from a name
    *
    * @param name
    * @return
    */
-  fun findJavaColor(name: String): Color? {
-    val code = javaNames[name] ?: return null
+  fun findSVGColor(name: String?): Color? {
+    val code = svgNames[name] ?: return null
     return Color(code)
+  }
+
+  /**
+   * Find svgName from Color
+   *
+   * @param color
+   * @return
+   */
+  @Suppress("unused")
+  fun findSVGName(color: Color): String? {
+    val rgb = toColor(color.rgb)
+    return svgColors[rgb]
   }
 
   /** Load colors from XML. */
@@ -99,16 +98,6 @@ class PredefinedColors {
     }
   }
 
-  private fun loadSVGColors(colors: Colors) {
-    svgColors = TreeMap()
-    svgNames = TreeMap()
-
-    for (col: SingleColor in colors.svgColors!!) {
-      (svgColors as TreeMap<Int, String?>)[col.colorInt] = col.name
-      (svgNames as TreeMap<String?, Int>)[col.name] = col.colorInt
-    }
-  }
-
   private fun loadJavaColors(colors: Colors) {
     javaColors = TreeMap()
     javaNames = TreeMap()
@@ -116,6 +105,16 @@ class PredefinedColors {
     for (col: SingleColor in colors.javaColors!!) {
       (javaColors as TreeMap<Int, String>)[col.colorInt] = col.name
       (javaNames as TreeMap<String, Int>)[col.name] = col.colorInt
+    }
+  }
+
+  private fun loadSVGColors(colors: Colors) {
+    svgColors = TreeMap()
+    svgNames = TreeMap()
+
+    for (col: SingleColor in colors.svgColors!!) {
+      (svgColors as TreeMap<Int, String?>)[col.colorInt] = col.name
+      (svgNames as TreeMap<String?, Int>)[col.name] = col.colorInt
     }
   }
 
@@ -145,4 +144,5 @@ class PredefinedColors {
     val instance: PredefinedColors
       get() = ApplicationManager.getApplication().getService(PredefinedColors::class.java)
   }
+
 }

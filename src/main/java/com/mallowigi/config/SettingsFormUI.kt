@@ -31,15 +31,17 @@ interface SettingsFormUI<
   Form : SettingsFormUI<Form, Config>,
   Config : SettingsConfig<Form, Config>,
   > {
-  val content: JComponent?
 
-  fun init()
+  val content: JComponent?
 
   fun afterStateSet()
 
   fun dispose()
 
-  fun setFormState(config: Config)
+  fun init()
 
   fun isModified(config: Config): Boolean
+
+  fun setFormState(config: Config)
+
 }

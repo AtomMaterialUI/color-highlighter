@@ -34,19 +34,39 @@ import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
 
 /**
- * Color visitor: This is the class that will colorize the texts representing colors
- *
+ * Color visitor: This is the class that will colorize the texts
+ * representing colors.
  */
 abstract class ColorVisitor : HighlightVisitor, LangVisitor {
+
   private var highlightInfoHolder: HighlightInfoHolder? = null
+
+  /**
+   * Highlight the element with the given color
+   *
+   * @param element element representing a color
+   * @param color color
+   */
+  fun highlight(element: PsiElement?, color: Color) {
+    if (!instance.isEnabled) return
+
+    assert(highlightInfoHolder != null)
+    highlightInfoHolder!!.add(ColorHighlighter.highlightColor(element, color))
+  }
+
+  fun highlight(color: Color, range: IntRange) {
+    if (!instance.isEnabled) return
+    assert(highlightInfoHolder != null)
+    highlightInfoHolder!!.add(ColorHighlighter.highlightColor(range, color))
+  }
 
   /**
    * Analyze: runs the annotate action on the file
    *
    * @param file the file to annotate
-   * @param updateWholeFile  whether to update the whole file
-   * @param holder  highlighting info holder
-   * @param action  action to run
+   * @param updateWholeFile whether to update the whole file
+   * @param holder highlighting info holder
+   * @param action action to run
    * @return
    */
   override fun analyze(file: PsiFile,
@@ -69,26 +89,8 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor {
    */
   abstract override fun clone(): HighlightVisitor
 
-  /**
-   * Highlight the element with the given color
-   *
-   * @param element element representing a color
-   * @param color color
-   */
-  fun highlight(element: PsiElement?, color: Color) {
-    if (!instance.isEnabled) return
-
-    assert(highlightInfoHolder != null)
-    highlightInfoHolder!!.add(ColorHighlighter.highlightColor(element, color))
-  }
-
-  fun highlight(color: Color, range: IntRange) {
-    if (!instance.isEnabled) return
-    assert(highlightInfoHolder != null)
-    highlightInfoHolder!!.add(ColorHighlighter.highlightColor(range, color))
-  }
+  override fun getParser(text: String): ColorParser? = null
 
   override fun shouldParseText(text: String): Boolean = false
 
-  override fun getParser(text: String): ColorParser? = null
 }

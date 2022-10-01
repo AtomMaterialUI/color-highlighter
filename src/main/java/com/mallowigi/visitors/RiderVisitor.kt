@@ -40,6 +40,19 @@ class RiderVisitor : ColorVisitor() {
 
   private val allowedTypes = setOf("STRING_LITERAL_REGULAR", "DUMMY_NODE")
 
+  override fun clone(): HighlightVisitor = RiderVisitor()
+
+  override fun getParser(text: String): ColorParser = when {
+    text.contains(COLOR_FROM_ARGB.text) -> NetColorParser()
+    else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+  }
+
+  override fun shouldParseText(text: String): Boolean {
+    if (ColorHighlighterConfig.instance.isRiderColorMethodEnabled) return text.contains(COLOR_FROM_ARGB.text)
+
+    return false
+  }
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.(c|h|cc|hh|cpp|hpp|cs)$".toRegex())
 
@@ -52,18 +65,4 @@ class RiderVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = RiderVisitor()
-
-  override fun shouldParseText(text: String): Boolean {
-    if (ColorHighlighterConfig.instance.isRiderColorMethodEnabled) return text.contains(COLOR_FROM_ARGB.text)
-
-    return false
-  }
-
-  override fun getParser(text: String): ColorParser {
-    return when {
-      text.contains(COLOR_FROM_ARGB.text) -> NetColorParser()
-      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
-    }
-  }
 }

@@ -31,11 +31,10 @@ import java.awt.Color
 import java.io.Serializable
 import java.util.Map.copyOf
 
-/**
- * This is the serialized data class for user custom colors from xml
- */
+/** This is the serialized data class for user custom colors from xml. */
 @Suppress("MemberNameEqualsClassName", "unused")
 class CustomColors : Serializable {
+
   @Property
   @XCollection
   private val customColors: MutableMap<String, SingleColor>
@@ -52,38 +51,7 @@ class CustomColors : Serializable {
     customColors = associations.associateBy { it.name }.toMutableMap()
   }
 
-  /**
-   * Has the association?
-   *
-   * @param name
-   */
-  private fun has(name: String): Boolean = customColors.containsKey(name)
-
-  /**
-   * Get an association
-   *
-   * @param name
-   */
-  fun get(name: String): SingleColor? = customColors[name]
-
-  /**
-   * Add association to map if not exists
-   *
-   * @param name
-   * @param assoc
-   */
-  fun set(name: String, assoc: SingleColor) {
-    if (has(name)) return
-
-    customColors[name] = assoc
-  }
-
-  /**
-   * get the association values
-   *
-   * @return
-   */
-  private fun values(): List<SingleColor> = customColors.values.toList()
+  operator fun contains(text: String): Boolean = customColors.containsKey(text)
 
   fun findCustomColor(colorName: String): SingleColor? =
     values().stream()
@@ -91,13 +59,23 @@ class CustomColors : Serializable {
       .findAny()
       .orElse(null)
 
-  fun getTheAssociations(): List<SingleColor> = values()
-
-  operator fun contains(text: String): Boolean = customColors.containsKey(text)
+  fun get(name: String): SingleColor? = customColors[name]
 
   fun getColor(name: String): Color? {
     val foundColor = customColors[name] ?: return null
     return Color(foundColor.colorInt)
   }
+
+  fun getTheAssociations(): List<SingleColor> = values()
+
+  fun set(name: String, assoc: SingleColor) {
+    if (has(name)) return
+
+    customColors[name] = assoc
+  }
+
+  private fun has(name: String): Boolean = customColors.containsKey(name)
+
+  private fun values(): List<SingleColor> = customColors.values.toList()
 
 }

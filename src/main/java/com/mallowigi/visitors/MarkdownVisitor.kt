@@ -34,6 +34,9 @@ import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.search.ColorSearchEngine
 
 class MarkdownVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = MarkdownVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.(md|mdx)$".toRegex())
 
@@ -49,5 +52,4 @@ class MarkdownVisitor : ColorVisitor() {
     }
   }
 
-  override fun clone(): HighlightVisitor = MarkdownVisitor()
 }

@@ -27,10 +27,7 @@ package com.mallowigi.search.parsers
 
 import java.awt.Color
 
-/**
- * Interface for parsing colors from text
- *
- */
+/** Interface for parsing colors from text. */
 fun interface ColorParser {
   /**
    * Parse a color representation
@@ -39,4 +36,5 @@ fun interface ColorParser {
    * @return a color if parseable
    */
   fun parseColor(text: String?): Color?
+
 }

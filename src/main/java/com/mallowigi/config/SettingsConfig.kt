@@ -30,9 +30,11 @@ interface SettingsConfig<
   Form : SettingsFormUI<Form, Config>,
   Config : SettingsConfig<Form, Config>,
   > {
+
   fun applySettings(form: Form)
+
+  fun fireChanged()
 
   fun resetSettings()
 
-  fun fireChanged()
 }

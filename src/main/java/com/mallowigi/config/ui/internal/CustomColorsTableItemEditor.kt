@@ -29,23 +29,15 @@ import com.intellij.util.Function
 import com.intellij.util.ui.table.TableModelEditor.DialogItemEditor
 import com.mallowigi.colors.SingleColor
 
-/**
- * Associations table item editor
- *
- */
+/** Associations table item editor. */
 class CustomColorsTableItemEditor : DialogItemEditor<SingleColor> {
-  override fun getItemClass(): Class<out SingleColor> = SingleColor::class.java
+
+  override fun applyEdited(oldItem: SingleColor, newItem: SingleColor): Unit = oldItem.apply(newItem)
 
   override fun clone(item: SingleColor, forInPlaceEditing: Boolean): SingleColor = SingleColor(
     item.name,
     item.code
   )
-
-  override fun applyEdited(oldItem: SingleColor, newItem: SingleColor): Unit = oldItem.apply(newItem)
-
-  override fun isEditable(item: SingleColor): Boolean = !item.isEmpty
-
-  override fun isEmpty(item: SingleColor): Boolean = item.isEmpty
 
   override fun edit(
     item: SingleColor,
@@ -55,5 +47,11 @@ class CustomColorsTableItemEditor : DialogItemEditor<SingleColor> {
     val settings = clone(item, true)
     mutator.`fun`(item).apply(settings)
   }
+
+  override fun getItemClass(): Class<out SingleColor> = SingleColor::class.java
+
+  override fun isEditable(item: SingleColor): Boolean = !item.isEmpty
+
+  override fun isEmpty(item: SingleColor): Boolean = item.isEmpty
 
 }

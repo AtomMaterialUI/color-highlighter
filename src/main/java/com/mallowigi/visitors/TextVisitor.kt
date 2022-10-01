@@ -34,6 +34,8 @@ import com.mallowigi.search.ColorSearchEngine
 
 class TextVisitor : ColorVisitor() {
 
+  override fun clone(): HighlightVisitor = TextVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.(txt|log|rst)$".toRegex())
 
@@ -58,6 +60,5 @@ class TextVisitor : ColorVisitor() {
     color?.let { highlight(it, range) }
   }
 
-  override fun clone(): HighlightVisitor = TextVisitor()
 }
 

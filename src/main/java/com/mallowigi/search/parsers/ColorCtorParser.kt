@@ -29,11 +29,9 @@ import com.mallowigi.colors.ColorData
 import java.awt.Color
 import java.util.*
 
-/**
- * Parses colors in the form `Color(a,b,c)`
- *
- */
+/** Parses colors in the form `Color(a,b,c)` */
 class ColorCtorParser : ColorParser {
+
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {
@@ -66,6 +64,7 @@ class ColorCtorParser : ColorParser {
       }
     }
   }
+
 }
 
 

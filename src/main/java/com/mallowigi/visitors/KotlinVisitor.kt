@@ -40,7 +40,6 @@ import com.mallowigi.search.parsers.ColorParser
 import org.jetbrains.kotlin.psi.KtFile
 
 class KotlinVisitor : ColorVisitor() {
-  override fun suitableForFile(file: PsiFile): Boolean = file is KtFile
 
   private val allowedTypes = listOf(
     "INTEGER_CONSTANT",
@@ -51,16 +50,13 @@ class KotlinVisitor : ColorVisitor() {
 
   private val config = ColorHighlighterConfig.instance
 
-  override fun visit(element: PsiElement) {
-    val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
-
-    val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
-  }
-
   override fun clone(): HighlightVisitor = KotlinVisitor()
+
+  override fun getParser(text: String): ColorParser = when {
+    text.startsWith(KT_COLOR.text) -> ColorCtorParser()
+    text.startsWith(COLOR_METHOD.text) -> ColorMethodParser(COLOR_METHOD.text)
+    else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+  }
 
   override fun shouldParseText(text: String): Boolean {
     // todo add settings for those
@@ -79,15 +75,15 @@ class KotlinVisitor : ColorVisitor() {
 //    return prefixes.any { text.startsWith(it) }
   }
 
-  override fun getParser(text: String): ColorParser {
-    return when {
-      text.startsWith(KT_COLOR.text) -> ColorCtorParser()
-      text.startsWith(COLOR_METHOD.text) -> ColorMethodParser(COLOR_METHOD.text)
-      // todo
-//      text.startsWith(COLOR_ARGB.text) -> ColorCtorParser()
-//      text.startsWith(COLOR_RGB.text) -> ColorCtorParser()
-//      text.startsWith(JBCOLOR.text) -> ColorMethodParser(JBCOLOR.text)
-      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
-    }
+  override fun suitableForFile(file: PsiFile): Boolean = file is KtFile
+
+  override fun visit(element: PsiElement) {
+    val type = PsiUtilCore.getElementType(element).toString()
+    if (type !in allowedTypes) return
+
+    val value = element.text
+    val color = ColorSearchEngine.getColor(value, this)
+    color?.let { highlight(element, it) }
   }
+
 }

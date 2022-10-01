@@ -36,6 +36,9 @@ import com.jetbrains.python.psi.PyStringElement
 import com.mallowigi.search.ColorSearchEngine
 
 class PythonVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = PythonVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is PyFile
 
   override fun visit(element: PsiElement) {
@@ -50,5 +53,4 @@ class PythonVisitor : ColorVisitor() {
     }
   }
 
-  override fun clone(): HighlightVisitor = PythonVisitor()
 }

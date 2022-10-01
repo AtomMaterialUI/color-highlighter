@@ -31,6 +31,7 @@ import java.util.*
 
 /** Parses colors in the form `Color.FromArgb(a,b,c)` */
 class NetColorParser : ColorParser {
+
   override fun parseColor(text: String?): Color? = parseConstructor(text!!)
 
   private fun parseConstructor(text: String): Color? {
@@ -59,6 +60,7 @@ class NetColorParser : ColorParser {
       }
     }
   }
+
 }
 
 

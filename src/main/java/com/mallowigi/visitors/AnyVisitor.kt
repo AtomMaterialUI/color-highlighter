@@ -35,14 +35,14 @@ import com.mallowigi.search.ColorSearchEngine
 class AnyVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean =
-    !extensions.contains(file.virtualFile.extension)
+    !extensions.contains(file.virtualFile?.extension)
 
   override fun visit(element: PsiElement) {
     if (element !is PsiLiteralValue) return
 
     val value = element.value
     if (value is String) {
-      val color = ColorSearchEngine.getColor((value as String?)!!, this)
+      val color = ColorSearchEngine.getColor((value as? String)!!, this)
       color?.let { highlight(element, it) }
     }
   }

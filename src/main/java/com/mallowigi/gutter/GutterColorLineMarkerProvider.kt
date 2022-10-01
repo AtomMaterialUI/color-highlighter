@@ -34,21 +34,19 @@ import com.mallowigi.ColorHighlighterBundle.message
 import com.mallowigi.ColorHighlighterIcons
 import javax.swing.Icon
 
-/**
- * Gutter color line marker provider: option to toggle gutter display
- *
- */
+/** Gutter color line marker provider: option to toggle gutter display. */
 class GutterColorLineMarkerProvider : LineMarkerProviderDescriptor() {
-
-  override fun getName(): @GutterName String = message("GutterColorDescriptor.name")
 
   override fun getIcon(): Icon = ColorHighlighterIcons.Gutter.Inline
 
   override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? = null
+
+  override fun getName(): @GutterName String = message("GutterColorDescriptor.name")
 
   companion object {
     private val INSTANCE: GutterColorLineMarkerProvider = GutterColorLineMarkerProvider()
 
     fun isEnabled(): Boolean = LineMarkerSettings.getSettings().isEnabled(INSTANCE)
   }
+
 }

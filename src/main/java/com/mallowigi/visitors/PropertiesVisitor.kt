@@ -34,6 +34,9 @@ import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
 
 class PropertiesVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = PropertiesVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is PropertiesFile
 
   override fun visit(element: PsiElement) {
@@ -44,5 +47,4 @@ class PropertiesVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = PropertiesVisitor()
 }

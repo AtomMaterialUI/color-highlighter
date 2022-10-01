@@ -40,11 +40,20 @@ import com.mallowigi.gutter.GutterColorRenderer
 import java.awt.Color
 
 internal object ColorHighlighter {
+
   private val COLOR_ELEMENT: HighlightInfoType = HighlightInfoTypeImpl(
     HighlightSeverity.INFORMATION,
     DefaultLanguageHighlighterColors.CONSTANT
   )
 
+  fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
+    getHighlightInfoBuilder(color).range(element!!).create()
+
+  fun highlightColor(range: IntRange, color: Color): HighlightInfo? = getHighlightInfoBuilder(color)
+    .range(range.first, range.last)
+    .create()
+
+  @Suppress("Detekt:MagicNumber")
   private fun getAttributesFlyweight(color: Color): TextAttributes {
     val attributes = TextAttributes()
     val background = EditorColorsManager.getInstance().globalScheme.defaultBackground
@@ -54,15 +63,6 @@ internal object ColorHighlighter {
       attributes.flyweight
         .withBackground(mix)
         .withForeground(if (ColorUtil.isDark(mix)) Gray._254 else Gray._1))
-  }
-
-  fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
-    getHighlightInfoBuilder(color).range(element!!).create()
-
-  fun highlightColor(range: IntRange, color: Color): HighlightInfo? {
-    return getHighlightInfoBuilder(color)
-      .range(range.first, range.last)
-      .create()
   }
 
   private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder {
@@ -75,4 +75,5 @@ internal object ColorHighlighter {
 
     return newHighlightInfo
   }
+
 }

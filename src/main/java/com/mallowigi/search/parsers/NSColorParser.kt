@@ -32,10 +32,10 @@ import java.util.*
 /**
  * Parse a color in the objectiveC format
  *
- * TODO
- *
+ * TODO.
  */
 class NSColorParser : ColorParser {
+
   override fun parseColor(text: String?): Color? = parseMethodCall(text!!)
 
   private fun parseMethodCall(text: String): Color? {
@@ -77,6 +77,7 @@ class NSColorParser : ColorParser {
       return Color.getHSBColor(floatHue, floatSaturation, floatBrightness)
     }
   }
+
 }
 
 

@@ -44,7 +44,24 @@ import java.util.*
 
 /** Notifications support. */
 object ColorHighlighterNotifications {
+
   private const val CHANNEL: String = "Color Highlighter Notifications"
+
+  /**
+   * Show simple notification
+   *
+   * @param project
+   * @param content
+   */
+  @Suppress("unused")
+  @JvmStatic
+  fun showSimple(
+    project: Project,
+    @NlsContexts.NotificationContent content: String
+  ) {
+    val notification = createNotification("", content, NotificationType.INFORMATION)
+    Notifications.Bus.notify(notification, project)
+  }
 
   /**
    * Show the update notification
@@ -59,19 +76,6 @@ object ColorHighlighterNotifications {
       NotificationType.INFORMATION
     )
     showFullNotification(project, notification)
-  }
-
-  /**
-   * Show simple notification
-   *
-   * @param project
-   * @param content
-   */
-  @Suppress("unused")
-  @JvmStatic
-  fun showSimple(project: Project, content: String) {
-    val notification = createNotification("", content, NotificationType.INFORMATION)
-    Notifications.Bus.notify(notification, project)
   }
 
   /**
@@ -107,7 +111,7 @@ object ColorHighlighterNotifications {
   private fun createNotification(
     @NlsContexts.NotificationTitle title: String,
     @NlsContexts.NotificationContent content: String,
-    type: NotificationType
+    type: NotificationType,
   ): Notification {
     val group = NotificationGroupManager.getInstance().getNotificationGroup(CHANNEL)
     return group.createNotification(title, content, type)
@@ -164,4 +168,5 @@ object ColorHighlighterNotifications {
       }
     }
   }
+
 }

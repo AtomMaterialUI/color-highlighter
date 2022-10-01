@@ -37,6 +37,20 @@ import com.mallowigi.search.parsers.ColorParser
 import com.mallowigi.search.parsers.NSColorParser
 
 class AppCodeVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = AppCodeVisitor()
+
+  override fun getParser(text: String): ColorParser {
+    return when {
+      text.startsWith(NS_COLOR.text) -> NSColorParser()
+      text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
+      text.startsWith(UI_COLOR.text) -> NSColorParser()
+      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+    }
+  }
+
+  override fun shouldParseText(text: String): Boolean = false // todo
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.toString().contains("OCFile") || file.javaClass.toString().contains("SwiftFile")
 
@@ -49,26 +63,4 @@ class AppCodeVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = AppCodeVisitor()
-
-  override fun shouldParseText(text: String): Boolean {
-//    val prefixes = setOf(
-//      NS_COLOR.text,
-//      SWIFT_COLOR.text,
-//      UI_COLOR.text,
-//    )
-//
-//    return prefixes.any { text.startsWith(it) }
-    // todo
-    return false
-  }
-
-  override fun getParser(text: String): ColorParser {
-    return when {
-      text.startsWith(NS_COLOR.text) -> NSColorParser()
-      text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
-      text.startsWith(UI_COLOR.text) -> NSColorParser()
-      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
-    }
-  }
 }

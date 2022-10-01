@@ -34,6 +34,9 @@ import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
 
 class JsonVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = JsonVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is JsonFile
 
   override fun visit(element: PsiElement) {
@@ -43,5 +46,4 @@ class JsonVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = JsonVisitor()
 }

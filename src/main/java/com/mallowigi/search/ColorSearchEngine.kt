@@ -33,9 +33,8 @@ import java.util.regex.Pattern
 
 object ColorSearchEngine {
   // region COLOR_PATTERNS
-  /**
-   * List of color patterns. Currently unused.
-   */
+  /** List of color patterns. Currently unused. */
+  @Suppress("unused")
   private val COLOR_PATTERNS = listOf(
     Pattern.compile(
       "((#\\p{XDigit}{6}\\b)|(#\\p{XDigit}{3}\\b))"
@@ -94,18 +93,20 @@ object ColorSearchEngine {
     ) // aliceblue
   )
   // endregion
+
   /**
    * Try to parse a color using the provided formats
+   *
    * @param text text to parse
-   * @param visitor a Language Visitor to provide additional formats (ex: Color() for Java/Kotlin)
+   * @param visitor a Language Visitor to provide additional formats (ex:
+   *     Color() for Java/Kotlin)
    */
-  fun getColor(text: String, visitor: ColorVisitor): Color? {
-    return try {
-      val normalizedText = text.replace("\"".toRegex(), "").replace("'".toRegex(), "")
-      ColorParserFactory.getParser(normalizedText, visitor).parseColor(normalizedText)
-    } catch (e: RuntimeException) {
-      null
-    }
+  fun getColor(text: String, visitor: ColorVisitor): Color? = try {
+    val normalizedText = text.replace("\"".toRegex(), "").replace("'".toRegex(), "")
+    ColorParserFactory.getParser(normalizedText, visitor).parseColor(normalizedText)
+  } catch (e: RuntimeException) {
+    null
   }
+
 }
 

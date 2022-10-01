@@ -36,6 +36,8 @@ class DartVisitor : ColorVisitor() {
 
   private val allowedTypes = setOf("REGULAR_STRING_PART", "NUMBER")
 
+  override fun clone(): HighlightVisitor = DartVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.dart$".toRegex())
 
@@ -48,5 +50,4 @@ class DartVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = DartVisitor()
 }

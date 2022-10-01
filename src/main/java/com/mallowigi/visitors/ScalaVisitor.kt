@@ -34,6 +34,9 @@ import org.jetbrains.plugins.scala.lang.psi.api.ScalaFile
 import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScIntegerLiteral
 
 class ScalaVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = ScalaVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is ScalaFile
 
   override fun visit(element: PsiElement) {
@@ -44,5 +47,4 @@ class ScalaVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = ScalaVisitor()
 }

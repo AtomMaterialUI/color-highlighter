@@ -34,6 +34,9 @@ import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
 
 class RubyVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = RubyVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is RFile
 
   override fun visit(element: PsiElement) {
@@ -44,5 +47,4 @@ class RubyVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = RubyVisitor()
 }

@@ -28,16 +28,15 @@ package com.mallowigi.colors
 import com.intellij.util.xmlb.annotations.Property
 import java.util.*
 
-/**
- * Serialized form of a list of colors in xml format
- *
- */
+/** Serialized form of a list of colors in xml format. */
 internal class Colors {
-  @Property
-  val svgColors: Set<SingleColor>? = null
-    get() = field?.let { Collections.unmodifiableSet(it) }
 
   @Property
   val javaColors: Set<SingleColor>? = null
     get() = field?.let { Collections.unmodifiableSet(it) }
+
+  @Property
+  val svgColors: Set<SingleColor>? = null
+    get() = field?.let { Collections.unmodifiableSet(it) }
+
 }

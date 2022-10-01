@@ -28,14 +28,16 @@ package com.mallowigi
 import com.intellij.openapi.application.ApplicationManager
 
 class FeatureLoader {
-  var isRiderEnabled: Boolean = false
+
   var isJavaEnabled: Boolean = false
   var isKotlinEnabled: Boolean = false
   var isMarkdownEnabled: Boolean = false
+  var isRiderEnabled: Boolean = false
 
   companion object {
     @JvmStatic
     val instance: FeatureLoader
       get() = ApplicationManager.getApplication().getService(FeatureLoader::class.java)
   }
+
 }

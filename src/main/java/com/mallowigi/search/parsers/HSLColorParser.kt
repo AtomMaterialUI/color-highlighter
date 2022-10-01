@@ -30,16 +30,12 @@ import com.mallowigi.utils.ColorUtils
 import java.awt.Color
 import java.util.*
 
-/**
- * Parse text in the form `hsl(h,s,l,[,a])`
- *
- */
+/** Parse text in the form `hsl(h,s,l,[,a])` */
 class HSLColorParser : ColorParser {
+
   override fun parseColor(text: String?): Color? = parseHSL(text!!)
 
-  /**
-   * Parse a color in the hsl[a](h, s, l[, a]) format
-   */
+  /** Parse a color in the hsl[a](h, s, l[, a]) format. */
   private fun parseHSL(text: String): Color? {
     val colorData = ColorData()
     colorData.run {
@@ -60,5 +56,6 @@ class HSLColorParser : ColorParser {
       return ColorUtils.getHSLa(floatHue.toInt(), floatSaturation.toInt(), floatBrightness.toInt(), floatAlpha)
     }
   }
+
 }
 

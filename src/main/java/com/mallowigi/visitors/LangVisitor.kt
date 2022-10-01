@@ -29,6 +29,8 @@ package com.mallowigi.visitors
 import com.mallowigi.search.parsers.ColorParser
 
 interface LangVisitor {
-  fun shouldParseText(text: String): Boolean
   fun getParser(text: String): ColorParser?
+
+  fun shouldParseText(text: String): Boolean
+
 }

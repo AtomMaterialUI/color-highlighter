@@ -34,6 +34,9 @@ import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
 import com.mallowigi.search.ColorSearchEngine
 
 class PhpVisitor : ColorVisitor() {
+
+  override fun clone(): HighlightVisitor = PhpVisitor()
+
   override fun suitableForFile(file: PsiFile): Boolean = file is PhpFile
 
   override fun visit(element: PsiElement) {
@@ -44,5 +47,4 @@ class PhpVisitor : ColorVisitor() {
     color?.let { highlight(element, it) }
   }
 
-  override fun clone(): HighlightVisitor = PhpVisitor()
 }

@@ -30,16 +30,12 @@ import com.mallowigi.utils.ColorUtils
 import java.awt.Color
 import java.util.*
 
-/**
- * Parse text in the form `rgb(r,g,b[,a])`
- *
- */
+/** Parse text in the form `rgb(r,g,b[,a])` */
 class RGBColorParser : ColorParser {
+
   override fun parseColor(text: String?): Color? = parseRGB(text!!)
 
-  /**
-   * Parse a color in the rgb[a](r, g, b[, a]) format
-   */
+  /** Parse a color in the rgb[a](r, g, b[, a]) format. */
   private fun parseRGB(text: String): Color? {
     val colorData = ColorData()
     colorData.run {
@@ -65,5 +61,6 @@ class RGBColorParser : ColorParser {
     }
 
   }
+
 }
 
