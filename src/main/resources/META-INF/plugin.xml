@@ -56,6 +56,10 @@
 
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
+  <depends>com.intellij.modules.androidstudio</depends>
+  <depends>org.jetbrains.android</depends>
+  <incompatible-with>com.intellij.modules.ultimate</incompatible-with>
+
   <extensions defaultExtensionNs="com.intellij">
     <applicationService serviceImplementation="com.mallowigi.FeatureLoader"/>
 
