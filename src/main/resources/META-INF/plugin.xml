@@ -51,6 +51,7 @@
   <depends optional="true" config-file="withMarkdown.xml">org.intellij.plugins.markdown</depends>
   <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
   <depends optional="true" config-file="withDart.xml">Dart</depends>
+  <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
 
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 

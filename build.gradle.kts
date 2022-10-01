@@ -53,7 +53,6 @@ version = properties("pluginVersion")
 
 val depsDartVersion: String = properties("depsDartVersion")
 val depsGoVersion: String = properties("depsGoVersion")
-val depsKotlinVersion: String = properties("depsKotlinVersion")
 val depsPhpVersion: String = properties("depsPhpVersion")
 val depsPyVersion: String = properties("depsPyVersion")
 val depsRubyVersion: String = properties("depsRubyVersion")
