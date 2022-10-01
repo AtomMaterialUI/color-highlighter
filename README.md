@@ -42,6 +42,8 @@
   - C#
   - Markdown
   - Dart (**NEW**)
+  - SQL (**NEW**)
+  - R (**NEW**)
   - Text (**NEW**, *Experimental*)
 
 - Ability to preview color in the gutter
