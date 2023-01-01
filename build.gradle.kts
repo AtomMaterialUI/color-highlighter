@@ -73,7 +73,7 @@ dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
   implementation("com.jgoodies:jgoodies-forms:1.9.0")
   implementation("com.thoughtworks.xstream:xstream:1.4.19")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
 }
 
 // Configure gradle-intellij-plugin plugin.
