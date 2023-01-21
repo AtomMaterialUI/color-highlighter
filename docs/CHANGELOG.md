@@ -1,25 +1,25 @@
 # Changelog
 
-## [Unreleased]
-### Features
+---
+
+## 15.0.0
 
 ### Fixes
 
-### Other
-
-### Bump
+- Support for 2023.1
 
 ## 14.0.0
----
 
-## 14.0.0
 ### Features
+
 - Support for **R** and **SQL** Languages
 
 ### Fixes
+
 - Fix the issue where the "_Use rgba instead of argb_" was doing the opposite
 
 ## 13.0.0
+
 ### Fixes
 - Support for 2022.3
 
