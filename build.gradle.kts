@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,17 @@ fun properties(key: String) = project.findProperty(key).toString()
 
 fun fileProperties(key: String) = project.findProperty(key).toString().let { if (it.isNotEmpty()) file(it) else null }
 
+fun environment(key: String) = providers.environmentVariable(key)
 
 plugins {
   // Java support
   id("java")
   // Kotlin support
-  id("org.jetbrains.kotlin.jvm") version "1.7.22"
+  id("org.jetbrains.kotlin.jvm") version "1.9.0"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-  id("org.jetbrains.intellij") version "1.12.0"
+  id("org.jetbrains.intellij") version "1.15.0"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-  id("org.jetbrains.changelog") version "2.0.0"
+  id("org.jetbrains.changelog") version "2.1.2"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
   id("io.gitlab.arturbosch.detekt") version "1.22.0"
   // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
@@ -72,8 +73,8 @@ repositories {
 dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
   implementation("com.jgoodies:jgoodies-forms:1.9.0")
-  implementation("com.thoughtworks.xstream:xstream:1.4.19")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22")
+  implementation("com.thoughtworks.xstream:xstream:1.4.20")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
 }
 
 // Configure gradle-intellij-plugin plugin.

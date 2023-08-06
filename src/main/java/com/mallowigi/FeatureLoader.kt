@@ -31,7 +31,8 @@ class FeatureLoader {
 
   var isJavaEnabled: Boolean = false
   var isKotlinEnabled: Boolean = false
-  var isMarkdownEnabled: Boolean = false
+  var isMa
+  rkdownEnabled: Boolean = false
   var isRiderEnabled: Boolean = false
 
   companion object {
