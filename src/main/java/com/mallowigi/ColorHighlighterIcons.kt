@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ package com.mallowigi
 import com.intellij.ui.IconManager
 import javax.swing.Icon
 
-fun load(path: String): Icon = IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java)
+fun load(path: String): Icon = IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java.classLoader)
 
 object ColorHighlighterIcons {
   object Gutter {

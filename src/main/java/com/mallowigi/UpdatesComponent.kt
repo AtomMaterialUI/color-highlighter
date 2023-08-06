@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,18 +26,17 @@
 package com.mallowigi
 
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.StartupActivity
+import com.intellij.openapi.startup.ProjectActivity
 import com.mallowigi.config.home.ColorHighlighterConfig
 import com.mallowigi.utils.ColorHighlighterNotifications
 import com.mallowigi.utils.getVersion
 
-class UpdatesComponent : StartupActivity.Background {
+class UpdatesComponent : ProjectActivity {
 
   private var config: ColorHighlighterConfig = ColorHighlighterConfig.instance
 
-  override fun runActivity(project: Project) {
-    config = ColorHighlighterConfig.instance
-    projectOpened(project)
+  override suspend fun execute(project: Project) {
+    runActivity(project)
   }
 
   private fun projectOpened(project: Project) {
@@ -49,6 +48,11 @@ class UpdatesComponent : StartupActivity.Background {
     if (updated) {
       ColorHighlighterNotifications.showUpdate(project)
     }
+  }
+
+  private fun runActivity(project: Project) {
+    config = ColorHighlighterConfig.instance
+    projectOpened(project)
   }
 
 }

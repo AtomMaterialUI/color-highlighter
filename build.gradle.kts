@@ -137,7 +137,7 @@ tasks {
     }
     withType<KotlinCompile> {
       kotlinOptions.jvmTarget = it
-      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check", "-Xjvm-default=enable")
+      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check")
     }
   }
 

@@ -28,7 +28,7 @@ package com.mallowigi.gutter
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.markup.GutterIconRenderer
 import com.intellij.openapi.ide.CopyPasteManager
-import com.intellij.ui.ColorChooser
+import com.intellij.ui.ColorChooserService
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.scale.JBUIScale
 import com.intellij.util.ui.ColorIcon
@@ -80,7 +80,7 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
       override fun actionPerformed(e: AnActionEvent) {
         val editor = e.getData(CommonDataKeys.EDITOR) ?: return
         val currentColor = color ?: return
-        val newColor = ColorChooser.chooseColor(
+        val newColor = ColorChooserService.instance.showDialog(
           editor.project,
           editor.component,
           message("replace.color"),

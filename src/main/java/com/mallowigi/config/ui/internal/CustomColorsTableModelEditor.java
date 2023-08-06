@@ -238,8 +238,25 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
         final Object colorValue = model.getValueAt(row, 1);
         final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
 
-        ColorPicker.showColorPickerPopup(null, modelColor,
-          (color, source) -> ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color)));
+        ColorChooserService.getInstance().showDialog(
+          event.getComponent(),
+          "Choose Color",
+          modelColor,
+          false,
+          List.of(
+            new ColorPickerListener() {
+              @Override
+              public void colorChanged(final Color color) {
+                ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color));
+              }
+
+              @Override
+              public void closed(@Nullable Color color) {
+
+              }
+            })
+        );
+
         return true;
       }
       return false;
