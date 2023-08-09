@@ -24,6 +24,9 @@
  *
  */
 
+let foo = '#f8c'
+
+
 {
   colors: [
     {

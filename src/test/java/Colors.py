@@ -352,3 +352,5 @@ class Colors:
             "pico": "192a56",
             "electromagnetic": "2f3640"
         }
+
+WHITE = (255,10,10)
