@@ -147,9 +147,9 @@ object ColorUtils {
   /** Parse rgb in the hex format #123. */
   fun getShortRGB(hex: String): Color {
     val rgb = normalizeRGB(hex, 3)
-    val r = rgb.substring(0, 1).toInt(16)
-    val g = rgb.substring(1, 2).toInt(16)
-    val b = rgb.substring(2, 3).toInt(16)
+    val r = rgb.substring(0, 1).repeat(2).toInt(16)
+    val g = rgb.substring(1, 2).repeat(2).toInt(16)
+    val b = rgb.substring(2, 3).repeat(2).toInt(16)
     return Color(r, g, b)
   }
 
