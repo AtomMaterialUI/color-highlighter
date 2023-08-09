@@ -49,7 +49,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   var isHexDetectEnabled: Boolean = true
 
   @Property
-  var isRgbaEnabled: Boolean = false
+  var isRgbaEnabled: Boolean = true
 
   @Property
   var isJavaColorCtorEnabled: Boolean = true
@@ -74,7 +74,6 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
 
   @Property
   var version: String = "7.0.0"
-
 
   override fun getState(): ColorHighlighterConfig = this
 
@@ -101,7 +100,7 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   override fun resetSettings() {
     isEnabled = true
     isHexDetectEnabled = true
-    isRgbaEnabled = false
+    isRgbaEnabled = true
     isJavaColorCtorEnabled = true
     isJavaColorMethodEnabled = true
     isKotlinColorCtorEnabled = true
@@ -200,7 +199,6 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
 
   fun isCssColorEnabledChanged(isEnabled: Boolean): Boolean =
     WebEditorOptions.getInstance().isShowCssInlineColorPreview != isEnabled
-
 
   companion object {
     @JvmStatic
