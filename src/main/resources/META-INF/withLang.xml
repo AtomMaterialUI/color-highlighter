@@ -26,6 +26,7 @@
 
 <idea-plugin>
   <extensions defaultExtensionNs="com.intellij">
+    <highlightVisitor implementation="com.mallowigi.visitors.XmlVisitor"/>
     <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
     <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>
     <codeInsight.lineMarkerProvider language=""
