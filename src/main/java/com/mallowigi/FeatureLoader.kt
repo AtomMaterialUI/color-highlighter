@@ -26,9 +26,11 @@
 package com.mallowigi
 
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 
+@Service(Service.Level.APP)
 class FeatureLoader {
-
   var isJavaEnabled: Boolean = false
   var isKotlinEnabled: Boolean = false
   var isMarkdownEnabled: Boolean = false
@@ -36,8 +38,6 @@ class FeatureLoader {
 
   companion object {
     @JvmStatic
-    val instance: FeatureLoader
-      get() = ApplicationManager.getApplication().getService(FeatureLoader::class.java)
+    val instance: FeatureLoader by lazy { service() }
   }
-
 }

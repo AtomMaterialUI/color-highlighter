@@ -57,14 +57,12 @@
   <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="com.mallowigi.FeatureLoader"/>
-
-    <applicationService serviceImplementation="com.mallowigi.colors.PredefinedColors"/>
     <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"/>
 
     <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
                              groupId="editor"
+                             key="ColorHighlighterForm.title"
                              dynamic="true"
                              id="ColorHighlighterConfig"/>
 
@@ -72,11 +70,11 @@
     <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
                              groupId="editor"
                              dynamic="true"
+                             key="CustomColorsForm.title"
                              parentId="ColorHighlighterConfig"
                              id="CustomColorsConfig"/>
 
     <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
-
   </extensions>
 
   <description><![CDATA[

@@ -61,7 +61,5 @@ class ColorHighlighterConfigurable : ConfigurableBase<ColorHighlighterSettingsFo
   companion object {
     @NonNls
     private const val ID = "ColorHighlighterConfig"
-
   }
-
 }

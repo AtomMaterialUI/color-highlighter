@@ -29,10 +29,7 @@ package com.mallowigi.config.home
 import com.intellij.application.options.editor.WebEditorOptions
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.PersistentStateComponent
-import com.intellij.openapi.components.SettingsCategory
-import com.intellij.openapi.components.State
-import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.*
 import com.intellij.util.xmlb.XmlSerializerUtil
 import com.intellij.util.xmlb.annotations.Property
 import com.mallowigi.config.SettingsConfig
@@ -201,12 +198,12 @@ class ColorHighlighterConfig : PersistentStateComponent<ColorHighlighterConfig>,
   }
   //endregion
 
-  fun isCssColorEnabledChanged(isEnabled: Boolean): Boolean = WebEditorOptions.getInstance().isShowCssInlineColorPreview != isEnabled
+  fun isCssColorEnabledChanged(isEnabled: Boolean): Boolean =
+    WebEditorOptions.getInstance().isShowCssInlineColorPreview != isEnabled
 
 
   companion object {
     @JvmStatic
-    val instance: ColorHighlighterConfig
-      get() = ApplicationManager.getApplication().getService(ColorHighlighterConfig::class.java)
+    val instance: ColorHighlighterConfig by lazy { service() }
   }
 }

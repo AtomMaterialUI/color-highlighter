@@ -26,6 +26,8 @@
 package com.mallowigi.colors
 
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.thoughtworks.xstream.XStream
 import java.awt.Color
 import java.util.*
@@ -34,6 +36,7 @@ import java.util.*
  * PredefinedColors: This is the service containing the predefined colors
  * from the XML file.
  */
+@Service(Service.Level.APP)
 class PredefinedColors {
   private lateinit var javaColors: MutableMap<Int, String>
   private lateinit var javaNames: MutableMap<String, Int>
@@ -141,8 +144,7 @@ class PredefinedColors {
     private const val MASK = 0xffffff
 
     @JvmStatic
-    val instance: PredefinedColors
-      get() = ApplicationManager.getApplication().getService(PredefinedColors::class.java)
+    val instance: PredefinedColors by lazy { service() }
   }
 
 }
