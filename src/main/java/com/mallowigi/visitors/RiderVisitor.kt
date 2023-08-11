@@ -30,7 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorPrefixes.COLOR_FROM_ARGB
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorParser
@@ -48,7 +48,7 @@ class RiderVisitor : ColorVisitor() {
   }
 
   override fun shouldParseText(text: String): Boolean {
-    if (ColorHighlighterConfig.instance.isRiderColorMethodEnabled) return text.contains(COLOR_FROM_ARGB.text)
+    if (ColorHighlighterState.instance.isRiderColorMethodEnabled) return text.contains(COLOR_FROM_ARGB.text)
 
     return false
   }

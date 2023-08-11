@@ -29,7 +29,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.mallowigi.config.home.ColorHighlighterConfig.Companion.instance
+import com.mallowigi.config.home.ColorHighlighterState.Companion.instance
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
 

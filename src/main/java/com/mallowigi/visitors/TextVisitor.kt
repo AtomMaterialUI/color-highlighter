@@ -29,7 +29,7 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorSearchEngine
 
 class TextVisitor : ColorVisitor() {
@@ -40,7 +40,7 @@ class TextVisitor : ColorVisitor() {
     file.name.matches(".*\\.(txt|log|rst)$".toRegex())
 
   override fun visit(element: PsiElement) {
-    if (!ColorHighlighterConfig.instance.isTextEnabled) return
+    if (!ColorHighlighterState.instance.isTextEnabled) return
     val value = element.text
     if (value is String) splitText(value)
   }
@@ -61,4 +61,3 @@ class TextVisitor : ColorVisitor() {
   }
 
 }
-

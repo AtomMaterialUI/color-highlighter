@@ -30,7 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorSearchEngine
 
 class MarkdownVisitor : ColorVisitor() {
@@ -41,13 +41,13 @@ class MarkdownVisitor : ColorVisitor() {
     file.name.matches(".*\\.(md|mdx)$".toRegex())
 
   override fun visit(element: PsiElement) {
-    if (!ColorHighlighterConfig.instance.isMarkdownEnabled) return
+    if (!ColorHighlighterState.instance.isMarkdownEnabled) return
     val type = PsiUtilCore.getElementType(element).toString()
     if (type != "Markdown:Markdown:TEXT") return
 
     val value = element.text
     if (value is String) {
-      val color = ColorSearchEngine.getColor((value as String?)!!, this)
+      val color = ColorSearchEngine.getColor((value as? String)!!, this)
       color?.let { highlight(element, it) }
     }
   }

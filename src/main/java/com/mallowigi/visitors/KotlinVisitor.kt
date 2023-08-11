@@ -30,7 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorPrefixes.COLOR_METHOD
 import com.mallowigi.search.ColorPrefixes.KT_COLOR
 import com.mallowigi.search.ColorSearchEngine
@@ -48,7 +48,7 @@ class KotlinVisitor : ColorVisitor() {
     "REFERENCE_EXPRESSION"
   )
 
-  private val config = ColorHighlighterConfig.instance
+  private val config = ColorHighlighterState.instance
 
   override fun clone(): HighlightVisitor = KotlinVisitor()
 

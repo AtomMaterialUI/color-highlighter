@@ -30,7 +30,7 @@ package com.mallowigi.utils
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import java.awt.Color
 import kotlin.math.max
 import kotlin.math.min
@@ -136,7 +136,7 @@ object ColorUtils {
 
   fun getRGBA(hex: String): Color {
     val rgb = normalizeRGB(hex, 8)
-    val rgbaEnabled = ColorHighlighterConfig.instance.isRgbaEnabled
+    val rgbaEnabled = ColorHighlighterState.instance.isRgbaEnabled
 
     return when {
       !rgbaEnabled -> getArgb(rgb)

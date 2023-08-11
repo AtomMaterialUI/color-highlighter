@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,43 +23,200 @@
  *
  *
  */
+
 package com.mallowigi.config.home
 
-import com.intellij.openapi.options.SearchableConfigurable
-import com.mallowigi.ColorHighlighterBundle
-import com.mallowigi.config.ConfigurableBase
-import org.jetbrains.annotations.Nls
+import com.intellij.openapi.components.service
+import com.intellij.openapi.options.BoundSearchableConfigurable
+import com.intellij.openapi.ui.DialogPanel
+import com.intellij.openapi.ui.Messages
+import com.intellij.ui.components.JBCheckBox
+import com.intellij.ui.dsl.builder.*
+import com.intellij.ui.layout.selected
+import com.mallowigi.ColorHighlighterBundle.message
+import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
+import com.mallowigi.FeatureLoader
 import org.jetbrains.annotations.NonNls
-import java.util.*
 
-/** Configurable for Custom Associations. */
-class ColorHighlighterConfigurable : ConfigurableBase<ColorHighlighterSettingsForm, ColorHighlighterConfig>(),
-  SearchableConfigurable {
-  override val config: ColorHighlighterConfig
-    get() = ColorHighlighterConfig.instance
-
-  @Nls
-  override fun getDisplayName(): String = ColorHighlighterBundle.message("ColorHighlighterForm.title")
+class ColorHighlighterConfigurable : BoundSearchableConfigurable(
+  message("ColorHighlighterForm.title"),
+  "com.mallowigi.config.home.ColorHighlighterConfigurable",
+) {
+  private lateinit var main: DialogPanel
+  private lateinit var javaPanel: CollapsibleRow
+  private lateinit var kotlinPanel: CollapsibleRow
+  private lateinit var markdownPanel: CollapsibleRow
+  private lateinit var textPanel: CollapsibleRow
+  private lateinit var riderPanel: CollapsibleRow
+  private val settings = ColorHighlighterState.instance
+  private val settingsClone = ColorHighlighterState.instance.clone()
 
   override fun getId(): String = ID
 
-  override fun createForm(): ColorHighlighterSettingsForm = ColorHighlighterSettingsForm()
+  @Suppress("Detekt.LongMethod")
+  private fun initComponents() {
+    lateinit var enabledCheckbox: JBCheckBox
 
-  override fun setFormState(form: ColorHighlighterSettingsForm?, config: ColorHighlighterConfig) {
-    form?.setFormState(config)
+    main = panel {
+      group(message("ColorHighlighterSettingsForm.globalSeparator.text")) {
+        row {
+          icon(MAIN_ICON)
+            .gap(RightGap.SMALL)
+          enabledCheckbox = checkBox(message("ColorHighlighterSettingsForm.enableCheckbox.text"))
+            .bindSelected(settingsClone::isEnabled)
+            .gap(RightGap.SMALL)
+            .component
+        }
+
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.colorParsingCheckbox.text"))
+            .bindSelected(settingsClone::isHexDetectEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorParsingCheckbox.toolTipText"))
+
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.rgbaCheckbox.text"))
+            .bindSelected(settingsClone::isRgbaEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.rgbaCheckbox.toolTipText"))
+
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.cssCheckbox.text"))
+            .bindSelected(settingsClone::isCssColorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.cssCheckbox.toolTipText"))
+      }
+
+      markdownPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.markdownSeparator.text")) {
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.markdownCheckbox.text"))
+            .bindSelected(settingsClone::isMarkdownEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.markdownCheckbox.toolTipText"))
+      }
+
+      javaPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.javaSeparator.text")) {
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.colorCtorCheckbox.text"))
+            .bindSelected(settingsClone::isJavaColorCtorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorCtorCheckbox.toolTipText"))
+
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.colorMethodCheckbox.text"))
+            .bindSelected(settingsClone::isJavaColorMethodEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorMethodCheckbox.toolTipText"))
+      }
+
+      kotlinPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.kotlinSeparator.text")) {
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.text"))
+            .bindSelected(settingsClone::isKotlinColorCtorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.toolTipText"))
+
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.text"))
+            .bindSelected(settingsClone::isKotlinColorMethodEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"))
+      }
+
+      riderPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.riderSeparator.text")) {
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.riderColorMethodCheckbox.text"))
+            .bindSelected(settingsClone::isRiderColorMethodEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.riderColorMethodCheckbox.toolTipText"))
+      }
+
+      textPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.textPanelSeparator.text")) {
+        row {
+          checkBox(message("ColorHighlighterSettingsForm.textCheckbox.text"))
+            .bindSelected(settingsClone::isTextEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.textCheckbox.toolTipText"))
+      }
+
+      row {
+        button(message("ColorHighlighterSettingsForm.resetDefaultsButton.text")) { resetSettings() }
+          .resizableColumn()
+          .align(AlignX.RIGHT)
+      }
+    }
   }
 
-  override fun doApply(form: ColorHighlighterSettingsForm?, config: ColorHighlighterConfig): Unit =
-    config.applySettings(form!!)
+  override fun createPanel(): DialogPanel {
+    initComponents()
+    toggleFeatures()
+    return main
+  }
 
-  override fun checkModified(form: ColorHighlighterSettingsForm?, config: ColorHighlighterConfig): Boolean =
-    checkFormModified(form!!, config)
+  override fun isModified(): Boolean {
+    if (super.isModified()) return true
+    return settings != settingsClone
+  }
 
-  private fun checkFormModified(form: ColorHighlighterSettingsForm, config: ColorHighlighterConfig): Boolean =
-    Objects.requireNonNull(form)!!.isModified(config)
+  private fun resetSettings() {
+    if (Messages.showOkCancelDialog(
+        message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation"),
+        message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.title"),
+        message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.ok"),
+        message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.cancel"),
+        Messages.getQuestionIcon(),
+      ) == Messages.OK) {
+      settings.resetSettings()
+      main.reset()
+    }
+  }
+
+  override fun apply() {
+    super.apply()
+    settings.apply(settingsClone)
+  }
+
+  private fun toggleFeatures() {
+    val featureLoader = FeatureLoader.instance
+    if (!featureLoader.isJavaEnabled) {
+      javaPanel.visible(false)
+    }
+    if (!featureLoader.isKotlinEnabled) {
+      kotlinPanel.visible(false)
+    }
+    if (!featureLoader.isRiderEnabled) {
+      riderPanel.visible(false)
+    }
+    if (!featureLoader.isMarkdownEnabled) {
+      markdownPanel.visible(false)
+    }
+  }
 
   companion object {
     @NonNls
-    private const val ID = "ColorHighlighterConfig"
+    const val ID = "com.mallowigi.config.home.ColorHighlighterConfigurable"
+
+    @JvmStatic
+    val instance: ColorHighlighterConfigurable by lazy { service() }
   }
 }

@@ -27,11 +27,11 @@
 package com.mallowigi.listeners
 
 import com.intellij.util.messages.Topic
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 
 fun interface ColorHighlighterNotifier {
 
-  fun configChanged(config: ColorHighlighterConfig?)
+  fun configChanged(config: ColorHighlighterState?)
 
   companion object {
     @Topic.AppLevel

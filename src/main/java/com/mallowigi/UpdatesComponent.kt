@@ -27,17 +27,19 @@ package com.mallowigi
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
-import com.mallowigi.config.home.ColorHighlighterConfig
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.utils.ColorHighlighterNotifications
 import com.mallowigi.utils.getVersion
 
+/**
+ * Represents a component responsible for handling updates in the ColorHighlighter plugin.
+ *
+ * This class extends the [ProjectActivity] class.
+ */
 class UpdatesComponent : ProjectActivity {
+  private var config: ColorHighlighterState = ColorHighlighterState.instance
 
-  private var config: ColorHighlighterConfig = ColorHighlighterConfig.instance
-
-  override suspend fun execute(project: Project) {
-    runActivity(project)
-  }
+  override suspend fun execute(project: Project) = onProjectOpened(project)
 
   private fun projectOpened(project: Project) {
     // Show new version notification
@@ -50,9 +52,8 @@ class UpdatesComponent : ProjectActivity {
     }
   }
 
-  private fun runActivity(project: Project) {
-    config = ColorHighlighterConfig.instance
+  private fun onProjectOpened(project: Project) {
+    config = ColorHighlighterState.instance
     projectOpened(project)
   }
-
 }

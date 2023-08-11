@@ -38,4 +38,8 @@ object ColorHighlighterIcons {
     val Inline: Icon = load("icons/gutter/inline.svg")
   }
 
+  object Settings {
+    val MAIN_ICON: Icon = load("icons/settings/icon.svg")
+  }
+
 }
