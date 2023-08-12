@@ -68,6 +68,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isMarkupEnabled: Boolean by property(true)
 
+    var highlightingStyle: HighlightingStyles by enum(HighlightingStyles.BACKGROUND)
+
     var version: String? by string(VERSION)
   }
 
@@ -155,6 +157,12 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
       WebEditorOptions.getInstance().isShowCssInlineColorPreview = value
     }
 
+  var highlightingStyle: HighlightingStyles
+    get() = state.highlightingStyle
+    set(value) {
+      state.highlightingStyle = value
+    }
+
   var version: String?
     get() = state.version
     set(value) {
@@ -176,6 +184,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isTextEnabled = false
     this.isMarkdownEnabled = true
     this.isMarkupEnabled = true
+    this.highlightingStyle = HighlightingStyles.BACKGROUND
     this.version = VERSION
 
     updateEditors()
@@ -211,6 +220,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     clone.isMarkdownEnabled = this.isMarkdownEnabled
     clone.isMarkupEnabled = this.isMarkupEnabled
     clone.isCssColorEnabled = this.isCssColorEnabled
+    clone.highlightingStyle = this.highlightingStyle
     clone.version = this.version
     return clone
   }
@@ -230,6 +240,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isMarkdownEnabled = state.isMarkdownEnabled
     this.isMarkupEnabled = state.isMarkupEnabled
     this.isCssColorEnabled = state.isCssColorEnabled
+    this.highlightingStyle = state.highlightingStyle
 
     updateEditors()
     this.fireChanged()
@@ -256,6 +267,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     if (isMarkdownEnabled != other.isMarkdownEnabled) return false
     if (isMarkupEnabled != other.isMarkupEnabled) return false
     if (isCssColorEnabled != other.isCssColorEnabled) return false
+    if (highlightingStyle != other.highlightingStyle) return false
     if (version != other.version) return false
     return true
   }
@@ -275,6 +287,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     result = 31 * result + isTextEnabled.hashCode()
     result = 31 * result + isMarkdownEnabled.hashCode()
     result = 31 * result + isMarkupEnabled.hashCode()
+    result = 31 * result + highlightingStyle.hashCode()
     result = 31 * result + version.hashCode()
     return result
   }

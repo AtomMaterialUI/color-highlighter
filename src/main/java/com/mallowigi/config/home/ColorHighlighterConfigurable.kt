@@ -30,6 +30,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.Messages
+import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.layout.selected
@@ -48,6 +49,9 @@ import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
 import org.jetbrains.annotations.NonNls
+import javax.swing.DefaultComboBoxModel
+import javax.swing.Icon
+import javax.swing.JList
 
 class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   message("ColorHighlighterForm.title"),
@@ -68,6 +72,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   @Suppress("Detekt.LongMethod")
   private fun initComponents() {
     lateinit var enabledCheckbox: JBCheckBox
+    val arrowsRenderer = arrowsRenderer()
+
 
     main = panel {
       group(message("ColorHighlighterSettingsForm.globalSeparator.text")) {
@@ -130,6 +136,14 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
             .gap(RightGap.SMALL)
             .component
         }.rowComment(message("ColorHighlighterSettingsForm.cssCheckbox.toolTipText"))
+
+        row(message("ColorHighlighterSettingsForm.highlightingStyle.text")) {
+          val model = DefaultComboBoxModel(HighlightingStyles.values())
+          comboBox(model, arrowsRenderer)
+            .bindItem(settingsClone::highlightingStyle) {
+              settingsClone.highlightingStyle = it ?: HighlightingStyles.BACKGROUND
+            }
+        }.rowComment(message("ColorHighlighterSettingsForm.highlightingStyle.toolTipText"))
       }
 
       markdownPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.markdownSeparator.text")) {
@@ -275,6 +289,24 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     if (!featureLoader.isMarkdownEnabled) {
       markdownPanel.visible(false)
     }
+  }
+
+  private fun arrowsRenderer(): SimpleListCellRenderer<HighlightingStyles?> {
+    val renderer = object : SimpleListCellRenderer<HighlightingStyles?>() {
+      override fun customize(
+        list: JList<out HighlightingStyles?>,
+        value: HighlightingStyles?,
+        index: Int,
+        selected: Boolean,
+        hasFocus: Boolean,
+      ) {
+        if (value == null) return
+        val baseIcon: Icon = value.icon
+        icon = baseIcon
+        text = value.type
+      }
+    }
+    return renderer
   }
 
   companion object {

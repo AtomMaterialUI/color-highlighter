@@ -53,4 +53,12 @@ object ColorHighlighterIcons {
     val TEXT_ICON: Icon = load("icons/settings/text.svg")
   }
 
+  object Highlighting {
+    val BACKGROUND_ICON: Icon = load("icons/highlighting/background.svg")
+    val BORDER_ICON: Icon = load("icons/highlighting/border.svg")
+    val FOREGROUND_ICON: Icon = load("icons/highlighting/foreground.svg")
+    val UNDERLINE_ICON: Icon = load("icons/highlighting/underline.svg")
+    val INLINE_ICON: Icon = load("icons/highlighting/inline.svg")
+  }
+
 }

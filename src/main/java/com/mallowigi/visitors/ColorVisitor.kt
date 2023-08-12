@@ -30,7 +30,6 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.config.home.ColorHighlighterState.Companion.instance
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
@@ -42,7 +41,7 @@ import java.awt.Color
 abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   private var highlightInfoHolder: HighlightInfoHolder? = null
-  internal val config = ColorHighlighterState.instance
+  internal val config = instance
 
   /**
    * Highlight the element with the given color
