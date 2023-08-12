@@ -25,11 +25,13 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.MarkdownVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.MarkdownVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.MarkdownInlineInlayProvider"
+                                   language="Markdown"/>
+    </extensions>
 
-  <applicationListeners>
-    <listener class="com.mallowigi.startup.MarkdownVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
-  </applicationListeners>
+    <applicationListeners>
+        <listener class="com.mallowigi.startup.MarkdownVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 </idea-plugin>
