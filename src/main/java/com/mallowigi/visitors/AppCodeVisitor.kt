@@ -40,16 +40,14 @@ class AppCodeVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = AppCodeVisitor()
 
-  override fun getParser(text: String): ColorParser {
-    return when {
-      text.startsWith(NS_COLOR.text) -> NSColorParser()
-      text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
-      text.startsWith(UI_COLOR.text) -> NSColorParser()
-      else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
-    }
+  override fun getParser(text: String): ColorParser = when {
+    text.startsWith(NS_COLOR.text) -> NSColorParser()
+    text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
+    text.startsWith(UI_COLOR.text) -> NSColorParser()
+    else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
   }
 
-  override fun shouldParseText(text: String): Boolean = false // todo
+  override fun shouldParseText(text: String): Boolean = true
 
   override fun suitableForFile(file: PsiFile): Boolean =
     file.toString().contains("OCFile") || file.javaClass.toString().contains("SwiftFile")

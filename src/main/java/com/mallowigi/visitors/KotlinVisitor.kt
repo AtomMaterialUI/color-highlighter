@@ -30,7 +30,6 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
-import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorPrefixes.COLOR_METHOD
 import com.mallowigi.search.ColorPrefixes.KT_COLOR
 import com.mallowigi.search.ColorSearchEngine
@@ -48,8 +47,6 @@ class KotlinVisitor : ColorVisitor() {
     "REFERENCE_EXPRESSION"
   )
 
-  private val config = ColorHighlighterState.instance
-
   override fun clone(): HighlightVisitor = KotlinVisitor()
 
   override fun getParser(text: String): ColorParser = when {
@@ -58,21 +55,10 @@ class KotlinVisitor : ColorVisitor() {
     else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
   }
 
-  override fun shouldParseText(text: String): Boolean {
-    // todo add settings for those
-//    val prefixes = setOf(
-//      JBCOLOR.text,
-//      COLOR_ARGB.text,
-//      COLOR_RGB.text
-//    )
-
-    return when {
-      config.isKotlinColorCtorEnabled -> text.startsWith(KT_COLOR.text)
-      config.isKotlinColorMethodEnabled -> text.startsWith(COLOR_METHOD.text)
-      else -> false
-    }
-
-//    return prefixes.any { text.startsWith(it) }
+  override fun shouldParseText(text: String): Boolean = when {
+    config.isKotlinColorCtorEnabled -> text.startsWith(KT_COLOR.text)
+    config.isKotlinColorMethodEnabled -> text.startsWith(COLOR_METHOD.text)
+    else -> false
   }
 
   override fun suitableForFile(file: PsiFile): Boolean = file is KtFile

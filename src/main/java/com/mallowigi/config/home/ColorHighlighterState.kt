@@ -66,6 +66,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isMarkdownEnabled: Boolean by property(true)
 
+    var isMarkupEnabled: Boolean by property(true)
+
     var version: String? by string(VERSION)
   }
 
@@ -141,6 +143,12 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
       state.isMarkdownEnabled = value
     }
 
+  var isMarkupEnabled: Boolean
+    get() = state.isMarkupEnabled
+    set(value) {
+      state.isMarkupEnabled = value
+    }
+
   var isCssColorEnabled: Boolean
     get() = WebEditorOptions.getInstance().isShowCssInlineColorPreview
     set(value) {
@@ -167,6 +175,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isCssColorEnabled = true
     this.isTextEnabled = false
     this.isMarkdownEnabled = true
+    this.isMarkupEnabled = true
     this.version = VERSION
 
     updateEditors()
@@ -200,6 +209,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     clone.isRiderColorMethodEnabled = this.isRiderColorMethodEnabled
     clone.isTextEnabled = this.isTextEnabled
     clone.isMarkdownEnabled = this.isMarkdownEnabled
+    clone.isMarkupEnabled = this.isMarkupEnabled
     clone.isCssColorEnabled = this.isCssColorEnabled
     clone.version = this.version
     return clone
@@ -218,6 +228,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isRiderColorMethodEnabled = state.isRiderColorMethodEnabled
     this.isTextEnabled = state.isTextEnabled
     this.isMarkdownEnabled = state.isMarkdownEnabled
+    this.isMarkupEnabled = state.isMarkupEnabled
     this.isCssColorEnabled = state.isCssColorEnabled
 
     updateEditors()
@@ -243,6 +254,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     if (isRiderColorMethodEnabled != other.isRiderColorMethodEnabled) return false
     if (isTextEnabled != other.isTextEnabled) return false
     if (isMarkdownEnabled != other.isMarkdownEnabled) return false
+    if (isMarkupEnabled != other.isMarkupEnabled) return false
     if (isCssColorEnabled != other.isCssColorEnabled) return false
     if (version != other.version) return false
     return true
@@ -262,6 +274,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     result = 31 * result + isRiderColorMethodEnabled.hashCode()
     result = 31 * result + isTextEnabled.hashCode()
     result = 31 * result + isMarkdownEnabled.hashCode()
+    result = 31 * result + isMarkupEnabled.hashCode()
     result = 31 * result + version.hashCode()
     return result
   }
@@ -270,6 +283,6 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     @JvmStatic
     val instance: ColorHighlighterState by lazy { service() }
 
-    const val VERSION = "8.0.0"
+    const val VERSION = "16.0.0"
   }
 }

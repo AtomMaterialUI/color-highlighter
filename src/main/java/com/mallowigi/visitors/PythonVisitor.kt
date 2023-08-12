@@ -29,13 +29,11 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.jetbrains.python.psi.*
-import com.mallowigi.search.ColorPrefixes
+import com.jetbrains.python.psi.PyFile
+import com.jetbrains.python.psi.PyNumericLiteralExpression
+import com.jetbrains.python.psi.PyParenthesizedExpression
+import com.jetbrains.python.psi.PyPlainStringElement
 import com.mallowigi.search.ColorSearchEngine
-import com.mallowigi.search.parsers.ColorCtorParser
-import com.mallowigi.search.parsers.ColorMethodParser
-import com.mallowigi.search.parsers.ColorParser
-import com.mallowigi.search.parsers.RGBColorParser
 
 class PythonVisitor : ColorVisitor() {
 

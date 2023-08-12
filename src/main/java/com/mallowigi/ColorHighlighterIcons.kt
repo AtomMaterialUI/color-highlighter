@@ -46,6 +46,7 @@ object ColorHighlighterIcons {
     val ANDROID_ICON: Icon = load("icons/settings/android.svg")
     val CSS_ICON: Icon = load("icons/settings/css.svg")
     val MARKDOWN_ICON: Icon = load("icons/settings/markdown.svg")
+    val MARKUP_ICON: Icon = load("icons/settings/markup.svg")
     val JAVA_ICON: Icon = load("icons/settings/java.svg")
     val KOTLIN_ICON: Icon = load("icons/settings/kotlin.svg")
     val XCODE_ICON: Icon = load("icons/settings/xcode.svg")

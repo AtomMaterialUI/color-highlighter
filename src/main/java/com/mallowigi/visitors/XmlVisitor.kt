@@ -29,9 +29,7 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiLiteralValue
 import com.intellij.psi.util.PsiUtilCore
-import com.intellij.psi.xml.XmlText
 import com.mallowigi.search.ColorSearchEngine
 
 class XmlVisitor : ColorVisitor() {
@@ -50,6 +48,8 @@ class XmlVisitor : ColorVisitor() {
       color?.let { highlight(element, it) }
     }
   }
+
+  override fun shouldParseText(text: String): Boolean = config.isMarkupEnabled
 
   override fun clone(): HighlightVisitor = XmlVisitor()
 

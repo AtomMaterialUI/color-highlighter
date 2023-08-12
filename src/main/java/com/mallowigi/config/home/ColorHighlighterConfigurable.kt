@@ -42,6 +42,7 @@ import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.MARKUP_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
@@ -56,6 +57,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   private lateinit var javaPanel: CollapsibleRow
   private lateinit var kotlinPanel: CollapsibleRow
   private lateinit var markdownPanel: CollapsibleRow
+  private lateinit var markupPanel: CollapsibleRow
   private lateinit var textPanel: CollapsibleRow
   private lateinit var riderPanel: CollapsibleRow
   private val settings = ColorHighlighterState.instance
@@ -140,6 +142,18 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
             .gap(RightGap.SMALL)
             .component
         }.rowComment(message("ColorHighlighterSettingsForm.markdownCheckbox.toolTipText"))
+      }
+
+      markupPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.markupSeparator.text")) {
+        row {
+          icon(MARKUP_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.markupCheckbox.text"))
+            .bindSelected(settingsClone::isMarkupEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.markupCheckbox.toolTipText"))
       }
 
       javaPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.javaSeparator.text")) {
