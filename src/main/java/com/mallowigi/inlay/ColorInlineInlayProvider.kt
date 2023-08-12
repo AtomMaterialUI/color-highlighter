@@ -31,6 +31,8 @@ import com.intellij.lang.Language
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiFile
 import com.intellij.ui.dsl.builder.panel
+import com.mallowigi.config.home.ColorHighlighterState
+import com.mallowigi.config.home.HighlightingStyles
 import javax.swing.JComponent
 
 @Suppress("UnstableApiUsage")
@@ -38,7 +40,7 @@ abstract class ColorInlineInlayProvider : InlayHintsProvider<NoSettings> {
   override val name: String = "Inline Color"
   override val key: SettingsKey<NoSettings> = SettingsKey("inline.color")
   override val previewText: String? = null
-  override fun isLanguageSupported(language: Language): Boolean = true
+  override fun isLanguageSupported(language: Language): Boolean = ColorHighlighterState.instance.highlightingStyle == HighlightingStyles.INLINE
   override fun createConfigurable(settings: NoSettings): ImmediateConfigurable = object : ImmediateConfigurable {
     override fun createComponent(listener: ChangeListener): JComponent = panel {}
   }
