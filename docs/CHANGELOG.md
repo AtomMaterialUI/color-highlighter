@@ -2,6 +2,21 @@
 
 ---
 
+## 16.0.0
+
+### Features
+
+- Migrate Settings to Kotlin UI DSL
+- Add XML Visitor to be able to highlight colors inside XML nodes
+- Python: Recognize tuples
+
+### Fixes
+
+- Fix short rgb highlighting
+- Fix deprecated usages
+- Fix the display name missing error
+- Make rgba format the default rather than argb
+
 ## 15.0.0
 
 ### Fixes

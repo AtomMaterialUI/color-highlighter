@@ -41,6 +41,7 @@ colors[6].@code=7f8c8d
 colors[7].@name=azure
 colors[7].@code=f0ffff
 colors[8].@name=beige
+
 colors[8].@code=f5f5dc
 colors[9].@name=belizehole
 colors[9].@code=2980b9
