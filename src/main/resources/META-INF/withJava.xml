@@ -25,11 +25,13 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.JavaVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.JavaVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.JavaInlineInlayProvider"
+                                   language="JAVA"/>
+    </extensions>
 
-  <applicationListeners>
-    <listener class="com.mallowigi.startup.JavaVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
-  </applicationListeners>
+    <applicationListeners>
+        <listener class="com.mallowigi.startup.JavaVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 </idea-plugin>

@@ -25,11 +25,13 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.KotlinVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.KotlinVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.KotlinInlineInlayProvider"
+                                   language="kotlin"/>
+    </extensions>
 
-  <applicationListeners>
-    <listener class="com.mallowigi.startup.KotlinVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
-  </applicationListeners>
+    <applicationListeners>
+        <listener class="com.mallowigi.startup.KotlinVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 </idea-plugin>
