@@ -35,9 +35,11 @@ import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorCtorParser
 import com.mallowigi.search.parsers.ColorParser
 import com.mallowigi.search.parsers.NSColorParser
+import com.mallowigi.search.parsers.PredefinedColorParser
 import java.awt.Color
 
 class AppCodeVisitor : ColorVisitor() {
+  private val allowedTypes = setOf("STRING_LITERAL", "ISTRING_CONTENT", "STRING_LITERAL_CONTENT")
 
   override fun clone(): HighlightVisitor = AppCodeVisitor()
 
@@ -45,17 +47,19 @@ class AppCodeVisitor : ColorVisitor() {
     text.startsWith(NS_COLOR.text) -> NSColorParser()
     text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
     text.startsWith(UI_COLOR.text) -> NSColorParser()
-    else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+    else -> PredefinedColorParser()
   }
 
   override fun shouldParseText(text: String): Boolean = true
 
-  override fun suitableForFile(file: PsiFile): Boolean =
-    file.toString().contains("OCFile") || file.javaClass.toString().contains("SwiftFile")
+  override fun suitableForFile(file: PsiFile): Boolean {
+    val fileTypesArray = arrayOf("OCFile", "SwiftFile", "Swift File")
+    return fileTypesArray.any { fileType -> file.toString().contains(fileType) }
+  }
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if ("STRING_LITERAL" != type && "ISTRING_CONTENT" != type) return null
+    if (type !in allowedTypes) return null
 
     val value = element.text
     return ColorSearchEngine.getColor(value, this)

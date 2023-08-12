@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.AppCodeVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.AppCodeVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.AppCodeInlineInlayProvider"
+                                   language="Swift"/>
+    </extensions>
 </idea-plugin>
