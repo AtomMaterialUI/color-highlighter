@@ -9,6 +9,8 @@
 - Migrate Settings to Kotlin UI DSL
 - Add XML Visitor to be able to highlight colors inside XML nodes
 - Python: Recognize tuples
+- Toggle color names detection
+- Toggle tuple detection
 
 ### Fixes
 

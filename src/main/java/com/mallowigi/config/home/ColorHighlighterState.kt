@@ -34,23 +34,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.mallowigi.listeners.ColorHighlighterNotifier
 
-/**
- * Represents the state of the Color Highlighter plugin settings.
- * The settings are persisted in the "color-highlighter.xml" file.
- *
- * @property isEnabled Indicates whether the Color Highlighter plugin is enabled.
- * @property isHexDetectEnabled Indicates whether Hex color detection is enabled.
- * @property isRgbaEnabled Indicates whether RGBA color detection is enabled.
- * @property isJavaColorCtorEnabled Indicates whether Java Color constructor color detection is enabled.
- * @property isJavaColorMethodEnabled Indicates whether Java Color method color detection is enabled.
- * @property isKotlinColorCtorEnabled Indicates whether Kotlin Color constructor color detection is enabled.
- * @property isKotlinColorMethodEnabled Indicates whether Kotlin Color method color detection is enabled.
- * @property isRiderColorMethodEnabled Indicates whether Rider Color method color detection is enabled.
- * @property isTextEnabled Indicates whether color highlighting in plain text files is enabled.
- * @property isMarkdownEnabled Indicates whether color highlighting in Markdown files is enabled.
- * @property isCssColorEnabled Indicates whether CSS inline color preview is enabled.
- * @property version The version string of the Color Highlighter plugin.
- */
 @State(
   name = "Color Highlighter Settings",
   storages = [Storage("color-highlighter.xml")],
@@ -62,6 +45,10 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     var isEnabled: Boolean by property(true)
 
     var isHexDetectEnabled: Boolean by property(true)
+
+    var isColorNamesDetectEnabled: Boolean by property(true)
+
+    var isTupleDetectEnabled: Boolean by property(true)
 
     var isRgbaEnabled: Boolean by property(true)
 
@@ -92,6 +79,18 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     get() = state.isHexDetectEnabled
     set(value) {
       state.isHexDetectEnabled = value
+    }
+
+  var isColorNamesDetectEnabled: Boolean
+    get() = state.isColorNamesDetectEnabled
+    set(value) {
+      state.isColorNamesDetectEnabled = value
+    }
+
+  var isTupleDetectEnabled: Boolean
+    get() = state.isTupleDetectEnabled
+    set(value) {
+      state.isTupleDetectEnabled = value
     }
 
   var isRgbaEnabled: Boolean
@@ -157,6 +156,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   fun resetSettings() {
     this.isEnabled = true
     this.isHexDetectEnabled = true
+    this.isColorNamesDetectEnabled = true
+    this.isTupleDetectEnabled = true
     this.isRgbaEnabled = true
     this.isJavaColorCtorEnabled = true
     this.isJavaColorMethodEnabled = true
@@ -189,6 +190,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     val clone = ColorHighlighterState()
     clone.isEnabled = this.isEnabled
     clone.isHexDetectEnabled = this.isHexDetectEnabled
+    clone.isColorNamesDetectEnabled = this.isColorNamesDetectEnabled
+    clone.isTupleDetectEnabled = this.isTupleDetectEnabled
     clone.isRgbaEnabled = this.isRgbaEnabled
     clone.isJavaColorCtorEnabled = this.isJavaColorCtorEnabled
     clone.isJavaColorMethodEnabled = this.isJavaColorMethodEnabled
@@ -205,6 +208,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   fun apply(state: ColorHighlighterState) {
     this.isEnabled = state.isEnabled
     this.isHexDetectEnabled = state.isHexDetectEnabled
+    this.isColorNamesDetectEnabled = state.isColorNamesDetectEnabled
+    this.isTupleDetectEnabled = state.isTupleDetectEnabled
     this.isRgbaEnabled = state.isRgbaEnabled
     this.isJavaColorCtorEnabled = state.isJavaColorCtorEnabled
     this.isJavaColorMethodEnabled = state.isJavaColorMethodEnabled
@@ -228,6 +233,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     if (isEnabled != other.isEnabled) return false
     if (isHexDetectEnabled != other.isHexDetectEnabled) return false
+    if (isColorNamesDetectEnabled != other.isColorNamesDetectEnabled) return false
+    if (isTupleDetectEnabled != other.isTupleDetectEnabled) return false
     if (isRgbaEnabled != other.isRgbaEnabled) return false
     if (isJavaColorCtorEnabled != other.isJavaColorCtorEnabled) return false
     if (isJavaColorMethodEnabled != other.isJavaColorMethodEnabled) return false
@@ -245,6 +252,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   override fun hashCode(): Int {
     var result = isEnabled.hashCode()
     result = 31 * result + isHexDetectEnabled.hashCode()
+    result = 31 * result + isColorNamesDetectEnabled.hashCode()
+    result = 31 * result + isTupleDetectEnabled.hashCode()
     result = 31 * result + isRgbaEnabled.hashCode()
     result = 31 * result + isJavaColorCtorEnabled.hashCode()
     result = 31 * result + isJavaColorMethodEnabled.hashCode()

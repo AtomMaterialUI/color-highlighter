@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,33 +23,14 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-@file:Suppress("PropertyName")
+import java.awt.Color
 
-package com.mallowigi
-
-import com.intellij.ui.IconManager
-import javax.swing.Icon
-
-fun load(path: String): Icon = IconManager.getInstance().getIcon(path, ColorHighlighterIcons::class.java.classLoader)
-
-object ColorHighlighterIcons {
-  object Gutter {
-    val Inline: Icon = load("icons/gutter/inline.svg")
-  }
-
-  object Settings {
-    val MAIN_ICON: Icon = load("icons/settings/icon.svg")
-    val HEX_ICON: Icon = load("icons/settings/hex.svg")
-    val COLOR_NAMES_ICON: Icon = load("icons/settings/colorNames.svg")
-    val TUPLE_ICON: Icon = load("icons/settings/tuple.svg")
-    val ANDROID_ICON: Icon = load("icons/settings/android.svg")
-    val CSS_ICON: Icon = load("icons/settings/css.svg")
-    val MARKDOWN_ICON: Icon = load("icons/settings/markdown.svg")
-    val JAVA_ICON: Icon = load("icons/settings/java.svg")
-    val KOTLIN_ICON: Icon = load("icons/settings/kotlin.svg")
-    val XCODE_ICON: Icon = load("icons/settings/xcode.svg")
-    val TEXT_ICON: Icon = load("icons/settings/text.svg")
-  }
-
+/**
+ * No op parser
+ *
+ */
+class NoParser : ColorParser {
+  override fun parseColor(text: String?): Color? = null
 }

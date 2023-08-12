@@ -50,18 +50,23 @@ object ColorParserFactory {
       text.startsWith(RGB.text) -> RGBColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
-      TUPLE_PATTERN.matches(text) -> RGBColorParser()
 
+      // Tuple detection
+      config.isTupleDetectEnabled && TUPLE_PATTERN.matches(text) -> RGBColorParser()
+
+      // Hex with no hash detection
       config.isHexDetectEnabled && NO_HEX_PATTERN.matches(text) -> HexColorParser("")
 
       // If the lang visitor should parse the text, retrieve the parser
       langVisitor.shouldParseText(text) -> langVisitor.getParser(text) ?: PredefinedColorParser()
 
       // custom colors
-      text in customColors -> CustomColorParser()
+      config.isColorNamesDetectEnabled && text in customColors -> CustomColorParser()
 
       // Parse from PredefinedColors
-      else -> PredefinedColorParser()
+      config.isColorNamesDetectEnabled -> PredefinedColorParser()
+
+      else -> NoParser()
     }
   }
 

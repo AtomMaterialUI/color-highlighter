@@ -35,6 +35,7 @@ import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.layout.selected
 import com.mallowigi.ColorHighlighterBundle.message
 import com.mallowigi.ColorHighlighterIcons.Settings.ANDROID_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.COLOR_NAMES_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.CSS_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.HEX_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
@@ -42,6 +43,7 @@ import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
 import org.jetbrains.annotations.NonNls
@@ -85,6 +87,27 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
             .gap(RightGap.SMALL)
             .component
         }.rowComment(message("ColorHighlighterSettingsForm.colorParsingCheckbox.toolTipText"))
+
+        row {
+          icon(COLOR_NAMES_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.colorNamesParsingCheckbox.text"))
+            .bindSelected(settingsClone::isColorNamesDetectEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorNamesParsingCheckbox.toolTipText"))
+
+        row {
+          icon(TUPLE_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.tupleDetectCheckbox.text"))
+            .bindSelected(settingsClone::isTupleDetectEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.tupleDetectCheckbox.toolTipText"))
+
 
         row {
           icon(ANDROID_ICON)
