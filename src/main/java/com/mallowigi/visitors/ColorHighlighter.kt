@@ -28,56 +28,54 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType.HighlightInfoTypeImpl
+import com.intellij.codeInsight.hints.presentation.PresentationFactory
+import com.intellij.codeInsight.hints.presentation.PresentationRenderer
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
-import com.intellij.openapi.editor.colors.EditorColorsManager
-import com.intellij.openapi.editor.markup.TextAttributes
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.editor.InlayModel
 import com.intellij.psi.PsiElement
-import com.intellij.ui.ColorUtil
-import com.intellij.ui.Gray
+import com.intellij.ui.components.JBLabel
 import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.gutter.GutterColorLineMarkerProvider
 import com.mallowigi.gutter.GutterColorRenderer
 import com.mallowigi.highlighters.HighlighterStyleFactory
 import java.awt.Color
+import java.awt.Dimension
+import javax.swing.Icon
 
 internal object ColorHighlighter {
+  private val COLOR_ELEMENT: HighlightInfoType = HighlightInfoTypeImpl(HighlightSeverity.INFORMATION, DefaultLanguageHighlighterColors.CONSTANT)
 
-  private val COLOR_ELEMENT: HighlightInfoType = HighlightInfoTypeImpl(
-    HighlightSeverity.INFORMATION,
-    DefaultLanguageHighlighterColors.CONSTANT
-  )
+  fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? = getHighlightInfoBuilder(color).range(element!!).create()
 
-  fun highlightColor(element: PsiElement?, color: Color): HighlightInfo? =
-    getHighlightInfoBuilder(color).range(element!!).create()
-
-  fun highlightColor(range: IntRange, color: Color): HighlightInfo? = getHighlightInfoBuilder(color)
-    .range(range.first, range.last)
-    .create()
-
-  @Suppress("Detekt:MagicNumber")
-  private fun getAttributesFlyweight(color: Color): TextAttributes {
-    val attributes = TextAttributes()
-    val background = EditorColorsManager.getInstance().globalScheme.defaultBackground
-    val mix = ColorUtil.mix(background, color, color.alpha / 255.0)
-
-    return TextAttributes.fromFlyweight(
-      attributes.flyweight
-        .withBackground(mix)
-        .withForeground(if (ColorUtil.isDark(mix)) Gray._254 else Gray._1))
-  }
+  fun highlightColor(range: IntRange, color: Color): HighlightInfo? = getHighlightInfoBuilder(color).range(range.first, range.last).create()
 
   private fun getHighlightInfoBuilder(color: Color): HighlightInfo.Builder {
     val highlighter = HighlighterStyleFactory.instance.getHighlighter(ColorHighlighterState.instance.highlightingStyle)
 
-    var newHighlightInfo = HighlightInfo.newHighlightInfo(COLOR_ELEMENT)
-      .textAttributes(highlighter.getAttributesFlyweight(color))
+    var newHighlightInfo = HighlightInfo.newHighlightInfo(COLOR_ELEMENT).textAttributes(highlighter.getAttributesFlyweight(color))
 
     if (GutterColorLineMarkerProvider.isEnabled()) {
       newHighlightInfo = newHighlightInfo.gutterIconRenderer(GutterColorRenderer(color))
     }
-
     return newHighlightInfo
   }
 
+  fun createInlay(editor: Editor, offset: Int, icon: Icon) {
+    val inlayModel: InlayModel = editor.inlayModel
+
+    val renderer = object : JBLabel(icon) {
+      init {
+        isOpaque = false
+      }
+
+      override fun getPreferredSize(): Dimension = Dimension(icon.iconWidth, icon.iconHeight)
+    }
+
+    val presentation = PresentationFactory(editor).text("Inlay text")
+
+    val element = inlayModel.addInlineElement(offset, PresentationRenderer(presentation))
+
+  }
 }
