@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.ScalaVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.ScalaVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.ScalaInlineInlayProvider"
+                                   language="Scala"/>
+    </extensions>
 </idea-plugin>

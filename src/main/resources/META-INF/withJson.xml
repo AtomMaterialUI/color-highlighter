@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.JsonVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.JsonVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.JsonInlineInlayProvider"
+                                   language="JSON"/>
+    </extensions>
 </idea-plugin>

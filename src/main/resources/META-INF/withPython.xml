@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.PythonVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.PythonVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.PythonInlineInlayProvider"
+                                   language="Python"/>
+    </extensions>
 </idea-plugin>

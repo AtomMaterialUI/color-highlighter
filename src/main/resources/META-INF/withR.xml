@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.RVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.RVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.RInlineInlayProvider"
+                                   language="R"/>
+    </extensions>
 </idea-plugin>

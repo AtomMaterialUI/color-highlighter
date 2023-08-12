@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.YamlVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.YamlVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.SQLInlineInlayProvider"
+                                   language="yaml"/>
+    </extensions>
 </idea-plugin>

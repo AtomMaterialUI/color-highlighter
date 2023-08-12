@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.SqlVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.SqlVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.SQLInlineInlayProvider"
+                                   language="SQL"/>
+    </extensions>
 </idea-plugin>
