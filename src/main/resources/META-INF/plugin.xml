@@ -64,17 +64,16 @@
 
     <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterState"/>
     <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
-                             groupId="editor"
                              key="ColorHighlighterForm.title"
                              dynamic="true"
+                             parentId="editor"
                              id="ColorHighlighterConfigurable"/>
 
     <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig"/>
     <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
-                             groupId="editor"
                              dynamic="true"
                              key="CustomColorsForm.title"
-                             parentId="ColorHighlighterConfig"
+                             parentId="ColorHighlighterConfigurable"
                              id="CustomColorsConfig"/>
 
     <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
