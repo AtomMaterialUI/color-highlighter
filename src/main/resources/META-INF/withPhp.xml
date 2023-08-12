@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.PhpVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.PhpVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.PhpInlineInlayProvider"
+                                   language="PHP"/>
+    </extensions>
 </idea-plugin>

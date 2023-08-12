@@ -33,5 +33,7 @@
                                         implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
         <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.XmlInlineInlayProvider"
                                    language="XML"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.AnyInlineInlayProvider"
+                                   language=""/>
     </extensions>
 </idea-plugin>
