@@ -43,7 +43,7 @@ class TextVisitor : ColorVisitor() {
     if (value is String) splitText(value)
   }
 
-  override fun shouldParseText(text: String): Boolean = config.isTextEnabled
+  override fun shouldVisit(): Boolean = config.isTextEnabled
 
   private fun splitText(text: String) {
     val blocks = text.split(Regex("\\b"))

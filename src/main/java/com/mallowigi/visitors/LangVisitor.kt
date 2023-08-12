@@ -29,8 +29,20 @@ package com.mallowigi.visitors
 import com.mallowigi.search.parsers.ColorParser
 
 interface LangVisitor {
+  /**
+   * Returns a suitable parser for the given text (ex: CtorParser if the text is a Color() constructor)
+   */
   fun getParser(text: String): ColorParser?
 
+  /**
+   * Checks if the visitor should parse the text for a parser
+   *
+   */
   fun shouldParseText(text: String): Boolean
 
+  /**
+   * Checks if the visitor should visit at all
+   *
+   */
+  fun shouldVisit(): Boolean
 }

@@ -27,6 +27,7 @@ package com.mallowigi.visitors
 
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
+import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.config.home.ColorHighlighterState
@@ -38,7 +39,7 @@ import java.awt.Color
  * Color visitor: This is the class that will colorize the texts
  * representing colors.
  */
-abstract class ColorVisitor : HighlightVisitor, LangVisitor {
+abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   private var highlightInfoHolder: HighlightInfoHolder? = null
   internal val config = ColorHighlighterState.instance
@@ -95,4 +96,5 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor {
 
   override fun shouldParseText(text: String): Boolean = false
 
+  override fun shouldVisit(): Boolean = true
 }

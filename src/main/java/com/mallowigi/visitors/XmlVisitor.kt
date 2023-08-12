@@ -49,7 +49,7 @@ class XmlVisitor : ColorVisitor() {
     }
   }
 
-  override fun shouldParseText(text: String): Boolean = config.isMarkupEnabled
+  override fun shouldVisit(): Boolean = config.isMarkupEnabled
 
   override fun clone(): HighlightVisitor = XmlVisitor()
 

@@ -46,6 +46,7 @@ object ColorParserFactory {
     val customColors = CustomColorsConfig.instance.customColors
 
     return when {
+      !langVisitor.shouldVisit() -> NoParser()
       text.startsWith(HASH) && text.length > 1 -> HexColorParser(HASH)
       text.startsWith(RGB.text) -> RGBColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
