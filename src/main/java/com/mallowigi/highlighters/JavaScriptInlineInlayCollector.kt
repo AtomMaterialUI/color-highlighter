@@ -28,11 +28,12 @@ package com.mallowigi.highlighters
 
 import com.intellij.codeInsight.hints.FactoryInlayHintsCollector
 import com.intellij.codeInsight.hints.InlayHintsSink
-import com.intellij.codeInsight.hints.presentation.PresentationFactory
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement
-import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
+import com.mallowigi.ColorHighlighterIcons
+import com.mallowigi.utils.themedIcon
 import com.mallowigi.visitors.JSVisitor
+import java.awt.Color
 
 @Suppress("UnstableApiUsage")
 class JavaScriptInlineInlayCollector(editor: Editor) : FactoryInlayHintsCollector(editor) {
@@ -48,22 +49,24 @@ class JavaScriptInlineInlayCollector(editor: Editor) : FactoryInlayHintsCollecto
 
       startOffset -= lineStartOffset
 
-      var factory: PresentationFactory
-      val presentation = PresentationFactory(editor)
-        .also { factory = it }
-        .textSpacePlaceholder(startOffset, true)
+      val icon = factory.icon(ColorHighlighterIcons.Other.INLINE.themedIcon(Color.RED))
 
-      val icon = factory.smallScaledIcon(MAIN_ICON)
-      val space = factory.textSpacePlaceholder(1, true)
-      val text = factory.smallText("Blabla")
-
-      sink.addInlineElement(startOffset,
-        true,
-        factory.inset(presentation, left = 1, right = 1),
+      sink.addInlineElement(
+        lineStartOffset + startOffset,
+        false,
+        factory.inset(
+          icon,
+          right = 1,
+          top = 4
+        ),
         false
       )
+
+      return true
     }
 
     return true
   }
+
+
 }

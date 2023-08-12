@@ -26,16 +26,32 @@
 
 package com.mallowigi.utils
 
+import com.dynatrace.hash4j.hashing.HashFunnel
+import com.dynatrace.hash4j.hashing.Hashing
 import com.intellij.ide.plugins.IdeaPluginDescriptor
 import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.extensions.PluginId
+import com.intellij.openapi.util.IconLoader
+import com.intellij.ui.ColorUtil
 import com.mallowigi.ColorHighlighterBundle
-
+import java.awt.Color
+import javax.swing.Icon
 
 fun getPlugin(): IdeaPluginDescriptor? = PluginManagerCore.getPlugin(PluginId.getId("com.mallowigi.colorHighlighter"))
-
 
 fun getVersion(): String {
   val plugin: IdeaPluginDescriptor? = getPlugin()
   return if (plugin != null) plugin.version else ColorHighlighterBundle.message("plugin.version")
 }
+
+fun String.toHash(): Long =
+  Hashing.komihash4_3().hashStream().putOrderedIterable(listOf(this), HashFunnel.forString()).asLong
+
+/** Convert a color to a hex string. */
+fun Color.toHex(): String = ColorUtil.toHex(this)
+
+/** Get color from hex. */
+fun String.fromHex(): Color = ColorUtil.fromHex(this)
+
+@Suppress("UnstableApiUsage")
+fun Icon.themedIcon(color: Color): Icon = IconLoader.colorPatchedIcon(this, IconColorPatcher(color))
