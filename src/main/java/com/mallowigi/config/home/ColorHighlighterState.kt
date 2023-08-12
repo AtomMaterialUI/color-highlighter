@@ -27,9 +27,11 @@
 package com.mallowigi.config.home
 
 import com.intellij.application.options.editor.WebEditorOptions
-import com.intellij.ide.ui.LafManager
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.project.ProjectManager
 import com.mallowigi.listeners.ColorHighlighterNotifier
 
 /**
@@ -166,8 +168,17 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isMarkdownEnabled = true
     this.version = VERSION
 
-    ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
+    updateEditors()
     fireChanged()
+  }
+
+  private fun updateEditors() {
+    ApplicationManager.getApplication().invokeLater {
+      val openProjects: Array<Project> = ProjectManager.getInstance().openProjects
+      for (project in openProjects) {
+        DaemonCodeAnalyzer.getInstance(project)?.restart()
+      }
+    }
   }
 
   private fun fireChanged(): Unit = ApplicationManager.getApplication().messageBus
@@ -204,7 +215,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isMarkdownEnabled = state.isMarkdownEnabled
     this.isCssColorEnabled = state.isCssColorEnabled
 
-    ApplicationManager.getApplication().invokeAndWait { LafManager.getInstance().updateUI() }
+    updateEditors()
     this.fireChanged()
   }
 
