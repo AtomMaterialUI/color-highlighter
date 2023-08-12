@@ -34,7 +34,15 @@ import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.layout.selected
 import com.mallowigi.ColorHighlighterBundle.message
+import com.mallowigi.ColorHighlighterIcons.Settings.ANDROID_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.CSS_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.HEX_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
 import org.jetbrains.annotations.NonNls
 
@@ -66,9 +74,11 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
             .bindSelected(settingsClone::isEnabled)
             .gap(RightGap.SMALL)
             .component
-        }
+        }.rowComment(message("ColorHighlighterSettingsForm.enableCheckbox.toolTipText"))
 
         row {
+          icon(HEX_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.colorParsingCheckbox.text"))
             .bindSelected(settingsClone::isHexDetectEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -77,6 +87,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorParsingCheckbox.toolTipText"))
 
         row {
+          icon(ANDROID_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.rgbaCheckbox.text"))
             .bindSelected(settingsClone::isRgbaEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -85,6 +97,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.rgbaCheckbox.toolTipText"))
 
         row {
+          icon(CSS_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.cssCheckbox.text"))
             .bindSelected(settingsClone::isCssColorEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -95,6 +109,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
 
       markdownPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.markdownSeparator.text")) {
         row {
+          icon(MARKDOWN_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.markdownCheckbox.text"))
             .bindSelected(settingsClone::isMarkdownEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -105,6 +121,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
 
       javaPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.javaSeparator.text")) {
         row {
+          icon(JAVA_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.colorCtorCheckbox.text"))
             .bindSelected(settingsClone::isJavaColorCtorEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -113,6 +131,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorCtorCheckbox.toolTipText"))
 
         row {
+          icon(JAVA_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.colorMethodCheckbox.text"))
             .bindSelected(settingsClone::isJavaColorMethodEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -123,6 +143,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
 
       kotlinPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.kotlinSeparator.text")) {
         row {
+          icon(KOTLIN_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.text"))
             .bindSelected(settingsClone::isKotlinColorCtorEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -131,6 +153,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.toolTipText"))
 
         row {
+          icon(KOTLIN_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.text"))
             .bindSelected(settingsClone::isKotlinColorMethodEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -141,6 +165,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
 
       riderPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.riderSeparator.text")) {
         row {
+          icon(XCODE_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.riderColorMethodCheckbox.text"))
             .bindSelected(settingsClone::isRiderColorMethodEnabled)
             .enabledIf(enabledCheckbox.selected)
@@ -151,6 +177,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
 
       textPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.textPanelSeparator.text")) {
         row {
+          icon(TEXT_ICON)
+            .gap(RightGap.SMALL)
           checkBox(message("ColorHighlighterSettingsForm.textCheckbox.text"))
             .bindSelected(settingsClone::isTextEnabled)
             .enabledIf(enabledCheckbox.selected)

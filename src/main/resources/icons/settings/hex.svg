@@ -1,7 +1,7 @@
 <!--
   - The MIT License (MIT)
   -
-  - Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+  - Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
   -
   - Permission is hereby granted, free of charge, to any person obtaining a copy
   - of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,7 @@
   -
   -->
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 505 505"
-     xml:space="preserve">
-<circle fill="#84DBFF" cx="252.5" cy="252.5" r="252.5"/>
-  <polygon fill="#FF7058" points="91.4,390.1 116.6,364.9 143.5,391.8 125,410.3 "/>
-  <path fill="#324A5E" d="M409.6,161.6l-62.9-62.9c-5.2-5.2-13.8-5.3-19.2-0.3L167.8,246.9l93.5,93.5l148.5-159.7
-	C414.9,175.4,414.8,166.8,409.6,161.6z"/>
-  <rect x="136.616" y="288.783" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 130.1331 664.8694)"
-        fill="#2B3B4E" width="132.299" height="33.4"/>
-  <path fill="#FFFFFF" d="M143.6,391.9l-13.5-13.5l0,0l-13.6-13.6c24.9-54.8,27.9-94.2,27.9-94.2l46.7,46.7l0,0l46.7,46.7
-	C237.8,364,198.4,366.9,143.6,391.9z"/>
+<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path fill="#AB47BC"
+        d="M7 7C5.9 7 5 7.9 5 9V15C5 16.11 5.9 17 7 17H9C10.11 17 11 16.11 11 15V9C11 7.9 10.11 7 9 7H7M7 9H9V15H7V9M17.6 17L15.5 14.9L13.4 17L12 15.6L14.1 13.5L12 11.4L13.4 10L15.5 12.1L17.6 10L19 11.4L16.9 13.5L19 15.6L17.6 17Z"/>
 </svg>
