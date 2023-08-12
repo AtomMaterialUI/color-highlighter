@@ -214,7 +214,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.cancel"),
         Messages.getQuestionIcon(),
       ) == Messages.OK) {
-      settings.resetSettings()
+      settingsClone.resetSettings()
       main.reset()
     }
   }
