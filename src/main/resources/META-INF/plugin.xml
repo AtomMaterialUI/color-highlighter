@@ -31,7 +31,6 @@
     <category>Editor</category>
     <vendor email="elior@material-theme.com" url="https://github.com/mallowigi">AtomMaterial</vendor>
 
-
     <idea-version since-build="211.*"/>
 
     <depends>com.intellij.modules.platform</depends>
@@ -60,7 +59,9 @@
     <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"/>
+        <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"
+                           bundle="messages.ColorHighlighterBundle"
+                           key="notification.group.color.highlighter.notifications"/>
 
         <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterState"/>
         <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"

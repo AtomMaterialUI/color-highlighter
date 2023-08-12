@@ -27,7 +27,5 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
         <highlightVisitor implementation="com.mallowigi.visitors.JSVisitor"/>
-        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.JavaScriptInlineInlayProvider"
-                                   language="TypeScript"/>
     </extensions>
 </idea-plugin>
