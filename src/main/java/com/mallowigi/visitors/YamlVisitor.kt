@@ -33,6 +33,7 @@ import com.intellij.psi.util.PsiUtilCore
 import com.intellij.util.ArrayUtil
 import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.yaml.psi.YAMLFile
+import java.awt.Color
 
 class YamlVisitor : ColorVisitor() {
 
@@ -40,14 +41,13 @@ class YamlVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is YAMLFile
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring")) {
-      return
+      return null
     }
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class DartVisitor : ColorVisitor() {
 
@@ -41,13 +42,12 @@ class DartVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.dart$".toRegex())
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

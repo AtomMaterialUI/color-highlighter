@@ -28,9 +28,10 @@ package com.mallowigi.visitors
 
 import com.intellij.psi.PsiElement
 import com.mallowigi.search.parsers.ColorParser
+import java.awt.Color
 
 interface LangVisitor {
-  fun accept(element: PsiElement): Boolean = false
+  fun accept(element: PsiElement): Color? = null
 
   /**
    * Returns a suitable parser for the given text (ex: CtorParser if the text is a Color() constructor)

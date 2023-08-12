@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class RVisitor : ColorVisitor() {
   private val allowedTypes = setOf(
@@ -42,13 +43,12 @@ class RVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(r|rmd|rd|rsx)$".toRegex())
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

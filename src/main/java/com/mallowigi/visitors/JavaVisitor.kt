@@ -37,6 +37,7 @@ import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorCtorParser
 import com.mallowigi.search.parsers.ColorMethodParser
 import com.mallowigi.search.parsers.ColorParser
+import java.awt.Color
 
 class JavaVisitor : ColorVisitor() {
 
@@ -63,12 +64,11 @@ class JavaVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is PsiJavaFile
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 }

@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class XmlVisitor : ColorVisitor() {
   private val allowedTypes = setOf("XML_DATA_CHARACTERS", "XML_ATTRIBUTE_VALUE_TOKEN")
@@ -38,15 +39,13 @@ class XmlVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean =
     extensions.contains(file.virtualFile?.extension)
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    if (value is String) {
-      val color = ColorSearchEngine.getColor((value as? String)!!, this)
-      color?.let { highlight(element, it) }
-    }
+    if (value !is String) return null
+    return ColorSearchEngine.getColor((value as? String)!!, this)
   }
 
   override fun shouldVisit(): Boolean = config.isMarkupEnabled

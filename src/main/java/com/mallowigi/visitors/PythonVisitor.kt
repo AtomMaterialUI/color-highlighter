@@ -34,6 +34,7 @@ import com.jetbrains.python.psi.PyNumericLiteralExpression
 import com.jetbrains.python.psi.PyParenthesizedExpression
 import com.jetbrains.python.psi.PyPlainStringElement
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class PythonVisitor : ColorVisitor() {
 
@@ -41,14 +42,10 @@ class PythonVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is PyFile
 
-  override fun visit(element: PsiElement) {
-    if (element is PyPlainStringElement ||
-      element is PyNumericLiteralExpression ||
-      element is PyParenthesizedExpression) {
-      val value = element.text
-      val color = ColorSearchEngine.getColor(value, this)
-      color?.let { highlight(element, it) }
-    }
-  }
+  override fun accept(element: PsiElement): Color? {
+    if (element !is PyPlainStringElement && element !is PyNumericLiteralExpression && element !is PyParenthesizedExpression) return null
 
+    val value = element.text
+    return ColorSearchEngine.getColor(value, this)
+  }
 }

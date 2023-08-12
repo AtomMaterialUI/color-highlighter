@@ -32,6 +32,7 @@ import com.intellij.lang.properties.psi.impl.PropertyValueImpl
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class PropertiesVisitor : ColorVisitor() {
 
@@ -39,12 +40,11 @@ class PropertiesVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is PropertiesFile
 
-  override fun visit(element: PsiElement) {
-    if (element !is PropertyValueImpl) return
+  override fun accept(element: PsiElement): Color? {
+    if (element !is PropertyValueImpl) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

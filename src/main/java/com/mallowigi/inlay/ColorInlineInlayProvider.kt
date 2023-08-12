@@ -24,49 +24,29 @@
  *
  */
 
-package com.mallowigi.highlighters
+package com.mallowigi.inlay
 
-import com.intellij.codeInsight.hints.FactoryInlayHintsCollector
-import com.intellij.codeInsight.hints.InlayHintsSink
+import com.intellij.codeInsight.hints.*
+import com.intellij.lang.Language
 import com.intellij.openapi.editor.Editor
-import com.intellij.psi.PsiElement
-import com.mallowigi.ColorHighlighterIcons
-import com.mallowigi.utils.themedIcon
-import com.mallowigi.visitors.JSVisitor
-import java.awt.Color
+import com.intellij.psi.PsiFile
+import com.intellij.ui.dsl.builder.panel
+import javax.swing.JComponent
 
 @Suppress("UnstableApiUsage")
-class JavaScriptInlineInlayCollector(editor: Editor) : FactoryInlayHintsCollector(editor) {
-
-  override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
-    val visitor = JSVisitor()
-    val acceptable: Boolean = visitor.accept(element)
-
-    if (acceptable) {
-      var startOffset = element.textRange.startOffset
-      val lineNumber = editor.document.getLineNumber(startOffset)
-      val lineStartOffset = editor.document.getLineStartOffset(lineNumber)
-
-      startOffset -= lineStartOffset
-
-      val icon = factory.icon(ColorHighlighterIcons.Other.INLINE.themedIcon(Color.RED))
-
-      sink.addInlineElement(
-        lineStartOffset + startOffset,
-        false,
-        factory.inset(
-          icon,
-          right = 1,
-          top = 4
-        ),
-        false
-      )
-
-      return true
-    }
-
-    return true
+abstract class ColorInlineInlayProvider : InlayHintsProvider<NoSettings> {
+  override val name: String = "Inline Color"
+  override val key: SettingsKey<NoSettings> = SettingsKey("inline.color")
+  override val previewText: String? = null
+  override fun isLanguageSupported(language: Language): Boolean = true
+  override fun createConfigurable(settings: NoSettings): ImmediateConfigurable = object : ImmediateConfigurable {
+    override fun createComponent(listener: ChangeListener): JComponent = panel {}
   }
 
+  override fun createSettings(): NoSettings = NoSettings()
+  override fun getCollectorFor(file: PsiFile, editor: Editor, settings: NoSettings, sink: InlayHintsSink): InlayHintsCollector =
+    getCollector(editor)
+
+  abstract fun getCollector(editor: Editor): InlayHintsCollector
 
 }

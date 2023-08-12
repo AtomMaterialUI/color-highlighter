@@ -23,31 +23,13 @@
  *
  *
  */
-package com.mallowigi.highlighters
+package com.mallowigi.inlay
 
-import com.intellij.codeInsight.hints.*
-import com.intellij.lang.Language
+import com.intellij.codeInsight.hints.InlayHintsCollector
 import com.intellij.openapi.editor.Editor
-import com.intellij.psi.PsiFile
-import com.intellij.ui.dsl.builder.panel
-import javax.swing.JComponent
 
-@Suppress("UnstableApiUsage")
-class InlineInlayProvider : InlayHintsProvider<NoSettings> {
-  override val name: String = "Inline Color"
+class JavaScriptInlineInlayProvider : ColorInlineInlayProvider() {
+  @Suppress("UnstableApiUsage")
+  override fun getCollector(editor: Editor): InlayHintsCollector = JavaScriptInlineInlayCollector(editor)
 
-  override val key: SettingsKey<NoSettings> = SettingsKey("inline.color")
-
-  override val previewText: String? = null
-
-  override fun isLanguageSupported(language: Language): Boolean = true
-
-  override fun createConfigurable(settings: NoSettings): ImmediateConfigurable = object : ImmediateConfigurable {
-    override fun createComponent(listener: ChangeListener): JComponent = panel {}
-  }
-
-  override fun createSettings(): NoSettings = NoSettings()
-
-  override fun getCollectorFor(file: PsiFile, editor: Editor, settings: NoSettings, sink: InlayHintsSink): InlayHintsCollector =
-    JavaScriptInlineInlayCollector(editor)
 }

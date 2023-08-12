@@ -77,9 +77,6 @@
                                  id="CustomColorsConfig"/>
 
         <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
-
-        <codeInsight.inlayProvider implementationClass="com.mallowigi.highlighters.InlineInlayProvider"
-                                   language="TypeScript"/>
     </extensions>
 
     <description><![CDATA[

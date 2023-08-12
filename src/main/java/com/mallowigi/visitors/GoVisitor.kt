@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 import java.util.*
 
 class GoVisitor : ColorVisitor() {
@@ -40,12 +41,10 @@ class GoVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean =
     "GO_FILE" == Objects.requireNonNull(file.fileElementType).toString()
 
-  override fun visit(element: PsiElement) {
-    if ("STRING_LITERAL" != PsiUtilCore.getElementType(element).toString()) return
+  override fun accept(element: PsiElement): Color? {
+    if ("STRING_LITERAL" != PsiUtilCore.getElementType(element).toString()) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
-
 }

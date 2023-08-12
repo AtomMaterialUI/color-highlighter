@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class JSVisitor : ColorVisitor() {
 
@@ -39,25 +40,15 @@ class JSVisitor : ColorVisitor() {
     "JS:STRING_LITERAL"
   )
 
-  override fun accept(element: PsiElement): Boolean {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return false
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value!!, this)
-    return color != null
+    return ColorSearchEngine.getColor(value!!, this)
   }
 
   override fun clone(): HighlightVisitor = JSVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean = true
-
-  override fun visit(element: PsiElement) {
-    val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
-
-    val value = element.text
-    val color = ColorSearchEngine.getColor(value!!, this)
-    color?.let { highlight(element, it) }
-  }
 }

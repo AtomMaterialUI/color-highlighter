@@ -32,6 +32,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
+import java.awt.Color
 
 class RubyVisitor : ColorVisitor() {
 
@@ -39,12 +40,11 @@ class RubyVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is RFile
 
-  override fun visit(element: PsiElement) {
-    if ("string content" != PsiUtilCore.getElementType(element).toString()) return
+  override fun accept(element: PsiElement): Color? {
+    if ("string content" != PsiUtilCore.getElementType(element).toString()) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

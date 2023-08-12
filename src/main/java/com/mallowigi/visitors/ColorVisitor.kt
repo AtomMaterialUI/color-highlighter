@@ -84,6 +84,11 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
     return true
   }
 
+  override fun visit(element: PsiElement) {
+    val color = this.accept(element)
+    color?.let { highlight(element, it) }
+  }
+
   /**
    * Clones the visitor. This method is mandatory.
    *
@@ -97,6 +102,6 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   override fun shouldVisit(): Boolean = true
 
-  override fun accept(element: PsiElement): Boolean = false
+  override fun accept(element: PsiElement): Color? = null
 
 }

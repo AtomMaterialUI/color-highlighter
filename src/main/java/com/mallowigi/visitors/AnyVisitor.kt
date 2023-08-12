@@ -31,20 +31,24 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLiteralValue
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class AnyVisitor : ColorVisitor() {
+  override fun accept(element: PsiElement): Color? {
+    if (element !is PsiLiteralValue) return null
+
+    val value = element.value
+    if (value !is String) return null
+
+    return ColorSearchEngine.getColor((value as? String)!!, this)
+  }
 
   override fun suitableForFile(file: PsiFile): Boolean =
     !extensions.contains(file.virtualFile?.extension)
 
   override fun visit(element: PsiElement) {
-    if (element !is PsiLiteralValue) return
-
-    val value = element.value
-    if (value is String) {
-      val color = ColorSearchEngine.getColor((value as? String)!!, this)
-      color?.let { highlight(element, it) }
-    }
+    val color = this.accept(element)
+    color?.let { highlight(element, it) }
   }
 
   override fun clone(): HighlightVisitor = AnyVisitor()

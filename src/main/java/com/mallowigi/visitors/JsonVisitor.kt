@@ -32,6 +32,7 @@ import com.intellij.json.psi.JsonStringLiteral
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class JsonVisitor : ColorVisitor() {
 
@@ -39,11 +40,9 @@ class JsonVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = file is JsonFile
 
-  override fun visit(element: PsiElement) {
-    if (element !is JsonStringLiteral) return
+  override fun accept(element: PsiElement): Color? {
+    if (element !is JsonStringLiteral) return null
 
-    val color = ColorSearchEngine.getColor(element.value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(element.value, this)
   }
-
 }

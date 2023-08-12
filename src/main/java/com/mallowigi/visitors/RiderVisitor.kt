@@ -35,6 +35,7 @@ import com.mallowigi.search.ColorPrefixes.COLOR_FROM_ARGB
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorParser
 import com.mallowigi.search.parsers.NetColorParser
+import java.awt.Color
 
 class RiderVisitor : ColorVisitor() {
 
@@ -56,13 +57,12 @@ class RiderVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean =
     file.name.matches(".*\\.(c|h|cc|hh|cpp|hpp|cs)$".toRegex())
 
-  override fun visit(element: PsiElement) {
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return
+    if (type !in allowedTypes) return null
 
     val value = element.text
-    val color = ColorSearchEngine.getColor(value, this)
-    color?.let { highlight(element, it) }
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

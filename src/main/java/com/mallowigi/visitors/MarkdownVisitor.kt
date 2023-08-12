@@ -32,24 +32,24 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.ColorSearchEngine
+import java.awt.Color
 
 class MarkdownVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = MarkdownVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean =
-    file.name.matches(".*\\.(md|mdx)$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean = file.name.matches(".*\\.(md|mdx)$".toRegex())
 
-  override fun visit(element: PsiElement) {
-    if (!ColorHighlighterState.instance.isMarkdownEnabled) return
+  override fun shouldVisit(): Boolean = ColorHighlighterState.instance.isMarkdownEnabled
+
+  override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
-    if (type != "Markdown:Markdown:TEXT") return
+    if (type != "Markdown:Markdown:TEXT") return null
 
     val value = element.text
-    if (value is String) {
-      val color = ColorSearchEngine.getColor((value as? String)!!, this)
-      color?.let { highlight(element, it) }
-    }
+    if (value !is String) return null
+
+    return ColorSearchEngine.getColor((value as? String)!!, this)
   }
 
 }
