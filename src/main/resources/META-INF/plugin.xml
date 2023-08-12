@@ -55,6 +55,8 @@
     <depends optional="true" config-file="withDart.xml">Dart</depends>
     <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
     <depends optional="true" config-file="withR.xml">R4Intellij</depends>
+    <depends optional="true" config-file="withRust.xml">org.rust.lang</depends>
+    <depends optional="true" config-file="withLua.xml">com.tang</depends>
 
     <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 

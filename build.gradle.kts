@@ -59,6 +59,8 @@ val depsPyVersion: String = properties("depsPyVersion")
 val depsRubyVersion: String = properties("depsRubyVersion")
 val depsScalaVersion: String = properties("depsScalaVersion")
 val depsRVersion: String = properties("depsRVersion")
+val depsRustVersion: String = properties("depsRustVersion")
+val depsLuaVersion: String = properties("depsLuaVersion")
 
 // Configure project's dependencies
 repositories {
@@ -104,7 +106,9 @@ intellij {
     "org.intellij.scala:$depsScalaVersion",
     "org.jetbrains.plugins.ruby:$depsRubyVersion",
     "com.jetbrains.php:$depsPhpVersion",
-    "R4Intellij:$depsRVersion"
+    "R4Intellij:$depsRVersion",
+    "org.rust.lang:$depsRustVersion",
+    "com.tang:$depsLuaVersion"
   ))
 }
 
