@@ -25,203 +25,215 @@
   -->
 
 <idea-plugin>
-  <id>com.mallowigi.colorHighlighter</id>
-  <name>Color Highlighter</name>
-  <version>@version@</version>
-  <category>Editor</category>
-  <vendor email="elior@material-theme.com" url="https://github.com/mallowigi">AtomMaterial</vendor>
+    <id>com.mallowigi.colorHighlighter</id>
+    <name>Color Highlighter</name>
+    <version>@version@</version>
+    <category>Editor</category>
+    <vendor email="elior@material-theme.com" url="https://github.com/mallowigi">AtomMaterial</vendor>
 
 
-  <idea-version since-build="211.*"/>
+    <idea-version since-build="211.*"/>
 
-  <depends>com.intellij.modules.platform</depends>
-  <depends optional="true" config-file="withLang.xml">com.intellij.modules.lang</depends>
-  <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
-  <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
-  <!--suppress PluginXmlValidity -->
-  <depends optional="true" config-file="withJs.xml">JavaScript</depends>
-  <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
-  <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
-  <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
-  <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
-  <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
-  <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
-  <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
-  <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
-  <!--suppress PluginXmlValidity -->
-  <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
-  <depends optional="true" config-file="withMarkdown.xml">org.intellij.plugins.markdown</depends>
-  <!--suppress PluginXmlValidity -->
-  <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
-  <depends optional="true" config-file="withDart.xml">Dart</depends>
-  <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
-  <depends optional="true" config-file="withR.xml">R4Intellij</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="withLang.xml">com.intellij.modules.lang</depends>
+    <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
+    <depends optional="true" config-file="withYaml.xml">org.jetbrains.plugins.yaml</depends>
+    <!--suppress PluginXmlValidity -->
+    <depends optional="true" config-file="withJs.xml">JavaScript</depends>
+    <depends optional="true" config-file="withJson.xml">com.intellij.modules.json</depends>
+    <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
+    <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
+    <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
+    <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
+    <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
+    <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="withGo.xml">com.intellij.modules.go-capable</depends>
+    <!--suppress PluginXmlValidity -->
+    <depends optional="true" config-file="withAppCode.xml">com.intellij.modules.cidr.lang</depends>
+    <depends optional="true" config-file="withMarkdown.xml">org.intellij.plugins.markdown</depends>
+    <!--suppress PluginXmlValidity -->
+    <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
+    <depends optional="true" config-file="withDart.xml">Dart</depends>
+    <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
+    <depends optional="true" config-file="withR.xml">R4Intellij</depends>
 
-  <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
+    <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup displayType="BALLOON" id="Color Highlighter Notifications"/>
 
-    <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterState"/>
-    <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
-                             key="ColorHighlighterForm.title"
-                             dynamic="true"
-                             parentId="editor"
-                             id="ColorHighlighterConfigurable"/>
+        <applicationService serviceImplementation="com.mallowigi.config.home.ColorHighlighterState"/>
+        <applicationConfigurable instance="com.mallowigi.config.home.ColorHighlighterConfigurable"
+                                 key="ColorHighlighterForm.title"
+                                 dynamic="true"
+                                 parentId="editor"
+                                 id="ColorHighlighterConfigurable"/>
 
-    <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig"/>
-    <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
-                             dynamic="true"
-                             key="CustomColorsForm.title"
-                             parentId="ColorHighlighterConfigurable"
-                             id="CustomColorsConfig"/>
+        <applicationService serviceImplementation="com.mallowigi.config.custom.CustomColorsConfig"/>
+        <applicationConfigurable instance="com.mallowigi.config.custom.CustomColorsConfigurable"
+                                 dynamic="true"
+                                 key="CustomColorsForm.title"
+                                 parentId="ColorHighlighterConfigurable"
+                                 id="CustomColorsConfig"/>
 
-    <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
-  </extensions>
+        <backgroundPostStartupActivity implementation="com.mallowigi.UpdatesComponent"/>
 
-  <description><![CDATA[
-    <!--suppress LongLine -->
-    <h1>Color Highlighter</h1>
-    <h2>Highlight Colors in your IDE</h2>
-    <hr/>
-    <div>
-      <img
-        src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
-        alt="logo" width="256">
-    </div>
-    <hr>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.highlighters.InlineInlayProvider"
+                                   language="JavaScript"/>
+    </extensions>
 
-    <p>This plugin highlights colors in editors in order to make them stand out in your code.</p>
-    <br>
-    <p>This does the same as "Show CSS Color preview as background", only for more languages!</p>
-    <br>
-    <p>Currently supported languages:</p>
-    <ul>
-      <li>XML</li>
-      <li>HTML</li>
-      <li>JavaScript</li>
-      <li>TypeScript</li>
-      <li>Properties</li>
-      <li>YAML</li>
-      <li>Python</li>
-      <li>PHP</li>
-      <li>Ruby</li>
-      <li>Scala</li>
-      <li>Java</li>
-      <li>Kotlin</li>
-      <li>Objective-C</li>
-      <li>Swift</li>
-      <li>Go</li>
-      <li>C</li>
-      <li>C++</li>
-      <li>C#</li>
-      <li>R</li>
-      <li>SQL</li>
-      <li>Markdown</li>
-      <li>Text</li>
-    </ul>
-    <br>
+    <description><![CDATA[
+        <!--suppress LongLine -->
+        <h1>Color Highlighter</h1>
+        <h2>Highlight Colors in your IDE</h2>
+        <hr/>
+        <div>
+            <img
+                    src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
+                    alt="logo" width="256">
+        </div>
+        <hr>
 
-    <hr>
-    <h2>Features</h2>
-    <ul>
-      <li>Preview most common color formats:</li>
-      <ul>
-        <li>Hex: <code>(#rgb, #rrggbb, #rrggbbaa)</code></li>
-        <li>RGB <code>rgb(red, green, blue[, alpha])</code></li>
-        <li>HSL <code>hsl(hue, saturation, luminance[, alpha])</code></li>
-        <li>0x <code>0xRRGGBBAA</code></li>
-        <li>Java/Kotlin Color function <code>[new ]Color(r, g, b)</code></li>
-        <li>Java/Kotlin Color properties <code>Color.XXXX</code></li>
-        <li>C# Color methods <code>Color.FromArgb(red, green, blue)</code></li>
-        <li>Web Colors <code>(red, green, khaki, goldenrod...)</code></li>
-        <li>FlatUI Colors <code>(emerald, carrot, amethyst...)</code></li>
-        <li><strong>Custom Colors (define your own custom colors!)</strong></li>
-      </ul>
-      <li>Also displays the color in the gutter, with options to <strong>copy to clipboard in different
-        formats!</strong></li>
-    </ul>
-    <br>
+        <p>This plugin highlights colors in editors in order to make them stand out in your code.</p>
+        <br>
+        <p>This does the same as "Show CSS Color preview as background", only for more languages!</p>
+        <br>
+        <p>Currently supported languages:</p>
+        <ul>
+            <li>XML</li>
+            <li>HTML</li>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>Properties</li>
+            <li>YAML</li>
+            <li>Python</li>
+            <li>PHP</li>
+            <li>Ruby</li>
+            <li>Scala</li>
+            <li>Java</li>
+            <li>Kotlin</li>
+            <li>Objective-C</li>
+            <li>Swift</li>
+            <li>Go</li>
+            <li>C</li>
+            <li>C++</li>
+            <li>C#</li>
+            <li>R</li>
+            <li>SQL</li>
+            <li>Markdown</li>
+            <li>Text</li>
+        </ul>
+        <br>
 
-    <h2>Donate</h2>
-    <p>This theme is backed up by <a
-      href="https://opencollective.com/atom-material-themes-and-plugins">OpenCollective</a>.
-      If you like this plugin, don't hesitate to
-      give it a star or donate via <a href="https://www.paypal.me/mallowigi">Paypal</a> or <a
-        href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
-    <br>
+        <hr>
+        <h2>Features</h2>
+        <ul>
+            <li>Preview most common color formats:</li>
+            <ul>
+                <li>Hex: <code>(#rgb, #rrggbb, #rrggbbaa)</code></li>
+                <li>RGB <code>rgb(red, green, blue[, alpha])</code></li>
+                <li>HSL <code>hsl(hue, saturation, luminance[, alpha])</code></li>
+                <li>0x <code>0xRRGGBBAA</code></li>
+                <li>Java/Kotlin Color function <code>[new ]Color(r, g, b)</code></li>
+                <li>Java/Kotlin Color properties <code>Color.XXXX</code></li>
+                <li>C# Color methods <code>Color.FromArgb(red, green, blue)</code></li>
+                <li>Web Colors <code>(red, green, khaki, goldenrod...)</code></li>
+                <li>FlatUI Colors <code>(emerald, carrot, amethyst...)</code></li>
+                <li><strong>Custom Colors (define your own custom colors!)</strong></li>
+            </ul>
+            <li>Also displays the color in the gutter, with options to <strong>copy to clipboard in different
+                formats!</strong></li>
+        </ul>
+        <br>
 
-    <h2>Screenshots</h2>
+        <h2>Donate</h2>
+        <p>This theme is backed up by <a
+                href="https://opencollective.com/atom-material-themes-and-plugins">OpenCollective</a>.
+            If you like this plugin, don't hesitate to
+            give it a star or donate via <a href="https://www.paypal.me/mallowigi">Paypal</a> or <a
+                    href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
+        <br>
 
-    <h3>PHP</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png" alt="PHP"
-    ></a>
+        <h2>Screenshots</h2>
 
-
-    <h3>Python</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png" alt="Python"
-    ></a>
+        <h3>PHP</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png"
+                alt="PHP"
+        ></a>
 
 
-    <h4>Ruby</h4>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png" alt="Ruby"
-    ></a>
+        <h3>Python</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png"
+                alt="Python"
+        ></a>
 
 
-    <h4>Go</h4>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
-    ></a>
+        <h4>Ruby</h4>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png"
+                alt="Ruby"
+        ></a>
 
 
-    <h3>Objective C</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png" alt="ObjectiveC"
-    ></a>
+        <h4>Go</h4>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
+        ></a>
 
 
-    <h3>Swift</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png" alt="Swift"
-    ></a>
+        <h3>Objective C</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png"
+                alt="ObjectiveC"
+        ></a>
 
 
-    <h3>JavaScript</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png" alt="JavaScript"
-    ></a>
+        <h3>Swift</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png"
+                alt="Swift"
+        ></a>
 
 
-    <h3>Kotlin</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png" alt="Kotlin"
-    ></a>
+        <h3>JavaScript</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png"
+                alt="JavaScript"
+        ></a>
 
 
-    <h3>Java</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png" alt="Java"
-    ></a>
+        <h3>Kotlin</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png"
+                alt="Kotlin"
+        ></a>
 
 
-    <h3>JSON</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png" alt="JSON"
-    ></a>
+        <h3>Java</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png"
+                alt="Java"
+        ></a>
 
 
-    <h3>Properties</h3>
-    <img
-      src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
-      alt="Properties"
-    ></a>
-    ]]>
+        <h3>JSON</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png"
+                alt="JSON"
+        ></a>
+
+
+        <h3>Properties</h3>
+        <img
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
+                alt="Properties"
+        ></a>
+        ]]>
   </description>
 
 
-  <change-notes>
-  </change-notes>
+    <change-notes>
+    </change-notes>
 </idea-plugin>

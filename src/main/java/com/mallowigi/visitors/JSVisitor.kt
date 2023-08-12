@@ -39,6 +39,15 @@ class JSVisitor : ColorVisitor() {
     "JS:STRING_LITERAL"
   )
 
+  override fun accept(element: PsiElement): Boolean {
+    val type = PsiUtilCore.getElementType(element).toString()
+    if (type !in allowedTypes) return false
+
+    val value = element.text
+    val color = ColorSearchEngine.getColor(value!!, this)
+    return color != null
+  }
+
   override fun clone(): HighlightVisitor = JSVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean = true
@@ -51,5 +60,4 @@ class JSVisitor : ColorVisitor() {
     val color = ColorSearchEngine.getColor(value!!, this)
     color?.let { highlight(element, it) }
   }
-
 }

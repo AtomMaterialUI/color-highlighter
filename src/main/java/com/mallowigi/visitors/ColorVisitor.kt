@@ -96,4 +96,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   override fun shouldParseText(text: String): Boolean = false
 
   override fun shouldVisit(): Boolean = true
+
+  override fun accept(element: PsiElement): Boolean = false
+
 }

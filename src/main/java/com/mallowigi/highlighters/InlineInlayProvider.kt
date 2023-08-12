@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +23,31 @@
  *
  *
  */
+package com.mallowigi.highlighters
 
-package com.mallowigi.visitors
+import com.intellij.codeInsight.hints.*
+import com.intellij.lang.Language
+import com.intellij.openapi.editor.Editor
+import com.intellij.psi.PsiFile
+import com.intellij.ui.dsl.builder.panel
+import javax.swing.JComponent
 
-import com.intellij.psi.PsiElement
-import com.mallowigi.search.parsers.ColorParser
+@Suppress("UnstableApiUsage")
+class InlineInlayProvider : InlayHintsProvider<NoSettings> {
+  override val name: String = "Inline Color"
 
-interface LangVisitor {
-  fun accept(element: PsiElement): Boolean = false
+  override val key: SettingsKey<NoSettings> = SettingsKey("inline.color")
 
-  /**
-   * Returns a suitable parser for the given text (ex: CtorParser if the text is a Color() constructor)
-   */
-  fun getParser(text: String): ColorParser?
+  override val previewText: String? = null
 
-  /**
-   * Checks if the visitor should parse the text for a parser
-   *
-   */
-  fun shouldParseText(text: String): Boolean
+  override fun isLanguageSupported(language: Language): Boolean = true
 
-  /**
-   * Checks if the visitor should visit at all
-   *
-   */
-  fun shouldVisit(): Boolean
+  override fun createConfigurable(settings: NoSettings): ImmediateConfigurable = object : ImmediateConfigurable {
+    override fun createComponent(listener: ChangeListener): JComponent = panel {}
+  }
+
+  override fun createSettings(): NoSettings = NoSettings()
+
+  override fun getCollectorFor(file: PsiFile, editor: Editor, settings: NoSettings, sink: InlayHintsSink): InlayHintsCollector =
+    JavaScriptInlineInlayCollector(editor)
 }

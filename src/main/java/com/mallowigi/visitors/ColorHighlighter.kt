@@ -28,21 +28,14 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType.HighlightInfoTypeImpl
-import com.intellij.codeInsight.hints.presentation.PresentationFactory
-import com.intellij.codeInsight.hints.presentation.PresentationRenderer
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
-import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.editor.InlayModel
 import com.intellij.psi.PsiElement
-import com.intellij.ui.components.JBLabel
 import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.gutter.GutterColorLineMarkerProvider
 import com.mallowigi.gutter.GutterColorRenderer
 import com.mallowigi.highlighters.HighlighterStyleFactory
 import java.awt.Color
-import java.awt.Dimension
-import javax.swing.Icon
 
 internal object ColorHighlighter {
   private val COLOR_ELEMENT: HighlightInfoType = HighlightInfoTypeImpl(HighlightSeverity.INFORMATION, DefaultLanguageHighlighterColors.CONSTANT)
@@ -60,22 +53,5 @@ internal object ColorHighlighter {
       newHighlightInfo = newHighlightInfo.gutterIconRenderer(GutterColorRenderer(color))
     }
     return newHighlightInfo
-  }
-
-  fun createInlay(editor: Editor, offset: Int, icon: Icon) {
-    val inlayModel: InlayModel = editor.inlayModel
-
-    val renderer = object : JBLabel(icon) {
-      init {
-        isOpaque = false
-      }
-
-      override fun getPreferredSize(): Dimension = Dimension(icon.iconWidth, icon.iconHeight)
-    }
-
-    val presentation = PresentationFactory(editor).text("Inlay text")
-
-    val element = inlayModel.addInlineElement(offset, PresentationRenderer(presentation))
-
   }
 }
