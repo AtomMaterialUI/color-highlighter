@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.GoVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.GoVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.GoInlineInlayProvider"
+                                   language="go"/>
+    </extensions>
 </idea-plugin>

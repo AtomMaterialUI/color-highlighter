@@ -27,13 +27,13 @@ package com.mallowigi.inlay
 
 import com.intellij.codeInsight.hints.InlayHintsCollector
 import com.intellij.openapi.editor.Editor
-import com.mallowigi.visitors.JSVisitor
+import com.mallowigi.visitors.GoVisitor
 
-class JavaScriptInlineInlayProvider : ColorInlineInlayProvider() {
+class GoInlineInlayProvider : ColorInlineInlayProvider() {
   @Suppress("UnstableApiUsage")
   override fun getCollector(editor: Editor): InlayHintsCollector = MyInlineInlayCollector(editor)
 
   class MyInlineInlayCollector(editor: Editor) : InlineInlayCollector(editor) {
-    override fun getVisitor() = JSVisitor()
+    override fun getVisitor() = GoVisitor()
   }
 }

@@ -25,7 +25,9 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="com.mallowigi.visitors.DartVisitor"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <highlightVisitor implementation="com.mallowigi.visitors.DartVisitor"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.DartInlineInlayProvider"
+                                   language="Dart"/>
+    </extensions>
 </idea-plugin>
