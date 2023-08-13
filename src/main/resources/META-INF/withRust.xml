@@ -27,7 +27,7 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
         <highlightVisitor implementation="com.mallowigi.visitors.RustVisitor"/>
-        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.RInlineInlayProvider"
-                                   language="R"/>
+        <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.RustInlineInlayProvider"
+                                   language="Rust"/>
     </extensions>
 </idea-plugin>

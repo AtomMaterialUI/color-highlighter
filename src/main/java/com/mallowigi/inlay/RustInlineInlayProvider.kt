@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,17 @@
  *
  *
  */
+package com.mallowigi.inlay
 
-package com.mallowigi.visitors
+import com.intellij.codeInsight.hints.InlayHintsCollector
+import com.intellij.openapi.editor.Editor
+import com.mallowigi.visitors.RustVisitor
 
-import com.intellij.codeInsight.daemon.impl.HighlightVisitor
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.psi.util.PsiUtilCore
-import com.mallowigi.search.ColorSearchEngine
-import java.awt.Color
+class RustInlineInlayProvider : ColorInlineInlayProvider() {
+  @Suppress("UnstableApiUsage")
+  override fun getCollector(editor: Editor): InlayHintsCollector = MyInlineInlayCollector(editor)
 
-class RustVisitor : ColorVisitor() {
-  private val allowedTypes = setOf(
-    "STRING_LITERAL",
-    "INTEGER_LITERAL"
-  )
-
-  override fun clone(): HighlightVisitor = RustVisitor()
-
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(rust|rs)$".toRegex())
-
-  override fun accept(element: PsiElement): Color? {
-    val type = PsiUtilCore.getElementType(element).toString()
-    if (type !in allowedTypes) return null
-
-    val value = element.text
-    return ColorSearchEngine.getColor(value, this)
+  class MyInlineInlayCollector(editor: Editor) : InlineInlayCollector(editor) {
+    override fun getVisitor() = RustVisitor()
   }
-
 }
