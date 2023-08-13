@@ -14,4 +14,5 @@
   }
 </style>
 
-<label aria-invalid={$isValid}></label>
+
+<div aria-invalid={$isValid} style="color: red"/>

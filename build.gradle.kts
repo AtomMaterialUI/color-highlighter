@@ -108,7 +108,7 @@ intellij {
     "com.jetbrains.php:$depsPhpVersion",
     "R4Intellij:$depsRVersion",
     "org.rust.lang:$depsRustVersion",
-    "com.tang:$depsLuaVersion"
+    "com.tang:$depsLuaVersion",
   ))
 }
 

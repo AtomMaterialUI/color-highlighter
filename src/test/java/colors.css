@@ -1,4 +1,9 @@
 .color {
   color: red;
   background-color: blue;
+  border-color: rgb(10, 20, 30);
+}
+
+.other {
+  color: #ff00ff;
 }

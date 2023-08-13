@@ -57,7 +57,9 @@
     <depends optional="true" config-file="withR.xml">R4Intellij</depends>
     <depends optional="true" config-file="withRust.xml">org.rust.lang</depends>
     <depends optional="true" config-file="withLua.xml">com.tang</depends>
+    <!--suppress PluginXmlValidity -->
     <depends optional="true" config-file="withToml.xml">org.toml.lang</depends>
+    <depends optional="true" config-file="withSvelte.xml">dev.blachut.svelte.lang</depends>
 
     <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 
