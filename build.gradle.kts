@@ -61,6 +61,8 @@ val depsScalaVersion: String = properties("depsScalaVersion")
 val depsRVersion: String = properties("depsRVersion")
 val depsRustVersion: String = properties("depsRustVersion")
 val depsLuaVersion: String = properties("depsLuaVersion")
+val depsVueVersion: String = properties("depsVueVersion")
+val depsSvelteVersion: String = properties("depsSvelteVersion")
 
 // Configure project's dependencies
 repositories {
@@ -109,6 +111,8 @@ intellij {
     "R4Intellij:$depsRVersion",
     "org.rust.lang:$depsRustVersion",
     "com.tang:$depsLuaVersion",
+    "dev.blachut.svelte.lang:$depsSvelteVersion",
+    "org.jetbrains.plugins.vue:$depsVueVersion",
   ))
 }
 

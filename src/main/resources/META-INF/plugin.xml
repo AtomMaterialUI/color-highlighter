@@ -60,6 +60,7 @@
     <!--suppress PluginXmlValidity -->
     <depends optional="true" config-file="withToml.xml">org.toml.lang</depends>
     <depends optional="true" config-file="withSvelte.xml">dev.blachut.svelte.lang</depends>
+    <depends optional="true" config-file="withVue.xml">org.jetbrains.plugins.vue</depends>
 
     <resource-bundle>messages.ColorHighlighterBundle</resource-bundle>
 

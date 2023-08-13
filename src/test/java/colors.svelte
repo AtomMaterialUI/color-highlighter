@@ -1,5 +1,6 @@
 <script>
   import { writable } from 'svelte/store';
+  console.log("#ff0000")
 
   const isValid = writable(true); // you can customize the initial value.
 </script>
