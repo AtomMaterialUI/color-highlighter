@@ -24,6 +24,7 @@
 - Fix deprecated usages
 - Fix the display name missing error
 - Make rgba format the default rather than argb
+- Detect Strings in Scala
 
 ## 15.0.0
 

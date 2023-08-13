@@ -8,6 +8,7 @@ import scala.collection.JavaConversions._
 class ScalaColors {
 
   var ALICEBLUE: Color = new ColorUIResource(0xf0f8ff)
+  var ALICEBLUE: Color = new ColorUIResource("f0f0f0")
 
   var ALIZARIN: Color = new ColorUIResource(0xe74c3c)
 

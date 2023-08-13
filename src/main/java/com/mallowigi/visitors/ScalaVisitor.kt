@@ -32,6 +32,7 @@ import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.plugins.scala.lang.psi.api.ScalaFile
 import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScIntegerLiteral
+import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScStringLiteral
 import java.awt.Color
 
 class ScalaVisitor : ColorVisitor() {
@@ -41,7 +42,7 @@ class ScalaVisitor : ColorVisitor() {
   override fun suitableForFile(file: PsiFile): Boolean = file is ScalaFile
 
   override fun accept(element: PsiElement): Color? {
-    if (element !is ScIntegerLiteral) return null
+    if (element !is ScIntegerLiteral && element !is ScStringLiteral) return null
 
     val value = element.text
     return ColorSearchEngine.getColor(value, this)
