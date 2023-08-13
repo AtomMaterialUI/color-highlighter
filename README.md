@@ -11,44 +11,72 @@
 ## Features
 
 - Colorize different color formats directly in the code
-  - `HEX` with or without hash (`#`) with alpha support
-  - `rgb()`, `argb()` and `rgba()`
-  - `hsl()` and `hsla()`
-  - Java/Kotlin/Scala -> `ColorUiResource`
-  - Java/Kotlin: `[new ]Color(r, g, b[, a])`
-  - *ASCII Colors* and *Web Colors* (https://en.wikipedia.org/wiki/Web_colors)
-  - *FlatUI Colors* (https://flatuicolors.com/)
-  - Custom Colors (**NEW!**)
+    - `HEX` with or without hash (`#`) with alpha support
+    - `rgb()`, `argb()` and `rgba()`
+    - `hsl()` and `hsla()`
+    - Color Tuples (`(r, g, b[, a])`)
+    - Java/Kotlin/Scala -> `ColorUiResource`
+    - Java/Kotlin: `[new ]Color(r, g, b[, a])`
+    - Objective-C: `[NSColor colorWith...]`
+    - *ASCII Colors* and *Web Colors* (https://en.wikipedia.org/wiki/Web_colors)
+    - *FlatUI Colors* (https://flatuicolors.com/)
+    - Custom Colors (**NEW!**)
 
 - Supports most languages (more to come)
-  - HTML
-  - XML
-  - YAML
-  - Properties
-  - JSON
-  - JavaScript
-  - TypeScript
-  - Scala
-  - Java
-  - Kotlin
-  - Ruby
-  - Python
-  - PHP
-  - Go
-  - ObjectiveC
-  - Swift
-  - C
-  - C++
-  - C#
-  - Markdown
-  - Dart (**NEW**)
-  - SQL (**NEW**)
-  - R (**NEW**)
-  - Text (**NEW**, *Experimental*)
+    - HTML
+    - XML
+    - YAML
+    - Properties
+    - JSON
+    - JavaScript
+    - TypeScript
+    - Scala
+    - Java
+    - Kotlin
+    - Ruby
+    - Python
+    - PHP
+    - Go
+    - ObjectiveC
+    - Swift
+    - C
+    - C++
+    - C#
+    - Markdown
+    - Dart
+    - SQL
+    - R
+    - Rust (**NEW**)
+    - Lua (**NEW**)
+    - Toml (**NEW**)
+    - Vue (**NEW**)
+    - Svelte (**NEW**)
+    - CSS Languages (SCSS, Less, Stylus, PostCSS)
+    - Markup languages (HTML, XML, SVG, JSX, TSX, etc)
+    - Text (**Experimental**)
+
+- Different styles:
+    - Background
+    - Foreground
+    - Border
+    - Underline
+    - Inline (small colored icon near the color)
 
 - Ability to preview color in the gutter
 - Options to copy gutter color in different formats (rgb, hsl, etc)
-- You can disable certain parsers
+- Specify between `rgba` and `argb` detection in hex colors
+
+- Fine-toggling:
+    - Hexadecimal detection (`ff0000`, `ff0000ff`, `f0f`)
+    - Color Tuples (`(r, g, b[, a])`)
+    - Color names
+    - Java Color Constructor (`new Color(r, g, b[, a])`)
+    - Java Color methods (`Color.BLACK`, `Color.RED`)
+    - Kotlin Color Constructor (`Color(r, g, b[, a])`)
+    - Kotlin Color methods (`Color.BLACK`, `Color.RED`)
+    - C# Color Constructor (`Color.FromArgb(r, g, b[, a])`)
+    - Markdown Parsing
+    - Text Parsing
 
 ## Screenshots
 

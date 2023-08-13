@@ -6,6 +6,12 @@
 
 ### Features
 
+- New **Highlighting Styles**: *Background*, *Foreground*, *Border*, *Underline* and **Inline**
+- Support for **Rust**
+- Support for **Lua**
+- Support for **Toml**
+- Support for **Svelte**
+- Support for **Vue**
 - Migrate Settings to Kotlin UI DSL
 - Add XML Visitor to be able to highlight colors inside XML nodes
 - Python: Recognize tuples
