@@ -1,0 +1,1392 @@
+[[colors]]
+"@name" = "aliceblue"
+"@code" = "f0f8ff"
+
+[[colors]]
+"@name" = "alizarin"
+"@code" = "e74c3c"
+
+[[colors]]
+"@name" = "amethyst"
+"@code" = "9b59b6"
+
+[[colors]]
+"@name" = "antiquewhite"
+"@code" = "faebd7"
+
+[[colors]]
+"@name" = "aqua"
+"@code" = "00ffff"
+
+[[colors]]
+"@name" = "aquamarine"
+"@code" = "7fffd4"
+
+[[colors]]
+"@name" = "asbestos"
+"@code" = "7f8c8d"
+
+[[colors]]
+"@name" = "azure"
+"@code" = "f0ffff"
+
+[[colors]]
+"@name" = "beige"
+"@code" = "f5f5dc"
+
+[[colors]]
+"@name" = "belizehole"
+"@code" = "2980b9"
+
+[[colors]]
+"@name" = "bisque"
+"@code" = "ffe4c4"
+
+[[colors]]
+"@name" = "black"
+"@code" = "000000"
+
+[[colors]]
+"@name" = "blanchedalmond"
+"@code" = "ffebcd"
+
+[[colors]]
+"@name" = "blue"
+"@code" = "0000ff"
+
+[[colors]]
+"@name" = "blueviolet"
+"@code" = "8a2be2"
+
+[[colors]]
+"@name" = "brown"
+"@code" = "a52a2a"
+
+[[colors]]
+"@name" = "buff"
+"@code" = "F0DC82"
+
+[[colors]]
+"@name" = "burlywood"
+"@code" = "deb887"
+
+[[colors]]
+"@name" = "cadetblue"
+"@code" = "5f9ea0"
+
+[[colors]]
+"@name" = "carrot"
+"@code" = "e67e22"
+
+[[colors]]
+"@name" = "chartreuse"
+"@code" = "7fff00"
+
+[[colors]]
+"@name" = "chocolate"
+"@code" = "d2691e"
+
+[[colors]]
+"@name" = "clouds"
+"@code" = "ecf0f1"
+
+[[colors]]
+"@name" = "concrete"
+"@code" = "95a5a6"
+
+[[colors]]
+"@name" = "coral"
+"@code" = "ff7f50"
+
+[[colors]]
+"@name" = "cornflowerblue"
+"@code" = "6495ed"
+
+[[colors]]
+"@name" = "cornsilk"
+"@code" = "fff8dc"
+
+[[colors]]
+"@name" = "crimson"
+"@code" = "dc143c"
+
+[[colors]]
+"@name" = "cyan"
+"@code" = "00ffff"
+
+[[colors]]
+"@name" = "darkblue"
+"@code" = "00008b"
+
+[[colors]]
+"@name" = "darkbrown"
+"@code" = "5C4033"
+
+[[colors]]
+"@name" = "darkbuff"
+"@code" = "976638"
+
+[[colors]]
+"@name" = "darkcyan"
+"@code" = "008b8b"
+
+[[colors]]
+"@name" = "darkgold"
+"@code" = "EEBC1D"
+
+[[colors]]
+"@name" = "darkgoldenrod"
+"@code" = "b8860b"
+
+[[colors]]
+"@name" = "darkgray"
+"@code" = "404040"
+
+[[colors]]
+"@name" = "darkgreen"
+"@code" = "006400"
+
+[[colors]]
+"@name" = "darkgrey"
+"@code" = "a9a9a9"
+
+[[colors]]
+"@name" = "darkivory"
+"@code" = "F2E58F"
+
+[[colors]]
+"@name" = "darkkhaki"
+"@code" = "bdb76b"
+
+[[colors]]
+"@name" = "darkmagenta"
+"@code" = "8b008b"
+
+[[colors]]
+"@name" = "darkmustard"
+"@code" = "7C7C40"
+
+[[colors]]
+"@name" = "darkolivegreen"
+"@code" = "556b2f"
+
+[[colors]]
+"@name" = "darkorange"
+"@code" = "ff8c00"
+
+[[colors]]
+"@name" = "darkorchid"
+"@code" = "9932cc"
+
+[[colors]]
+"@name" = "darkpink"
+"@code" = "E75480"
+
+[[colors]]
+"@name" = "darkred"
+"@code" = "8b0000"
+
+[[colors]]
+"@name" = "darksalmon"
+"@code" = "e9967a"
+
+[[colors]]
+"@name" = "darksilver"
+"@code" = "AFAFAF"
+
+[[colors]]
+"@name" = "darkseagreen"
+"@code" = "8fbc8f"
+
+[[colors]]
+"@name" = "darkslateblue"
+"@code" = "483d8b"
+
+[[colors]]
+"@name" = "darkslategray"
+"@code" = "2f4f4f"
+
+[[colors]]
+"@name" = "darkslategrey"
+"@code" = "2f4f4f"
+
+[[colors]]
+"@name" = "darkturquoise"
+"@code" = "00ced1"
+
+[[colors]]
+"@name" = "darkviolet"
+"@code" = "9400d3"
+
+[[colors]]
+"@name" = "darkyellow"
+"@code" = "FFCC00"
+
+[[colors]]
+"@name" = "deeppink"
+"@code" = "ff1493"
+
+[[colors]]
+"@name" = "deepskyblue"
+"@code" = "00bfff"
+
+[[colors]]
+"@name" = "dimgray"
+"@code" = "696969"
+
+[[colors]]
+"@name" = "dimgrey"
+"@code" = "696969"
+
+[[colors]]
+"@name" = "dodgerblue"
+"@code" = "1e90ff"
+
+[[colors]]
+"@name" = "emerald"
+"@code" = "2ecc71"
+
+[[colors]]
+"@name" = "firebrick"
+"@code" = "b22222"
+
+[[colors]]
+"@name" = "floralwhite"
+"@code" = "fffaf0"
+
+[[colors]]
+"@name" = "forestgreen"
+"@code" = "228b22"
+
+[[colors]]
+"@name" = "fuchsia"
+"@code" = "ff00ff"
+
+[[colors]]
+"@name" = "gainsboro"
+"@code" = "dcdcdc"
+
+[[colors]]
+"@name" = "ghostwhite"
+"@code" = "f8f8ff"
+
+[[colors]]
+"@name" = "gold"
+"@code" = "ffd700"
+
+[[colors]]
+"@name" = "goldenrod"
+"@code" = "daa520"
+
+[[colors]]
+"@name" = "gray"
+"@code" = "808080"
+
+[[colors]]
+"@name" = "green"
+"@code" = "008000"
+
+[[colors]]
+"@name" = "greensea"
+"@code" = "16a085"
+
+[[colors]]
+"@name" = "greenyellow"
+"@code" = "adff2f"
+
+[[colors]]
+"@name" = "grey"
+"@code" = "808080"
+
+[[colors]]
+"@name" = "honeydew"
+"@code" = "f0fff0"
+
+[[colors]]
+"@name" = "hotpink"
+"@code" = "ff69b4"
+
+[[colors]]
+"@name" = "indianred"
+"@code" = "cd5c5c"
+
+[[colors]]
+"@name" = "indigo"
+"@code" = "4b0082"
+
+[[colors]]
+"@name" = "ivory"
+"@code" = "fffff0"
+
+[[colors]]
+"@name" = "khaki"
+"@code" = "f0e68c"
+
+[[colors]]
+"@name" = "lavender"
+"@code" = "e6e6fa"
+
+[[colors]]
+"@name" = "lavenderblush"
+"@code" = "fff0f5"
+
+[[colors]]
+"@name" = "lawngreen"
+"@code" = "7cfc00"
+
+[[colors]]
+"@name" = "lemonchiffon"
+"@code" = "fffacd"
+
+[[colors]]
+"@name" = "lightblack"
+"@code" = "808080"
+
+[[colors]]
+"@name" = "lightblue"
+"@code" = "add8e6"
+
+[[colors]]
+"@name" = "lightbrown"
+"@code" = "9966FF"
+
+[[colors]]
+"@name" = "lightbuff"
+"@code" = "ECD9B0"
+
+[[colors]]
+"@name" = "lightcoral"
+"@code" = "f08080"
+
+[[colors]]
+"@name" = "lightcyan"
+"@code" = "e0ffff"
+
+[[colors]]
+"@name" = "lightgold"
+"@code" = "F1E5AC"
+
+[[colors]]
+"@name" = "lightgoldenrod"
+"@code" = "FFEC8B"
+
+[[colors]]
+"@name" = "lightgoldenrodyellow"
+"@code" = "fafad2"
+
+[[colors]]
+"@name" = "lightgray"
+"@code" = "d3d3d3"
+
+[[colors]]
+"@name" = "lightgreen"
+"@code" = "90ee90"
+
+[[colors]]
+"@name" = "lightgrey"
+"@code" = "d3d3d3"
+
+[[colors]]
+"@name" = "lightivory"
+"@code" = "FFF8C9"
+
+[[colors]]
+"@name" = "lightmagenta"
+"@code" = "FF77FF"
+
+[[colors]]
+"@name" = "lightmustard"
+"@code" = "EEDD62"
+
+[[colors]]
+"@name" = "lightorange"
+"@code" = "D9A465"
+
+[[colors]]
+"@name" = "lightpink"
+"@code" = "ffb6c1"
+
+[[colors]]
+"@name" = "lightred"
+"@code" = "FF3333"
+
+[[colors]]
+"@name" = "lightsalmon"
+"@code" = "ffa07a"
+
+[[colors]]
+"@name" = "lightseagreen"
+"@code" = "20b2aa"
+
+[[colors]]
+"@name" = "lightsilver"
+"@code" = "E1E1E1"
+
+[[colors]]
+"@name" = "lightskyblue"
+"@code" = "87cefa"
+
+[[colors]]
+"@name" = "lightslategray"
+"@code" = "778899"
+
+[[colors]]
+"@name" = "lightslategrey"
+"@code" = "778899"
+
+[[colors]]
+"@name" = "lightsteelblue"
+"@code" = "b0c4de"
+
+[[colors]]
+"@name" = "lightturquoise"
+"@code" = "AFE4DE"
+
+[[colors]]
+"@name" = "lightviolet"
+"@code" = "7A5299"
+
+[[colors]]
+"@name" = "lightyellow"
+"@code" = "ffffe0"
+
+[[colors]]
+"@name" = "lime"
+"@code" = "00ff00"
+
+[[colors]]
+"@name" = "limegreen"
+"@code" = "32cd32"
+
+[[colors]]
+"@name" = "linen"
+"@code" = "faf0e6"
+
+[[colors]]
+"@name" = "magenta"
+"@code" = "ff00ff"
+
+[[colors]]
+"@name" = "maroon"
+"@code" = "800000"
+
+[[colors]]
+"@name" = "mediumaquamarine"
+"@code" = "66cdaa"
+
+[[colors]]
+"@name" = "mediumblue"
+"@code" = "0000cd"
+
+[[colors]]
+"@name" = "mediumorchid"
+"@code" = "ba55d3"
+
+[[colors]]
+"@name" = "mediumpurple"
+"@code" = "9370db"
+
+[[colors]]
+"@name" = "mediumseagreen"
+"@code" = "3cb371"
+
+[[colors]]
+"@name" = "mediumslateblue"
+"@code" = "7b68ee"
+
+[[colors]]
+"@name" = "mediumspringgreen"
+"@code" = "00fa9a"
+
+[[colors]]
+"@name" = "mediumturquoise"
+"@code" = "48d1cc"
+
+[[colors]]
+"@name" = "mediumvioletred"
+"@code" = "c71585"
+
+[[colors]]
+"@name" = "midnightblue"
+"@code" = "191970"
+
+[[colors]]
+"@name" = "midnightblack"
+"@code" = "2c3e50"
+
+[[colors]]
+"@name" = "mintcream"
+"@code" = "f5fffa"
+
+[[colors]]
+"@name" = "mistyrose"
+"@code" = "ffe4e1"
+
+[[colors]]
+"@name" = "moccasin"
+"@code" = "ffe4b5"
+
+[[colors]]
+"@name" = "mustard"
+"@code" = "FFDB58"
+
+[[colors]]
+"@name" = "nephritis"
+"@code" = "27ae60"
+
+[[colors]]
+"@name" = "navajowhite"
+"@code" = "ffdead"
+
+[[colors]]
+"@name" = "navy"
+"@code" = "000080"
+
+[[colors]]
+"@name" = "oldlace"
+"@code" = "fdf5e6"
+
+[[colors]]
+"@name" = "olive"
+"@code" = "808000"
+
+[[colors]]
+"@name" = "olivedrab"
+"@code" = "6b8e23"
+
+[[colors]]
+"@name" = "orange"
+"@code" = "ffa500"
+
+[[colors]]
+"@name" = "orangered"
+"@code" = "ff4500"
+
+[[colors]]
+"@name" = "orchid"
+"@code" = "da70d6"
+
+[[colors]]
+"@name" = "palegoldenrod"
+"@code" = "eee8aa"
+
+[[colors]]
+"@name" = "palegreen"
+"@code" = "98fb98"
+
+[[colors]]
+"@name" = "paleturquoise"
+"@code" = "afeeee"
+
+[[colors]]
+"@name" = "palevioletred"
+"@code" = "db7093"
+
+[[colors]]
+"@name" = "papayawhip"
+"@code" = "ffefd5"
+
+[[colors]]
+"@name" = "peachpuff"
+"@code" = "ffdab9"
+
+[[colors]]
+"@name" = "peterriver"
+"@code" = "3498db"
+
+[[colors]]
+"@name" = "peru"
+"@code" = "cd853f"
+
+[[colors]]
+"@name" = "pink"
+"@code" = "ffc0cb"
+
+[[colors]]
+"@name" = "plum"
+"@code" = "dda0dd"
+
+[[colors]]
+"@name" = "pomegranate"
+"@code" = "c0392b"
+
+[[colors]]
+"@name" = "powderblue"
+"@code" = "b0e0e6"
+
+[[colors]]
+"@name" = "purple"
+"@code" = "800080"
+
+[[colors]]
+"@name" = "pumpkin"
+"@code" = "d35400"
+
+[[colors]]
+"@name" = "rebeccapurple"
+"@code" = "663399"
+
+[[colors]]
+"@name" = "red"
+"@code" = "ff0000"
+
+[[colors]]
+"@name" = "rosybrown"
+"@code" = "bc8f8f"
+
+[[colors]]
+"@name" = "royalblue"
+"@code" = "4169e1"
+
+[[colors]]
+"@name" = "saddlebrown"
+"@code" = "8b4513"
+
+[[colors]]
+"@name" = "salmon"
+"@code" = "fa8072"
+
+[[colors]]
+"@name" = "sandybrown"
+"@code" = "f4a460"
+
+[[colors]]
+"@name" = "seagreen"
+"@code" = "2e8b57"
+
+[[colors]]
+"@name" = "seashell"
+"@code" = "fff5ee"
+
+[[colors]]
+"@name" = "sienna"
+"@code" = "a0522d"
+
+[[colors]]
+"@name" = "quiksilver"
+"@code" = "bdc3c7"
+
+[[colors]]
+"@name" = "silver"
+"@code" = "c0c0c0"
+
+[[colors]]
+"@name" = "skyblue"
+"@code" = "87ceeb"
+
+[[colors]]
+"@name" = "slateblue"
+"@code" = "6a5acd"
+
+[[colors]]
+"@name" = "slategray"
+"@code" = "708090"
+
+[[colors]]
+"@name" = "slategrey"
+"@code" = "708090"
+
+[[colors]]
+"@name" = "snow"
+"@code" = "fffafa"
+
+[[colors]]
+"@name" = "springgreen"
+"@code" = "00ff7f"
+
+[[colors]]
+"@name" = "steelblue"
+"@code" = "4682b4"
+
+[[colors]]
+"@name" = "sunflower"
+"@code" = "f1c40f"
+
+[[colors]]
+"@name" = "tan"
+"@code" = "d2b48c"
+
+[[colors]]
+"@name" = "teal"
+"@code" = "008080"
+
+[[colors]]
+"@name" = "thistle"
+"@code" = "d8bfd8"
+
+[[colors]]
+"@name" = "tomato"
+"@code" = "ff6347"
+
+[[colors]]
+"@name" = "turquoise"
+"@code" = "40e0d0"
+
+[[colors]]
+"@name" = "violet"
+"@code" = "ee82ee"
+
+[[colors]]
+"@name" = "wetasphalt"
+"@code" = "34495e"
+
+[[colors]]
+"@name" = "wisteria"
+"@code" = "8e44ad"
+
+[[colors]]
+"@name" = "wheat"
+"@code" = "f5deb3"
+
+[[colors]]
+"@name" = "white"
+"@code" = "ffffff"
+
+[[colors]]
+"@name" = "whitesmoke"
+"@code" = "f5f5f5"
+
+[[colors]]
+"@name" = "yellow"
+"@code" = "ffff00"
+
+[[colors]]
+"@name" = "yellowgreen"
+"@code" = "9acd32"
+
+[[colors]]
+"@name" = "beekeeper"
+"@code" = "f6e58d"
+
+[[colors]]
+"@name" = "spiced nectarine"
+"@code" = "ffbe76"
+
+[[colors]]
+"@name" = "pink glamour"
+"@code" = "ff7979"
+
+[[colors]]
+"@name" = "june bud"
+"@code" = "badc58"
+
+[[colors]]
+"@name" = "coastal breeze"
+"@code" = "dff9fb"
+
+[[colors]]
+"@name" = "turbo"
+"@code" = "f9ca24"
+
+[[colors]]
+"@name" = "quince jelly"
+"@code" = "f0932b"
+
+[[colors]]
+"@name" = "carmine pink"
+"@code" = "eb4d4b"
+
+[[colors]]
+"@name" = "pure apple"
+"@code" = "6ab04c"
+
+[[colors]]
+"@name" = "hint of ice pack"
+"@code" = "c7ecee"
+
+[[colors]]
+"@name" = "middle blue"
+"@code" = "7ed6df"
+
+[[colors]]
+"@name" = "heliotrope"
+"@code" = "e056fd"
+
+[[colors]]
+"@name" = "exodus fruit"
+"@code" = "686de0"
+
+[[colors]]
+"@name" = "deep koamaru"
+"@code" = "30336b"
+
+[[colors]]
+"@name" = "soaring eagle"
+"@code" = "95afc0"
+
+[[colors]]
+"@name" = "greenland green"
+"@code" = "22a6b3"
+
+[[colors]]
+"@name" = "steel pink"
+"@code" = "be2edd"
+
+[[colors]]
+"@name" = "blurple"
+"@code" = "4834d4"
+
+[[colors]]
+"@name" = "deep cove"
+"@code" = "130f40"
+
+[[colors]]
+"@name" = "wizard grey"
+"@code" = "535c68"
+
+[[colors]]
+"@name" = "highlighter pink"
+"@code" = "ef5777"
+
+[[colors]]
+"@name" = "dark periwinkle"
+"@code" = "575fcf"
+
+[[colors]]
+"@name" = "megaman"
+"@code" = "4bcffa"
+
+[[colors]]
+"@name" = "fresh turquoise"
+"@code" = "34e7e4"
+
+[[colors]]
+"@name" = "minty green"
+"@code" = "0be881"
+
+[[colors]]
+"@name" = "sizzling red"
+"@code" = "f53b57"
+
+[[colors]]
+"@name" = "free speech blue"
+"@code" = "3c40c6"
+
+[[colors]]
+"@name" = "spiro disco ball"
+"@code" = "0fbcf9"
+
+[[colors]]
+"@name" = "jade dust"
+"@code" = "00d8d6"
+
+[[colors]]
+"@name" = "green teal"
+"@code" = "05c46b"
+
+[[colors]]
+"@name" = "narenji orange"
+"@code" = "ffc048"
+
+[[colors]]
+"@name" = "yriel yellow"
+"@code" = "ffdd59"
+
+[[colors]]
+"@name" = "sunset orange"
+"@code" = "ff5e57"
+
+[[colors]]
+"@name" = "hint of elusive blue"
+"@code" = "d2dae2"
+
+[[colors]]
+"@name" = "good night"
+"@code" = "485460"
+
+[[colors]]
+"@name" = "chrome yellow"
+"@code" = "ffa801"
+
+[[colors]]
+"@name" = "vibrant yellow"
+"@code" = "ffd32a"
+
+[[colors]]
+"@name" = "red orange"
+"@code" = "ff3f34"
+
+[[colors]]
+"@name" = "london square"
+"@code" = "808e9b"
+
+[[colors]]
+"@name" = "black pearl"
+"@code" = "1e272e"
+
+[[colors]]
+"@name" = "flat flesh"
+"@code" = "fad390"
+
+[[colors]]
+"@name" = "melon melody"
+"@code" = "f8c291"
+
+[[colors]]
+"@name" = "livid"
+"@code" = "6a89cc"
+
+[[colors]]
+"@name" = "spray"
+"@code" = "82ccdd"
+
+[[colors]]
+"@name" = "paradise green"
+"@code" = "b8e994"
+
+[[colors]]
+"@name" = "squash blossom"
+"@code" = "f6b93b"
+
+[[colors]]
+"@name" = "mandarin red"
+"@code" = "e55039"
+
+[[colors]]
+"@name" = "azraq blue"
+"@code" = "4a69bd"
+
+[[colors]]
+"@name" = "dupain"
+"@code" = "60a3bc"
+
+[[colors]]
+"@name" = "aurora green"
+"@code" = "78e08f"
+
+[[colors]]
+"@name" = "iceland poppy"
+"@code" = "fa983a"
+
+[[colors]]
+"@name" = "tomato red"
+"@code" = "eb2f06"
+
+[[colors]]
+"@name" = "good samaritan"
+"@code" = "3c6382"
+
+[[colors]]
+"@name" = "waterfall"
+"@code" = "38ada9"
+
+[[colors]]
+"@name" = "carrot orange"
+"@code" = "e58e26"
+
+[[colors]]
+"@name" = "jalapeno red"
+"@code" = "b71540"
+
+[[colors]]
+"@name" = "dark sapphire"
+"@code" = "0c2461"
+
+[[colors]]
+"@name" = "forest blues"
+"@code" = "0a3d62"
+
+[[colors]]
+"@name" = "reef encounter"
+"@code" = "079992"
+
+[[colors]]
+"@name" = "jigglypuff"
+"@code" = "ff9ff3"
+
+[[colors]]
+"@name" = "casandora yellow"
+"@code" = "feca57"
+
+[[colors]]
+"@name" = "pastel red"
+"@code" = "ff6b6b"
+
+[[colors]]
+"@name" = "megaman"
+"@code" = "48dbfb"
+
+[[colors]]
+"@name" = "wild caribbean green"
+"@code" = "1dd1a1"
+
+[[colors]]
+"@name" = "lotus pink"
+"@code" = "f368e0"
+
+[[colors]]
+"@name" = "double dragon skin"
+"@code" = "ff9f43"
+
+[[colors]]
+"@name" = "amour"
+"@code" = "ee5253"
+
+[[colors]]
+"@name" = "cyanite"
+"@code" = "0abde3"
+
+[[colors]]
+"@name" = "dark mountain meadow"
+"@code" = "10ac84"
+
+[[colors]]
+"@name" = "jade dust"
+"@code" = "00d2d3"
+
+[[colors]]
+"@name" = "joust blue"
+"@code" = "54a0ff"
+
+[[colors]]
+"@name" = "nasu purple"
+"@code" = "5f27cd"
+
+[[colors]]
+"@name" = "light blue ballerina"
+"@code" = "c8d6e5"
+
+[[colors]]
+"@name" = "fuel town"
+"@code" = "576574"
+
+[[colors]]
+"@name" = "aqua velvet"
+"@code" = "01a3a4"
+
+[[colors]]
+"@name" = "bleu de france"
+"@code" = "2e86de"
+
+[[colors]]
+"@name" = "bluebell"
+"@code" = "341f97"
+
+[[colors]]
+"@name" = "storm petrel"
+"@code" = "8395a7"
+
+[[colors]]
+"@name" = "imperial primer"
+"@code" = "222f3e"
+
+[[colors]]
+"@name" = "orchid orange"
+"@code" = "fea47f"
+
+[[colors]]
+"@name" = "spiro disco ball"
+"@code" = "25ccf7"
+
+[[colors]]
+"@name" = "honey glow"
+"@code" = "eab543"
+
+[[colors]]
+"@name" = "sweet garden"
+"@code" = "55e6c1"
+
+[[colors]]
+"@name" = "falling star"
+"@code" = "cad3c8"
+
+[[colors]]
+"@name" = "rich gardenia"
+"@code" = "f97f51"
+
+[[colors]]
+"@name" = "clear chill"
+"@code" = "1b9cfc"
+
+[[colors]]
+"@name" = "sarawak white pepper"
+"@code" = "f8efba"
+
+[[colors]]
+"@name" = "keppel"
+"@code" = "58b19f"
+
+[[colors]]
+"@name" = "ships officer"
+"@code" = "2c3a47"
+
+[[colors]]
+"@name" = "fiery fuchsia"
+"@code" = "b33771"
+
+[[colors]]
+"@name" = "bluebell"
+"@code" = "3b3b98"
+
+[[colors]]
+"@name" = "georgia peach"
+"@code" = "fd7272"
+
+[[colors]]
+"@name" = "oasis stream"
+"@code" = "9aecdb"
+
+[[colors]]
+"@name" = "bright ube"
+"@code" = "d6a2e8"
+
+[[colors]]
+"@name" = "magenta purple"
+"@code" = "6d214f"
+
+[[colors]]
+"@name" = "ending navy blue"
+"@code" = "182c61"
+
+[[colors]]
+"@name" = "sasquatch socks"
+"@code" = "fc427b"
+
+[[colors]]
+"@name" = "pine glade"
+"@code" = "bdc581"
+
+[[colors]]
+"@name" = "highlighter lavender"
+"@code" = "82589f"
+
+[[colors]]
+"@name" = "bright lilac"
+"@code" = "cd84f1"
+
+[[colors]]
+"@name" = "pretty please"
+"@code" = "ffcccc"
+
+[[colors]]
+"@name" = "light red"
+"@code" = "ff4d4d"
+
+[[colors]]
+"@name" = "mandarin sorbet"
+"@code" = "ffaf40"
+
+[[colors]]
+"@name" = "unmellow yellow"
+"@code" = "fffa65"
+
+[[colors]]
+"@name" = "light purple"
+"@code" = "c56cf0"
+
+[[colors]]
+"@name" = "young salmon"
+"@code" = "ffb8b8"
+
+[[colors]]
+"@name" = "red orange"
+"@code" = "ff3838"
+
+[[colors]]
+"@name" = "radiant yellow"
+"@code" = "ff9f1a"
+
+[[colors]]
+"@name" = "dorn yellow"
+"@code" = "fff200"
+
+[[colors]]
+"@name" = "wintergreen"
+"@code" = "32ff7e"
+
+[[colors]]
+"@name" = "electric blue"
+"@code" = "7efff5"
+
+[[colors]]
+"@name" = "neon blue"
+"@code" = "18dcff"
+
+[[colors]]
+"@name" = "light slate blue"
+"@code" = "7d5fff"
+
+[[colors]]
+"@name" = "shadowed steel"
+"@code" = "4b4b4b"
+
+[[colors]]
+"@name" = "weird green"
+"@code" = "3ae374"
+
+[[colors]]
+"@name" = "hammam blue"
+"@code" = "67e6dc"
+
+[[colors]]
+"@name" = "spiro disco ball"
+"@code" = "17c0eb"
+
+[[colors]]
+"@name" = "light indigo"
+"@code" = "7158e2"
+
+[[colors]]
+"@name" = "baltic sea"
+"@code" = "3d3d3d"
+
+[[colors]]
+"@name" = "sunflower"
+"@code" = "ffc312"
+
+[[colors]]
+"@name" = "energos"
+"@code" = "c4e538"
+
+[[colors]]
+"@name" = "blue martina"
+"@code" = "12cbc4"
+
+[[colors]]
+"@name" = "lavender rose"
+"@code" = "fda7df"
+
+[[colors]]
+"@name" = "bara red"
+"@code" = "ed4c67"
+
+[[colors]]
+"@name" = "radiant yellow"
+"@code" = "f79f1f"
+
+[[colors]]
+"@name" = "android green"
+"@code" = "a3cb38"
+
+[[colors]]
+"@name" = "mediterranean sea"
+"@code" = "1289a7"
+
+[[colors]]
+"@name" = "lavender tea"
+"@code" = "d980fa"
+
+[[colors]]
+"@name" = "very berry"
+"@code" = "b53471"
+
+[[colors]]
+"@name" = "puffins bill"
+"@code" = "ee5a24"
+
+[[colors]]
+"@name" = "pixelated grass"
+"@code" = "009432"
+
+[[colors]]
+"@name" = "merchant marine blue"
+"@code" = "0652dd"
+
+[[colors]]
+"@name" = "forgotten purple"
+"@code" = "9980fa"
+
+[[colors]]
+"@name" = "hollyhock"
+"@code" = "833471"
+
+[[colors]]
+"@name" = "red pigment"
+"@code" = "ea2027"
+
+[[colors]]
+"@name" = "turkish aqua"
+"@code" = "006266"
+
+[[colors]]
+"@name" = "under the sea"
+"@code" = "1b1464"
+
+[[colors]]
+"@name" = "circumorbital ring"
+"@code" = "5758bb"
+
+[[colors]]
+"@name" = "magenta purple"
+"@code" = "6f1e51"
+
+[[colors]]
+"@name" = "protoss pylon"
+"@code" = "00a8ff"
+
+[[colors]]
+"@name" = "periwinkle"
+"@code" = "9c88ff"
+
+[[colors]]
+"@name" = "rise-n-shine"
+"@code" = "fbc531"
+
+[[colors]]
+"@name" = "download progress"
+"@code" = "4cd137"
+
+[[colors]]
+"@name" = "seabrook"
+"@code" = "487eb0"
+
+[[colors]]
+"@name" = "vanadyl blue"
+"@code" = "0097e6"
+
+[[colors]]
+"@name" = "matt purple"
+"@code" = "8c7ae6"
+
+[[colors]]
+"@name" = "nanohanacha gold"
+"@code" = "e1b12c"
+
+[[colors]]
+"@name" = "skirret green"
+"@code" = "44bd32"
+
+[[colors]]
+"@name" = "naval"
+"@code" = "40739e"
+
+[[colors]]
+"@name" = "nasturcian flower"
+"@code" = "e84118"
+
+[[colors]]
+"@name" = "lynx white"
+"@code" = "f5f6fa"
+
+[[colors]]
+"@name" = "blueberry soda"
+"@code" = "7f8fa6"
+
+[[colors]]
+"@name" = "mazarine blue"
+"@code" = "273c75"
+"bla" = 0x101010
+
+[[colors]]
+"@name" = "blue nights"
+"@code" = "353b48"
+
+[[colors]]
+"@name" = "harley davidson orange"
+"@code" = "c23616"
+
+[[colors]]
+"@name" = "hint of pensive"
+"@code" = "dcdde1"
+
+[[colors]]
+"@name" = "chain gang grey"
+"@code" = "718093"
+
+[[colors]]
+"@name" = "pico void"
+"@code" = "192a56"
+
+[[colors]]
+"@name" = "electromagnetic"
+"@code" = "2f3640"
