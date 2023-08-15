@@ -32,5 +32,5 @@ import java.awt.Color
  *
  */
 class NoParser : ColorParser {
-  override fun parseColor(text: String?): Color? = null
+  override fun parseColor(text: String): Color? = null
 }

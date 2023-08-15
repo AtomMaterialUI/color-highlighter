@@ -32,7 +32,7 @@ import java.util.*
 /** Parses colors in the form `Color(a,b,c)` */
 class ColorCtorParser : ColorParser {
 
-  override fun parseColor(text: String?): Color? = parseConstructor(text!!)
+  override fun parseColor(text: String): Color? = parseConstructor(text)
 
   private fun parseConstructor(text: String): Color? {
     val colorData = ColorData()

@@ -31,6 +31,6 @@ import java.util.*
 
 /** Look for a predefined color of the given text. */
 class PredefinedColorParser : ColorParser {
-  override fun parseColor(text: String?): Color? = PredefinedColors.instance.findSVGColor(text!!.lowercase(Locale.getDefault()))
+  override fun parseColor(text: String): Color? = PredefinedColors.instance.findSVGColor(text.lowercase(Locale.getDefault()))
 
 }

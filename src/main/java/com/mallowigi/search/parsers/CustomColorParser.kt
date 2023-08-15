@@ -32,7 +32,7 @@ import java.util.*
 /** Look for a custom color of the given text. */
 class CustomColorParser : ColorParser {
 
-  override fun parseColor(text: String?): Color? = getColor(text!!.lowercase(Locale.getDefault()))
+  override fun parseColor(text: String): Color? = getColor(text.lowercase(Locale.getDefault()))
 
   private fun getColor(colorName: String): Color? = CustomColorsConfig.instance.customColors.getColor(colorName)
 

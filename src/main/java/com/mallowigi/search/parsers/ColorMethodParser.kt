@@ -34,7 +34,7 @@ import java.awt.Color
  * @property colorMethod - prefix to offset from
  */
 class ColorMethodParser internal constructor(private val colorMethod: String) : ColorParser {
-  override fun parseColor(text: String?): Color? = parseMethod(text!!, colorMethod)
+  override fun parseColor(text: String): Color? = parseMethod(text, colorMethod)
 
   private fun parseMethod(text: String, prefix: String): Color? {
     val name = text.substring(prefix.length)
