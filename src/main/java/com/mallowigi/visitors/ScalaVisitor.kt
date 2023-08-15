@@ -29,23 +29,60 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.mallowigi.search.ColorPrefixes
 import com.mallowigi.search.ColorSearchEngine
+import com.mallowigi.search.parsers.ColorCtorParser
+import com.mallowigi.search.parsers.ColorMethodParser
+import com.mallowigi.search.parsers.ColorParser
 import org.jetbrains.plugins.scala.lang.psi.api.ScalaFile
+import org.jetbrains.plugins.scala.lang.psi.api.base.ScConstructorInvocation
 import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScIntegerLiteral
 import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScStringLiteral
+import org.jetbrains.plugins.scala.lang.psi.api.expr.ScReferenceExpression
 import java.awt.Color
+import kotlin.reflect.KClass
 
 class ScalaVisitor : ColorVisitor() {
+
+  private val parsedTypes = mapOf<KClass<*>, ((PsiElement) -> Color?)?>(
+    ScIntegerLiteral::class to ::parseColor,
+    ScStringLiteral::class to ::parseColor,
+    ScConstructorInvocation::class to ::parseCtor,
+    ScReferenceExpression::class to ::parseMethod,
+  )
+
+  private fun parseCtor(element: PsiElement): Color? {
+    val text = element.text
+    return when {
+      config.isJavaColorCtorEnabled && text.startsWith(ColorPrefixes.KT_COLOR.text) -> ColorCtorParser().parseColor(text)
+      else -> null
+    }
+  }
+
+  private fun parseMethod(element: PsiElement): Color? {
+    val text = element.text
+    return when {
+      config.isJavaColorMethodEnabled && text.startsWith(ColorPrefixes.COLOR_METHOD.text) -> ColorMethodParser(ColorPrefixes.COLOR_METHOD.text).parseColor(text)
+      else -> null
+    }
+  }
+
+  private fun parseColor(element: PsiElement): Color? {
+    val value = element.text
+    return ColorSearchEngine.getColor(value, this)
+  }
 
   override fun clone(): HighlightVisitor = ScalaVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean = file is ScalaFile
 
   override fun accept(element: PsiElement): Color? {
-    if (element !is ScIntegerLiteral && element !is ScStringLiteral) return null
-
-    val value = element.text
-    return ColorSearchEngine.getColor(value, this)
+    for (keyClass in parsedTypes.keys) {
+      if (keyClass.isInstance(element)) {
+        return parsedTypes[keyClass]?.invoke(element)
+      }
+    }
+    return null
   }
 
 }
