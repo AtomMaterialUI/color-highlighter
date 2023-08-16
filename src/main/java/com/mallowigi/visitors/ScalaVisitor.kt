@@ -54,7 +54,7 @@ class ScalaVisitor : ColorVisitor() {
   private fun parseCtor(element: PsiElement): Color? {
     val text = element.text
     return when {
-      config.isJavaColorCtorEnabled && text.startsWith(ColorPrefixes.KT_COLOR.text) -> ColorCtorParser().parseColor(text)
+      config.isScalaColorCtorEnabled && text.startsWith(ColorPrefixes.KT_COLOR.text) -> ColorCtorParser().parseColor(text)
       else -> null
     }
   }
@@ -62,7 +62,7 @@ class ScalaVisitor : ColorVisitor() {
   private fun parseMethod(element: PsiElement): Color? {
     val text = element.text
     return when {
-      config.isJavaColorMethodEnabled && text.startsWith(ColorPrefixes.COLOR_METHOD.text) -> ColorMethodParser(ColorPrefixes.COLOR_METHOD.text).parseColor(text)
+      config.isScalaColorMethodEnabled && text.startsWith(ColorPrefixes.COLOR_METHOD.text) -> ColorMethodParser(ColorPrefixes.COLOR_METHOD.text).parseColor(text)
       else -> null
     }
   }
