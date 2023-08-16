@@ -8,7 +8,9 @@
 
 - Avoid highlighting non-color numbers (highlight only numbers with 3, 6 or 8 hex digits)
 
-## 16.0.0
+### Features
+
+- Constructor highlighting for Scala
 
 ### Features
 
@@ -166,3 +168,4 @@ More to come!
 ## 1.0.0
 ### Bump
 - First version of the plugin
+
