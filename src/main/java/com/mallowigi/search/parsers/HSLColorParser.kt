@@ -33,7 +33,7 @@ import java.util.*
 /** Parse text in the form `hsl(h,s,l,[,a])` */
 class HSLColorParser : ColorParser {
 
-  override fun parseColor(text: String?): Color? = parseHSL(text!!)
+  override fun parseColor(text: String): Color? = parseHSL(text)
 
   /** Parse a color in the hsl[a](h, s, l[, a]) format. */
   private fun parseHSL(text: String): Color? {

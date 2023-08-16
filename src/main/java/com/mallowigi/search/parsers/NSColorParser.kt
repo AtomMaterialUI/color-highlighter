@@ -36,7 +36,7 @@ import java.util.*
  */
 class NSColorParser : ColorParser {
 
-  override fun parseColor(text: String?): Color? = parseMethodCall(text!!)
+  override fun parseColor(text: String): Color? = parseMethodCall(text)
 
   private fun parseMethodCall(text: String): Color? {
     val colorData = ColorData()

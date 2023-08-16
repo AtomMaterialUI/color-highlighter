@@ -35,6 +35,6 @@ fun interface ColorParser {
    * @param text the text to parse
    * @return a color if parseable
    */
-  fun parseColor(text: String?): Color?
+  fun parseColor(text: String): Color?
 
 }
