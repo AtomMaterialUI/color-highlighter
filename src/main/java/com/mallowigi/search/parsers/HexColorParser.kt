@@ -40,7 +40,7 @@ class HexColorParser internal constructor(prefix: String) : ColorParser {
     offset = prefix.length
   }
 
-  override fun parseColor(text: String): Color = parseHex(text)
+  override fun parseColor(text: String): Color? = parseHex(text)
 
   /**
    * parse a color in the hex format

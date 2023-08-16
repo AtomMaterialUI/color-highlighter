@@ -285,7 +285,7 @@ object ColorUtils {
   private fun normalizeDegrees(x: Int): Int = max(0, min(x % 360, 359))
 
   /** Ensure a number is between 0 and 1. */
-  private fun normalizeFraction(f: Float): Float = max(0.0f, max(f, 1.0f))
+  private fun normalizeFraction(f: Float): Float = max(0.0f, min(f, 1.0f))
 
   /** Ensure a number is between 0 and 100. */
   private fun normalizePercent(x: Int): Int = max(0, min(x, 100))
