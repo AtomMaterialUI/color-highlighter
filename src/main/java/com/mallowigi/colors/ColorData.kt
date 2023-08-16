@@ -34,39 +34,11 @@ import java.util.*
  * This data class serves as a container for color parsing. Used in the
  * different parsers.
  *
- * @property isPercent
- * @property isFloat
- * @property floatRed
- * @property floatGreen
- * @property floatBlue
- * @property floatHue
- * @property floatSaturation
- * @property floatBrightness
- * @property floatAlpha
- * @property intRed
- * @property intGreen
- * @property intBlue
- * @property intAlpha
- * @property alpha
  * @property startParen
  * @property endParen
  */
 @Suppress("DuplicatedCode")
 class ColorData(
-  var isPercent: Boolean = false,
-  var isFloat: Boolean = false,
-  var floatRed: Float = 0.0f,
-  var floatGreen: Float = 0.0f,
-  var floatBlue: Float = 0.0f,
-  var floatHue: Float = 0.0f,
-  var floatSaturation: Float = 0.0f,
-  var floatBrightness: Float = 0.0f,
-  var floatAlpha: Float = 1.0f,
-  var intRed: Int = 0,
-  var intGreen: Int = 0,
-  var intBlue: Int = 0,
-  var intAlpha: Int = 255,
-  var alpha: Boolean = false,
   var startParen: Int = -1,
   var endParen: Int = -1
 ) {
@@ -77,98 +49,20 @@ class ColorData(
     endParen = text.indexOf(')')
   }
 
-  /** Parse red part of a `Color(r,g,b)` form. */
-  fun parseRed(part: String): Unit = when {
-    part.endsWith("f") -> {
-      isFloat = true
-      floatRed = part.substring(0, part.length - 1).toFloat()
-    }
-
-    part.endsWith("%") -> {
-      isPercent = true
-      intRed = part.substring(0, part.length - 1).toInt()
-    }
-
-    else -> intRed = parseInt(part)
+  /** Parse one component part of a `Color(r,g,b)` form. */
+  fun parseComponent(part: String): Any = when {
+    "true" == part -> true
+    "false" == part -> false
+    part.endsWith("f") -> part.substring(0, part.length - 1).toFloat()
+    part.contains(".") -> part.toFloat()
+    part.endsWith("%") -> part.substring(0, part.length - 1).toInt() / 100.0f
+    else -> parseInt(part)
   }
 
-  /** Parse green part of a `Color(r,g,b)` form. */
-  fun parseGreen(part: String): Unit = when {
-    "true" == part -> alpha = true
-    "false" == part -> alpha = false
-    part.endsWith("f") -> {
-      isFloat = true
-      floatGreen = part.substring(0, part.length - 1).toFloat()
-    }
-
-    part.endsWith("%") -> {
-      isPercent = true
-      intGreen = part.substring(0, part.length - 1).toInt()
-    }
-
-    else -> intGreen = parseInt(part)
-  }
-
-  /** Parse blue part of a `Color(r,g,b)` form. */
-  fun parseBlue(part: String): Unit = when {
-    part.endsWith("f") -> {
-      isFloat = true
-      floatBlue = part.substring(0, part.length - 1).toFloat()
-    }
-
-    part.endsWith("%") -> {
-      isPercent = true
-      intBlue = part.substring(0, part.length - 1).toInt()
-    }
-
-    else -> intBlue = parseInt(part)
-  }
-
-  /** Parse alpha part of a `Color(r,g,b,a)` form. */
-  fun parseAlpha(part: String): Unit = when {
-    part.endsWith("f") || part.contains('.') -> {
-      isFloat = true
-      floatAlpha = part.substring(0, part.length - 1).toFloat()
-    }
-
-    part.endsWith("%") -> {
-      isPercent = true
-      floatAlpha = part.substring(0, part.length - 1).toFloat()
-    }
-
-    else -> intAlpha = parseInt(part)
-  }
-
-  /** Parse hue part of a `Color(h,s,l)` form. */
-  fun parseHue(part: String): Unit = when {
-    part.endsWith("%") -> {
-      isPercent = true
-      floatHue = part.substring(0, part.length - 1).toFloat()
-    }
-
-    else -> floatHue = parseFloat(part)
-  }
-
-
-  /** Parse saturation part of a `Color(h,s,l)` form. */
-  fun parseSaturation(part: String): Unit = when {
-    part.endsWith("%") -> {
-      isPercent = true
-      floatSaturation = part.substring(0, part.length - 1).toFloat()
-    }
-
-    else -> floatSaturation = parseFloat(part)
-  }
-
-
-  /** Parse brightness part of a `Color(h,s,l)` form. */
-  fun parseBrightness(part: String): Unit = when {
-    part.endsWith("%") -> {
-      isPercent = true
-      floatBrightness = part.substring(0, part.length - 1).toFloat()
-    }
-
-    else -> floatBrightness = parseFloat(part)
+  /** Parse single component of a `Color(h,s,l)` form. */
+  fun parseHSLComponent(part: String): Float = when {
+    part.endsWith("%") -> part.substring(0, part.length - 1).toFloat()
+    else -> parseFloat(part)
   }
 
 

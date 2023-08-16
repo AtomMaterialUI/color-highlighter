@@ -38,26 +38,7 @@ class NetColorParser : ColorParser {
     val colorData = ColorData()
     colorData.run {
       init(text)
-
-      if (startParen == -1 || endParen == -1) return null
-
-      // tokenize the string into "alpha,red,green,blue"
-      val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
-      val params = tokenizer.countTokens()
-
-      getNextNumber(tokenizer).also { parseAlpha(it) }
-      if (params >= 2) getNextNumber(tokenizer).also { parseRed(it) }
-      if (params >= 3) getNextNumber(tokenizer).also { parseGreen(it) }
-      if (params == 4) getNextNumber(tokenizer).also { parseBlue(it) }
-
-      return when {
-        isFloat -> Color(floatRed, floatGreen, floatBlue, floatAlpha)
-        else -> when (params) {
-          1 -> Color(intRed)
-          2 -> Color(intRed, alpha)
-          else -> Color(intRed, intGreen, intBlue, intAlpha)
-        }
-      }
+      return RGBColorParser().parseRGB(text)
     }
   }
 

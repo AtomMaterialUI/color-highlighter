@@ -47,13 +47,13 @@ class HSLColorParser : ColorParser {
       val params = tokenizer.countTokens()
       if (params < 3) return null
 
-      getNextNumber(tokenizer).also { parseHue(it) }
-      getNextNumber(tokenizer).also { parseSaturation(it) }
-      getNextNumber(tokenizer).also { parseBrightness(it) }
+      val hue = getNextNumber(tokenizer).let { parseHSLComponent(it) }
+      val sat = getNextNumber(tokenizer).let { parseHSLComponent(it) }
+      val lum = getNextNumber(tokenizer).let { parseHSLComponent(it) }
 
-      if (tokenizer.hasMoreTokens()) getNextNumber(tokenizer).also { parseAlpha(it) }
+      val alpha = if (tokenizer.hasMoreTokens()) getNextNumber(tokenizer).let { parseComponent(it) as Float } else 1f
 
-      return ColorUtils.getHSLa(floatHue.toInt(), floatSaturation.toInt(), floatBrightness.toInt(), floatAlpha)
+      return ColorUtils.getHSLa(hue.toInt(), sat.toInt(), lum.toInt(), alpha)
     }
   }
 
