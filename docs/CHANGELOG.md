@@ -2,6 +2,12 @@
 
 ---
 
+## 16.0.1
+
+### Fixes
+
+- Avoid highlighting non-color numbers (highlight only numbers with 3, 6 or 8 hex digits)
+
 ## 16.0.0
 
 ### Features

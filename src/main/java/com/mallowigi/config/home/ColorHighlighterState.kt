@@ -296,6 +296,6 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     @JvmStatic
     val instance: ColorHighlighterState by lazy { service() }
 
-    const val VERSION = "16.0.0"
+    const val VERSION = "16.0.1"
   }
 }
