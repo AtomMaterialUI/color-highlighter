@@ -60,6 +60,10 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isKotlinColorMethodEnabled: Boolean by property(true)
 
+    var isScalaColorCtorEnabled: Boolean by property(true)
+
+    var isScalaColorMethodEnabled: Boolean by property(true)
+
     var isRiderColorMethodEnabled: Boolean by property(true)
 
     var isTextEnabled: Boolean by property(false)
@@ -125,6 +129,18 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     get() = state.isKotlinColorMethodEnabled
     set(value) {
       state.isKotlinColorMethodEnabled = value
+    }
+
+  var isScalaColorCtorEnabled: Boolean
+    get() = state.isScalaColorCtorEnabled
+    set(value) {
+      state.isScalaColorCtorEnabled = value
+    }
+
+  var isScalaColorMethodEnabled: Boolean
+    get() = state.isScalaColorMethodEnabled
+    set(value) {
+      state.isScalaColorMethodEnabled = value
     }
 
   var isRiderColorMethodEnabled: Boolean

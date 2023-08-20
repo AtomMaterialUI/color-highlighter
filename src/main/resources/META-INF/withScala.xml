@@ -30,4 +30,7 @@
         <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.ScalaInlineInlayProvider"
                                    language="Scala"/>
     </extensions>
+    <applicationListeners>
+        <listener class="com.mallowigi.startup.ScalaVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 </idea-plugin>
