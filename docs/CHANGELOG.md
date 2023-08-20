@@ -2,15 +2,14 @@
 
 ---
 
-## 16.0.1
-
-### Fixes
-
-- Avoid highlighting non-color numbers (highlight only numbers with 3, 6 or 8 hex digits)
+## 17.0.0
 
 ### Features
 
-- Constructor highlighting for Scala
+- Add _Color constructor_ and _Color Methods_ detection for Scala (with Settings). Credits to [Ondřej Španěl](https://github.com/OndrejSpanel)
+- Improve hex detection by only detecting hex colors with 3, 6 or 8 digits.
+
+## 16.0.0
 
 ### Features
 
@@ -168,4 +167,3 @@ More to come!
 ## 1.0.0
 ### Bump
 - First version of the plugin
-
