@@ -74,6 +74,8 @@
     - Java Color methods (`Color.BLACK`, `Color.RED`)
     - Kotlin Color Constructor (`Color(r, g, b[, a])`)
     - Kotlin Color methods (`Color.BLACK`, `Color.RED`)
+    - Scala Color Constructor (`new Color(r, g, b[, a])`)
+    - Scala Color methods (`Color.BLACK`, `Color.RED`)
     - C# Color Constructor (`Color.FromArgb(r, g, b[, a])`)
     - Markdown Parsing
     - Text Parsing
@@ -133,3 +135,7 @@ by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 ## Authors:
 
 - [Elior Boukhobza (mallowigi)](https://github.com/mallowigi)
+
+## Contributors:
+
+- [Ondřej Španěl (OndrejSpanel)](https://github.com/OndrejSpanel)
