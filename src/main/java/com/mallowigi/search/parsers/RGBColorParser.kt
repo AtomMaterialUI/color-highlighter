@@ -36,7 +36,7 @@ class RGBColorParser : ColorParser {
   override fun parseColor(text: String): Color? = parseRGB(text)
 
   /** Parse a color in the rgb[a](r, g, b[, a]) format. */
-  private fun parseRGB(text: String): Color? {
+  fun parseRGB(text: String): Color? {
     val colorData = ColorData()
     colorData.run {
       init(text)
@@ -45,17 +45,32 @@ class RGBColorParser : ColorParser {
       // tokenize the string into "red,green,blue"
       val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
       val params = tokenizer.countTokens()
-      if (params < 3) return null
+      if (params < 3 || params > 4) return null
 
-      getNextNumber(tokenizer).also { parseRed(it) }
-      getNextNumber(tokenizer).also { parseGreen(it) }
-      getNextNumber(tokenizer).also { parseBlue(it) }
+      val components = (1..params).map { parseComponent(getNextNumber(tokenizer)) }
 
-      if (tokenizer.hasMoreTokens()) getNextNumber(tokenizer).also { parseAlpha(it) }
+      fun asFloat(x: Any) = when {
+        x is Int -> x.toFloat()
+        x is Float -> x
+        else -> 0f
+      }
+      fun alphaAsFloat(x: Any) = when {
+        x is Int -> x.toFloat() / 255.0f
+        x is Float -> x
+        else -> 0f
+      }
 
-      return when {
-        isPercent -> ColorUtils.getPercentRGBa(intRed, intGreen, intBlue, floatAlpha)
-        else -> ColorUtils.getDecimalRGBa(intRed, intGreen, intBlue, floatAlpha)
+      if (components.take(3).all { it is Int }) {
+        val intComponents = components.map { it as Int }
+        return when {
+          params == 3 -> ColorUtils.getDecimalRGB(intComponents[0], intComponents[1], intComponents[2])
+          else -> ColorUtils.getDecimalRGBa(intComponents[0], intComponents[1], intComponents[2], alphaAsFloat(components[3]))
+        }
+      } else {
+        val floatComponents = components.map { asFloat(it) }
+        return when {
+          params == 3 -> ColorUtils.getFloatRGBa(floatComponents[0], floatComponents[1], floatComponents[2], 1f)
+          else -> ColorUtils.getFloatRGBa(floatComponents[0], floatComponents[1], floatComponents[2], asFloat(components[3]))        }
       }
 
     }

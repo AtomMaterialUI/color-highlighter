@@ -64,12 +64,9 @@ object ColorUtils {
 
   /** Parse a color from r,g,b,a in decimal format. */
   fun getDecimalRGBa(r: Int, g: Int, b: Int, a: Float): Color {
-    var red = r
-    var green = g
-    var blue = b
-    red = normalizeDecimal(red)
-    green = normalizeDecimal(green)
-    blue = normalizeDecimal(blue)
+    val red = normalizeDecimal(r)
+    val green = normalizeDecimal(g)
+    val blue = normalizeDecimal(b)
 
     val alpha = toDecimal(normalizeFraction(a))
     return Color(red, green, blue, alpha)
@@ -83,15 +80,10 @@ object ColorUtils {
 
   /** Parse a color from h,s,l,a in decimal format. */
   fun getHSLa(h: Int, s: Int, l: Int, a: Float): Color {
-    var hue = h
-    var saturation = s
-    var lightning = l
-    var alpha = a
-
-    hue = normalizeDegrees(hue)
-    saturation = normalizePercent(saturation)
-    lightning = normalizePercent(lightning)
-    alpha = normalizeFraction(alpha)
+    val hue = normalizeDegrees(h)
+    val saturation = normalizePercent(s)
+    val lightning = normalizePercent(l)
+    val alpha = normalizeFraction(a)
 
     val rgb = convertHSLToRGB(hue / 359.0f, saturation / 100.0f, lightning / 100.0f)
     return Color(rgb[0], rgb[1], rgb[2], alpha)
@@ -107,18 +99,23 @@ object ColorUtils {
 
   /** Parse a color from r,g,b,a in percent format. */
   fun getPercentRGBa(r: Int, g: Int, b: Int, a: Float): Color {
-    var red = r
-    var green = g
-    var blue = b
-    var alpha = a
-    red = normalizePercent(red)
-    green = normalizePercent(green)
-    blue = normalizePercent(blue)
-    alpha = normalizeFraction(alpha)
+    val red = normalizePercent(r)
+    val green = normalizePercent(g)
+    val blue = normalizePercent(b)
+    val alpha = normalizeFraction(a)
 
     return Color(red / 100.0f, green / 100.0f, blue / 100.0f, alpha)
   }
 
+  /** Parse a color from r,g,b,a in float format. */
+  fun getFloatRGBa(r: Float, g: Float, b: Float, a: Float): Color {
+    val red = normalizeFraction(r)
+    val green = normalizeFraction(g)
+    val blue = normalizeFraction(b)
+    val alpha = normalizeFraction(a)
+
+    return Color(red, green, blue, alpha)
+  }
   /** Parse rgb in the hex format #123456. */
   fun getRGB(hex: String): Color {
     val rgb = normalizeRGB(hex, 6)

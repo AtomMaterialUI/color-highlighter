@@ -49,24 +49,18 @@ class NSColorParser : ColorParser {
       // tokenize the string
       val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), " ")
       val params = tokenizer.countTokens()
-      var next = getNextNumber(tokenizer)
-      // extract the part after the :
-      var param = getNextParam(next)
 
-      // float support: sets floatRed/intRed
-      parseHue(param)
-
-      if (params >= 2) {
-        next = getNextNumber(tokenizer)
-        param = getNextParam(next)
-        parseSaturation(param)
+      if (params < 1 || params > 4) return null
+      val components = (1..params).map {
+        val next = getNextNumber(tokenizer)
+        // extract the part after the :
+        val param = getNextParam(next)
+        parseHSLComponent(param)
       }
 
-      if (params >= 3) {
-        next = getNextNumber(tokenizer)
-        param = getNextParam(next)
-        parseBrightness(param)
-      }
+      val hue = components[0]
+      val sat = components.getOrNull(1) ?: 0f
+      val bri = components.getOrNull(2) ?: 0f
 
 //      if (params == 4) {
 //        next = getNextNumber(tokenizer)
@@ -74,7 +68,7 @@ class NSColorParser : ColorParser {
 //        parseAlpha(param)
 //      }
 
-      return Color.getHSBColor(floatHue, floatSaturation, floatBrightness)
+      return Color.getHSBColor(hue, sat, bri)
     }
   }
 

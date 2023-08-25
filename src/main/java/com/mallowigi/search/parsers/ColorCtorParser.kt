@@ -44,23 +44,21 @@ class ColorCtorParser : ColorParser {
       // tokenize the string into "red,green,blue"
       val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
       val params = tokenizer.countTokens()
-
-      // parse red part
-      getNextNumber(tokenizer).also { parseRed(it) }
-      // parse green part
-      if (params >= 2) getNextNumber(tokenizer).also { parseGreen(it) }
-      // parse blue part
-      if (params >= 3) getNextNumber(tokenizer).also { parseBlue(it) }
-      // parse alpha
-      if (params == 4) getNextNumber(tokenizer).also { parseAlpha(it) }
+      if (params < 1 || params > 4) return null
 
       return when {
-        isFloat -> Color(floatRed, floatGreen, floatBlue, floatAlpha)
-        else -> when (params) {
-          1 -> Color(intRed)
-          2 -> Color(intRed, alpha)
-          else -> Color(intRed, intGreen, intBlue, intAlpha)
+        params == 1 -> {// single hex int
+            val hex = parseComponent(getNextNumber(tokenizer)) as Int
+            Color(hex)
         }
+
+        params == 2 -> {// hex int followed with hasAlpha
+        val hex = parseComponent(getNextNumber(tokenizer)) as Int
+          val hasAlpha = parseComponent(getNextNumber(tokenizer)) as Boolean
+          Color(hex, hasAlpha)
+        }
+
+        else -> RGBColorParser().parseRGB(text)
       }
     }
   }
