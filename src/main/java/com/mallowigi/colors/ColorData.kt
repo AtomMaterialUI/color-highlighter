@@ -65,7 +65,6 @@ class ColorData(
     else -> parseFloat(part)
   }
 
-
   /**
    * Get next number of a `Color(x,y,z)` form
    *
