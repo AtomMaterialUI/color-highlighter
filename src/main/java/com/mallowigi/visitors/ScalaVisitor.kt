@@ -79,7 +79,11 @@ class ScalaVisitor : ColorVisitor() {
   override fun accept(element: PsiElement): Color? {
     for (keyClass in parsedTypes.keys) {
       if (keyClass.isInstance(element)) {
-        return parsedTypes[keyClass]?.invoke(element)
+        return try {
+          parsedTypes[keyClass]?.invoke(element)
+        } catch (e: Exception) {
+          return null;
+        }
       }
     }
     return null
