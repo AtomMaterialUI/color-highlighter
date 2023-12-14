@@ -1,11 +1,11 @@
 repo_name: mallowigi/color-highlighter
-report_id: 3411a844ad6bbd2e55f4a2bf5fd1d812
+report_id: 8d75ac2bc9128d45f4da53a1ba1c2add
 repo_type: Public
-timestamp: '2023-11-19T07:57:20+00:00'
+timestamp: '2023-12-14T13:14:57+00:00'
 requested_by: mallowigi
 provider: github
 branch: master
-detected_tools_count: 20
+detected_tools_count: 22
 tools:
 - name: CSS 3
   description: The latest evolution of the Cascading Style Sheets language
@@ -164,6 +164,17 @@ tools:
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
   detection_source: Repo Metadata
+- name: pgvector
+  description: Open-source vector similarity search for Postgres
+  website_url: https://github.com/pgvector/pgvector/
+  open_source: false
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png
+  detection_source: src/test/java/colors.txt
+  last_updated_by: Elior
+  last_updated_on: 2021-09-27 19:25:42.000000000 Z
 - name: Git
   description: Fast, scalable, distributed revision control system
   website_url: http://git-scm.com/
@@ -183,7 +194,7 @@ tools:
   image_url: https://img.stackshare.io/service/11563/actions.png
   detection_source: ".github/workflows/quality-checks.yml"
   last_updated_by: renovate[bot]
-  last_updated_on: 2023-06-09 15:33:08.000000000 Z
+  last_updated_on: 2023-11-19 08:00:41.000000000 Z
 - name: Gradle
   description: A powerful build system for the JVM
   website_url: https://www.gradle.org/
@@ -193,9 +204,9 @@ tools:
   category: Build, Test, Deploy
   sub_category: Java Build Tools
   image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
-  detection_source: gradlew.bat
+  detection_source: gradlew
   last_updated_by: renovate[bot]
-  last_updated_on: 2023-03-01 02:59:09.000000000 Z
+  last_updated_on: 2023-12-01 01:47:27.000000000 Z
 - name: HTML
   description: Hypertext Markup Language for creating web pages.
   website_url: http://
@@ -205,3 +216,14 @@ tools:
   detection_source: docs/CHANGELOG.html
   last_updated_by: Elior
   last_updated_on: 2022-10-01 07:40:16.000000000 Z
+- name: LangChain
+  description: Build AI apps with LLMs through composability
+  website_url: https://github.com/hwchase17/langchain
+  open_source: true
+  hosted_saas: false
+  category: Communications
+  sub_category: Large Language Model Tools
+  image_url: https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg
+  detection_source: src/test/java/colors.txt
+  last_updated_by: Elior
+  last_updated_on: 2021-09-27 19:25:42.000000000 Z
