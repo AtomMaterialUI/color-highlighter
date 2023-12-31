@@ -25,10 +25,11 @@
  */
 
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-fun properties(key: String) = project.findProperty(key).toString()
+fun properties(key: String) = providers.gradleProperty(key)
 
 fun fileProperties(key: String) = project.findProperty(key).toString().let { if (it.isNotEmpty()) file(it) else null }
 
@@ -38,31 +39,31 @@ plugins {
   // Java support
   id("java")
   // Kotlin support
-  id("org.jetbrains.kotlin.jvm") version "1.9.0"
+  id("org.jetbrains.kotlin.jvm") version "1.9.10"
   // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-  id("org.jetbrains.intellij") version "1.15.0"
+  id("org.jetbrains.intellij") version "1.16.0"
   // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
   id("org.jetbrains.changelog") version "2.2.0"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
-  id("io.gitlab.arturbosch.detekt") version "1.23.0"
+  id("io.gitlab.arturbosch.detekt") version "1.23.1"
   // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
   id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
 }
 
-group = properties("pluginGroup")
-version = properties("pluginVersion")
+group = properties("pluginGroup").get()
+version = properties("pluginVersion").get()
 
-val depsDartVersion: String = properties("depsDartVersion")
-val depsGoVersion: String = properties("depsGoVersion")
-val depsPhpVersion: String = properties("depsPhpVersion")
-val depsPyVersion: String = properties("depsPyVersion")
-val depsRubyVersion: String = properties("depsRubyVersion")
-val depsScalaVersion: String = properties("depsScalaVersion")
-val depsRVersion: String = properties("depsRVersion")
-val depsRustVersion: String = properties("depsRustVersion")
-val depsLuaVersion: String = properties("depsLuaVersion")
-val depsVueVersion: String = properties("depsVueVersion")
-val depsSvelteVersion: String = properties("depsSvelteVersion")
+val depsDartVersion: String = properties("depsDartVersion").get()
+val depsGoVersion: String = properties("depsGoVersion").get()
+val depsPhpVersion: String = properties("depsPhpVersion").get()
+val depsPyVersion: String = properties("depsPyVersion").get()
+val depsRubyVersion: String = properties("depsRubyVersion").get()
+val depsScalaVersion: String = properties("depsScalaVersion").get()
+val depsRVersion: String = properties("depsRVersion").get()
+val depsRustVersion: String = properties("depsRustVersion").get()
+val depsLuaVersion: String = properties("depsLuaVersion").get()
+val depsVueVersion: String = properties("depsVueVersion").get()
+val depsSvelteVersion: String = properties("depsSvelteVersion").get()
 
 // Configure project's dependencies
 repositories {
@@ -83,9 +84,9 @@ dependencies {
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-  pluginName.set(properties("pluginName"))
-  version.set(properties("platformVersion"))
-  type.set(properties("platformType"))
+  pluginName.set(properties("pluginName").get())
+  version.set(properties("platformVersion").get())
+  type.set(properties("platformType").get())
   downloadSources.set(true)
   instrumentCode.set(true)
   updateSinceUntilBuild.set(true)
@@ -108,7 +109,7 @@ intellij {
     "org.jetbrains.plugins.ruby:$depsRubyVersion",
     "com.jetbrains.php:$depsPhpVersion",
     "R4Intellij:$depsRVersion",
-    "org.rust.lang:$depsRustVersion",
+    "com.jetbrains.rust:$depsRustVersion",
     "com.tang:$depsLuaVersion",
     "dev.blachut.svelte.lang:$depsSvelteVersion",
     "org.jetbrains.plugins.vue:$depsVueVersion",
@@ -119,7 +120,7 @@ intellij {
 // Read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
   path.set("${project.projectDir}/docs/CHANGELOG.md")
-  version.set(properties("pluginVersion"))
+  version.set(properties("pluginVersion").get())
   header.set(provider { version.get() })
   itemPrefix.set("-")
   keepUnreleasedSection.set(true)
@@ -130,13 +131,13 @@ changelog {
 // Configure detekt plugin.
 // Read more: https://detekt.github.io/detekt/kotlindsl.html
 detekt {
-  config = files("./detekt-config.yml")
+  config.from(files("./detekt-config.yml"))
   buildUponDefaultConfig = true
   autoCorrect = true
 }
 
 tasks {
-  properties("javaVersion").let {
+  properties("javaVersion").get().let {
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
       sourceCompatibility = it
@@ -149,11 +150,11 @@ tasks {
   }
 
   wrapper {
-    gradleVersion = properties("gradleVersion")
+    gradleVersion = properties("gradleVersion").get()
   }
 
   withType<Detekt> {
-    jvmTarget = properties("javaVersion")
+    jvmTarget = properties("javaVersion").get()
     reports.xml.required.set(true)
   }
 
@@ -173,16 +174,26 @@ tasks {
   }
 
   patchPluginXml {
-    version.set(properties("pluginVersion"))
-    sinceBuild.set(properties("pluginSinceBuild"))
-    untilBuild.set(properties("pluginUntilBuild"))
+    version.set(properties("pluginVersion").get())
+    sinceBuild.set(properties("pluginSinceBuild").get())
+    untilBuild.set(properties("pluginUntilBuild").get())
 
     // Get the latest available change notes from the changelog file
-    changeNotes.set(changelog.getLatest().toHTML())
+    val pluginVersion = properties("pluginVersion").get()
+    changeNotes.set(provider {
+      with(changelog) {
+        renderItem(
+          (getOrNull(pluginVersion) ?: getUnreleased())
+            .withHeader(false)
+            .withEmptySections(false),
+          Changelog.OutputType.HTML,
+        )
+      }
+    })
   }
 
   runPluginVerifier {
-    ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map { it.trim() }.toList())
+    ideVersions.set(properties("pluginVerifierIdeVersions").get().split(',').map { it.trim() }.toList())
   }
 
   buildSearchableOptions {
@@ -192,7 +203,7 @@ tasks {
   publishPlugin {
 //    dependsOn("patchChangelog")
     token.set(System.getenv("INTELLIJ_PUBLISH_TOKEN") ?: file("./publishToken").readText().trim())
-    channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
+    channels.set(listOf(properties("pluginVersion").get().split('-').getOrElse(1) { "default" }.split('.').first()))
   }
 
   signPlugin {

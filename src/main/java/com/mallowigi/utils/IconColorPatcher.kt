@@ -33,7 +33,7 @@ import com.intellij.util.SVGLoader
 import java.awt.Color
 
 class IconColorPatcher(val color: Color) : SVGLoader.SvgElementColorPatcherProvider {
-  override fun attributeForPath(path: String?): SvgAttributePatcher = object : SvgAttributePatcher {
+  override fun attributeForPath(path: String): SvgAttributePatcher = object : SvgAttributePatcher {
     override fun patchColors(attributes: MutableMap<String, String>) {
       print("patchColors: $attributes")
       val hexColor = when (attributes[COLORIZE]) {
@@ -45,11 +45,11 @@ class IconColorPatcher(val color: Color) : SVGLoader.SvgElementColorPatcherProvi
         attributes[FILL] = hexColor
       }
     }
-
-    override fun digest(): LongArray = longArrayOf(
-      color.toHex().toHash(),
-    )
   }
+
+  override fun digest(): LongArray = longArrayOf(
+    color.toHex().toHash(),
+  )
 
   companion object {
     private const val COLORIZE = "colorize"
