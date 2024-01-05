@@ -1,11 +1,12 @@
 repo_name: mallowigi/color-highlighter
 report_id: 3411a844ad6bbd2e55f4a2bf5fd1d812
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-19T07:57:20+00:00'
+timestamp: '2024-01-05T08:37:10+00:00'
 requested_by: mallowigi
 provider: github
 branch: master
-detected_tools_count: 20
+detected_tools_count: 22
 tools:
 - name: CSS 3
   description: The latest evolution of the Cascading Style Sheets language
@@ -15,6 +16,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Dart
   description: A new web programming language with libraries, a virtual machine, and
@@ -25,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1646/Twitter-02.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Golang
   description: An open source programming language that makes it easy to build simple,
@@ -36,6 +39,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1005/O6AczwfV_400x400.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Java
   description: A concurrent, class-based, object-oriented, language specifically designed
@@ -46,6 +50,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -56,6 +61,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Kotlin
   description: Statically typed Programming Language targeting JVM and JavaScript
@@ -65,6 +71,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/3750/pCfEzr6L.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Lua
   description: Powerful, fast, lightweight, embeddable scripting language
@@ -74,6 +81,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/2118/128px-Lua-Logo.svg.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: PHP
   description: A popular general-purpose scripting language that is especially suited
@@ -84,6 +92,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/991/hwUcGZ41_400x400.jpg
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Python
   description: A clear and powerful object-oriented programming language, comparable
@@ -94,6 +103,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: R Language
   description: A language and environment for statistical computing and graphics
@@ -103,6 +113,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1213/r-logo.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Ruby
   description: A dynamic, interpreted, open source programming language with a focus
@@ -113,6 +124,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/989/ruby.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Rust
   description: A safe, concurrent, practical language
@@ -122,6 +134,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1070/v7txhrjp9pdqrkdtxxp0.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: SQL
   description: It is a domain-specific language used in programming
@@ -131,6 +144,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/src/test/java/colors.sql
   detection_source: src/test/java/colors.sql
   last_updated_by: Elior
   last_updated_on: 2021-05-29 19:11:04.000000000 Z
@@ -143,6 +157,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1012/scala.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: Swift
   description: 'An innovative new programming language for Cocoa and Cocoa Touch. '
@@ -153,6 +168,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1009/tuHsaI2U.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
@@ -163,7 +179,20 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
+- name: pgvector
+  description: Open-source vector similarity search for Postgres
+  website_url: https://github.com/pgvector/pgvector/
+  open_source: false
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/src/test/java/colors.txt
+  detection_source: src/test/java/colors.txt
+  last_updated_by: Elior
+  last_updated_on: 2021-09-27 19:25:42.000000000 Z
 - name: Git
   description: Fast, scalable, distributed revision control system
   website_url: http://git-scm.com/
@@ -172,6 +201,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter
   detection_source: Repo Metadata
 - name: GitHub Actions
   description: Automate your workflow from idea to production
@@ -181,9 +211,10 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/.github/workflows/quality-checks.yml
   detection_source: ".github/workflows/quality-checks.yml"
   last_updated_by: renovate[bot]
-  last_updated_on: 2023-06-09 15:33:08.000000000 Z
+  last_updated_on: 2023-11-19 08:00:41.000000000 Z
 - name: Gradle
   description: A powerful build system for the JVM
   website_url: https://www.gradle.org/
@@ -193,15 +224,29 @@ tools:
   category: Build, Test, Deploy
   sub_category: Java Build Tools
   image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
-  detection_source: gradlew.bat
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/gradlew
+  detection_source: gradlew
   last_updated_by: renovate[bot]
-  last_updated_on: 2023-03-01 02:59:09.000000000 Z
+  last_updated_on: 2023-12-01 01:47:27.000000000 Z
 - name: HTML
   description: Hypertext Markup Language for creating web pages.
   website_url: http://
   open_source: false
   hosted_saas: false
   image_url: https://img.stackshare.io/service/2270/no-img-open-source.png
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/docs/CHANGELOG.html
   detection_source: docs/CHANGELOG.html
   last_updated_by: Elior
   last_updated_on: 2022-10-01 07:40:16.000000000 Z
+- name: LangChain
+  description: Build AI apps with LLMs through composability
+  website_url: https://github.com/hwchase17/langchain
+  open_source: true
+  hosted_saas: false
+  category: Communications
+  sub_category: Large Language Model Tools
+  image_url: https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg
+  detection_source_url: https://github.com/mallowigi/color-highlighter/blob/master/src/test/java/colors.txt
+  detection_source: src/test/java/colors.txt
+  last_updated_by: Elior
+  last_updated_on: 2021-09-27 19:25:42.000000000 Z
