@@ -77,7 +77,7 @@ repositories {
 dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5")
   implementation("com.thoughtworks.xstream:xstream:1.4.20")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0")
 }
 
 // Configure gradle-intellij-plugin plugin.
