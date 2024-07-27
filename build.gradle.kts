@@ -60,8 +60,8 @@ val platformDownloadSources: String by project
 
 val javaVersion: String by project
 
-group = properties("pluginGroup")
-version = properties("pluginVersion")
+group = pluginGroup
+version = pluginVersion
 
 val depsDartVersion: String = properties("depsDartVersion")
 val depsGoVersion: String = properties("depsGoVersion")
@@ -111,13 +111,13 @@ dependencies {
 
     plugins(
       "Dart:$depsDartVersion",
-      "Pythonid:$depsPyVersion",
+      "PythonCore:$depsPyVersion",
       "org.jetbrains.plugins.go:$depsGoVersion",
       "org.intellij.scala:$depsScalaVersion",
       "org.jetbrains.plugins.ruby:$depsRubyVersion",
       "com.jetbrains.php:$depsPhpVersion",
       "R4Intellij:$depsRVersion",
-      "org.rust.lang:$depsRustVersion",
+      "com.jetbrains.rust:$depsRustVersion",
       "com.tang:$depsLuaVersion",
       "dev.blachut.svelte.lang:$depsSvelteVersion",
       "org.jetbrains.plugins.vue:$depsVueVersion",
@@ -168,10 +168,9 @@ intellijPlatform {
 changelog {
   path.set("${project.projectDir}/docs/CHANGELOG.md")
   version.set(pluginVersion)
-  header.set(provider { version.get() })
   itemPrefix.set("-")
   keepUnreleasedSection.set(true)
-  unreleasedTerm.set("[Unreleased]")
+  unreleasedTerm.set("Changelog")
   groups.set(listOf("Features", "Fixes", "Other", "Bump"))
 }
 
@@ -203,11 +202,6 @@ tasks {
   wrapper {
     gradleVersion = properties("gradleVersion")
   }
-
-  // patchPluginXml {
-  //   // Get the latest available change notes from the changelog file
-  //   changeNotes.set(changelog.getLatest().toHTML())
-  // }
 
   buildSearchableOptions {
     enabled = false
