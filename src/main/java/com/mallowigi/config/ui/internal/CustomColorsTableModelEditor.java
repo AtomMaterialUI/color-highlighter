@@ -49,6 +49,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.intellij.ui.TableSpeedSearch.installOn;
+
 @SuppressWarnings({"SyntheticAccessorCall",
   "AccessingNonPublicFieldOfAnotherObject",
   "MagicNumber",
@@ -85,7 +87,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
     table.setEnableAntialiasing(true);
     table.setPreferredScrollableViewportSize(JBUI.size(200, -1));
     table.setVisibleRowCount(20);
-    new TableSpeedSearch(table);
+    installOn(table);
 
     table.getEmptyText().setFont(UIUtil.getLabelFont().deriveFont(24.0f));
     table.getEmptyText().setText(emptyText);
