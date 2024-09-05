@@ -78,7 +78,6 @@ class DartVisitor : ColorVisitor() {
   }
 }
 
-
 class ColorInitializer(private val visitor: DartVisitor) : DartRecursiveVisitor() {
   var result: Color? = null
 
@@ -90,7 +89,7 @@ class ColorInitializer(private val visitor: DartVisitor) : DartRecursiveVisitor(
           val elementType = PsiUtilCore.getElementType(value)
           index == 0 && elementType == DartTokenTypes.IDENTIFIER ||
             index == 2 && elementType == DartTokenTypes.NUMBER
-        }?.last()?.let {
+        }?.lastOrNull()?.let {
           ColorSearchEngine.getColor(
             it.value.descendantOfType<LeafPsiElement> { true }!!.text,
             visitor
