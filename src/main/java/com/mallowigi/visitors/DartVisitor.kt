@@ -29,13 +29,25 @@ package com.mallowigi.visitors
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiWhiteSpace
+import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.util.PsiUtilCore
+import com.intellij.psi.util.childLeafs
+import com.intellij.psi.util.firstLeaf
+import com.intellij.psi.util.parentOfType
+import com.jetbrains.lang.dart.DartTokenTypes
+import com.jetbrains.lang.dart.psi.DartRecursiveVisitor
+import com.jetbrains.lang.dart.psi.DartReference
+import com.jetbrains.lang.dart.psi.DartVarDeclarationList
+import com.jetbrains.lang.dart.psi.DartVarInit
 import com.mallowigi.search.ColorSearchEngine
+import org.rust.lang.core.psi.ext.descendantOfType
+import org.toml.lang.psi.ext.elementType
 import java.awt.Color
 
 class DartVisitor : ColorVisitor() {
 
-  private val allowedTypes = setOf("REGULAR_STRING_PART", "NUMBER")
+  private val allowedTypes = setOf("REGULAR_STRING_PART", "NUMBER", "REFERENCE_EXPRESSION")
 
   override fun clone(): HighlightVisitor = DartVisitor()
 
@@ -46,8 +58,44 @@ class DartVisitor : ColorVisitor() {
     val type = PsiUtilCore.getElementType(element).toString()
     if (type !in allowedTypes) return null
 
-    val value = element.text
-    return ColorSearchEngine.getColor(value, this)
+    if (element is DartReference) {
+      if (element.parentOfType<DartReference>()?.resolve() == element.resolve()) return null
+      return element.readReferencedValue()
+    } else {
+      return ColorSearchEngine.getColor(element.text, this)
+    }
   }
 
+  private fun createVisitor(): ColorInitializer = ColorInitializer(this)
+
+  private fun DartReference.readReferencedValue(): Color? {
+    if (this.firstLeaf().let { it is LeafPsiElement && it.elementType == DartTokenTypes.IDENTIFIER }) {
+      val visitor = createVisitor()
+      this.resolve()?.let { visitor.visitElement(it) }
+      return visitor.result
+    }
+    return null
+  }
+}
+
+
+class ColorInitializer(private val visitor: DartVisitor) : DartRecursiveVisitor() {
+  var result: Color? = null
+
+  override fun visitElement(element: PsiElement) {
+    result =
+      element.parentOfType<DartVarDeclarationList>()?.descendantOfType<DartVarInit> { true }?.childLeafs()
+        ?.filter { it !is PsiWhiteSpace && it.elementType != DartTokenTypes.EQ }?.withIndex()
+        ?.filter { (index, value) ->
+          val elementType = PsiUtilCore.getElementType(value)
+          index == 0 && elementType == DartTokenTypes.IDENTIFIER ||
+            index == 2 && elementType == DartTokenTypes.NUMBER
+        }?.last()?.let {
+          ColorSearchEngine.getColor(
+            it.value.descendantOfType<LeafPsiElement> { true }!!.text,
+            visitor
+          )
+        }
+    if (result == null) element.acceptChildren(this) else return
+  }
 }
