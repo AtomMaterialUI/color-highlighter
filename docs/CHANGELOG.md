@@ -11,6 +11,12 @@
 ### Other
 
 ---
+## 18.1.0
+
+### Features
+- Provide "Gutter only" option for preview
+- Add border to gutter icons for better contrast
+
 ## 17.0.1
 
 ### Fixes
