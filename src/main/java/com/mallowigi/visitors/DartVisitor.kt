@@ -33,7 +33,6 @@ import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.util.PsiUtilCore
 import com.intellij.psi.util.childLeafs
-import com.intellij.psi.util.firstLeaf
 import com.intellij.psi.util.parentOfType
 import com.jetbrains.lang.dart.DartTokenTypes
 import com.jetbrains.lang.dart.psi.DartRecursiveVisitor
@@ -69,7 +68,7 @@ class DartVisitor : ColorVisitor() {
   private fun createVisitor(): ColorInitializer = ColorInitializer(this)
 
   private fun DartReference.readReferencedValue(): Color? {
-    if (this.firstLeaf().let { it is LeafPsiElement && it.elementType == DartTokenTypes.IDENTIFIER }) {
+    if (this.descendantOfType<LeafPsiElement> { it.elementType == DartTokenTypes.IDENTIFIER } != null) {
       val visitor = createVisitor()
       this.resolve()?.let { visitor.visitElement(it) }
       return visitor.result
@@ -82,19 +81,14 @@ class ColorInitializer(private val visitor: DartVisitor) : DartRecursiveVisitor(
   var result: Color? = null
 
   override fun visitElement(element: PsiElement) {
-    result =
+    val filteredElements =
       element.parentOfType<DartVarDeclarationList>()?.descendantOfType<DartVarInit> { true }?.childLeafs()
-        ?.filter { it !is PsiWhiteSpace && it.elementType != DartTokenTypes.EQ }?.withIndex()
-        ?.filter { (index, value) ->
-          val elementType = PsiUtilCore.getElementType(value)
-          index == 0 && elementType == DartTokenTypes.IDENTIFIER ||
-            index == 2 && elementType == DartTokenTypes.NUMBER
-        }?.lastOrNull()?.let {
-          ColorSearchEngine.getColor(
-            it.value.descendantOfType<LeafPsiElement> { true }!!.text,
-            visitor
-          )
-        }
+        ?.filter { it !is PsiWhiteSpace && it.elementType != DartTokenTypes.EQ }
+    result = filteredElements?.windowed(4, 1)?.firstOrNull { window ->
+      Triple(window[0].elementType, window[0].text, window[2].elementType).let {
+        it.first == DartTokenTypes.IDENTIFIER && it.second == "Color" && it.third == DartTokenTypes.NUMBER
+      }
+    }?.elementAt(2)?.let { ColorSearchEngine.getColor(it.text, visitor) }
     if (result == null) element.acceptChildren(this) else return
   }
 }
