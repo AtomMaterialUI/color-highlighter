@@ -36,6 +36,17 @@ import java.awt.Color
 class XmlVisitor : ColorVisitor() {
   private val allowedTypes = setOf("XML_DATA_CHARACTERS", "XML_ATTRIBUTE_VALUE_TOKEN")
 
+  val extensions: Set<String> = setOf(
+    "xml",
+    "html",
+    "xhtml",
+    "vue",
+    "svelte",
+    "svg",
+    "jsx",
+    "tsx"
+  )
+
   override fun suitableForFile(file: PsiFile): Boolean =
     extensions.contains(file.virtualFile?.extension)
 
@@ -45,22 +56,10 @@ class XmlVisitor : ColorVisitor() {
 
     val value = element.text
     if (value !is String) return null
-    return ColorSearchEngine.getColor((value as? String)!!, this)
+    return ColorSearchEngine.getColor(value, this)
   }
 
   override fun shouldVisit(): Boolean = config.isMarkupEnabled
 
   override fun clone(): HighlightVisitor = XmlVisitor()
-
-  companion object {
-    val extensions: Set<String> = setOf(
-      "xml",
-      "html",
-      "xhtml",
-      "vue",
-      "svelte",
-      "svg",
-      "jsx",
-      "tsx")
-  }
 }

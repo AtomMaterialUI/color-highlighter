@@ -27,7 +27,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key).get()
 
@@ -186,11 +185,6 @@ tasks {
     withType<JavaCompile> {
       sourceCompatibility = it
       targetCompatibility = it
-    }
-
-    withType<KotlinCompile> {
-      kotlinOptions.jvmTarget = it
-      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check")
     }
 
     withType<Detekt> {

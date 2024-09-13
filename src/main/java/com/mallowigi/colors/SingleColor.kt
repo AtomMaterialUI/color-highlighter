@@ -35,7 +35,7 @@ import java.io.Serializable
  * @property code
  */
 @Suppress("Detekt:DataClassShouldBeImmutable", "Detekt:DataClassContainsFunctions") // Need to disable this for now
-data class SingleColor internal constructor(
+data class SingleColor(
   @field:Property var name: String = "",
   @field:Property var code: String = "",
 ) : Serializable {

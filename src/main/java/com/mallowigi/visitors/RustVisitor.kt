@@ -34,14 +34,18 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class RustVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "rust",
+    "rs",
+  )
+
   private val allowedTypes = setOf(
-    "STRING_LITERAL",
-    "INTEGER_LITERAL"
+    "STRING_LITERAL", "INTEGER_LITERAL"
   )
 
   override fun clone(): HighlightVisitor = RustVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(rust|rs)$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean = extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()

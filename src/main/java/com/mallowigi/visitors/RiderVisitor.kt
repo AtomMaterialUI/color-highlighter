@@ -38,14 +38,26 @@ import com.mallowigi.search.parsers.NetColorParser
 import java.awt.Color
 
 class RiderVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "c",
+    "h",
+    "cc",
+    "hh",
+    "cpp",
+    "hpp",
+    "cs"
+  )
 
-  private val allowedTypes = setOf("STRING_LITERAL_REGULAR", "DUMMY_NODE")
+  private val allowedTypes = setOf(
+    "STRING_LITERAL_REGULAR",
+    "DUMMY_NODE"
+  )
 
   override fun clone(): HighlightVisitor = RiderVisitor()
 
   override fun getParser(text: String): ColorParser = when {
     text.contains(COLOR_FROM_ARGB.text) -> NetColorParser()
-    else -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+    else                                -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
   }
 
   override fun shouldParseText(text: String): Boolean {
@@ -55,7 +67,7 @@ class RiderVisitor : ColorVisitor() {
   }
 
   override fun suitableForFile(file: PsiFile): Boolean =
-    file.name.matches(".*\\.(c|h|cc|hh|cpp|hpp|cs)$".toRegex())
+    extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()

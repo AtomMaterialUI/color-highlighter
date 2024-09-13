@@ -26,7 +26,6 @@
 
 package com.mallowigi.config.home
 
-import com.intellij.openapi.components.service
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.Messages
@@ -40,11 +39,11 @@ import com.mallowigi.ColorHighlighterIcons.Settings.COLOR_NAMES_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.CSS_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.HEX_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
-import com.mallowigi.ColorHighlighterIcons.Settings.SCALA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKUP_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.SCALA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
@@ -288,7 +287,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.ok"),
         message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.cancel"),
         Messages.getQuestionIcon(),
-      ) == Messages.OK) {
+      ) == Messages.OK
+    ) {
       settingsClone.resetSettings()
       main.reset()
     }
@@ -339,8 +339,5 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   companion object {
     @NonNls
     const val ID = "com.mallowigi.config.home.ColorHighlighterConfigurable"
-
-    @JvmStatic
-    val instance: ColorHighlighterConfigurable by lazy { service() }
   }
 }

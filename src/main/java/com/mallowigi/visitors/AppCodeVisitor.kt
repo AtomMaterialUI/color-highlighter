@@ -39,15 +39,19 @@ import com.mallowigi.search.parsers.PredefinedColorParser
 import java.awt.Color
 
 class AppCodeVisitor : ColorVisitor() {
-  private val allowedTypes = setOf("STRING_LITERAL", "ISTRING_CONTENT", "STRING_LITERAL_CONTENT")
+  private val allowedTypes = setOf(
+    "STRING_LITERAL",
+    "ISTRING_CONTENT",
+    "STRING_LITERAL_CONTENT"
+  )
 
   override fun clone(): HighlightVisitor = AppCodeVisitor()
 
   override fun getParser(text: String): ColorParser = when {
-    text.startsWith(NS_COLOR.text) -> NSColorParser()
+    text.startsWith(NS_COLOR.text)    -> NSColorParser()
     text.startsWith(SWIFT_COLOR.text) -> ColorCtorParser()
-    text.startsWith(UI_COLOR.text) -> NSColorParser()
-    else -> PredefinedColorParser()
+    text.startsWith(UI_COLOR.text)    -> NSColorParser()
+    else                              -> PredefinedColorParser()
   }
 
   override fun shouldParseText(text: String): Boolean = true
