@@ -24,26 +24,13 @@
  *
  */
 
-package com.mallowigi.config.home
+package com.mallowigi.highlighters
 
-import com.intellij.openapi.util.NlsContexts
-import com.mallowigi.ColorHighlighterBundle.message
-import com.mallowigi.ColorHighlighterIcons.Highlighting.BACKGROUND_ICON
-import com.mallowigi.ColorHighlighterIcons.Highlighting.BORDER_ICON
-import com.mallowigi.ColorHighlighterIcons.Highlighting.DISABLED_ICON
-import com.mallowigi.ColorHighlighterIcons.Highlighting.FOREGROUND_ICON
-import com.mallowigi.ColorHighlighterIcons.Highlighting.INLINE_ICON
-import com.mallowigi.ColorHighlighterIcons.Highlighting.UNDERLINE_ICON
-import javax.swing.Icon
+import com.intellij.openapi.editor.markup.TextAttributes
+import java.awt.Color
 
-enum class HighlightingStyles(
-  @NlsContexts.Label val type: String,
-  val icon: Icon
-) {
-  BACKGROUND(message("HighlightingStyles.background"), BACKGROUND_ICON),
-  BORDER(message("HighlightingStyles.border"), BORDER_ICON),
-  UNDERLINE(message("HighlightingStyles.underline"), UNDERLINE_ICON),
-  FOREGROUND(message("HighlightingStyles.foreground"), FOREGROUND_ICON),
-  INLINE(message("HighlightingStyles.inline"), INLINE_ICON),
-  DISABLED(message("HighlightingStyles.disabled"), DISABLED_ICON);
+class DisabledHighlighter : Highlighter {
+  override fun getAttributesFlyweight(color: Color): TextAttributes {
+    return TextAttributes()
+  }
 }

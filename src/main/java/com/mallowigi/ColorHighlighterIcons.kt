@@ -61,6 +61,7 @@ object ColorHighlighterIcons {
     val FOREGROUND_ICON: Icon = load("icons/highlighting/foreground.svg")
     val UNDERLINE_ICON: Icon = load("icons/highlighting/underline.svg")
     val INLINE_ICON: Icon = load("icons/highlighting/inline.svg")
+    val DISABLED_ICON: Icon = load("icons/highlighting/disabled.svg")
   }
 
   object Other {
