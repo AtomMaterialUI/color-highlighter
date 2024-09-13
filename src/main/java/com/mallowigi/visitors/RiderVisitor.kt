@@ -45,7 +45,8 @@ class RiderVisitor : ColorVisitor() {
     "hh",
     "cpp",
     "hpp",
-    "cs"
+    "cs",
+    "razor"
   )
 
   private val allowedTypes = setOf(
