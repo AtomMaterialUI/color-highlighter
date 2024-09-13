@@ -36,6 +36,17 @@ import java.awt.Color
 class CssVisitor : ColorVisitor() {
   private val allowedTypes = setOf("CSS_IDENT", "CSS_NUMBER", "CSS_HASH", "CSS_FUNCTION")
 
+  private val extensions: Set<String> = setOf(
+    "css",
+    "scss",
+    "sass",
+    "less",
+    "styl",
+    "pcss",
+    "html",
+    "vue",
+  )
+
   override fun suitableForFile(file: PsiFile): Boolean =
     extensions.contains(file.virtualFile?.extension)
 
@@ -45,21 +56,10 @@ class CssVisitor : ColorVisitor() {
 
     val value = element.text
     if (value !is String) return null
-    return ColorSearchEngine.getColor((value as? String)!!, this)
+    return ColorSearchEngine.getColor(value, this)
   }
+
+  override fun shouldVisit(): Boolean = config.isCssColorEnabled
 
   override fun clone(): HighlightVisitor = CssVisitor()
-
-  companion object {
-    val extensions: Set<String> = setOf(
-      "css",
-      "scss",
-      "sass",
-      "less",
-      "styl",
-      "pcss",
-      "html",
-      "vue",
-    )
-  }
 }

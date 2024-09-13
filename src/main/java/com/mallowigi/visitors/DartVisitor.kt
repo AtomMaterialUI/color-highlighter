@@ -45,13 +45,16 @@ import org.toml.lang.psi.ext.elementType
 import java.awt.Color
 
 class DartVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "dart",
+  )
 
   private val allowedTypes = setOf("REGULAR_STRING_PART", "NUMBER", "REFERENCE_EXPRESSION")
 
   override fun clone(): HighlightVisitor = DartVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean =
-    file.name.matches(".*\\.dart$".toRegex())
+    extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()

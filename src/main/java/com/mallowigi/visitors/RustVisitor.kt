@@ -30,18 +30,37 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorPrefixes.RGB_RUST
 import com.mallowigi.search.ColorSearchEngine
+import com.mallowigi.search.parsers.ColorParser
+import com.mallowigi.search.parsers.RgbCtorParser
 import java.awt.Color
 
 class RustVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "rust",
+    "rs",
+  )
+
   private val allowedTypes = setOf(
     "STRING_LITERAL",
-    "INTEGER_LITERAL"
+    "INTEGER_LITERAL",
+    "CALL_EXPR"
   )
 
   override fun clone(): HighlightVisitor = RustVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(rust|rs)$".toRegex())
+  override fun getParser(text: String): ColorParser = when {
+    text.startsWith(RGB_RUST.text) -> RgbCtorParser()
+    else                           -> throw IllegalArgumentException("Cannot find a parser for the text: $text")
+  }
+
+  override fun shouldParseText(text: String): Boolean = when {
+    config.isRustColorCtorEnabled -> text.startsWith(RGB_RUST.text)
+    else                          -> false
+  }
+
+  override fun suitableForFile(file: PsiFile): Boolean = extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()

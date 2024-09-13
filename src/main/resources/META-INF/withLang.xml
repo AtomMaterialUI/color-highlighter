@@ -29,6 +29,7 @@
         <highlightVisitor implementation="com.mallowigi.visitors.XmlVisitor"/>
         <highlightVisitor implementation="com.mallowigi.visitors.AnyVisitor"/>
         <highlightVisitor implementation="com.mallowigi.visitors.TextVisitor"/>
+        <highlightVisitor implementation="com.mallowigi.visitors.CssVisitor"/>
         <codeInsight.lineMarkerProvider language=""
                                         implementationClass="com.mallowigi.gutter.GutterColorLineMarkerProvider"/>
         <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.XmlInlineInlayProvider"

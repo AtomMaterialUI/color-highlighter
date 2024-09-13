@@ -26,7 +26,6 @@
 
 package com.mallowigi.config.home
 
-import com.intellij.openapi.components.service
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.Messages
@@ -40,15 +39,17 @@ import com.mallowigi.ColorHighlighterIcons.Settings.COLOR_NAMES_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.CSS_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.HEX_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
-import com.mallowigi.ColorHighlighterIcons.Settings.SCALA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKUP_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.RUST_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.SCALA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
+import com.mallowigi.inlay.refreshInlayHints
 import org.jetbrains.annotations.NonNls
 import javax.swing.DefaultComboBoxModel
 import javax.swing.Icon
@@ -62,6 +63,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   private lateinit var javaPanel: CollapsibleRow
   private lateinit var kotlinPanel: CollapsibleRow
   private lateinit var scalaPanel: CollapsibleRow
+  private lateinit var rustPanel: CollapsibleRow
   private lateinit var markdownPanel: CollapsibleRow
   private lateinit var markupPanel: CollapsibleRow
   private lateinit var textPanel: CollapsibleRow
@@ -238,6 +240,19 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"))
       }
 
+      rustPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.rustSeparator.text")) {
+        row {
+          icon(RUST_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.colorRustCheckbox.text"))
+            .bindSelected(settingsClone::isRustColorCtorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorRustCheckbox.toolTipText"))
+
+      }
+
       riderPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.riderSeparator.text")) {
         row {
           icon(XCODE_ICON)
@@ -288,7 +303,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.ok"),
         message("ColorHighlighterSettingsForm.resetDefaultsButton.confirmation.cancel"),
         Messages.getQuestionIcon(),
-      ) == Messages.OK) {
+      ) == Messages.OK
+    ) {
       settingsClone.resetSettings()
       main.reset()
     }
@@ -297,6 +313,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   override fun apply() {
     super.apply()
     settings.apply(settingsClone)
+    refreshInlayHints()
   }
 
   private fun toggleFeatures() {
@@ -315,6 +332,9 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     }
     if (!featureLoader.isMarkdownEnabled) {
       markdownPanel.visible(false)
+    }
+    if (!featureLoader.isRustEnabled) {
+      rustPanel.visible(false)
     }
   }
 
@@ -339,8 +359,6 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   companion object {
     @NonNls
     const val ID = "com.mallowigi.config.home.ColorHighlighterConfigurable"
-
-    @JvmStatic
-    val instance: ColorHighlighterConfigurable by lazy { service() }
   }
 }
+

@@ -3,25 +3,27 @@
 ## Tech Stack
 mallowigi/color-highlighter is built on the following main stack:
 
-- [Gradle](https://www.gradle.org/) – Java Build Tools
-- [Ruby](https://www.ruby-lang.org) – Languages
+- [Dart](https://www.dartlang.org/) – Languages
+- [Golang](http://golang.org/) – Languages
+- [Java](https://www.java.com) – Languages
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
+- [Kotlin](https://kotlinlang.org/) – Languages
+- [Lua](http://www.lua.org/) – Languages
 - [PHP](http://www.php.net/) – Languages
 - [Python](https://www.python.org) – Languages
-- [Java](https://www.java.com) – Languages
-- [Golang](http://golang.org/) – Languages
-- [Swift](https://developer.apple.com/swift/) – Languages
-- [Scala](http://www.scala-lang.org/) – Languages
-- [Rust](http://www.rust-lang.org/) – Languages
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - [R Language](http://www.r-project.org/) – Languages
-- [TypeScript](http://www.typescriptlang.org) – Languages
-- [Dart](https://www.dartlang.org/) – Languages
-- [Lua](http://www.lua.org/) – Languages
+- [Ruby](https://www.ruby-lang.org) – Languages
+- [Rust](http://www.rust-lang.org/) – Languages
 - [SQL](https://en.wikipedia.org/wiki/SQL) – Languages
-- [Kotlin](https://kotlinlang.org/) – Languages
+- [Scala](http://www.scala-lang.org/) – Languages
+- [Swift](https://developer.apple.com/swift/) – Languages
+- [TypeScript](http://www.typescriptlang.org) – Languages
+- [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
 - [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 - [LangChain](https://github.com/hwchase17/langchain) – Large Language Model Tools
 - [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
+- [Gradle](https://www.gradle.org/) – Java Build Tools
+- [LangChain](https://github.com/hwchase17/langchain) – Large Language Model Tools
 
 Full tech stack [here](/techstack.md)
 
@@ -31,23 +33,24 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 mallowigi/color-highlighter is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/975/gradlephant-social-black-bg.png' alt='Gradle'/> [Gradle](https://www.gradle.org/) – Java Build Tools
-- <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1646/Twitter-02.png' alt='Dart'/> [Dart](https://www.dartlang.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1005/O6AczwfV_400x400.png' alt='Golang'/> [Golang](http://golang.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/995/K85ZWV2F.png' alt='Java'/> [Java](https://www.java.com) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/3750/pCfEzr6L.png' alt='Kotlin'/> [Kotlin](https://kotlinlang.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/2118/128px-Lua-Logo.svg.png' alt='Lua'/> [Lua](http://www.lua.org/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/991/hwUcGZ41_400x400.jpg' alt='PHP'/> [PHP](http://www.php.net/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/995/K85ZWV2F.png' alt='Java'/> [Java](https://www.java.com) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1005/O6AczwfV_400x400.png' alt='Golang'/> [Golang](http://golang.org/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1009/tuHsaI2U.png' alt='Swift'/> [Swift](https://developer.apple.com/swift/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1012/scala.png' alt='Scala'/> [Scala](http://www.scala-lang.org/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1070/v7txhrjp9pdqrkdtxxp0.png' alt='Rust'/> [Rust](http://www.rust-lang.org/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1213/r-logo.png' alt='R Language'/> [R Language](http://www.r-project.org/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1646/Twitter-02.png' alt='Dart'/> [Dart](https://www.dartlang.org/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/2118/128px-Lua-Logo.svg.png' alt='Lua'/> [Lua](http://www.lua.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1070/v7txhrjp9pdqrkdtxxp0.png' alt='Rust'/> [Rust](http://www.rust-lang.org/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png' alt='SQL'/> [SQL](https://en.wikipedia.org/wiki/SQL) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/3750/pCfEzr6L.png' alt='Kotlin'/> [Kotlin](https://kotlinlang.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1012/scala.png' alt='Scala'/> [Scala](http://www.scala-lang.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1009/tuHsaI2U.png' alt='Swift'/> [Swift](https://developer.apple.com/swift/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png' alt='pgvector'/> [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- <img width='25' height='25' src='https://img.stackshare.io/service/975/gradlephant-social-black-bg.png' alt='Gradle'/> [Gradle](https://www.gradle.org/) – Java Build Tools
 - <img width='25' height='25' src='https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg' alt='LangChain'/> [LangChain](https://github.com/hwchase17/langchain) – Large Language Model Tools
 - <img width='25' height='25' src='https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png' alt='pgvector'/> [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
 
@@ -60,7 +63,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [mallowigi/color-highlighter](https://github.com/mallowigi/color-highlighter)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|22<br/>Tools used|12/14/23 <br/>Report generated|
+|22<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 

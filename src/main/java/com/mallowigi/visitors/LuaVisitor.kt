@@ -34,6 +34,11 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class LuaVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "lua",
+    "luau",
+  )
+
   private val allowedTypes = setOf(
     "STRING",
     "NUMBER"
@@ -41,7 +46,8 @@ class LuaVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = LuaVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(lua)$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean =
+    extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
