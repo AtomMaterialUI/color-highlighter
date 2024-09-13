@@ -33,6 +33,7 @@ import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.ColorUtil
+import com.intellij.ui.svg.colorPatchedIcon
 import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 import javax.swing.Icon
@@ -54,4 +55,4 @@ fun Color.toHex(): String = ColorUtil.toHex(this)
 fun String.fromHex(): Color = ColorUtil.fromHex(this)
 
 @Suppress("UnstableApiUsage")
-fun Icon.themedIcon(color: Color): Icon = IconLoader.colorPatchedIcon(this, IconColorPatcher(color))
+fun Icon.themedIcon(color: Color): Icon = colorPatchedIcon(this, IconColorPatcher(color))

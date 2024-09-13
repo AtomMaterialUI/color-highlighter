@@ -55,4 +55,5 @@ class IconColorPatcher(val color: Color) : SVGLoader.SvgElementColorPatcherProvi
     private const val COLORIZE = "colorize"
     private const val FILL = "fill"
   }
+
 }

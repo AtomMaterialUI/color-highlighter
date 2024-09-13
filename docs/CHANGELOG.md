@@ -1,4 +1,15 @@
 # Changelog
+
+## Changelog
+
+### Features
+
+### Fixes
+
+### Removals
+
+### Other
+
 ---
 ## [Unreleased]
 
