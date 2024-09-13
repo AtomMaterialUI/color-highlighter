@@ -2,9 +2,10 @@
 
 ---
 
-## 18.0.0
+## 18.1.0
 
 ### Features
+
 - Add CSS/SCSS/Markup support
 - Provide "Gutter only" option for preview (@lootwig)
 - Add border to gutter icons for better contrast (@lootwig)
