@@ -28,7 +28,6 @@ package com.mallowigi
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.mallowigi.config.home.ColorHighlighterState
-import com.mallowigi.utils.ColorHighlighterNotifications
 import com.mallowigi.utils.getVersion
 
 /**
@@ -44,12 +43,12 @@ class UpdatesComponent : ProjectActivity {
   private fun projectOpened(project: Project) {
     // Show new version notification
     val pluginVersion = getVersion()
-    val updated = pluginVersion != config.version
+    // val updated = pluginVersion != config.version
     config.version = pluginVersion
 
-    if (updated) {
-      ColorHighlighterNotifications.showUpdate(project)
-    }
+    // if (updated) {
+    //   ColorHighlighterNotifications.showUpdate(project)
+    // }
   }
 
   private fun onProjectOpened(project: Project) {
