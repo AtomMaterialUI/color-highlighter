@@ -43,6 +43,7 @@ import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MAIN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKDOWN_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.MARKUP_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.RUST_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.SCALA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
@@ -62,6 +63,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   private lateinit var javaPanel: CollapsibleRow
   private lateinit var kotlinPanel: CollapsibleRow
   private lateinit var scalaPanel: CollapsibleRow
+  private lateinit var rustPanel: CollapsibleRow
   private lateinit var markdownPanel: CollapsibleRow
   private lateinit var markupPanel: CollapsibleRow
   private lateinit var textPanel: CollapsibleRow
@@ -238,6 +240,19 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"))
       }
 
+      rustPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.rustSeparator.text")) {
+        row {
+          icon(RUST_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.colorRustCheckbox.text"))
+            .bindSelected(settingsClone::isRustColorCtorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorRustCheckbox.toolTipText"))
+
+      }
+
       riderPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.riderSeparator.text")) {
         row {
           icon(XCODE_ICON)
@@ -317,6 +332,9 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     }
     if (!featureLoader.isMarkdownEnabled) {
       markdownPanel.visible(false)
+    }
+    if (!featureLoader.isRustEnabled) {
+      rustPanel.visible(false)
     }
   }
 

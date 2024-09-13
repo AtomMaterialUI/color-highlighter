@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,14 @@
  *
  *
  */
-package com.mallowigi
+package com.mallowigi.startup
 
-import com.intellij.openapi.components.Service
-import com.intellij.openapi.components.service
+import com.intellij.ide.AppLifecycleListener
+import com.mallowigi.FeatureLoader
 
-@Service(Service.Level.APP)
-class FeatureLoader {
-  var isJavaEnabled: Boolean = false
-  var isKotlinEnabled: Boolean = false
-  var isScalaEnabled: Boolean = false
-  var isMarkdownEnabled: Boolean = false
-  var isRiderEnabled: Boolean = false
-  var isRustEnabled: Boolean = false
-
-  companion object {
-    @JvmStatic
-    val instance: FeatureLoader by lazy { service() }
+class RustVisitor : AppLifecycleListener {
+  override fun appFrameCreated(commandLineArgs: MutableList<String>) {
+    FeatureLoader.instance.isRustEnabled = true
   }
+
 }

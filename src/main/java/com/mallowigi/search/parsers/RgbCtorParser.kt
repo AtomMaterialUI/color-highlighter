@@ -23,22 +23,46 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-package com.mallowigi.search
+import com.mallowigi.colors.ColorData
+import java.awt.Color
+import java.util.*
 
-enum class ColorPrefixes(val text: String) {
-  COLOR_METHOD("Color."),
-  JBCOLOR("JBColor."),
-  RGB("rgb"),
-  HSL("hsl"),
-  OX("0x"),
-  COLOR("new Color("),
-  KT_COLOR("Color("),
-  COLOR_ARGB("Color.argb("),
-  COLOR_RGB("Color.rgb("),
-  COLOR_FROM_ARGB("Color.FromArgb("),
-  RGB_RUST("Rgb("),
-  NS_COLOR("[NSColor "),
-  SWIFT_COLOR("NSColor("),
-  UI_COLOR("[UIColor ")
+/** Parses colors in the form `Rgb(a,b,c)` */
+class RgbCtorParser : ColorParser {
+
+  override fun parseColor(text: String): Color? = parseConstructor(text)
+
+  private fun parseConstructor(text: String): Color? {
+    val colorData = ColorData()
+    colorData.run {
+      init(text)
+
+      if (startParen == -1 || endParen == -1) return null
+
+      // tokenize the string into "red,green,blue"
+      val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
+      val params = tokenizer.countTokens()
+      if (params < 1 || params > 4) return null
+
+      return when (params) {
+        1    -> {// single hex int
+          val hex = parseComponent(getNextNumber(tokenizer)) as Int
+          Color(hex)
+        }
+
+        2    -> {// hex int followed with hasAlpha
+          val hex = parseComponent(getNextNumber(tokenizer)) as Int
+          val hasAlpha = parseComponent(getNextNumber(tokenizer)) as Boolean
+          Color(hex, hasAlpha)
+        }
+
+        else -> RGBColorParser().parseRGB(text)
+      }
+    }
+  }
+
 }
+
+
