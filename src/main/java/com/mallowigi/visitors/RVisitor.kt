@@ -34,6 +34,13 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class RVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "r",
+    "rmd",
+    "rd",
+    "rsx"
+  )
+
   private val allowedTypes = setOf(
     "R_STRING_LITERAL_EXPRESSION",
     "R_NUMERIC_LITERAL_EXPRESSION"
@@ -41,7 +48,8 @@ class RVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = RVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.(r|rmd|rd|rsx)$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean =
+    extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()
@@ -50,5 +58,4 @@ class RVisitor : ColorVisitor() {
     val value = element.text
     return ColorSearchEngine.getColor(value, this)
   }
-
 }

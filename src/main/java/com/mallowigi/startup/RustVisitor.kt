@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,14 @@
  *
  *
  */
-package com.mallowigi
+package com.mallowigi.startup
 
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.ProjectActivity
-import com.mallowigi.config.home.ColorHighlighterState
-import com.mallowigi.utils.getVersion
+import com.intellij.ide.AppLifecycleListener
+import com.mallowigi.FeatureLoader
 
-/**
- * Represents a component responsible for handling updates in the ColorHighlighter plugin.
- *
- * This class extends the [ProjectActivity] class.
- */
-class UpdatesComponent : ProjectActivity {
-  private var config: ColorHighlighterState = ColorHighlighterState.instance
-
-  override suspend fun execute(project: Project) = onProjectOpened(project)
-
-  private fun projectOpened(project: Project) {
-    // Show new version notification
-    val pluginVersion = getVersion()
-    // val updated = pluginVersion != config.version
-    config.version = pluginVersion
-
-    // if (updated) {
-    //   ColorHighlighterNotifications.showUpdate(project)
-    // }
+class RustVisitor : AppLifecycleListener {
+  override fun appFrameCreated(commandLineArgs: MutableList<String>) {
+    FeatureLoader.instance.isRustEnabled = true
   }
 
-  private fun onProjectOpened(project: Project) {
-    config = ColorHighlighterState.instance
-    projectOpened(project)
-  }
 }
