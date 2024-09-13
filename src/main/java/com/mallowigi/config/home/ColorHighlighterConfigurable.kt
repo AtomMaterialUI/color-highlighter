@@ -48,6 +48,7 @@ import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
+import com.mallowigi.inlay.refreshInlayHints
 import org.jetbrains.annotations.NonNls
 import javax.swing.DefaultComboBoxModel
 import javax.swing.Icon
@@ -297,6 +298,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   override fun apply() {
     super.apply()
     settings.apply(settingsClone)
+    refreshInlayHints()
   }
 
   private fun toggleFeatures() {
@@ -341,3 +343,4 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     const val ID = "com.mallowigi.config.home.ColorHighlighterConfigurable"
   }
 }
+
