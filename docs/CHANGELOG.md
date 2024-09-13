@@ -4,10 +4,19 @@
 
 ## 18.0.0
 
-
 ### Features
-- Provide "Gutter only" option for preview
-- Add border to gutter icons for better contrast
+- Add CSS/SCSS/Markup support
+- Provide "Gutter only" option for preview (@lootwig)
+- Add border to gutter icons for better contrast (@lootwig)
+- Support for references to Color Values in Dart (@lootwig)
+- Add Tailwind colors (no prefixes/suffixes)
+- Add Rust `Rgb` format support
+
+### Fixes
+
+- Fix Rust Support
+- Add `razor` to the list of supported extensions
+- Fix Inline Colors not appearing/disappearing upon save
 
 ## 17.0.1
 
