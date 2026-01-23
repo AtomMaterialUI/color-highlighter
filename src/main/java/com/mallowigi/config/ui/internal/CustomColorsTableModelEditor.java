@@ -52,9 +52,9 @@ import java.util.List;
 import static com.intellij.ui.TableSpeedSearch.installOn;
 
 @SuppressWarnings({"SyntheticAccessorCall",
-  "AccessingNonPublicFieldOfAnotherObject",
-  "MagicNumber",
-  "unused"})
+    "AccessingNonPublicFieldOfAnotherObject",
+    "MagicNumber",
+    "unused"})
 public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor<T, CollectionItemEditor<T>> {
   private final TableView<T> table;
   private final ToolbarDecorator toolbarDecorator;
@@ -87,7 +87,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
     table.setEnableAntialiasing(true);
     table.setPreferredScrollableViewportSize(JBUI.size(200, -1));
     table.setVisibleRowCount(20);
-    installOn(table);
+    TableSpeedSearch.installOn(table);
 
     table.getEmptyText().setFont(UIUtil.getLabelFont().deriveFont(24.0f));
     table.getEmptyText().setText(emptyText);
@@ -181,7 +181,7 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
   }
 
   @SuppressWarnings({"AbstractClassNeverImplemented",
-    "NoopMethodInAbstractClass"})
+      "NoopMethodInAbstractClass"})
   public abstract static class DataChangedListener<T> implements TableModelListener {
     public abstract void dataChanged(@NotNull ColumnInfo<T, ?> columnInfo, int rowIndex);
 
@@ -191,8 +191,8 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
   }
 
   @SuppressWarnings({"FieldHasSetterButNoGetter",
-    "SerializableInnerClassWithNonSerializableOuterClass",
-    "InstanceVariableMayNotBeInitialized"})
+      "SerializableInnerClassWithNonSerializableOuterClass",
+      "InstanceVariableMayNotBeInitialized"})
   private final class MyListTableModel extends ListTableModel<T> {
     private List<T> items;
     private DataChangedListener<T> dataChangedListener;
@@ -217,8 +217,8 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
         final Object oldValue = column.valueOf(item);
 
         if (column.getColumnClass() == String.class
-          ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
-          : !Comparing.equal(oldValue, aValue)) {
+            ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
+            : !Comparing.equal(oldValue, aValue)) {
 
           column.setValue(helper.getMutable(item, rowIndex), aValue);
           if (dataChangedListener != null) {
@@ -241,22 +241,22 @@ public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor
         final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
 
         ColorChooserService.getInstance().showDialog(
-          event.getComponent(),
-          "Choose Color",
-          modelColor,
-          false,
-          List.of(
-            new ColorPickerListener() {
-              @Override
-              public void colorChanged(final Color color) {
-                ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color));
-              }
+            event.getComponent(),
+            "Choose Color",
+            modelColor,
+            false,
+            List.of(
+                new ColorPickerListener() {
+                  @Override
+                  public void colorChanged(final Color color) {
+                    ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color));
+                  }
 
-              @Override
-              public void closed(@Nullable Color color) {
+                  @Override
+                  public void closed(@Nullable Color color) {
 
-              }
-            })
+                  }
+                })
         );
 
         return true;

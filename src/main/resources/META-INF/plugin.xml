@@ -55,7 +55,7 @@
     <depends optional="true" config-file="withDart.xml">Dart</depends>
     <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
     <depends optional="true" config-file="withR.xml">R4Intellij</depends>
-    <depends optional="true" config-file="withRust.xml">org.rust.lang</depends>
+    <depends optional="true" config-file="withRust.xml">com.jetbrains.rust</depends>
     <depends optional="true" config-file="withLua.xml">com.tang</depends>
     <!--suppress PluginXmlValidity -->
     <depends optional="true" config-file="withToml.xml">org.toml.lang</depends>
@@ -93,8 +93,8 @@
         <hr/>
         <div>
             <img
-                    src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
-                    alt="logo" width="256">
+                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/src/main/resources/META-INF/pluginIcon.png"
+                alt="logo" width="256">
         </div>
         <hr>
 
@@ -152,91 +152,90 @@
 
         <h2>Donate</h2>
         <p>This theme is backed up by <a
-                href="https://opencollective.com/atom-material-themes-and-plugins">OpenCollective</a>.
+            href="https://opencollective.com/atom-material-themes-and-plugins">OpenCollective</a>.
             If you like this plugin, don't hesitate to
             give it a star or donate via <a href="https://www.paypal.me/mallowigi">Paypal</a> or <a
-                    href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
+                href="https://opencollective.com/atom-material-themes-and-plugins#sponsor">OpenCollective</a></p>
         <br>
 
         <h2>Screenshots</h2>
 
         <h3>PHP</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png"
-                alt="PHP"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/php.png"
+            alt="PHP"
         ></a>
 
 
         <h3>Python</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png"
-                alt="Python"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/python.png"
+            alt="Python"
         ></a>
 
 
         <h4>Ruby</h4>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png"
-                alt="Ruby"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/ruby.png"
+            alt="Ruby"
         ></a>
 
 
         <h4>Go</h4>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/go.png" alt="Go"
         ></a>
 
 
         <h3>Objective C</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png"
-                alt="ObjectiveC"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/objc.png"
+            alt="ObjectiveC"
         ></a>
 
 
         <h3>Swift</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png"
-                alt="Swift"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/swift.png"
+            alt="Swift"
         ></a>
 
 
         <h3>JavaScript</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png"
-                alt="JavaScript"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/js.png"
+            alt="JavaScript"
         ></a>
 
 
         <h3>Kotlin</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png"
-                alt="Kotlin"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/kotlin.png"
+            alt="Kotlin"
         ></a>
 
 
         <h3>Java</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png"
-                alt="Java"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/java.png"
+            alt="Java"
         ></a>
 
 
         <h3>JSON</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png"
-                alt="JSON"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/json.png"
+            alt="JSON"
         ></a>
 
 
         <h3>Properties</h3>
         <img
-                src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
-                alt="Properties"
+            src="https://raw.githubusercontent.com/mallowigi/color-highlighter/master/docs/screens/properties.png"
+            alt="Properties"
         ></a>
         ]]>
   </description>
-
 
     <change-notes>
     </change-notes>

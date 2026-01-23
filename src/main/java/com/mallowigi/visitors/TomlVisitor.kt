@@ -34,6 +34,10 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class TomlVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "toml"
+  )
+
   private val allowedTypes = setOf(
     "BASIC_STRING",
     "NUMBER"
@@ -41,7 +45,7 @@ class TomlVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = TomlVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.lowercase().matches(".*\\.toml$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean = extensions.contains(file.virtualFile?.extension)
 
   override fun accept(element: PsiElement): Color? {
     val type = PsiUtilCore.getElementType(element).toString()

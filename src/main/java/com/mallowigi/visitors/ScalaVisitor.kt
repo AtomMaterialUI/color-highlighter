@@ -33,7 +33,6 @@ import com.mallowigi.search.ColorPrefixes
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorCtorParser
 import com.mallowigi.search.parsers.ColorMethodParser
-import com.mallowigi.search.parsers.ColorParser
 import org.jetbrains.plugins.scala.lang.psi.api.ScalaFile
 import org.jetbrains.plugins.scala.lang.psi.api.base.ScConstructorInvocation
 import org.jetbrains.plugins.scala.lang.psi.api.base.literals.ScIntegerLiteral
@@ -43,7 +42,6 @@ import java.awt.Color
 import kotlin.reflect.KClass
 
 class ScalaVisitor : ColorVisitor() {
-
   private val parsedTypes = mapOf<KClass<*>, ((PsiElement) -> Color?)?>(
     ScIntegerLiteral::class to ::parseColor,
     ScStringLiteral::class to ::parseColor,
@@ -54,16 +52,18 @@ class ScalaVisitor : ColorVisitor() {
   private fun parseCtor(element: PsiElement): Color? {
     val text = element.text
     return when {
-      config.isScalaColorCtorEnabled && text.startsWith(ColorPrefixes.KT_COLOR.text) -> ColorCtorParser().parseColor(text)
-      else -> null
+      text.startsWith(ColorPrefixes.KT_COLOR.text) -> ColorCtorParser().parseColor(text)
+      else                                         -> null
     }
   }
 
   private fun parseMethod(element: PsiElement): Color? {
     val text = element.text
     return when {
-      config.isScalaColorMethodEnabled && text.startsWith(ColorPrefixes.COLOR_METHOD.text) -> ColorMethodParser(ColorPrefixes.COLOR_METHOD.text).parseColor(text)
-      else -> null
+      text.startsWith(ColorPrefixes.COLOR_METHOD.text) -> ColorMethodParser(ColorPrefixes.COLOR_METHOD.text)
+        .parseColor(text)
+
+      else                                             -> null
     }
   }
 
@@ -71,6 +71,8 @@ class ScalaVisitor : ColorVisitor() {
     val value = element.text
     return ColorSearchEngine.getColor(value, this)
   }
+
+  override fun shouldVisit(): Boolean = config.isScalaColorMethodEnabled
 
   override fun clone(): HighlightVisitor = ScalaVisitor()
 
@@ -81,8 +83,8 @@ class ScalaVisitor : ColorVisitor() {
       if (keyClass.isInstance(element)) {
         return try {
           parsedTypes[keyClass]?.invoke(element)
-        } catch (e: Exception) {
-          return null;
+        } catch (_: Exception) {
+          return null
         }
       }
     }

@@ -26,6 +26,7 @@
 package com.mallowigi.gutter
 
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.markup.GutterIconRenderer
 import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.ui.ColorChooserService
@@ -43,7 +44,12 @@ import javax.swing.Icon
 
 class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
   override fun getIcon(): Icon = when {
-    color != null -> JBUIScale.scaleIcon(ColorIcon(ICON_SIZE, color))
+    color != null -> {
+      EditorColorsManager.getInstance().globalScheme.defaultForeground
+        .let { ColorIcon(ICON_SIZE, ICON_SIZE, ICON_SIZE - 2, ICON_SIZE - 2, color, it, 3) }
+        .let { JBUIScale.scaleIcon(it) }
+    }
+
     else -> JBUIScale.scaleIcon(EmptyIcon.create(ICON_SIZE))
   }
 
@@ -81,11 +87,7 @@ class GutterColorRenderer(private val color: Color?) : GutterIconRenderer() {
         val editor = e.getData(CommonDataKeys.EDITOR) ?: return
         val currentColor = color ?: return
         val newColor = ColorChooserService.instance.showDialog(
-          editor.project,
-          editor.component,
-          message("replace.color"),
-          currentColor,
-          false
+          editor.project, editor.component, message("replace.color"), currentColor, false
         )
         copyColor(currentColor, newColor)
       }

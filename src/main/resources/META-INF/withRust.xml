@@ -30,4 +30,7 @@
         <codeInsight.inlayProvider implementationClass="com.mallowigi.inlay.RustInlineInlayProvider"
                                    language="Rust"/>
     </extensions>
+    <applicationListeners>
+        <listener class="com.mallowigi.startup.RustVisitor" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 </idea-plugin>

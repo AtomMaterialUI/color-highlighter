@@ -32,11 +32,17 @@ import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
 
 class TextVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "txt",
+    "log",
+    "rst",
+    "ini"
+  )
 
   override fun clone(): HighlightVisitor = TextVisitor()
 
   override fun suitableForFile(file: PsiFile): Boolean =
-    file.name.matches(".*\\.(txt|log|rst)$".toRegex())
+    extensions.contains(file.virtualFile?.extension)
 
   override fun visit(element: PsiElement) {
     val value = element.text

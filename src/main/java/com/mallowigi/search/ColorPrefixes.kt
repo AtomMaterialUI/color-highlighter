@@ -26,7 +26,6 @@
 
 package com.mallowigi.search
 
-
 enum class ColorPrefixes(val text: String) {
   COLOR_METHOD("Color."),
   JBCOLOR("JBColor."),
@@ -38,6 +37,7 @@ enum class ColorPrefixes(val text: String) {
   COLOR_ARGB("Color.argb("),
   COLOR_RGB("Color.rgb("),
   COLOR_FROM_ARGB("Color.FromArgb("),
+  RGB_RUST("Rgb("),
   NS_COLOR("[NSColor "),
   SWIFT_COLOR("NSColor("),
   UI_COLOR("[UIColor ")

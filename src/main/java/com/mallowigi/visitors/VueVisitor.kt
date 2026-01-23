@@ -34,6 +34,10 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class VueVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "vue",
+    "vuex"
+  )
 
   private val allowedTypes = listOf(
     "JS:NUMERIC_LITERAL",
@@ -50,5 +54,6 @@ class VueVisitor : ColorVisitor() {
 
   override fun clone(): HighlightVisitor = VueVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = true
+  override fun suitableForFile(file: PsiFile): Boolean =
+    extensions.contains(file.virtualFile?.extension)
 }

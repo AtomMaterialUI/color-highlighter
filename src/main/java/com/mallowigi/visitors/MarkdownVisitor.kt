@@ -35,10 +35,15 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class MarkdownVisitor : ColorVisitor() {
+  val extensions = setOf(
+    "md",
+    "markdown",
+    "mdx",
+  )
 
   override fun clone(): HighlightVisitor = MarkdownVisitor()
 
-  override fun suitableForFile(file: PsiFile): Boolean = file.name.matches(".*\\.(md|mdx)$".toRegex())
+  override fun suitableForFile(file: PsiFile): Boolean = extensions.contains(file.virtualFile?.extension)
 
   override fun shouldVisit(): Boolean = ColorHighlighterState.instance.isMarkdownEnabled
 
@@ -49,7 +54,7 @@ class MarkdownVisitor : ColorVisitor() {
     val value = element.text
     if (value !is String) return null
 
-    return ColorSearchEngine.getColor((value as? String)!!, this)
+    return ColorSearchEngine.getColor(value, this)
   }
 
 }

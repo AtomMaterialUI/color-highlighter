@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2024 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,19 @@
  *
  *
  */
-package com.mallowigi
 
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.ProjectActivity
-import com.mallowigi.config.home.ColorHighlighterState
-import com.mallowigi.utils.getVersion
+package com.mallowigi.inlay
 
-/**
- * Represents a component responsible for handling updates in the ColorHighlighter plugin.
- *
- * This class extends the [ProjectActivity] class.
- */
-class UpdatesComponent : ProjectActivity {
-  private var config: ColorHighlighterState = ColorHighlighterState.instance
+import com.intellij.codeInsight.daemon.impl.InlayHintsPassFactoryInternal
+import com.intellij.openapi.editor.EditorFactory
+import com.intellij.openapi.project.ProjectManager
 
-  override suspend fun execute(project: Project) = onProjectOpened(project)
-
-  private fun projectOpened(project: Project) {
-    // Show new version notification
-    val pluginVersion = getVersion()
-    // val updated = pluginVersion != config.version
-    config.version = pluginVersion
-
-    // if (updated) {
-    //   ColorHighlighterNotifications.showUpdate(project)
-    // }
-  }
-
-  private fun onProjectOpened(project: Project) {
-    config = ColorHighlighterState.instance
-    projectOpened(project)
+fun refreshInlayHints() {
+  ProjectManager.getInstance().openProjects.forEach { project ->
+    EditorFactory.getInstance().allEditors.forEach { editor ->
+      InlayHintsPassFactoryInternal.forceHintsUpdateOnNextPass()
+      editor.contentComponent.repaint()
+    }
   }
 }
+

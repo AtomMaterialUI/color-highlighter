@@ -29,384 +29,659 @@
   ~ Plus colors from https://flatuicolors.com/
   -->
 <colors>
-  <svgColors>
-    <color name="aliceblue" code="f0f8ff"/>
-    <color name="alizarin" code="e74c3c"/>
-    <color name="amethyst" code="9b59b6"/>
-    <color name="antiquewhite" code="faebd7"/>
-    <color name="aqua" code="00ffff"/>
-    <color name="aquamarine" code="7fffd4"/>
-    <color name="asbestos" code="7f8c8d"/>
-    <color name="azure" code="f0ffff"/>
-    <color name="beige" code="f5f5dc"/>
-    <color name="belizehole" code="2980b9"/>
-    <color name="bisque" code="ffe4c4"/>
-    <color name="black" code="000000"/>
-    <color name="blanchedalmond" code="ffebcd"/>
-    <color name="blue" code="0000ff"/>
-    <color name="blueviolet" code="8a2be2"/>
-    <color name="brown" code="a52a2a"/>
-    <color name="buff" code="F0DC82"/>
-    <color name="burlywood" code="deb887"/>
-    <color name="cadetblue" code="5f9ea0"/>
-    <color name="carrot" code="e67e22"/>
-    <color name="chartreuse" code="7fff00"/>
-    <color name="chocolate" code="d2691e"/>
-    <color name="clouds" code="ecf0f1"/>
-    <color name="concrete" code="95a5a6"/>
-    <color name="coral" code="ff7f50"/>
-    <color name="cornflowerblue" code="6495ed"/>
-    <color name="cornsilk" code="fff8dc"/>
-    <color name="crimson" code="dc143c"/>
-    <color name="cyan" code="00ffff"/>
-    <color name="darkblue" code="00008b"/>
-    <color name="darkbrown" code="5C4033"/>
-    <color name="darkbuff" code="976638"/>
-    <color name="darkcyan" code="008b8b"/>
-    <color name="darkgold" code="EEBC1D"/>
-    <color name="darkgoldenrod" code="b8860b"/>
-    <color name="darkgray" code="404040"/>
-    <color name="darkgreen" code="006400"/>
-    <color name="darkgrey" code="a9a9a9"/>
-    <color name="darkivory" code="F2E58F"/>
-    <color name="darkkhaki" code="bdb76b"/>
-    <color name="darkmagenta" code="8b008b"/>
-    <color name="darkmustard" code="7C7C40"/>
-    <color name="darkolivegreen" code="556b2f"/>
-    <color name="darkorange" code="ff8c00"/>
-    <color name="darkorchid" code="9932cc"/>
-    <color name="darkpink" code="E75480"/>
-    <color name="darkred" code="8b0000"/>
-    <color name="darksalmon" code="e9967a"/>
-    <color name="darksilver" code="AFAFAF"/>
-    <color name="darkseagreen" code="8fbc8f"/>
-    <color name="darkslateblue" code="483d8b"/>
-    <color name="darkslategray" code="2f4f4f"/>
-    <color name="darkslategrey" code="2f4f4f"/>
-    <color name="darkturquoise" code="00ced1"/>
-    <color name="darkviolet" code="9400d3"/>
-    <color name="darkyellow" code="FFCC00"/>
-    <color name="deeppink" code="ff1493"/>
-    <color name="deepskyblue" code="00bfff"/>
-    <color name="dimgray" code="696969"/>
-    <color name="dimgrey" code="696969"/>
-    <color name="dodgerblue" code="1e90ff"/>
-    <color name="emerald" code="2ecc71"/>
-    <color name="firebrick" code="b22222"/>
-    <color name="floralwhite" code="fffaf0"/>
-    <color name="forestgreen" code="228b22"/>
-    <color name="fuchsia" code="ff00ff"/>
-    <color name="gainsboro" code="dcdcdc"/>
-    <color name="ghostwhite" code="f8f8ff"/>
-    <color name="gold" code="ffd700"/>
-    <color name="goldenrod" code="daa520"/>
-    <color name="gray" code="808080"/>
-    <color name="green" code="008000"/>
-    <color name="greensea" code="16a085"/>
-    <color name="greenyellow" code="adff2f"/>
-    <color name="grey" code="808080"/>
-    <color name="honeydew" code="f0fff0"/>
-    <color name="hotpink" code="ff69b4"/>
-    <color name="indianred" code="cd5c5c"/>
-    <color name="indigo" code="4b0082"/>
-    <color name="ivory" code="fffff0"/>
-    <color name="khaki" code="f0e68c"/>
-    <color name="lavender" code="e6e6fa"/>
-    <color name="lavenderblush" code="fff0f5"/>
-    <color name="lawngreen" code="7cfc00"/>
-    <color name="lemonchiffon" code="fffacd"/>
-    <color name="lightblack" code="808080"/>
-    <color name="lightblue" code="add8e6"/>
-    <color name="lightbrown" code="9966FF"/>
-    <color name="lightbuff" code="ECD9B0"/>
-    <color name="lightcoral" code="f08080"/>
-    <color name="lightcyan" code="e0ffff"/>
-    <color name="lightgold" code="F1E5AC"/>
-    <color name="lightgoldenrod" code="FFEC8B"/>
-    <color name="lightgoldenrodyellow" code="fafad2"/>
-    <color name="lightgray" code="d3d3d3"/>
-    <color name="lightgreen" code="90ee90"/>
-    <color name="lightgrey" code="d3d3d3"/>
-    <color name="lightivory" code="FFF8C9"/>
-    <color name="lightmagenta" code="FF77FF"/>
-    <color name="lightmustard" code="EEDD62"/>
-    <color name="lightorange" code="D9A465"/>
-    <color name="lightpink" code="ffb6c1"/>
-    <color name="lightred" code="FF3333"/>
-    <color name="lightsalmon" code="ffa07a"/>
-    <color name="lightseagreen" code="20b2aa"/>
-    <color name="lightsilver" code="E1E1E1"/>
-    <color name="lightskyblue" code="87cefa"/>
-    <color name="lightslategray" code="778899"/>
-    <color name="lightslategrey" code="778899"/>
-    <color name="lightsteelblue" code="b0c4de"/>
-    <color name="lightturquoise" code="AFE4DE"/>
-    <color name="lightviolet" code="7A5299"/>
-    <color name="lightyellow" code="ffffe0"/>
-    <color name="lime" code="00ff00"/>
-    <color name="limegreen" code="32cd32"/>
-    <color name="linen" code="faf0e6"/>
-    <color name="magenta" code="ff00ff"/>
-    <color name="maroon" code="800000"/>
-    <color name="mediumaquamarine" code="66cdaa"/>
-    <color name="mediumblue" code="0000cd"/>
-    <color name="mediumorchid" code="ba55d3"/>
-    <color name="mediumpurple" code="9370db"/>
-    <color name="mediumseagreen" code="3cb371"/>
-    <color name="mediumslateblue" code="7b68ee"/>
-    <color name="mediumspringgreen" code="00fa9a"/>
-    <color name="mediumturquoise" code="48d1cc"/>
-    <color name="mediumvioletred" code="c71585"/>
-    <color name="midnightblue" code="191970"/>
-    <color name="midnightblack" code="2c3e50"/>
-    <color name="mintcream" code="f5fffa"/>
-    <color name="mistyrose" code="ffe4e1"/>
-    <color name="moccasin" code="ffe4b5"/>
-    <color name="mustard" code="FFDB58"/>
-    <color name="nephritis" code="27ae60"/>
-    <color name="navajowhite" code="ffdead"/>
-    <color name="navy" code="000080"/>
-    <color name="oldlace" code="fdf5e6"/>
-    <color name="olive" code="808000"/>
-    <color name="olivedrab" code="6b8e23"/>
-    <color name="orange" code="ffa500"/>
-    <color name="orangered" code="ff4500"/>
-    <color name="orchid" code="da70d6"/>
-    <color name="palegoldenrod" code="eee8aa"/>
-    <color name="palegreen" code="98fb98"/>
-    <color name="paleturquoise" code="afeeee"/>
-    <color name="palevioletred" code="db7093"/>
-    <color name="papayawhip" code="ffefd5"/>
-    <color name="peachpuff" code="ffdab9"/>
-    <color name="peterriver" code="3498db"/>
-    <color name="peru" code="cd853f"/>
-    <color name="pink" code="ffc0cb"/>
-    <color name="plum" code="dda0dd"/>
-    <color name="pomegranate" code="c0392b"/>
-    <color name="powderblue" code="b0e0e6"/>
-    <color name="purple" code="800080"/>
-    <color name="pumpkin" code="d35400"/>
-    <color name="rebeccapurple" code="663399"/>
-    <color name="red" code="ff0000"/>
-    <color name="rosybrown" code="bc8f8f"/>
-    <color name="royalblue" code="4169e1"/>
-    <color name="saddlebrown" code="8b4513"/>
-    <color name="salmon" code="fa8072"/>
-    <color name="sandybrown" code="f4a460"/>
-    <color name="seagreen" code="2e8b57"/>
-    <color name="seashell" code="fff5ee"/>
-    <color name="sienna" code="a0522d"/>
-    <color name="quiksilver" code="bdc3c7"/>
-    <color name="silver" code="c0c0c0"/>
-    <color name="skyblue" code="87ceeb"/>
-    <color name="slateblue" code="6a5acd"/>
-    <color name="slategray" code="708090"/>
-    <color name="slategrey" code="708090"/>
-    <color name="snow" code="fffafa"/>
-    <color name="springgreen" code="00ff7f"/>
-    <color name="steelblue" code="4682b4"/>
-    <color name="sunflower" code="f1c40f"/>
-    <color name="tan" code="d2b48c"/>
-    <color name="teal" code="008080"/>
-    <color name="thistle" code="d8bfd8"/>
-    <color name="tomato" code="ff6347"/>
-    <color name="turquoise" code="40e0d0"/>
-    <color name="violet" code="ee82ee"/>
-    <color name="wetasphalt" code="34495e"/>
-    <color name="wisteria" code="8e44ad"/>
-    <color name="wheat" code="f5deb3"/>
-    <color name="white" code="ffffff"/>
-    <color name="whitesmoke" code="f5f5f5"/>
-    <color name="yellow" code="ffff00"/>
-    <color name="yellowgreen" code="9acd32"/>
+    <svgColors>
+        <color name="aliceblue" code="f0f8ff"/>
+        <color name="alizarin" code="e74c3c"/>
+        <color name="amethyst" code="9b59b6"/>
+        <color name="antiquewhite" code="faebd7"/>
+        <color name="aqua" code="00ffff"/>
+        <color name="aquamarine" code="7fffd4"/>
+        <color name="asbestos" code="7f8c8d"/>
+        <color name="azure" code="f0ffff"/>
+        <color name="beige" code="f5f5dc"/>
+        <color name="belizehole" code="2980b9"/>
+        <color name="bisque" code="ffe4c4"/>
+        <color name="black" code="000000"/>
+        <color name="blanchedalmond" code="ffebcd"/>
+        <color name="blue" code="0000ff"/>
+        <color name="blueviolet" code="8a2be2"/>
+        <color name="brown" code="a52a2a"/>
+        <color name="buff" code="F0DC82"/>
+        <color name="burlywood" code="deb887"/>
+        <color name="cadetblue" code="5f9ea0"/>
+        <color name="carrot" code="e67e22"/>
+        <color name="chartreuse" code="7fff00"/>
+        <color name="chocolate" code="d2691e"/>
+        <color name="clouds" code="ecf0f1"/>
+        <color name="concrete" code="95a5a6"/>
+        <color name="coral" code="ff7f50"/>
+        <color name="cornflowerblue" code="6495ed"/>
+        <color name="cornsilk" code="fff8dc"/>
+        <color name="crimson" code="dc143c"/>
+        <color name="cyan" code="00ffff"/>
+        <color name="darkblue" code="00008b"/>
+        <color name="darkbrown" code="5C4033"/>
+        <color name="darkbuff" code="976638"/>
+        <color name="darkcyan" code="008b8b"/>
+        <color name="darkgold" code="EEBC1D"/>
+        <color name="darkgoldenrod" code="b8860b"/>
+        <color name="darkgray" code="404040"/>
+        <color name="darkgreen" code="006400"/>
+        <color name="darkgrey" code="a9a9a9"/>
+        <color name="darkivory" code="F2E58F"/>
+        <color name="darkkhaki" code="bdb76b"/>
+        <color name="darkmagenta" code="8b008b"/>
+        <color name="darkmustard" code="7C7C40"/>
+        <color name="darkolivegreen" code="556b2f"/>
+        <color name="darkorange" code="ff8c00"/>
+        <color name="darkorchid" code="9932cc"/>
+        <color name="darkpink" code="E75480"/>
+        <color name="darkred" code="8b0000"/>
+        <color name="darksalmon" code="e9967a"/>
+        <color name="darksilver" code="AFAFAF"/>
+        <color name="darkseagreen" code="8fbc8f"/>
+        <color name="darkslateblue" code="483d8b"/>
+        <color name="darkslategray" code="2f4f4f"/>
+        <color name="darkslategrey" code="2f4f4f"/>
+        <color name="darkturquoise" code="00ced1"/>
+        <color name="darkviolet" code="9400d3"/>
+        <color name="darkyellow" code="FFCC00"/>
+        <color name="deeppink" code="ff1493"/>
+        <color name="deepskyblue" code="00bfff"/>
+        <color name="dimgray" code="696969"/>
+        <color name="dimgrey" code="696969"/>
+        <color name="dodgerblue" code="1e90ff"/>
+        <color name="emerald" code="2ecc71"/>
+        <color name="firebrick" code="b22222"/>
+        <color name="floralwhite" code="fffaf0"/>
+        <color name="forestgreen" code="228b22"/>
+        <color name="fuchsia" code="ff00ff"/>
+        <color name="gainsboro" code="dcdcdc"/>
+        <color name="ghostwhite" code="f8f8ff"/>
+        <color name="gold" code="ffd700"/>
+        <color name="goldenrod" code="daa520"/>
+        <color name="gray" code="808080"/>
+        <color name="green" code="008000"/>
+        <color name="greensea" code="16a085"/>
+        <color name="greenyellow" code="adff2f"/>
+        <color name="grey" code="808080"/>
+        <color name="honeydew" code="f0fff0"/>
+        <color name="hotpink" code="ff69b4"/>
+        <color name="indianred" code="cd5c5c"/>
+        <color name="indigo" code="4b0082"/>
+        <color name="ivory" code="fffff0"/>
+        <color name="khaki" code="f0e68c"/>
+        <color name="lavender" code="e6e6fa"/>
+        <color name="lavenderblush" code="fff0f5"/>
+        <color name="lawngreen" code="7cfc00"/>
+        <color name="lemonchiffon" code="fffacd"/>
+        <color name="lightblack" code="808080"/>
+        <color name="lightblue" code="add8e6"/>
+        <color name="lightbrown" code="9966FF"/>
+        <color name="lightbuff" code="ECD9B0"/>
+        <color name="lightcoral" code="f08080"/>
+        <color name="lightcyan" code="e0ffff"/>
+        <color name="lightgold" code="F1E5AC"/>
+        <color name="lightgoldenrod" code="FFEC8B"/>
+        <color name="lightgoldenrodyellow" code="fafad2"/>
+        <color name="lightgray" code="d3d3d3"/>
+        <color name="lightgreen" code="90ee90"/>
+        <color name="lightgrey" code="d3d3d3"/>
+        <color name="lightivory" code="FFF8C9"/>
+        <color name="lightmagenta" code="FF77FF"/>
+        <color name="lightmustard" code="EEDD62"/>
+        <color name="lightorange" code="D9A465"/>
+        <color name="lightpink" code="ffb6c1"/>
+        <color name="lightred" code="FF3333"/>
+        <color name="lightsalmon" code="ffa07a"/>
+        <color name="lightseagreen" code="20b2aa"/>
+        <color name="lightsilver" code="E1E1E1"/>
+        <color name="lightskyblue" code="87cefa"/>
+        <color name="lightslategray" code="778899"/>
+        <color name="lightslategrey" code="778899"/>
+        <color name="lightsteelblue" code="b0c4de"/>
+        <color name="lightturquoise" code="AFE4DE"/>
+        <color name="lightviolet" code="7A5299"/>
+        <color name="lightyellow" code="ffffe0"/>
+        <color name="lime" code="00ff00"/>
+        <color name="limegreen" code="32cd32"/>
+        <color name="linen" code="faf0e6"/>
+        <color name="magenta" code="ff00ff"/>
+        <color name="maroon" code="800000"/>
+        <color name="mediumaquamarine" code="66cdaa"/>
+        <color name="mediumblue" code="0000cd"/>
+        <color name="mediumorchid" code="ba55d3"/>
+        <color name="mediumpurple" code="9370db"/>
+        <color name="mediumseagreen" code="3cb371"/>
+        <color name="mediumslateblue" code="7b68ee"/>
+        <color name="mediumspringgreen" code="00fa9a"/>
+        <color name="mediumturquoise" code="48d1cc"/>
+        <color name="mediumvioletred" code="c71585"/>
+        <color name="midnightblue" code="191970"/>
+        <color name="midnightblack" code="2c3e50"/>
+        <color name="mintcream" code="f5fffa"/>
+        <color name="mistyrose" code="ffe4e1"/>
+        <color name="moccasin" code="ffe4b5"/>
+        <color name="mustard" code="FFDB58"/>
+        <color name="nephritis" code="27ae60"/>
+        <color name="navajowhite" code="ffdead"/>
+        <color name="navy" code="000080"/>
+        <color name="oldlace" code="fdf5e6"/>
+        <color name="olive" code="808000"/>
+        <color name="olivedrab" code="6b8e23"/>
+        <color name="orange" code="ffa500"/>
+        <color name="orangered" code="ff4500"/>
+        <color name="orchid" code="da70d6"/>
+        <color name="palegoldenrod" code="eee8aa"/>
+        <color name="palegreen" code="98fb98"/>
+        <color name="paleturquoise" code="afeeee"/>
+        <color name="palevioletred" code="db7093"/>
+        <color name="papayawhip" code="ffefd5"/>
+        <color name="peachpuff" code="ffdab9"/>
+        <color name="peterriver" code="3498db"/>
+        <color name="peru" code="cd853f"/>
+        <color name="pink" code="ffc0cb"/>
+        <color name="plum" code="dda0dd"/>
+        <color name="pomegranate" code="c0392b"/>
+        <color name="powderblue" code="b0e0e6"/>
+        <color name="purple" code="800080"/>
+        <color name="pumpkin" code="d35400"/>
+        <color name="rebeccapurple" code="663399"/>
+        <color name="red" code="ff0000"/>
+        <color name="rosybrown" code="bc8f8f"/>
+        <color name="royalblue" code="4169e1"/>
+        <color name="saddlebrown" code="8b4513"/>
+        <color name="salmon" code="fa8072"/>
+        <color name="sandybrown" code="f4a460"/>
+        <color name="seagreen" code="2e8b57"/>
+        <color name="seashell" code="fff5ee"/>
+        <color name="sienna" code="a0522d"/>
+        <color name="quiksilver" code="bdc3c7"/>
+        <color name="silver" code="c0c0c0"/>
+        <color name="skyblue" code="87ceeb"/>
+        <color name="slateblue" code="6a5acd"/>
+        <color name="slategray" code="708090"/>
+        <color name="slategrey" code="708090"/>
+        <color name="snow" code="fffafa"/>
+        <color name="springgreen" code="00ff7f"/>
+        <color name="steelblue" code="4682b4"/>
+        <color name="sunflower" code="f1c40f"/>
+        <color name="tan" code="d2b48c"/>
+        <color name="teal" code="008080"/>
+        <color name="thistle" code="d8bfd8"/>
+        <color name="tomato" code="ff6347"/>
+        <color name="turquoise" code="40e0d0"/>
+        <color name="violet" code="ee82ee"/>
+        <color name="wetasphalt" code="34495e"/>
+        <color name="wisteria" code="8e44ad"/>
+        <color name="wheat" code="f5deb3"/>
+        <color name="white" code="ffffff"/>
+        <color name="whitesmoke" code="f5f5f5"/>
+        <color name="yellow" code="ffff00"/>
+        <color name="yellowgreen" code="9acd32"/>
 
-    <color name="beekeeper" code="f6e58d"/>
-    <color name="spiced nectarine" code="ffbe76"/>
-    <color name="pink glamour" code="ff7979"/>
-    <color name="june bud" code="badc58"/>
-    <color name="coastal breeze" code="dff9fb"/>
-    <color name="turbo" code="f9ca24"/>
-    <color name="quince jelly" code="f0932b"/>
-    <color name="carmine pink" code="eb4d4b"/>
-    <color name="pure apple" code="6ab04c"/>
-    <color name="hint of ice pack" code="c7ecee"/>
-    <color name="middle blue" code="7ed6df"/>
-    <color name="heliotrope" code="e056fd"/>
-    <color name="exodus fruit" code="686de0"/>
-    <color name="deep koamaru" code="30336b"/>
-    <color name="soaring eagle" code="95afc0"/>
-    <color name="greenland green" code="22a6b3"/>
-    <color name="steel pink" code="be2edd"/>
-    <color name="blurple" code="4834d4"/>
-    <color name="deep cove" code="130f40"/>
-    <color name="wizard grey" code="535c68"/>
-    <color name="highlighter pink" code="ef5777"/>
-    <color name="dark periwinkle" code="575fcf"/>
-    <color name="megaman" code="4bcffa"/>
-    <color name="fresh turquoise" code="34e7e4"/>
-    <color name="minty green" code="0be881"/>
-    <color name="sizzling red" code="f53b57"/>
-    <color name="free speech blue" code="3c40c6"/>
-    <color name="spiro disco ball" code="0fbcf9"/>
-    <color name="jade dust" code="00d8d6"/>
-    <color name="green teal" code="05c46b"/>
-    <color name="narenji orange" code="ffc048"/>
-    <color name="yriel yellow" code="ffdd59"/>
-    <color name="sunset orange" code="ff5e57"/>
-    <color name="hint of elusive blue" code="d2dae2"/>
-    <color name="good night" code="485460"/>
-    <color name="chrome yellow" code="ffa801"/>
-    <color name="vibrant yellow" code="ffd32a"/>
-    <color name="red orange" code="ff3f34"/>
-    <color name="london square" code="808e9b"/>
-    <color name="black pearl" code="1e272e"/>
-    <color name="flat flesh" code="fad390"/>
-    <color name="melon melody" code="f8c291"/>
-    <color name="livid" code="6a89cc"/>
-    <color name="spray" code="82ccdd"/>
-    <color name="paradise green" code="b8e994"/>
-    <color name="squash blossom" code="f6b93b"/>
-    <color name="mandarin red" code="e55039"/>
-    <color name="azraq blue" code="4a69bd"/>
-    <color name="dupain" code="60a3bc"/>
-    <color name="aurora green" code="78e08f"/>
-    <color name="iceland poppy" code="fa983a"/>
-    <color name="tomato red" code="eb2f06"/>
-    <color name="good samaritan" code="3c6382"/>
-    <color name="waterfall" code="38ada9"/>
-    <color name="carrot orange" code="e58e26"/>
-    <color name="jalapeno red" code="b71540"/>
-    <color name="dark sapphire" code="0c2461"/>
-    <color name="forest blues" code="0a3d62"/>
-    <color name="reef encounter" code="079992"/>
-    <color name="jigglypuff" code="ff9ff3"/>
-    <color name="casandora yellow" code="feca57"/>
-    <color name="pastel red" code="ff6b6b"/>
-    <color name="megaman" code="48dbfb"/>
-    <color name="wild caribbean green" code="1dd1a1"/>
-    <color name="lotus pink" code="f368e0"/>
-    <color name="double dragon skin" code="ff9f43"/>
-    <color name="amour" code="ee5253"/>
-    <color name="cyanite" code="0abde3"/>
-    <color name="dark mountain meadow" code="10ac84"/>
-    <color name="jade dust" code="00d2d3"/>
-    <color name="joust blue" code="54a0ff"/>
-    <color name="nasu purple" code="5f27cd"/>
-    <color name="light blue ballerina" code="c8d6e5"/>
-    <color name="fuel town" code="576574"/>
-    <color name="aqua velvet" code="01a3a4"/>
-    <color name="bleu de france" code="2e86de"/>
-    <color name="bluebell" code="341f97"/>
-    <color name="storm petrel" code="8395a7"/>
-    <color name="imperial primer" code="222f3e"/>
-    <color name="orchid orange" code="fea47f"/>
-    <color name="spiro disco ball" code="25ccf7"/>
-    <color name="honey glow" code="eab543"/>
-    <color name="sweet garden" code="55e6c1"/>
-    <color name="falling star" code="cad3c8"/>
-    <color name="rich gardenia" code="f97f51"/>
-    <color name="clear chill" code="1b9cfc"/>
-    <color name="sarawak white pepper" code="f8efba"/>
-    <color name="keppel" code="58b19f"/>
-    <color name="ships officer" code="2c3a47"/>
-    <color name="fiery fuchsia" code="b33771"/>
-    <color name="bluebell" code="3b3b98"/>
-    <color name="georgia peach" code="fd7272"/>
-    <color name="oasis stream" code="9aecdb"/>
-    <color name="bright ube" code="d6a2e8"/>
-    <color name="magenta purple" code="6d214f"/>
-    <color name="ending navy blue" code="182c61"/>
-    <color name="sasquatch socks" code="fc427b"/>
-    <color name="pine glade" code="bdc581"/>
-    <color name="highlighter lavender" code="82589f"/>
-    <color name="bright lilac" code="cd84f1"/>
-    <color name="pretty please" code="ffcccc"/>
-    <color name="light red" code="ff4d4d"/>
-    <color name="mandarin sorbet" code="ffaf40"/>
-    <color name="unmellow yellow" code="fffa65"/>
-    <color name="light purple" code="c56cf0"/>
-    <color name="young salmon" code="ffb8b8"/>
-    <color name="red orange" code="ff3838"/>
-    <color name="radiant yellow" code="ff9f1a"/>
-    <color name="dorn yellow" code="fff200"/>
-    <color name="wintergreen" code="32ff7e"/>
-    <color name="electric blue" code="7efff5"/>
-    <color name="neon blue" code="18dcff"/>
-    <color name="light slate blue" code="7d5fff"/>
-    <color name="shadowed steel" code="4b4b4b"/>
-    <color name="weird green" code="3ae374"/>
-    <color name="hammam blue" code="67e6dc"/>
-    <color name="spiro disco ball" code="17c0eb"/>
-    <color name="light indigo" code="7158e2"/>
-    <color name="baltic sea" code="3d3d3d"/>
-    <color name="sunflower" code="ffc312"/>
-    <color name="energos" code="c4e538"/>
-    <color name="blue martina" code="12cbc4"/>
-    <color name="lavender rose" code="fda7df"/>
-    <color name="bara red" code="ed4c67"/>
-    <color name="radiant yellow" code="f79f1f"/>
-    <color name="android green" code="a3cb38"/>
-    <color name="mediterranean sea" code="1289a7"/>
-    <color name="lavender tea" code="d980fa"/>
-    <color name="very berry" code="b53471"/>
-    <color name="puffins bill" code="ee5a24"/>
-    <color name="pixelated grass" code="009432"/>
-    <color name="merchant marine blue" code="0652dd"/>
-    <color name="forgotten purple" code="9980fa"/>
-    <color name="hollyhock" code="833471"/>
-    <color name="red pigment" code="ea2027"/>
-    <color name="turkish aqua" code="006266"/>
-    <color name="under the sea" code="1b1464"/>
-    <color name="circumorbital ring" code="5758bb"/>
-    <color name="magenta purple" code="6f1e51"/>
-    <color name="protoss pylon" code="00a8ff"/>
-    <color name="periwinkle" code="9c88ff"/>
-    <color name="rise-n-shine" code="fbc531"/>
-    <color name="download progress" code="4cd137"/>
-    <color name="seabrook" code="487eb0"/>
-    <color name="vanadyl blue" code="0097e6"/>
-    <color name="matt purple" code="8c7ae6"/>
-    <color name="nanohanacha gold" code="e1b12c"/>
-    <color name="skirret green" code="44bd32"/>
-    <color name="naval" code="40739e"/>
-    <color name="nasturcian flower" code="e84118"/>
-    <color name="lynx white" code="f5f6fa"/>
-    <color name="blueberry soda" code="7f8fa6"/>
-    <color name="mazarine blue" code="273c75"/>
-    <color name="blue nights" code="353b48"/>
-    <color name="harley davidson orange" code="c23616"/>
-    <color name="hint of pensive" code="dcdde1"/>
-    <color name="chain gang grey" code="718093"/>
-    <color name="pico void" code="192a56"/>
-    <color name="electromagnetic" code="2f3640"/>
-  </svgColors>
-  <javaColors>
-    <color name="black" code="000000"/>
-    <color name="blue" code="0000ff"/>
-    <color name="cyan" code="00ffff"/>
-    <color name="darkGray" code="404040"/>
-    <color name="gray" code="808080"/>
-    <color name="green" code="00ff00"/>
-    <color name="lightGray" code="D3D3D3"/>
-    <color name="magenta" code="ff00ff"/>
-    <color name="orange" code="FFA500"/>
-    <color name="pink" code="FFC0CB"/>
-    <color name="red" code="ff0000"/>
-    <color name="white" code="ffffff"/>
-    <color name="yellow" code="ffff00"/>
-    <color name="BLACK" code="000000"/>
-    <color name="BLUE" code="0000ff"/>
-    <color name="CYAN" code="00ffff"/>
-    <color name="DARK_GRAY" code="404040"/>
-    <color name="GRAY" code="808080"/>
-    <color name="GREEN" code="00ff00"/>
-    <color name="LIGHT_GRAY" code="D3D3D3"/>
-    <color name="MAGENTA" code="ff00ff"/>
-    <color name="ORANGE" code="FFA500"/>
-    <color name="PINK" code="FFC0CB"/>
-    <color name="RED" code="ff0000"/>
-    <color name="WHITE" code="ffffff"/>
-    <color name="YELLOW" code="ffff00"/>
-  </javaColors>
+        <color name="beekeeper" code="f6e58d"/>
+        <color name="spiced nectarine" code="ffbe76"/>
+        <color name="pink glamour" code="ff7979"/>
+        <color name="june bud" code="badc58"/>
+        <color name="coastal breeze" code="dff9fb"/>
+        <color name="turbo" code="f9ca24"/>
+        <color name="quince jelly" code="f0932b"/>
+        <color name="carmine pink" code="eb4d4b"/>
+        <color name="pure apple" code="6ab04c"/>
+        <color name="hint of ice pack" code="c7ecee"/>
+        <color name="middle blue" code="7ed6df"/>
+        <color name="heliotrope" code="e056fd"/>
+        <color name="exodus fruit" code="686de0"/>
+        <color name="deep koamaru" code="30336b"/>
+        <color name="soaring eagle" code="95afc0"/>
+        <color name="greenland green" code="22a6b3"/>
+        <color name="steel pink" code="be2edd"/>
+        <color name="blurple" code="4834d4"/>
+        <color name="deep cove" code="130f40"/>
+        <color name="wizard grey" code="535c68"/>
+        <color name="highlighter pink" code="ef5777"/>
+        <color name="dark periwinkle" code="575fcf"/>
+        <color name="megaman" code="4bcffa"/>
+        <color name="fresh turquoise" code="34e7e4"/>
+        <color name="minty green" code="0be881"/>
+        <color name="sizzling red" code="f53b57"/>
+        <color name="free speech blue" code="3c40c6"/>
+        <color name="spiro disco ball" code="0fbcf9"/>
+        <color name="jade dust" code="00d8d6"/>
+        <color name="green teal" code="05c46b"/>
+        <color name="narenji orange" code="ffc048"/>
+        <color name="yriel yellow" code="ffdd59"/>
+        <color name="sunset orange" code="ff5e57"/>
+        <color name="hint of elusive blue" code="d2dae2"/>
+        <color name="good night" code="485460"/>
+        <color name="chrome yellow" code="ffa801"/>
+        <color name="vibrant yellow" code="ffd32a"/>
+        <color name="red orange" code="ff3f34"/>
+        <color name="london square" code="808e9b"/>
+        <color name="black pearl" code="1e272e"/>
+        <color name="flat flesh" code="fad390"/>
+        <color name="melon melody" code="f8c291"/>
+        <color name="livid" code="6a89cc"/>
+        <color name="spray" code="82ccdd"/>
+        <color name="paradise green" code="b8e994"/>
+        <color name="squash blossom" code="f6b93b"/>
+        <color name="mandarin red" code="e55039"/>
+        <color name="azraq blue" code="4a69bd"/>
+        <color name="dupain" code="60a3bc"/>
+        <color name="aurora green" code="78e08f"/>
+        <color name="iceland poppy" code="fa983a"/>
+        <color name="tomato red" code="eb2f06"/>
+        <color name="good samaritan" code="3c6382"/>
+        <color name="waterfall" code="38ada9"/>
+        <color name="carrot orange" code="e58e26"/>
+        <color name="jalapeno red" code="b71540"/>
+        <color name="dark sapphire" code="0c2461"/>
+        <color name="forest blues" code="0a3d62"/>
+        <color name="reef encounter" code="079992"/>
+        <color name="jigglypuff" code="ff9ff3"/>
+        <color name="casandora yellow" code="feca57"/>
+        <color name="pastel red" code="ff6b6b"/>
+        <color name="megaman" code="48dbfb"/>
+        <color name="wild caribbean green" code="1dd1a1"/>
+        <color name="lotus pink" code="f368e0"/>
+        <color name="double dragon skin" code="ff9f43"/>
+        <color name="amour" code="ee5253"/>
+        <color name="cyanite" code="0abde3"/>
+        <color name="dark mountain meadow" code="10ac84"/>
+        <color name="jade dust" code="00d2d3"/>
+        <color name="joust blue" code="54a0ff"/>
+        <color name="nasu purple" code="5f27cd"/>
+        <color name="light blue ballerina" code="c8d6e5"/>
+        <color name="fuel town" code="576574"/>
+        <color name="aqua velvet" code="01a3a4"/>
+        <color name="bleu de france" code="2e86de"/>
+        <color name="bluebell" code="341f97"/>
+        <color name="storm petrel" code="8395a7"/>
+        <color name="imperial primer" code="222f3e"/>
+        <color name="orchid orange" code="fea47f"/>
+        <color name="spiro disco ball" code="25ccf7"/>
+        <color name="honey glow" code="eab543"/>
+        <color name="sweet garden" code="55e6c1"/>
+        <color name="falling star" code="cad3c8"/>
+        <color name="rich gardenia" code="f97f51"/>
+        <color name="clear chill" code="1b9cfc"/>
+        <color name="sarawak white pepper" code="f8efba"/>
+        <color name="keppel" code="58b19f"/>
+        <color name="ships officer" code="2c3a47"/>
+        <color name="fiery fuchsia" code="b33771"/>
+        <color name="bluebell" code="3b3b98"/>
+        <color name="georgia peach" code="fd7272"/>
+        <color name="oasis stream" code="9aecdb"/>
+        <color name="bright ube" code="d6a2e8"/>
+        <color name="magenta purple" code="6d214f"/>
+        <color name="ending navy blue" code="182c61"/>
+        <color name="sasquatch socks" code="fc427b"/>
+        <color name="pine glade" code="bdc581"/>
+        <color name="highlighter lavender" code="82589f"/>
+        <color name="bright lilac" code="cd84f1"/>
+        <color name="pretty please" code="ffcccc"/>
+        <color name="light red" code="ff4d4d"/>
+        <color name="mandarin sorbet" code="ffaf40"/>
+        <color name="unmellow yellow" code="fffa65"/>
+        <color name="light purple" code="c56cf0"/>
+        <color name="young salmon" code="ffb8b8"/>
+        <color name="red orange" code="ff3838"/>
+        <color name="radiant yellow" code="ff9f1a"/>
+        <color name="dorn yellow" code="fff200"/>
+        <color name="wintergreen" code="32ff7e"/>
+        <color name="electric blue" code="7efff5"/>
+        <color name="neon blue" code="18dcff"/>
+        <color name="light slate blue" code="7d5fff"/>
+        <color name="shadowed steel" code="4b4b4b"/>
+        <color name="weird green" code="3ae374"/>
+        <color name="hammam blue" code="67e6dc"/>
+        <color name="spiro disco ball" code="17c0eb"/>
+        <color name="light indigo" code="7158e2"/>
+        <color name="baltic sea" code="3d3d3d"/>
+        <color name="sunflower" code="ffc312"/>
+        <color name="energos" code="c4e538"/>
+        <color name="blue martina" code="12cbc4"/>
+        <color name="lavender rose" code="fda7df"/>
+        <color name="bara red" code="ed4c67"/>
+        <color name="radiant yellow" code="f79f1f"/>
+        <color name="android green" code="a3cb38"/>
+        <color name="mediterranean sea" code="1289a7"/>
+        <color name="lavender tea" code="d980fa"/>
+        <color name="very berry" code="b53471"/>
+        <color name="puffins bill" code="ee5a24"/>
+        <color name="pixelated grass" code="009432"/>
+        <color name="merchant marine blue" code="0652dd"/>
+        <color name="forgotten purple" code="9980fa"/>
+        <color name="hollyhock" code="833471"/>
+        <color name="red pigment" code="ea2027"/>
+        <color name="turkish aqua" code="006266"/>
+        <color name="under the sea" code="1b1464"/>
+        <color name="circumorbital ring" code="5758bb"/>
+        <color name="magenta purple" code="6f1e51"/>
+        <color name="protoss pylon" code="00a8ff"/>
+        <color name="periwinkle" code="9c88ff"/>
+        <color name="rise-n-shine" code="fbc531"/>
+        <color name="download progress" code="4cd137"/>
+        <color name="seabrook" code="487eb0"/>
+        <color name="vanadyl blue" code="0097e6"/>
+        <color name="matt purple" code="8c7ae6"/>
+        <color name="nanohanacha gold" code="e1b12c"/>
+        <color name="skirret green" code="44bd32"/>
+        <color name="naval" code="40739e"/>
+        <color name="nasturcian flower" code="e84118"/>
+        <color name="lynx white" code="f5f6fa"/>
+        <color name="blueberry soda" code="7f8fa6"/>
+        <color name="mazarine blue" code="273c75"/>
+        <color name="blue nights" code="353b48"/>
+        <color name="harley davidson orange" code="c23616"/>
+        <color name="hint of pensive" code="dcdde1"/>
+        <color name="chain gang grey" code="718093"/>
+        <color name="pico void" code="192a56"/>
+        <color name="electromagnetic" code="2f3640"/>
+
+        <color name="red" code="f44336"/>,
+        <color name="red-50" code="ffebee"/>,
+        <color name="red-100" code="ffcdd2"/>,
+        <color name="red-200" code="ef9a9a"/>,
+        <color name="red-300" code="e57373"/>,
+        <color name="red-400" code="ef5350"/>,
+        <color name="red-500" code="f44336"/>,
+        <color name="red-600" code="e53935"/>,
+        <color name="red-700" code="d32f2f"/>,
+        <color name="red-800" code="c62828"/>,
+        <color name="red-900" code="b71c1c"/>,
+        <color name="red-100-accent" code="ff8a80"/>,
+        <color name="red-200-accent" code="ff5252"/>,
+        <color name="red-400-accent" code="ff1744"/>,
+        <color name="red-700-accent" code="d50000"/>,
+        <color name="pink" code="e91e63"/>,
+        <color name="pink-50" code="fce4ec"/>,
+        <color name="pink-100" code="f8bbd0"/>,
+        <color name="pink-200" code="f48fb1"/>,
+        <color name="pink-300" code="f06292"/>,
+        <color name="pink-400" code="ec407a"/>,
+        <color name="pink-500" code="e91e63"/>,
+        <color name="pink-600" code="d81b60"/>,
+        <color name="pink-700" code="c2185b"/>,
+        <color name="pink-800" code="ad1457"/>,
+        <color name="pink-900" code="880e4f"/>,
+        <color name="pink-100-accent" code="ff80ab"/>,
+        <color name="pink-200-accent" code="ff4081"/>,
+        <color name="pink-400-accent" code="f50057"/>,
+        <color name="pink-700-accent" code="c51162"/>,
+        <color name="purple" code="9c27b0"/>,
+        <color name="purple-50" code="f3e5f5"/>,
+        <color name="purple-100" code="e1bee7"/>,
+        <color name="purple-200" code="ce93d8"/>,
+        <color name="purple-300" code="ba68c8"/>,
+        <color name="purple-400" code="ab47bc"/>,
+        <color name="purple-500" code="9c27b0"/>,
+        <color name="purple-600" code="8e24aa"/>,
+        <color name="purple-700" code="7b1fa2"/>,
+        <color name="purple-800" code="6a1b9a"/>,
+        <color name="purple-900" code="4a148c"/>,
+        <color name="purple-100-accent" code="ea80fc"/>,
+        <color name="purple-200-accent" code="e040fb"/>,
+        <color name="purple-400-accent" code="d500f9"/>,
+        <color name="purple-700-accent" code="aa00ff"/>,
+        <color name="deep-purple" code="673ab7"/>,
+        <color name="deep-purple-50" code="ede7f6"/>,
+        <color name="deep-purple-100" code="d1c4e9"/>,
+        <color name="deep-purple-200" code="b39ddb"/>,
+        <color name="deep-purple-300" code="9575cd"/>,
+        <color name="deep-purple-400" code="7e57c2"/>,
+        <color name="deep-purple-500" code="673ab7"/>,
+        <color name="deep-purple-600" code="5e35b1"/>,
+        <color name="deep-purple-700" code="512da8"/>,
+        <color name="deep-purple-800" code="4527a0"/>,
+        <color name="deep-purple-900" code="311b92"/>,
+        <color name="deep-purple-100-accent" code="b388ff"/>,
+        <color name="deep-purple-200-accent" code="7c4dff"/>,
+        <color name="deep-purple-400-accent" code="651fff"/>,
+        <color name="deep-purple-700-accent" code="6200ea"/>,
+        <color name="indigo" code="3f51b5"/>,
+        <color name="indigo-50" code="e8eaf6"/>,
+        <color name="indigo-100" code="c5cae9"/>,
+        <color name="indigo-200" code="9fa8da"/>,
+        <color name="indigo-300" code="7986cb"/>,
+        <color name="indigo-400" code="5c6bc0"/>,
+        <color name="indigo-500" code="3f51b5"/>,
+        <color name="indigo-600" code="3949ab"/>,
+        <color name="indigo-700" code="303f9f"/>,
+        <color name="indigo-800" code="283593"/>,
+        <color name="indigo-900" code="1a237e"/>,
+        <color name="indigo-100-accent" code="8c9eff"/>,
+        <!--        <color name="indigo-200-accent" code="536dfe"/>,-->
+        <color name="indigo-400-accent" code="3d5afe"/>,
+        <color name="indigo-700-accent" code="304ffe"/>,
+        <color name="blue" code="2196f3"/>,
+        <color name="blue-50" code="e3f2fd"/>,
+        <color name="blue-100" code="bbdefb"/>,
+        <color name="blue-200" code="90caf9"/>,
+        <color name="blue-300" code="64b5f6"/>,
+        <color name="blue-400" code="42a5f5"/>,
+        <color name="blue-500" code="2196f3"/>,
+        <color name="blue-600" code="1e88e5"/>,
+        <color name="blue-700" code="1976d2"/>,
+        <color name="blue-800" code="1565c0"/>,
+        <color name="blue-900" code="0d47a1"/>,
+        <color name="blue-100-accent" code="82b1ff"/>,
+        <color name="blue-200-accent" code="448aff"/>,
+        <color name="blue-400-accent" code="2979ff"/>,
+        <color name="blue-700-accent" code="2962ff"/>,
+        <color name="light-blue" code="03a9f4"/>,
+        <color name="light-blue-50" code="e1f5fe"/>,
+        <color name="light-blue-100" code="b3e5fc"/>,
+        <color name="light-blue-200" code="81d4fa"/>,
+        <color name="light-blue-300" code="4fc3f7"/>,
+        <color name="light-blue-400" code="29b6f6"/>,
+        <color name="light-blue-500" code="03a9f4"/>,
+        <color name="light-blue-600" code="039be5"/>,
+        <color name="light-blue-700" code="0288d1"/>,
+        <color name="light-blue-800" code="0277bd"/>,
+        <color name="light-blue-900" code="01579b"/>,
+        <color name="light-blue-100-accent" code="80d8ff"/>,
+        <color name="light-blue-200-accent" code="40c4ff"/>,
+        <color name="light-blue-400-accent" code="00b0ff"/>,
+        <color name="light-blue-700-accent" code="0091ea"/>,
+        <color name="cyan" code="00bcd4"/>,
+        <color name="cyan-50" code="e0f7fa"/>,
+        <color name="cyan-100" code="b2ebf2"/>,
+        <color name="cyan-200" code="80deea"/>,
+        <color name="cyan-300" code="4dd0e1"/>,
+        <color name="cyan-400" code="26c6da"/>,
+        <color name="cyan-500" code="00bcd4"/>,
+        <color name="cyan-600" code="00acc1"/>,
+        <color name="cyan-700" code="0097a7"/>,
+        <color name="cyan-800" code="00838f"/>,
+        <color name="cyan-900" code="006064"/>,
+        <color name="cyan-100-accent" code="84ffff"/>,
+        <color name="cyan-200-accent" code="18ffff"/>,
+        <color name="cyan-400-accent" code="00e5ff"/>,
+        <color name="cyan-700-accent" code="00b8d4"/>,
+        <color name="teal" code="009688"/>,
+        <color name="teal-50" code="e0f2f1"/>,
+        <color name="teal-100" code="b2dfdb"/>,
+        <color name="teal-200" code="80cbc4"/>,
+        <color name="teal-300" code="4db6ac"/>,
+        <color name="teal-400" code="26a69a"/>,
+        <color name="teal-500" code="009688"/>,
+        <color name="teal-600" code="00897b"/>,
+        <color name="teal-700" code="00796b"/>,
+        <color name="teal-800" code="00695c"/>,
+        <color name="teal-900" code="004d40"/>,
+        <color name="teal-100-accent" code="a7ffeb"/>,
+        <color name="teal-200-accent" code="64ffda"/>,
+        <color name="teal-400-accent" code="1de9b6"/>,
+        <color name="teal-700-accent" code="00bfa5"/>,
+        <color name="green" code="4caf50"/>,
+        <color name="green-50" code="e8f5e9"/>,
+        <color name="green-100" code="c8e6c9"/>,
+        <color name="green-200" code="a5d6a7"/>,
+        <color name="green-300" code="81c784"/>,
+        <color name="green-400" code="66bb6a"/>,
+        <color name="green-500" code="4caf50"/>,
+        <color name="green-600" code="43a047"/>,
+        <color name="green-700" code="388e3c"/>,
+        <color name="green-800" code="2e7d32"/>,
+        <color name="green-900" code="1b5e20"/>,
+        <color name="green-100-accent" code="b9f6ca"/>,
+        <color name="green-200-accent" code="69f0ae"/>,
+        <color name="green-400-accent" code="00e676"/>,
+        <color name="green-700-accent" code="00c853"/>,
+        <color name="light-green" code="8bc34a"/>,
+        <color name="light-green-50" code="f1f8e9"/>,
+        <color name="light-green-100" code="dcedc8"/>,
+        <color name="light-green-200" code="c5e1a5"/>,
+        <color name="light-green-300" code="aed581"/>,
+        <color name="light-green-400" code="9ccc65"/>,
+        <color name="light-green-500" code="8bc34a"/>,
+        <color name="light-green-600" code="7cb342"/>,
+        <color name="light-green-700" code="689f38"/>,
+        <color name="light-green-800" code="558b2f"/>,
+        <color name="light-green-900" code="33691e"/>,
+        <color name="light-green-100-accent" code="ccff90"/>,
+        <color name="light-green-200-accent" code="b2ff59"/>,
+        <color name="light-green-400-accent" code="76ff03"/>,
+        <color name="light-green-700-accent" code="64dd17"/>,
+        <color name="lime" code="cddc39"/>,
+        <color name="lime-50" code="f9fbe7"/>,
+        <color name="lime-100" code="f0f4c3"/>,
+        <color name="lime-200" code="e6ee9c"/>,
+        <color name="lime-300" code="dce775"/>,
+        <color name="lime-400" code="d4e157"/>,
+        <color name="lime-500" code="cddc39"/>,
+        <color name="lime-600" code="c0ca33"/>,
+        <color name="lime-700" code="afb42b"/>,
+        <color name="lime-800" code="9e9d24"/>,
+        <color name="lime-900" code="827717"/>,
+        <color name="lime-100-accent" code="f4ff81"/>,
+        <color name="lime-200-accent" code="eeff41"/>,
+        <color name="lime-400-accent" code="c6ff00"/>,
+        <color name="lime-700-accent" code="aeea00"/>,
+        <color name="yellow" code="ffeb3b"/>,
+        <color name="yellow-50" code="fffde7"/>,
+        <color name="yellow-100" code="fff9c4"/>,
+        <color name="yellow-200" code="fff59d"/>,
+        <color name="yellow-300" code="fff176"/>,
+        <color name="yellow-400" code="ffee58"/>,
+        <color name="yellow-500" code="ffeb3b"/>,
+        <color name="yellow-600" code="fdd835"/>,
+        <color name="yellow-700" code="fbc02d"/>,
+        <color name="yellow-800" code="f9a825"/>,
+        <color name="yellow-900" code="f57f17"/>,
+        <color name="yellow-100-accent" code="ffff8d"/>,
+        <color name="yellow-200-accent" code="ffff00"/>,
+        <color name="yellow-400-accent" code="ffea00"/>,
+        <color name="yellow-700-accent" code="ffd600"/>,
+        <color name="amber" code="ffc107"/>,
+        <color name="amber-50" code="fff8e1"/>,
+        <color name="amber-100" code="ffecb3"/>,
+        <color name="amber-200" code="ffe082"/>,
+        <color name="amber-300" code="ffd54f"/>,
+        <color name="amber-400" code="ffca28"/>,
+        <color name="amber-500" code="ffc107"/>,
+        <color name="amber-600" code="ffb300"/>,
+        <color name="amber-700" code="ffa000"/>,
+        <color name="amber-800" code="ff8f00"/>,
+        <color name="amber-900" code="ff6f00"/>,
+        <color name="amber-100-accent" code="ffe57f"/>,
+        <color name="amber-200-accent" code="ffd740"/>,
+        <color name="amber-400-accent" code="ffc400"/>,
+        <color name="amber-700-accent" code="ffab00"/>,
+        <color name="orange" code="ff9800"/>,
+        <color name="orange-50" code="fff3e0"/>,
+        <color name="orange-100" code="ffe0b2"/>,
+        <color name="orange-200" code="ffcc80"/>,
+        <color name="orange-300" code="ffb74d"/>,
+        <color name="orange-400" code="ffa726"/>,
+        <color name="orange-500" code="ff9800"/>,
+        <color name="orange-600" code="fb8c00"/>,
+        <color name="orange-700" code="f57c00"/>,
+        <color name="orange-800" code="ef6c00"/>,
+        <color name="orange-900" code="e65100"/>,
+        <color name="orange-100-accent" code="ffd180"/>,
+        <color name="orange-200-accent" code="ffab40"/>,
+        <color name="orange-400-accent" code="ff9100"/>,
+        <color name="orange-700-accent" code="ff6d00"/>,
+        <color name="deep-orange" code="ff5722"/>,
+        <color name="deep-orange-50" code="fbe9e7"/>,
+        <color name="deep-orange-100" code="ffccbc"/>,
+        <color name="deep-orange-200" code="ffab91"/>,
+        <color name="deep-orange-300" code="ff8a65"/>,
+        <color name="deep-orange-400" code="ff7043"/>,
+        <color name="deep-orange-500" code="ff5722"/>,
+        <color name="deep-orange-600" code="f4511e"/>,
+        <color name="deep-orange-700" code="e64a19"/>,
+        <color name="deep-orange-800" code="d84315"/>,
+        <color name="deep-orange-900" code="bf360c"/>,
+        <color name="deep-orange-100-accent" code="ff9e80"/>,
+        <color name="deep-orange-200-accent" code="ff6e40"/>,
+        <color name="deep-orange-400-accent" code="ff3d00"/>,
+        <color name="deep-orange-700-accent" code="dd2c00"/>,
+        <color name="brown" code="795548"/>,
+        <color name="brown-50" code="efebe9"/>,
+        <color name="brown-100" code="d7ccc8"/>,
+        <color name="brown-200" code="bcaaa4"/>,
+        <color name="brown-300" code="a1887f"/>,
+        <color name="brown-400" code="8d6e63"/>,
+        <color name="brown-500" code="795548"/>,
+        <color name="brown-600" code="6d4c41"/>,
+        <color name="brown-700" code="5d4037"/>,
+        <color name="brown-800" code="4e342e"/>,
+        <color name="brown-900" code="3e2723"/>,
+        <color name="grey" code="9e9e9e"/>,
+        <color name="grey-50" code="fafafa"/>,
+        <color name="grey-100" code="f5f5f5"/>,
+        <color name="grey-200" code="eeeeee"/>,
+        <color name="grey-300" code="e0e0e0"/>,
+        <color name="grey-400" code="bdbdbd"/>,
+        <color name="grey-500" code="9e9e9e"/>,
+        <color name="grey-600" code="757575"/>,
+        <color name="grey-700" code="616161"/>,
+        <color name="grey-800" code="424242"/>,
+        <color name="grey-900" code="212121"/>,
+        <color name="blue-grey" code="607d8b"/>,
+        <color name="blue-grey-50" code="eceff1"/>,
+        <color name="blue-grey-100" code="cfd8dc"/>,
+        <color name="blue-grey-200" code="b0bec5"/>,
+        <color name="blue-grey-300" code="90a4ae"/>,
+        <color name="blue-grey-400" code="78909c"/>,
+        <color name="blue-grey-500" code="607d8b"/>,
+        <color name="blue-grey-600" code="546e7a"/>,
+        <color name="blue-grey-700" code="455a64"/>,
+        <color name="blue-grey-800" code="37474f"/>,
+        <color name="blue-grey-900" code="263238"/>,
+
+    </svgColors>
+    <javaColors>
+        <color name="black" code="000000"/>
+        <color name="blue" code="0000ff"/>
+        <color name="cyan" code="00ffff"/>
+        <color name="darkGray" code="404040"/>
+        <color name="gray" code="808080"/>
+        <color name="green" code="00ff00"/>
+        <color name="lightGray" code="D3D3D3"/>
+        <color name="magenta" code="ff00ff"/>
+        <color name="orange" code="FFA500"/>
+        <color name="pink" code="FFC0CB"/>
+        <color name="red" code="ff0000"/>
+        <color name="white" code="ffffff"/>
+        <color name="yellow" code="ffff00"/>
+        <color name="BLACK" code="000000"/>
+        <color name="BLUE" code="0000ff"/>
+        <color name="CYAN" code="00ffff"/>
+        <color name="DARK_GRAY" code="404040"/>
+        <color name="GRAY" code="808080"/>
+        <color name="GREEN" code="00ff00"/>
+        <color name="LIGHT_GRAY" code="D3D3D3"/>
+        <color name="MAGENTA" code="ff00ff"/>
+        <color name="ORANGE" code="FFA500"/>
+        <color name="PINK" code="FFC0CB"/>
+        <color name="RED" code="ff0000"/>
+        <color name="WHITE" code="ffffff"/>
+        <color name="YELLOW" code="ffff00"/>
+    </javaColors>
 
 </colors>

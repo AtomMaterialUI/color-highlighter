@@ -34,13 +34,47 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class AnyVisitor : ColorVisitor() {
+  val extensions: Set<String> = setOf(
+    "asp",
+    "cjs",
+    "cs",
+    "dart",
+    "go",
+    "html",
+    "java",
+    "js",
+    "json",
+    "jsx",
+    "kt",
+    "md",
+    "mdx",
+    "mjs",
+    "objc",
+    "php",
+    "phpt",
+    "properties",
+    "py",
+    "rb",
+    "rbs",
+    "scala",
+    "swift",
+    "svelte",
+    "svg",
+    "ts",
+    "tsx",
+    "vue",
+    "xml",
+    "yaml",
+    "yml",
+  )
+
   override fun accept(element: PsiElement): Color? {
     if (element !is PsiLiteralValue) return null
 
     val value = element.value
     if (value !is String) return null
 
-    return ColorSearchEngine.getColor((value as? String)!!, this)
+    return ColorSearchEngine.getColor(value, this)
   }
 
   override fun suitableForFile(file: PsiFile): Boolean =
@@ -52,40 +86,4 @@ class AnyVisitor : ColorVisitor() {
   }
 
   override fun clone(): HighlightVisitor = AnyVisitor()
-
-  companion object {
-    val extensions: Set<String> = setOf(
-      "asp",
-      "cjs",
-      "cs",
-      "dart",
-      "go",
-      "html",
-      "java",
-      "js",
-      "json",
-      "jsx",
-      "kt",
-      "md",
-      "mdx",
-      "mjs",
-      "objc",
-      "php",
-      "phpt",
-      "properties",
-      "py",
-      "rb",
-      "rbs",
-      "scala",
-      "swift",
-      "svelte",
-      "svg",
-      "ts",
-      "tsx",
-      "vue",
-      "xml",
-      "yaml",
-      "yml",
-    )
-  }
 }

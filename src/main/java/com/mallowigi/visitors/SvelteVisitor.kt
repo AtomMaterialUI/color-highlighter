@@ -34,7 +34,16 @@ import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
 class SvelteVisitor : ColorVisitor() {
-  private val allowedTypes = setOf("CSS_IDENT", "CSS_NUMBER", "CSS_HASH", "CSS_FUNCTION")
+  private val allowedTypes = setOf(
+    "CSS_IDENT",
+    "CSS_NUMBER",
+    "CSS_HASH",
+    "CSS_FUNCTION"
+  )
+
+  val extensions: Set<String> = setOf(
+    "svelte",
+  )
 
   override fun suitableForFile(file: PsiFile): Boolean =
     extensions.contains(file.virtualFile?.extension)
@@ -45,14 +54,8 @@ class SvelteVisitor : ColorVisitor() {
 
     val value = element.text
     if (value !is String) return null
-    return ColorSearchEngine.getColor((value as? String)!!, this)
+    return ColorSearchEngine.getColor(value, this)
   }
 
   override fun clone(): HighlightVisitor = SvelteVisitor()
-
-  companion object {
-    val extensions: Set<String> = setOf(
-      "svelte",
-    )
-  }
 }

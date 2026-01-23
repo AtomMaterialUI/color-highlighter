@@ -1390,3 +1390,7 @@
 [[colors]]
 "@name" = "electromagnetic"
 "@code" = "2f3640"
+
+[[colors]]
+"@name" = "rgb"
+"@code" = 0xff00ff

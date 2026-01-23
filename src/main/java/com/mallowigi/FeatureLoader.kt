@@ -35,6 +35,7 @@ class FeatureLoader {
   var isScalaEnabled: Boolean = false
   var isMarkdownEnabled: Boolean = false
   var isRiderEnabled: Boolean = false
+  var isRustEnabled: Boolean = false
 
   companion object {
     @JvmStatic

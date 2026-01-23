@@ -23,32 +23,46 @@
  *
  *
  */
-package com.mallowigi.colors
+package com.mallowigi.search.parsers
 
-import com.intellij.util.xmlb.annotations.Property
-import java.io.Serializable
+import com.mallowigi.colors.ColorData
+import java.awt.Color
+import java.util.*
 
-/**
- * Represents a Single color: name + code
- *
- * @property name
- * @property code
- */
-@Suppress("Detekt:DataClassShouldBeImmutable", "Detekt:DataClassContainsFunctions") // Need to disable this for now
-data class SingleColor(
-  @field:Property var name: String = "",
-  @field:Property var code: String = "",
-) : Serializable {
-  val isEmpty: Boolean
-    get() = name.isEmpty() || code.isEmpty()
+/** Parses colors in the form `Rgb(a,b,c)` */
+class RgbCtorParser : ColorParser {
 
-  val colorInt: Int
-    get() = Integer.valueOf(code, 16)
+  override fun parseColor(text: String): Color? = parseConstructor(text)
 
-  fun apply(other: SingleColor) {
-    name = other.name
-    code = other.code
+  private fun parseConstructor(text: String): Color? {
+    val colorData = ColorData()
+    colorData.run {
+      init(text)
+
+      if (startParen == -1 || endParen == -1) return null
+
+      // tokenize the string into "red,green,blue"
+      val tokenizer = StringTokenizer(text.substring(startParen + 1, endParen), ",")
+      val params = tokenizer.countTokens()
+      if (params < 1 || params > 4) return null
+
+      return when (params) {
+        1    -> {// single hex int
+          val hex = parseComponent(getNextNumber(tokenizer)) as Int
+          Color(hex)
+        }
+
+        2    -> {// hex int followed with hasAlpha
+          val hex = parseComponent(getNextNumber(tokenizer)) as Int
+          val hasAlpha = parseComponent(getNextNumber(tokenizer)) as Boolean
+          Color(hex, hasAlpha)
+        }
+
+        else -> RGBColorParser().parseRGB(text)
+      }
+    }
   }
 
-  override fun toString(): String = "$name: $code"
 }
+
+

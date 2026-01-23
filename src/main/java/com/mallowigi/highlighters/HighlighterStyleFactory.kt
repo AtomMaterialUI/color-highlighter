@@ -39,6 +39,7 @@ class HighlighterStyleFactory {
       HighlightingStyles.UNDERLINE -> UnderlineHighlighter()
       HighlightingStyles.FOREGROUND -> ForegroundHighlighter()
       HighlightingStyles.INLINE -> InlineHighlighter()
+      HighlightingStyles.DISABLED -> DisabledHighlighter()
     }
 
   companion object {

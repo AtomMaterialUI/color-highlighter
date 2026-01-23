@@ -66,6 +66,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isRiderColorMethodEnabled: Boolean by property(true)
 
+    var isRustColorCtorEnabled: Boolean by property(true)
+
     var isTextEnabled: Boolean by property(false)
 
     var isMarkdownEnabled: Boolean by property(true)
@@ -149,6 +151,12 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
       state.isRiderColorMethodEnabled = value
     }
 
+  var isRustColorCtorEnabled: Boolean
+    get() = state.isRustColorCtorEnabled
+    set(value) {
+      state.isRustColorCtorEnabled = value
+    }
+
   var isTextEnabled: Boolean
     get() = state.isTextEnabled
     set(value) {
@@ -196,6 +204,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isKotlinColorCtorEnabled = true
     this.isKotlinColorMethodEnabled = true
     this.isRiderColorMethodEnabled = true
+    this.isRustColorCtorEnabled = true
     this.isCssColorEnabled = true
     this.isTextEnabled = false
     this.isMarkdownEnabled = true
@@ -232,6 +241,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     clone.isKotlinColorCtorEnabled = this.isKotlinColorCtorEnabled
     clone.isKotlinColorMethodEnabled = this.isKotlinColorMethodEnabled
     clone.isRiderColorMethodEnabled = this.isRiderColorMethodEnabled
+    clone.isRustColorCtorEnabled = this.isRustColorCtorEnabled
     clone.isTextEnabled = this.isTextEnabled
     clone.isMarkdownEnabled = this.isMarkdownEnabled
     clone.isMarkupEnabled = this.isMarkupEnabled
@@ -252,6 +262,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isKotlinColorCtorEnabled = state.isKotlinColorCtorEnabled
     this.isKotlinColorMethodEnabled = state.isKotlinColorMethodEnabled
     this.isRiderColorMethodEnabled = state.isRiderColorMethodEnabled
+    this.isRustColorCtorEnabled = state.isRustColorCtorEnabled
     this.isTextEnabled = state.isTextEnabled
     this.isMarkdownEnabled = state.isMarkdownEnabled
     this.isMarkupEnabled = state.isMarkupEnabled
@@ -279,6 +290,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     if (isKotlinColorCtorEnabled != other.isKotlinColorCtorEnabled) return false
     if (isKotlinColorMethodEnabled != other.isKotlinColorMethodEnabled) return false
     if (isRiderColorMethodEnabled != other.isRiderColorMethodEnabled) return false
+    if (isRustColorCtorEnabled != other.isRustColorCtorEnabled) return false
     if (isTextEnabled != other.isTextEnabled) return false
     if (isMarkdownEnabled != other.isMarkdownEnabled) return false
     if (isMarkupEnabled != other.isMarkupEnabled) return false
@@ -300,6 +312,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     result = 31 * result + isKotlinColorCtorEnabled.hashCode()
     result = 31 * result + isKotlinColorMethodEnabled.hashCode()
     result = 31 * result + isRiderColorMethodEnabled.hashCode()
+    result = 31 * result + isRustColorCtorEnabled.hashCode()
     result = 31 * result + isTextEnabled.hashCode()
     result = 31 * result + isMarkdownEnabled.hashCode()
     result = 31 * result + isMarkupEnabled.hashCode()
@@ -312,6 +325,6 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     @JvmStatic
     val instance: ColorHighlighterState by lazy { service() }
 
-    const val VERSION = "16.0.1"
+    const val VERSION = "18.0.1"
   }
 }

@@ -27,7 +27,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key).get()
 
@@ -88,7 +87,7 @@ repositories {
 }
 
 dependencies {
-  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.0")
+  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
   implementation("commons-io:commons-io:2.11.0")
   implementation("com.thoughtworks.xstream:xstream:1.4.20")
 
@@ -186,11 +185,6 @@ tasks {
     withType<JavaCompile> {
       sourceCompatibility = it
       targetCompatibility = it
-    }
-
-    withType<KotlinCompile> {
-      kotlinOptions.jvmTarget = it
-      kotlinOptions.freeCompilerArgs += listOf("-Xskip-prerelease-check")
     }
 
     withType<Detekt> {
