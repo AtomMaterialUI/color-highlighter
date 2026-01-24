@@ -1,6 +1,11 @@
 # Changelog
 
----
+## [Unreleased]
+
+### Features
+
+- Add support for configuration cache
+- Update to IntelliJ Platform Gradle Plugin 2.x
 
 ## 18.1.0
 

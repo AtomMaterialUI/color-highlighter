@@ -41,7 +41,7 @@ import com.jetbrains.lang.dart.psi.DartVarDeclarationList
 import com.jetbrains.lang.dart.psi.DartVarInit
 import com.mallowigi.search.ColorSearchEngine
 import org.rust.lang.core.psi.ext.descendantOfType
-import org.toml.lang.psi.ext.elementType
+import org.rust.lang.core.psi.ext.elementType
 import java.awt.Color
 
 class DartVisitor : ColorVisitor() {
@@ -107,4 +107,3 @@ class DartVisitor : ColorVisitor() {
   }
 
 }
-

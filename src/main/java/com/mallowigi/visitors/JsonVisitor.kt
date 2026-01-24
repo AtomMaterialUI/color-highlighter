@@ -27,8 +27,6 @@
 package com.mallowigi.visitors
 
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
-import com.intellij.json.psi.JsonFile
-import com.intellij.json.psi.JsonStringLiteral
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine

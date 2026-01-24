@@ -87,13 +87,14 @@ repositories {
 }
 
 dependencies {
-  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
-  implementation("commons-io:commons-io:2.11.0")
-  implementation("com.thoughtworks.xstream:xstream:1.4.20")
+  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
+  implementation("commons-io:commons-io:2.14.0")
+  implementation("com.thoughtworks.xstream:xstream:1.4.21")
 
   intellijPlatform {
-    intellijIdeaUltimate(platformVersion, useInstaller = false)
-    instrumentationTools()
+    intellijIdeaUltimate(platformVersion) {
+      useInstaller = false
+    }
     pluginVerifier()
     zipSigner()
 
@@ -125,7 +126,7 @@ dependencies {
 }
 
 kotlin {
-  jvmToolchain(17)
+  jvmToolchain(21)
 }
 
 intellijPlatform {
@@ -139,7 +140,7 @@ intellijPlatform {
       untilBuild = pluginUntilBuild
     }
 
-    changeNotes = provider {
+    changeNotes.set(provider {
       with(changelog) {
         renderItem(
           (getOrNull(pluginVersion) ?: getUnreleased())
@@ -148,7 +149,7 @@ intellijPlatform {
           Changelog.OutputType.HTML,
         )
       }
-    }
+    })
   }
 
   publishing {
@@ -162,6 +163,16 @@ intellijPlatform {
     password = environment("PRIVATE_KEY_PASSWORD")
   }
 
+  pluginVerification {
+    ides {
+      recommended()
+      select {
+        sinceBuild = pluginSinceBuild
+        untilBuild = pluginUntilBuild
+      }
+    }
+  }
+
 }
 
 changelog {
@@ -169,7 +180,7 @@ changelog {
   version.set(pluginVersion)
   itemPrefix.set("-")
   keepUnreleasedSection.set(true)
-  unreleasedTerm.set("Changelog")
+  unreleasedTerm.set("[Unreleased]")
   groups.set(listOf("Features", "Fixes", "Other", "Bump"))
 }
 
@@ -181,10 +192,10 @@ detekt {
 
 tasks {
   javaVersion.let {
-    // Set the compatibility versions to 1.8
+    // Set the compatibility versions to 21
     withType<JavaCompile> {
-      sourceCompatibility = it
-      targetCompatibility = it
+      sourceCompatibility = "21"
+      targetCompatibility = "21"
     }
 
     withType<Detekt> {
