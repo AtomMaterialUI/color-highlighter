@@ -27,6 +27,8 @@
 package com.mallowigi.visitors
 
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
+import com.intellij.json.psi.JsonFile
+import com.intellij.json.psi.JsonStringLiteral
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.search.ColorSearchEngine
@@ -41,6 +43,6 @@ class JsonVisitor : ColorVisitor() {
   override fun accept(element: PsiElement): Color? {
     if (element !is JsonStringLiteral) return null
 
-    return ColorSearchEngine.getColor(element.value, this)
+    return ColorSearchEngine.getColor(element.text, this)
   }
 }

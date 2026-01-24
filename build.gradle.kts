@@ -104,6 +104,7 @@ dependencies {
       "com.intellij.database",
       "com.intellij.css",
       "com.intellij.properties",
+      "com.intellij.modules.json",
       "org.jetbrains.plugins.yaml",
       "org.intellij.plugins.markdown",
       "org.jetbrains.kotlin",
