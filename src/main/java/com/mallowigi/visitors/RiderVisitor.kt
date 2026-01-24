@@ -51,8 +51,7 @@ class RiderVisitor : ColorVisitor() {
   )
 
   private val allowedTypes = setOf(
-    "STRING_LITERAL_REGULAR",
-    "DUMMY_NODE"
+    "STRING_LITERAL"
   )
 
   override fun clone(): HighlightVisitor = RiderVisitor()

@@ -53,6 +53,8 @@
     <depends optional="true" config-file="withMarkdown.xml">org.intellij.plugins.markdown</depends>
     <!--suppress PluginXmlValidity -->
     <depends optional="true" config-file="withRider.xml">com.intellij.modules.rider</depends>
+    <depends optional="true" config-file="withC.xml">com.intellij.modules.c-capable</depends>
+    <depends optional="true" config-file="withCpp.xml">com.intellij.modules.cpp-plugin-capable</depends>
     <depends optional="true" config-file="withDart.xml">Dart</depends>
     <depends optional="true" config-file="withSql.xml">com.intellij.database</depends>
     <depends optional="true" config-file="withR.xml">R4Intellij</depends>
