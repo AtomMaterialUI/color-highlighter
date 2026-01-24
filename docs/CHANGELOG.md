@@ -4,8 +4,25 @@
 
 ### Features
 
-- Add support for configuration cache
+### Fixes
+
+### Other
+
+### Bump
+
+## 19.0.0
+
+### Features
+
+- Support for multiple colors string literals.
+- Support for **C**, **C++** and **Groovy**.
+- Adding more colors to the predefined colors.
 - Update to IntelliJ Platform Gradle Plugin 2.x
+- Support for 2026.1
+
+### Fixes
+
+- Toggling CSS support no longer toggles the Editor Settings.
 
 ## 18.1.0
 
@@ -133,6 +150,7 @@
     - Java/Kotlin `new Color()` format
     - Java/Kotlin `Color.XXX` format
     - C# `Color.FromArgb()` format
+
     - **Markdown** color highlighting
 - **Ability to define your own colors**
 - Toggle gutter's color previews from the _Gutter settings_
