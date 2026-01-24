@@ -26,7 +26,6 @@
 
 package com.mallowigi.config.home
 
-import com.intellij.application.options.editor.WebEditorOptions
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
@@ -73,6 +72,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     var isMarkdownEnabled: Boolean by property(true)
 
     var isMarkupEnabled: Boolean by property(true)
+
+    var isCssEnabled: Boolean by property(true)
 
     var highlightingStyle: HighlightingStyles by enum(HighlightingStyles.BACKGROUND)
 
@@ -176,9 +177,9 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     }
 
   var isCssColorEnabled: Boolean
-    get() = WebEditorOptions.getInstance().isShowCssInlineColorPreview
+    get() = state.isCssEnabled
     set(value) {
-      WebEditorOptions.getInstance().isShowCssInlineColorPreview = value
+      state.isCssEnabled = value
     }
 
   var highlightingStyle: HighlightingStyles
@@ -194,22 +195,23 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     }
 
   fun resetSettings() {
+    this.highlightingStyle = HighlightingStyles.BACKGROUND
+    this.isColorNamesDetectEnabled = true
+    this.isCssColorEnabled = true
+    this.isCssColorEnabled = true
     this.isEnabled = true
     this.isHexDetectEnabled = true
-    this.isColorNamesDetectEnabled = true
-    this.isTupleDetectEnabled = true
-    this.isRgbaEnabled = true
     this.isJavaColorCtorEnabled = true
     this.isJavaColorMethodEnabled = true
     this.isKotlinColorCtorEnabled = true
     this.isKotlinColorMethodEnabled = true
-    this.isRiderColorMethodEnabled = true
-    this.isRustColorCtorEnabled = true
-    this.isCssColorEnabled = true
-    this.isTextEnabled = false
     this.isMarkdownEnabled = true
     this.isMarkupEnabled = true
-    this.highlightingStyle = HighlightingStyles.BACKGROUND
+    this.isRgbaEnabled = true
+    this.isRiderColorMethodEnabled = true
+    this.isRustColorCtorEnabled = true
+    this.isTextEnabled = false
+    this.isTupleDetectEnabled = true
     this.version = VERSION
 
     updateEditors()
@@ -231,43 +233,44 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
   fun clone(): ColorHighlighterState {
     val clone = ColorHighlighterState()
+    clone.highlightingStyle = this.highlightingStyle
+    clone.isColorNamesDetectEnabled = this.isColorNamesDetectEnabled
+    clone.isCssColorEnabled = this.isCssColorEnabled
+    clone.isCssColorEnabled = this.isCssColorEnabled
     clone.isEnabled = this.isEnabled
     clone.isHexDetectEnabled = this.isHexDetectEnabled
-    clone.isColorNamesDetectEnabled = this.isColorNamesDetectEnabled
-    clone.isTupleDetectEnabled = this.isTupleDetectEnabled
-    clone.isRgbaEnabled = this.isRgbaEnabled
     clone.isJavaColorCtorEnabled = this.isJavaColorCtorEnabled
     clone.isJavaColorMethodEnabled = this.isJavaColorMethodEnabled
     clone.isKotlinColorCtorEnabled = this.isKotlinColorCtorEnabled
     clone.isKotlinColorMethodEnabled = this.isKotlinColorMethodEnabled
+    clone.isMarkdownEnabled = this.isMarkdownEnabled
+    clone.isMarkupEnabled = this.isMarkupEnabled
+    clone.isRgbaEnabled = this.isRgbaEnabled
     clone.isRiderColorMethodEnabled = this.isRiderColorMethodEnabled
     clone.isRustColorCtorEnabled = this.isRustColorCtorEnabled
     clone.isTextEnabled = this.isTextEnabled
-    clone.isMarkdownEnabled = this.isMarkdownEnabled
-    clone.isMarkupEnabled = this.isMarkupEnabled
-    clone.isCssColorEnabled = this.isCssColorEnabled
-    clone.highlightingStyle = this.highlightingStyle
+    clone.isTupleDetectEnabled = this.isTupleDetectEnabled
     clone.version = this.version
     return clone
   }
 
   fun apply(state: ColorHighlighterState) {
+    this.highlightingStyle = state.highlightingStyle
+    this.isColorNamesDetectEnabled = state.isColorNamesDetectEnabled
+    this.isCssColorEnabled = state.isCssColorEnabled
     this.isEnabled = state.isEnabled
     this.isHexDetectEnabled = state.isHexDetectEnabled
-    this.isColorNamesDetectEnabled = state.isColorNamesDetectEnabled
-    this.isTupleDetectEnabled = state.isTupleDetectEnabled
-    this.isRgbaEnabled = state.isRgbaEnabled
     this.isJavaColorCtorEnabled = state.isJavaColorCtorEnabled
     this.isJavaColorMethodEnabled = state.isJavaColorMethodEnabled
     this.isKotlinColorCtorEnabled = state.isKotlinColorCtorEnabled
     this.isKotlinColorMethodEnabled = state.isKotlinColorMethodEnabled
+    this.isMarkdownEnabled = state.isMarkdownEnabled
+    this.isMarkupEnabled = state.isMarkupEnabled
+    this.isRgbaEnabled = state.isRgbaEnabled
     this.isRiderColorMethodEnabled = state.isRiderColorMethodEnabled
     this.isRustColorCtorEnabled = state.isRustColorCtorEnabled
     this.isTextEnabled = state.isTextEnabled
-    this.isMarkdownEnabled = state.isMarkdownEnabled
-    this.isMarkupEnabled = state.isMarkupEnabled
-    this.isCssColorEnabled = state.isCssColorEnabled
-    this.highlightingStyle = state.highlightingStyle
+    this.isTupleDetectEnabled = state.isTupleDetectEnabled
 
     updateEditors()
     this.fireChanged()
@@ -280,22 +283,23 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     other as ColorHighlighterState
 
+    if (highlightingStyle != other.highlightingStyle) return false
+    if (isColorNamesDetectEnabled != other.isColorNamesDetectEnabled) return false
+    if (isCssColorEnabled != other.isCssColorEnabled) return false
+    if (isCssColorEnabled != other.isCssColorEnabled) return false
     if (isEnabled != other.isEnabled) return false
     if (isHexDetectEnabled != other.isHexDetectEnabled) return false
-    if (isColorNamesDetectEnabled != other.isColorNamesDetectEnabled) return false
-    if (isTupleDetectEnabled != other.isTupleDetectEnabled) return false
-    if (isRgbaEnabled != other.isRgbaEnabled) return false
     if (isJavaColorCtorEnabled != other.isJavaColorCtorEnabled) return false
     if (isJavaColorMethodEnabled != other.isJavaColorMethodEnabled) return false
     if (isKotlinColorCtorEnabled != other.isKotlinColorCtorEnabled) return false
     if (isKotlinColorMethodEnabled != other.isKotlinColorMethodEnabled) return false
+    if (isMarkdownEnabled != other.isMarkdownEnabled) return false
+    if (isMarkupEnabled != other.isMarkupEnabled) return false
+    if (isRgbaEnabled != other.isRgbaEnabled) return false
     if (isRiderColorMethodEnabled != other.isRiderColorMethodEnabled) return false
     if (isRustColorCtorEnabled != other.isRustColorCtorEnabled) return false
     if (isTextEnabled != other.isTextEnabled) return false
-    if (isMarkdownEnabled != other.isMarkdownEnabled) return false
-    if (isMarkupEnabled != other.isMarkupEnabled) return false
-    if (isCssColorEnabled != other.isCssColorEnabled) return false
-    if (highlightingStyle != other.highlightingStyle) return false
+    if (isTupleDetectEnabled != other.isTupleDetectEnabled) return false
     if (version != other.version) return false
     return true
   }
@@ -303,20 +307,21 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   /** Hash code. */
   override fun hashCode(): Int {
     var result = isEnabled.hashCode()
-    result = 31 * result + isHexDetectEnabled.hashCode()
+    result = 31 * result + highlightingStyle.hashCode()
     result = 31 * result + isColorNamesDetectEnabled.hashCode()
-    result = 31 * result + isTupleDetectEnabled.hashCode()
-    result = 31 * result + isRgbaEnabled.hashCode()
+    result = 31 * result + isCssColorEnabled.hashCode()
+    result = 31 * result + isHexDetectEnabled.hashCode()
     result = 31 * result + isJavaColorCtorEnabled.hashCode()
     result = 31 * result + isJavaColorMethodEnabled.hashCode()
     result = 31 * result + isKotlinColorCtorEnabled.hashCode()
     result = 31 * result + isKotlinColorMethodEnabled.hashCode()
+    result = 31 * result + isMarkdownEnabled.hashCode()
+    result = 31 * result + isMarkupEnabled.hashCode()
+    result = 31 * result + isRgbaEnabled.hashCode()
     result = 31 * result + isRiderColorMethodEnabled.hashCode()
     result = 31 * result + isRustColorCtorEnabled.hashCode()
     result = 31 * result + isTextEnabled.hashCode()
-    result = 31 * result + isMarkdownEnabled.hashCode()
-    result = 31 * result + isMarkupEnabled.hashCode()
-    result = 31 * result + highlightingStyle.hashCode()
+    result = 31 * result + isTupleDetectEnabled.hashCode()
     result = 31 * result + version.hashCode()
     return result
   }
@@ -325,6 +330,6 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     @JvmStatic
     val instance: ColorHighlighterState by lazy { service() }
 
-    const val VERSION = "18.0.1"
+    const val VERSION = "20.0.0"
   }
 }
