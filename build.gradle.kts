@@ -108,6 +108,7 @@ dependencies {
       "org.jetbrains.plugins.yaml",
       "org.intellij.plugins.markdown",
       "org.jetbrains.kotlin",
+      "org.intellij.groovy",
     )
 
     plugins(

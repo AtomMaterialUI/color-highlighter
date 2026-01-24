@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2026 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,23 +23,36 @@
  *
  *
  */
-package com.mallowigi
 
-import com.intellij.openapi.components.Service
-import com.intellij.openapi.components.service
 
-@Service(Service.Level.APP)
-class FeatureLoader {
-  var isJavaEnabled: Boolean = false
-  var isKotlinEnabled: Boolean = false
-  var isGroovyEnabled: Boolean = false
-  var isScalaEnabled: Boolean = false
-  var isMarkdownEnabled: Boolean = false
-  var isRiderEnabled: Boolean = false
-  var isRustEnabled: Boolean = false
+import java.awt.*
 
-  companion object {
-    @JvmStatic
-    val instance: FeatureLoader by lazy { service() }
-  }
+class GroovyColors {
+    // Constructors
+    def black = new Color(0, 0, 0)
+    def white = new Color(255, 255, 255)
+    def red = new Color(255, 0, 0)
+    def green = new Color(0, 255, 0)
+    def blue = new Color(0, 0, 255)
+
+    // Methods/Properties
+    def staticRed = Color.RED
+    def staticBlue = Color.BLUE
+    def staticGreen = Color.GREEN
+    def staticBlack = Color.BLACK
+    def staticWhite = Color.WHITE
+
+    // Hex Colors (if enabled)
+    def hex1 = "#ff00ff"
+    def hex2 = "#00ffff"
+    def hex3 = "#ffff00"
+
+    // RGB/RGBA
+    def rgb = "rgb(100, 200, 50)"
+    def rgba = "rgba(100, 200, 50, 0.5)"
+
+    def test() {
+        def localColor = new Color(123, 123, 123)
+        println localColor
+    }
 }

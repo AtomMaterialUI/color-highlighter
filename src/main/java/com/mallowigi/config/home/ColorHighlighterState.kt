@@ -63,6 +63,10 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isScalaColorMethodEnabled: Boolean by property(true)
 
+    var isGroovyColorCtorEnabled: Boolean by property(true)
+
+    var isGroovyColorMethodEnabled: Boolean by property(true)
+
     var isRiderColorMethodEnabled: Boolean by property(true)
 
     var isRustColorCtorEnabled: Boolean by property(true)
@@ -144,6 +148,18 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     get() = state.isScalaColorMethodEnabled
     set(value) {
       state.isScalaColorMethodEnabled = value
+    }
+
+  var isGroovyColorCtorEnabled: Boolean
+    get() = state.isGroovyColorCtorEnabled
+    set(value) {
+      state.isGroovyColorCtorEnabled = value
+    }
+
+  var isGroovyColorMethodEnabled: Boolean
+    get() = state.isGroovyColorMethodEnabled
+    set(value) {
+      state.isGroovyColorMethodEnabled = value
     }
 
   var isRiderColorMethodEnabled: Boolean

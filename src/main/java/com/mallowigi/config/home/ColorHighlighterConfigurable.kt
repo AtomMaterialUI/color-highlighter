@@ -37,6 +37,7 @@ import com.mallowigi.ColorHighlighterBundle.message
 import com.mallowigi.ColorHighlighterIcons.Settings.ANDROID_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.COLOR_NAMES_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.CSS_ICON
+import com.mallowigi.ColorHighlighterIcons.Settings.GROOVY_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.HEX_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.JAVA_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.KOTLIN_ICON
@@ -62,6 +63,7 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
   private lateinit var main: DialogPanel
   private lateinit var javaPanel: CollapsibleRow
   private lateinit var kotlinPanel: CollapsibleRow
+  private lateinit var groovyPanel: CollapsibleRow
   private lateinit var scalaPanel: CollapsibleRow
   private lateinit var rustPanel: CollapsibleRow
   private lateinit var markdownPanel: CollapsibleRow
@@ -218,6 +220,28 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
         }.rowComment(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"))
       }
 
+      groovyPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.groovySeparator.text")) {
+        row {
+          icon(GROOVY_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.text"))
+            .bindSelected(settingsClone::isGroovyColorCtorEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorKtCtorCheckbox.toolTipText"))
+
+        row {
+          icon(GROOVY_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.text"))
+            .bindSelected(settingsClone::isGroovyColorMethodEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.colorKtMethodCheckbox.toolTipText"))
+      }
+
       scalaPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.scalaSeparator.text")) {
         row {
           icon(SCALA_ICON)
@@ -324,6 +348,9 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     if (!featureLoader.isKotlinEnabled) {
       kotlinPanel.visible(false)
     }
+    if (!featureLoader.isGroovyEnabled) {
+      groovyPanel.visible(false)
+    }
     if (!featureLoader.isRiderEnabled) {
       riderPanel.visible(false)
     }
@@ -361,4 +388,3 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
     const val ID = "com.mallowigi.config.home.ColorHighlighterConfigurable"
   }
 }
-

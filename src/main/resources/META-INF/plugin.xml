@@ -43,6 +43,7 @@
     <depends optional="true" config-file="withRuby.xml">org.jetbrains.plugins.ruby</depends>
     <depends optional="true" config-file="withProperties.xml">com.intellij.properties</depends>
     <depends optional="true" config-file="withKotlin.xml">org.jetbrains.kotlin</depends>
+    <depends optional="true" config-file="withGroovy.xml">org.intellij.groovy</depends>
     <depends optional="true" config-file="withPhp.xml">com.jetbrains.php</depends>
     <depends optional="true" config-file="withScala.xml">org.intellij.scala</depends>
     <depends optional="true" config-file="withPython.xml">com.intellij.modules.python</depends>
