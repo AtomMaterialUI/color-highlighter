@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.intellij.util.ArrayUtil
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.ColorSearchEngine
 import org.jetbrains.yaml.psi.YAMLFile
 import java.awt.Color
@@ -50,4 +51,14 @@ class YamlVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
+  override fun canAcceptMultiple(): Boolean = true
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
+    if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring")) {
+      return null
+    }
+
+    val value = element.text
+    return ColorSearchEngine.getAllColors(value, this)
+  }
 }

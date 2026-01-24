@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2022 Elior "Mallowigi" Boukhobza
+ * Copyright (c) 2015-2026 Elior "Mallowigi" Boukhobza
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,36 +24,8 @@
  *
  */
 
-package com.mallowigi.visitors
+package com.mallowigi.search
 
-import com.intellij.codeInsight.daemon.impl.HighlightVisitor
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.jetbrains.php.lang.psi.PhpFile
-import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
-import com.mallowigi.search.ColorMatch
-import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
-class PhpVisitor : ColorVisitor() {
-
-  override fun clone(): HighlightVisitor = PhpVisitor()
-
-  override fun suitableForFile(file: PsiFile): Boolean = file is PhpFile
-
-  override fun accept(element: PsiElement): Color? {
-    if (element !is StringLiteralExpression) return null
-
-    val value = element.contents
-    return ColorSearchEngine.getColor(value, this)
-  }
-
-  override fun canAcceptMultiple(): Boolean = true
-
-  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
-    if (element !is StringLiteralExpression) return null
-
-    val value = element.contents
-    return ColorSearchEngine.getAllColors(value, this)
-  }
-}
+data class ColorMatch(val range: IntRange, val color: Color)

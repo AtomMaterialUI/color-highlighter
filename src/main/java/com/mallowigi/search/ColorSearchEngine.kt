@@ -33,12 +33,13 @@ import java.util.regex.Pattern
 
 object ColorSearchEngine {
   // region COLOR_PATTERNS
-  /** List of color patterns. Currently unused. */
-  @Suppress("unused")
   private val COLOR_PATTERNS = listOf(
     Pattern.compile(
-      "((#\\p{XDigit}{6}\\b)|(#\\p{XDigit}{3}\\b))"
-    ),  // #123456 or #333
+      "((#?\\p{XDigit}{8}\\b)|(#?\\p{XDigit}{6}\\b)|(#?\\p{XDigit}{3}\\b))"
+    ),  // #12345678, #123456 or #333
+    Pattern.compile(
+      "\\b((0[xX])\\p{XDigit}{8}\\b|(0[xX])\\p{XDigit}{6}\\b)"
+    ),  // 0x12345678 or 0x123456
     Pattern.compile(
       "\\b((rgb\\s*\\(\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*\\))|(rgb\\s*\\(\\s*\\p{Digit}{1," +
         "3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*\\)))"
@@ -95,11 +96,10 @@ object ColorSearchEngine {
   // endregion
 
   /**
-   * Try to parse a color using the provided formats
+   * Try to parse a color using the provided formats.
    *
    * @param text text to parse
-   * @param visitor a Language Visitor to provide additional formats (ex:
-   *     Color() for Java/Kotlin)
+   * @param visitor a Language Visitor to provide additional formats (ex: Color() for Java/Kotlin)
    */
   fun getColor(text: String, visitor: ColorVisitor): Color? = try {
     val normalizedText = text.replace("\"".toRegex(), "").replace("'".toRegex(), "")
@@ -108,5 +108,32 @@ object ColorSearchEngine {
     null
   }
 
-}
+  /**
+   * Try to find colors in the given text.
+   *
+   * @param text text to parse
+   * @param visitor a Language Visitor to provide additional formats (ex: Color() for Java/Kotlin)
+   */
+  fun getAllColors(text: String, visitor: ColorVisitor): List<ColorMatch> {
+    val matches = mutableListOf<ColorMatch>()
+    val normalizedText = text.replace("\"".toRegex(), " ").replace("'".toRegex(), " ")
 
+    for (pattern in COLOR_PATTERNS) {
+      val matcher = pattern.matcher(normalizedText)
+      while (matcher.find()) {
+        val group = matcher.group()
+        val color = try {
+          ColorParserFactory.getParser(group, visitor).parseColor(group)
+        } catch (e: Exception) {
+          null
+        }
+
+        if (color != null) {
+          matches.add(ColorMatch(matcher.start()..matcher.end(), color))
+        }
+      }
+    }
+    return matches
+  }
+
+}

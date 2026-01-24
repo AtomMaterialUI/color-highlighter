@@ -220,7 +220,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     ApplicationManager.getApplication().invokeLater {
       val openProjects: Array<Project> = ProjectManager.getInstance().openProjects
       for (project in openProjects) {
-        DaemonCodeAnalyzer.getInstance(project)?.restart()
+        DaemonCodeAnalyzer.getInstance(project)?.restart(this)
       }
     }
   }

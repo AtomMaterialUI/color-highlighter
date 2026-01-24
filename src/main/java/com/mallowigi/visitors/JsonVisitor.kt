@@ -31,6 +31,7 @@ import com.intellij.json.psi.JsonFile
 import com.intellij.json.psi.JsonStringLiteral
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
@@ -44,5 +45,15 @@ class JsonVisitor : ColorVisitor() {
     if (element !is JsonStringLiteral) return null
 
     return ColorSearchEngine.getColor(element.text, this)
+  }
+
+  override fun canAcceptMultiple(): Boolean {
+    return true
+  }
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
+    if (element !is JsonStringLiteral) return null
+
+    return ColorSearchEngine.getAllColors(element.text, this)
   }
 }

@@ -31,6 +31,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
 import com.mallowigi.config.home.ColorHighlighterState
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.ColorPrefixes.COLOR_FROM_ARGB
 import com.mallowigi.search.ColorSearchEngine
 import com.mallowigi.search.parsers.ColorParser
@@ -78,4 +79,13 @@ class RiderVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
+  override fun canAcceptMultiple(): Boolean = true
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
+    val type = PsiUtilCore.getElementType(element).toString()
+    if (type !in allowedTypes) return null
+
+    val value = element.text
+    return ColorSearchEngine.getAllColors(value, this)
+  }
 }

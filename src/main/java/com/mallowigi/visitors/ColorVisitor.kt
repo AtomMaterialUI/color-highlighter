@@ -31,20 +31,18 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.config.home.ColorHighlighterState.Companion.instance
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
 
-/**
- * Color visitor: This is the class that will colorize the texts
- * representing colors.
- */
+/** Color visitor: This is the class that will colorize the texts representing colors. */
 abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   private var highlightInfoHolder: HighlightInfoHolder? = null
   internal val config = instance
 
   /**
-   * Highlight the element with the given color
+   * Highlight the element with the given color.
    *
    * @param element element representing a color
    * @param color color
@@ -63,7 +61,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   }
 
   /**
-   * Analyze: runs the annotate action on the file
+   * Analyze: runs the annotate action on the file.
    *
    * @param file the file to annotate
    * @param updateWholeFile whether to update the whole file
@@ -71,10 +69,12 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
    * @param action action to run
    * @return
    */
-  override fun analyze(file: PsiFile,
-                       updateWholeFile: Boolean,
-                       holder: HighlightInfoHolder,
-                       action: Runnable): Boolean {
+  override fun analyze(
+    file: PsiFile,
+    updateWholeFile: Boolean,
+    holder: HighlightInfoHolder,
+    action: Runnable
+  ): Boolean {
     highlightInfoHolder = holder
     try {
       action.run()
@@ -85,8 +85,23 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   }
 
   override fun visit(element: PsiElement) {
-    val color = this.accept(element)
-    color?.let { highlight(element, it) }
+    when {
+      this.canAcceptMultiple() -> {
+        val colors = this.acceptMultiple(element)
+        colors?.forEach { match ->
+          val absoluteRange = IntRange(
+            element.textRange.startOffset + match.range.first,
+            element.textRange.startOffset + match.range.last
+          )
+          highlight(match.color, absoluteRange)
+        }
+      }
+
+      else                     -> {
+        val color = this.accept(element)
+        color?.let { highlight(element, it) }
+      }
+    }
   }
 
   /**
@@ -104,4 +119,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   override fun accept(element: PsiElement): Color? = null
 
+  override fun canAcceptMultiple(): Boolean = false
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? = null
 }

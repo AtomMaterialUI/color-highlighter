@@ -30,6 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 import java.util.*
@@ -46,5 +47,14 @@ class GoVisitor : ColorVisitor() {
 
     val value = element.text
     return ColorSearchEngine.getColor(value, this)
+  }
+
+  override fun canAcceptMultiple(): Boolean = true
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
+    if ("STRING_LITERAL" != PsiUtilCore.getElementType(element).toString()) return null
+
+    val value = element.text
+    return ColorSearchEngine.getAllColors(value, this)
   }
 }

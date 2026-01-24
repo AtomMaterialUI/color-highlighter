@@ -27,26 +27,25 @@
 package com.mallowigi.visitors
 
 import com.intellij.psi.PsiElement
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
 
 interface LangVisitor {
   fun accept(element: PsiElement): Color? = null
 
-  /**
-   * Returns a suitable parser for the given text (ex: CtorParser if the text is a Color() constructor)
-   */
+  /** Returns a suitable parser for the given text (ex: CtorParser if the text is a Color() constructor). */
   fun getParser(text: String): ColorParser?
 
-  /**
-   * Checks if the visitor should parse the text for a parser
-   *
-   */
+  /** Checks if the visitor should parse the text for a parser. */
   fun shouldParseText(text: String): Boolean
 
-  /**
-   * Checks if the visitor should visit at all
-   *
-   */
+  /** Checks if the visitor should visit at all. */
   fun shouldVisit(): Boolean
+
+  /** Returns a list of color matches for the given element if the visitor can accept multiple colors. */
+  fun acceptMultiple(element: PsiElement): List<ColorMatch>?
+
+  /** Returns true if the visitor can accept multiple colors. */
+  fun canAcceptMultiple(): Boolean
 }

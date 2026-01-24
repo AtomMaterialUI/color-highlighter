@@ -30,6 +30,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
+import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.ColorSearchEngine
 import java.awt.Color
 
@@ -55,6 +56,17 @@ class SvelteVisitor : ColorVisitor() {
     val value = element.text
     if (value !is String) return null
     return ColorSearchEngine.getColor(value, this)
+  }
+
+  override fun canAcceptMultiple(): Boolean = true
+
+  override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
+    val type = PsiUtilCore.getElementType(element).toString()
+    if (type !in allowedTypes) return null
+
+    val value = element.text
+    if (value !is String) return null
+    return ColorSearchEngine.getAllColors(value, this)
   }
 
   override fun clone(): HighlightVisitor = SvelteVisitor()
