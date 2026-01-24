@@ -25,6 +25,7 @@
  */
 
 
+import javax.swing.plaf.ColorUIResource
 import java.awt.*
 
 class GroovyColors {
@@ -41,6 +42,8 @@ class GroovyColors {
     def staticGreen = Color.GREEN
     def staticBlack = Color.BLACK
     def staticWhite = Color.WHITE
+
+    def colorUI = new ColorUIResource(0xff0000)
 
     // Hex Colors (if enabled)
     def hex1 = "#ff00ff"

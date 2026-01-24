@@ -44,8 +44,8 @@ class GroovyVisitor : ColorVisitor() {
   private val allowedTypes = listOf(
     "Integer",
     "String",
-    "new expression",
-    "reference expression"
+    "NEW_EXPRESSION",
+    "REFERENCE_EXPRESSION"
   )
 
   override fun clone(): HighlightVisitor = GroovyVisitor()
