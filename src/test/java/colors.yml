@@ -2,6 +2,8 @@
 colors:
   colors:
     color:
+      - "-name": this is very slow facade
+        "-code": #ff0000
       - "-name": aliceblue
         "-code": f0f8ff
       - "-name": alizarin

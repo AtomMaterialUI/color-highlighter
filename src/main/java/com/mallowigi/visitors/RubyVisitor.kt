@@ -48,9 +48,7 @@ class RubyVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
-  override fun canAcceptMultiple(): Boolean {
-    return true
-  }
+  override fun canAcceptMultiple(): Boolean = false
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     if ("string content" != PsiUtilCore.getElementType(element).toString()) return null

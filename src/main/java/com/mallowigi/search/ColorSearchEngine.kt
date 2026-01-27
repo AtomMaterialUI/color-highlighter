@@ -35,25 +35,25 @@ object ColorSearchEngine {
   // region COLOR_PATTERNS
   private val COLOR_PATTERNS = listOf(
     Pattern.compile(
-      "((#?\\p{XDigit}{8}\\b)|(#?\\p{XDigit}{6}\\b)|(#?\\p{XDigit}{3}\\b))"
+      "\\b((#?\\p{XDigit}{8}\\b)|(#?\\p{XDigit}{6}\\b)|(#?\\p{XDigit}{3}\\b))"
     ),  // #12345678, #123456 or #333
     Pattern.compile(
       "\\b((0[xX])\\p{XDigit}{8}\\b|(0[xX])\\p{XDigit}{6}\\b)"
     ),  // 0x12345678 or 0x123456
     Pattern.compile(
-      "\\b((rgb\\s*\\(\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*\\))|(rgb\\s*\\(\\s*\\p{Digit}{1," +
-        "3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*\\)))"
+      "\\b((rgb\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*\\))|(rgb\\s*\\(\\s*\\d{1," +
+        "3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*\\)))"
     ),  // rgb(128, 128, 128)
     Pattern.compile(
-      "\\b((rgba\\s*\\(\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}\\s*,\\s*[0-9.]{1,3}\\s*\\))|" +
+      "\\b((rgba\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*[0-9.]{1,3}\\s*\\))|" +
         "(rgba\\s*\\" +
-        "(\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*[0-9.]{1,3}\\s*\\)))"
+        "(\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*[0-9.]{1,3}\\s*\\)))"
     ),  // rgba(128, 128, 128, 0)
     Pattern.compile(
-      "\\b(hsl\\s*\\(\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*\\))"
+      "\\b(hsl\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*\\))"
     ),  // hsl(0, 12, 120)
     Pattern.compile(
-      "\\b(hsla\\s*\\(\\s*\\p{Digit}{1,3}\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*\\p{Digit}{1,3}%\\s*,\\s*[0-9.]{1,3}\\s*\\))"
+      "\\b(hsla\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*[0-9.]{1,3}\\s*\\))"
     ),  // hsla(0, 12, 120, 1)
     Pattern.compile(
       "\\b(Color\\s*\\(\\s*(0[xX])?[0-9a-fA-F]+\\s*\\))"

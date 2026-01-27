@@ -49,7 +49,7 @@ class GoVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
-  override fun canAcceptMultiple(): Boolean = true
+  override fun canAcceptMultiple(): Boolean = false
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     if ("STRING_LITERAL" != PsiUtilCore.getElementType(element).toString()) return null

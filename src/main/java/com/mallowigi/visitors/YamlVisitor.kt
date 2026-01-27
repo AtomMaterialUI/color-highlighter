@@ -51,7 +51,7 @@ class YamlVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
-  override fun canAcceptMultiple(): Boolean = true
+  override fun canAcceptMultiple(): Boolean = false
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     if (!ArrayUtil.contains(PsiUtilCore.getElementType(element).toString(), "text", "scalar string", "comment", "scalar dstring")) {

@@ -10,6 +10,12 @@
 
 ### Bump
 
+## 19.0.1
+
+### Fixes
+
+- Fix issue where the color highlighting is too greedy
+
 ## 19.0.0
 
 ### Features

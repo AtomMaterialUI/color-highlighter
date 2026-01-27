@@ -78,7 +78,7 @@ class RiderVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(value, this)
   }
 
-  override fun canAcceptMultiple(): Boolean = true
+  override fun canAcceptMultiple(): Boolean = false
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     val type = PsiUtilCore.getElementType(element).toString()

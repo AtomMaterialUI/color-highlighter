@@ -47,9 +47,7 @@ class JsonVisitor : ColorVisitor() {
     return ColorSearchEngine.getColor(element.text, this)
   }
 
-  override fun canAcceptMultiple(): Boolean {
-    return true
-  }
+  override fun canAcceptMultiple(): Boolean = true
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     if (element !is JsonStringLiteral) return null
