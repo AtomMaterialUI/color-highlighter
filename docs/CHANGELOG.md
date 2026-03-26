@@ -10,6 +10,12 @@
 
 ### Bump
 
+## 19.1.0
+
+### Fixes
+
+- Support for 2026.1
+
 ## 19.0.1
 
 ### Fixes
