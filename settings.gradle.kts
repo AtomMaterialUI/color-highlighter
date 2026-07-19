@@ -28,11 +28,8 @@ rootProject.name = "color-highlighter"
 
 pluginManagement {
   repositories {
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
+    mavenCentral()
+    maven("https://cache-redirector.jetbrains.com/plugins.gradle.org/m2/")
     gradlePluginPortal()
   }
-}
-
-plugins {
-  id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
