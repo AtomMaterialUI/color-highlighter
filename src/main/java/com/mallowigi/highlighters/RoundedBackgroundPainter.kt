@@ -1,3 +1,29 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015-2023 Elior "Mallowigi" Boukhobza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ *
+ */
+
 package com.mallowigi.highlighters
 
 import com.mallowigi.config.home.ColorHighlighterState
@@ -48,92 +74,68 @@ object RoundedBackgroundPainter {
 
     editors.forEach { editor ->
       // First we remove all highlighters
-      clear(editor, visitorKey)
+      val highlightersMap = editor.getUserData(editorHighlightsKey) ?: mutableMapOf()
+      val highlighters = highlightersMap.remove(visitorKey) ?: mutableListOf()
+      val markupModel = editor.markupModel
 
-      if (highlights.isEmpty()) {
-        editor.contentComponent.repaint()
-        return@forEach
+      highlighters.forEach { highlighter ->
+        markupModel.removeHighlighter(highlighter)
       }
 
-      // Then we recreate the highlighters, avoiding duplicates
-      val created = highlights
-        .distinctBy { "${it.range.first}:${it.range.last}:${it.color.rgb}:${it.paintStyle}" }
-        .mapNotNull { addHighlighter(editor, it, arcRadius) }
-        .toMutableList()
+      // Then we add the new ones
+      val newHighlighters = mutableListOf<RangeHighlighter>()
 
-      // Finally we save the highlighters in the editor using the key. This will allow us to remove them later when the file is re-annotated.
-      // The editors are stored in a map whose key is the visitor's class name,
-      // so that each visitor can manage its own highlighters independently.
-      if (created.isNotEmpty()) {
-        val all = editor.getUserData(editorHighlightsKey) ?: mutableMapOf()
-        all[visitorKey] = created
-        editor.putUserData(editorHighlightsKey, all)
+      highlights.forEach { highlight ->
+        val highlighter = markupModel.addRangeHighlighter(
+          /* startOffset = */ highlight.range.first,
+          /* endOffset = */ highlight.range.last,
+          /* layer = */ HighlighterLayer.SELECTION - 1,
+          /* textAttributes = */ null,
+          /* targetArea = */ HighlighterTargetArea.EXACT_RANGE
+        )
+        // Install our custom renderer
+        highlighter.customRenderer = RoundedRangeRenderer(
+          color = highlight.color,
+          paintStyle = highlight.paintStyle,
+          arcRadius = arcRadius
+        )
+        newHighlighters.add(highlighter)
       }
-      editor.contentComponent.repaint()
+
+      // Store the highlighters for later removal
+      highlightersMap[visitorKey] = newHighlighters
+      editor.putUserData(editorHighlightsKey, highlightersMap)
     }
   }
 
+  /**
+   * Clears all highlighters for the given visitor key
+   */
   fun clear(file: PsiFile, visitorKey: String) {
     val document = PsiDocumentManager.getInstance(file.project).getDocument(file) ?: return
-    EditorFactory.getInstance().allEditors
-      .filter { editor -> editor.project == file.project && editor.document == document }
-      .forEach { editor -> clear(editor, visitorKey) }
-  }
+    val editors = EditorFactory.getInstance().allEditors.filter { editor ->
+      editor.project == file.project && editor.document == document
+    }
 
-  /**
-   * Clears the editor's saved highlighters for the given visitor key.
-   */
-  private fun clear(editor: Editor, visitorKey: String) {
-    val all = editor.getUserData(editorHighlightsKey) ?: return
+    editors.forEach { editor ->
+      val highlightersMap = editor.getUserData(editorHighlightsKey) ?: return@forEach
+      val highlighters = highlightersMap.remove(visitorKey) ?: return@forEach
 
-    all.remove(visitorKey)?.forEach { highlighter ->
-      if (highlighter.isValid) {
-        editor.markupModel.removeHighlighter(highlighter)
+      val markupModel = editor.markupModel
+      highlighters.forEach { highlighter ->
+        markupModel.removeHighlighter(highlighter)
       }
     }
-
-    if (all.isEmpty()) {
-      editor.putUserData(editorHighlightsKey, null)
-    }
-  }
-
-  /**
-   * Adds a range highlighter and give it the custom renderer to use rounded backgrounds
-   */
-  private fun addHighlighter(editor: Editor, highlight: RoundedHighlight, arcRadius: Int): RangeHighlighter? {
-    val start = highlight.range.first
-    val end = when {
-      highlight.range.last > start -> highlight.range.last
-      else                         -> start + 1
-    }
-
-    if (start !in 0..<end || end > editor.document.textLength) return null
-
-    val rangeHighlighter = editor.markupModel.addRangeHighlighter(
-      start,
-      end,
-      HighlighterLayer.SELECTION - 1,
-      null,
-      HighlighterTargetArea.EXACT_RANGE
-    )
-    rangeHighlighter.customRenderer = RoundedRangeRenderer(
-      color = highlight.color,
-      paintStyle = highlight.paintStyle,
-      arcRadius = arcRadius
-    )
-    return rangeHighlighter
   }
 }
 
-/**
- * A renderer that highlights a range in the editor with rounded borders.
- */
 private class RoundedRangeRenderer(
   private val color: Color,
   private val paintStyle: RoundedPaintStyle,
   arcRadius: Int
 ) : CustomHighlighterRenderer {
   private val safeArcRadius = arcRadius.coerceIn(MIN_ROUNDED_ARC_RADIUS, MAX_ROUNDED_ARC_RADIUS)
+  private val painter = StylePainterFactory.getPainter(paintStyle)
 
   override fun paint(editor: Editor, highlighter: RangeHighlighter, g: Graphics) {
     if (highlighter.startOffset >= highlighter.endOffset) return
@@ -173,52 +175,7 @@ private class RoundedRangeRenderer(
         val height = max(1, lineHeight - 2)
         val arc = min(height, safeArcRadius * 2)
 
-        when (paintStyle) {
-          RoundedPaintStyle.BACKGROUND -> {
-            g2.color = mixedColor
-            g2.fillRoundRect(x, y, width, height, arc, arc)
-            g2.color = color
-            g2.drawRoundRect(x, y, width, height, arc, arc)
-          }
-
-          RoundedPaintStyle.BORDER -> {
-            g2.color = color
-            g2.drawRoundRect(x, y, width, height, arc, arc)
-          }
-
-          RoundedPaintStyle.UNDERLINE_PILL -> {
-            val underlineHeight = max(2, height / 5)
-            val underlineY = y + height - underlineHeight
-            val underlineArc = min(underlineHeight, arc)
-
-            g2.color = mixedColor
-            g2.fillRoundRect(x, underlineY, width, underlineHeight, underlineArc, underlineArc)
-          }
-
-          RoundedPaintStyle.GLOW -> {
-            // Draw 3 concentric filled rounded rectangles with decreasing alpha for glow effect
-            val red = (color.red * 0.8).toInt()
-            val green = (color.green * 0.8).toInt()
-            val blue = (color.blue * 0.8).toInt()
-
-            // Outer glow (20% alpha) - filled
-            val glowOuter = Color(red, green, blue, (color.alpha * 0.2).toInt())
-            g2.color = glowOuter
-            val outerArc = arc + 4
-            g2.drawRoundRect(x - 3, y - 3, width + 6, height + 6, outerArc, outerArc)
-
-            // Middle glow (40% alpha) - filled
-            val glowMiddle = Color(red, green, blue, (color.alpha * 0.4).toInt())
-            g2.color = glowMiddle
-            val middleArc = arc + 2
-            g2.drawRoundRect(x - 2, y - 2, width + 4, height + 4, middleArc, middleArc)
-
-            // Inner outline (full opacity)
-            val glowInner = Color(red, green, blue, (color.alpha * 0.6).toInt())
-            g2.color = glowInner
-            g2.drawRoundRect(x-1, y-1, width+2, height+2, arc, arc)
-          }
-        }
+        painter.paint(g2, x, y, width, height, arc, color, mixedColor)
       }
     } finally {
       g2.dispose()
