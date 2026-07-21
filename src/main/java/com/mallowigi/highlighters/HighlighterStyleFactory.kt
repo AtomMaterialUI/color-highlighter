@@ -37,6 +37,7 @@ class HighlighterStyleFactory {
       HighlightingStyles.BACKGROUND -> BackgroundHighlighter()
       HighlightingStyles.BORDER -> BorderHighlighter()
       HighlightingStyles.UNDERLINE_PILL -> UnderlinePillHighlighter()
+      HighlightingStyles.GLOW -> GlowHighlighter()
       HighlightingStyles.UNDERLINE -> UnderlineHighlighter()
       HighlightingStyles.FOREGROUND -> ForegroundHighlighter()
       HighlightingStyles.INLINE -> InlineHighlighter()

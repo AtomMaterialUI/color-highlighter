@@ -45,7 +45,12 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   private var highlightInfoHolder: HighlightInfoHolder? = null
   private val roundedHighlights = mutableListOf<RoundedHighlight>()
   internal val config = instance
-  private val roundedStyles = setOf(HighlightingStyles.BACKGROUND, HighlightingStyles.BORDER, HighlightingStyles.UNDERLINE_PILL)
+  private val roundedStyles = setOf(
+    HighlightingStyles.BACKGROUND,
+    HighlightingStyles.BORDER,
+    HighlightingStyles.UNDERLINE_PILL,
+    HighlightingStyles.GLOW
+  )
 
   /**
    * Highlight the element with the given color.
@@ -169,6 +174,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
     HighlightingStyles.BACKGROUND -> RoundedPaintStyle.BACKGROUND
     HighlightingStyles.BORDER -> RoundedPaintStyle.BORDER
     HighlightingStyles.UNDERLINE_PILL -> RoundedPaintStyle.UNDERLINE_PILL
+    HighlightingStyles.GLOW -> RoundedPaintStyle.GLOW
     else -> RoundedPaintStyle.BACKGROUND
   }
 }
