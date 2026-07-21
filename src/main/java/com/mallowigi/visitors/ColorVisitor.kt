@@ -44,6 +44,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   private var highlightInfoHolder: HighlightInfoHolder? = null
   private val roundedHighlights = mutableListOf<RoundedHighlight>()
   internal val config = instance
+  private val roundedStyles = listOf(HighlightingStyles.BACKGROUND, HighlightingStyles.BORDER)
 
   /**
    * Highlight the element with the given color.
@@ -55,10 +56,12 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
     if (!instance.isEnabled) return
 
     val textRange = element?.textRange
-    if (instance.highlightingStyle == HighlightingStyles.BACKGROUND && textRange != null) {
+    val style = instance.highlightingStyle
+    if (style in roundedStyles && textRange != null) {
       roundedHighlights += RoundedHighlight(
         range = IntRange(textRange.startOffset, textRange.endOffset),
-        color = color
+        color = color,
+        fillBackground = style == HighlightingStyles.BACKGROUND
       )
     }
 
@@ -68,8 +71,13 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   fun highlight(color: Color, range: IntRange) {
     if (!instance.isEnabled) return
-    if (instance.highlightingStyle == HighlightingStyles.BACKGROUND) {
-      roundedHighlights += RoundedHighlight(range = range, color = color)
+    val style = instance.highlightingStyle
+    if (style in roundedStyles) {
+      roundedHighlights += RoundedHighlight(
+        range = range,
+        color = color,
+        fillBackground = style == HighlightingStyles.BACKGROUND
+      )
     }
     assert(highlightInfoHolder != null)
     highlightInfoHolder!!.add(ColorHighlighter.highlightColor(range, color))
@@ -97,11 +105,13 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
     try {
       action.run()
     } finally {
-      if (instance.isEnabled && instance.highlightingStyle == HighlightingStyles.BACKGROUND) {
+      val style = instance.highlightingStyle
+      if (instance.isEnabled && style in roundedStyles) {
         RoundedBackgroundPainter.apply(
           file = file,
           visitorKey = visitorKey,
-          highlights = roundedHighlights
+          highlights = roundedHighlights,
+          arcRadius = instance.roundedArcRadius
         )
       } else {
         RoundedBackgroundPainter.clear(

@@ -81,6 +81,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var highlightingStyle: HighlightingStyles by enum(HighlightingStyles.BACKGROUND)
 
+    var roundedArcRadius: Int by property(DEFAULT_ROUNDED_ARC_RADIUS)
+
     var version: String? by string(VERSION)
   }
 
@@ -204,6 +206,12 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
       state.highlightingStyle = value
     }
 
+  var roundedArcRadius: Int
+    get() = state.roundedArcRadius.coerceIn(MIN_ROUNDED_ARC_RADIUS, MAX_ROUNDED_ARC_RADIUS)
+    set(value) {
+      state.roundedArcRadius = value.coerceIn(MIN_ROUNDED_ARC_RADIUS, MAX_ROUNDED_ARC_RADIUS)
+    }
+
   var version: String?
     get() = state.version
     set(value) {
@@ -212,6 +220,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
   fun resetSettings() {
     this.highlightingStyle = HighlightingStyles.BACKGROUND
+    this.roundedArcRadius = DEFAULT_ROUNDED_ARC_RADIUS
     this.isColorNamesDetectEnabled = true
     this.isCssColorEnabled = true
     this.isCssColorEnabled = true
@@ -250,6 +259,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   fun clone(): ColorHighlighterState {
     val clone = ColorHighlighterState()
     clone.highlightingStyle = this.highlightingStyle
+    clone.roundedArcRadius = this.roundedArcRadius
     clone.isColorNamesDetectEnabled = this.isColorNamesDetectEnabled
     clone.isCssColorEnabled = this.isCssColorEnabled
     clone.isCssColorEnabled = this.isCssColorEnabled
@@ -272,6 +282,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
   fun apply(state: ColorHighlighterState) {
     this.highlightingStyle = state.highlightingStyle
+    this.roundedArcRadius = state.roundedArcRadius
     this.isColorNamesDetectEnabled = state.isColorNamesDetectEnabled
     this.isCssColorEnabled = state.isCssColorEnabled
     this.isEnabled = state.isEnabled
@@ -300,6 +311,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     other as ColorHighlighterState
 
     if (highlightingStyle != other.highlightingStyle) return false
+    if (roundedArcRadius != other.roundedArcRadius) return false
     if (isColorNamesDetectEnabled != other.isColorNamesDetectEnabled) return false
     if (isCssColorEnabled != other.isCssColorEnabled) return false
     if (isCssColorEnabled != other.isCssColorEnabled) return false
@@ -324,6 +336,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   override fun hashCode(): Int {
     var result = isEnabled.hashCode()
     result = 31 * result + highlightingStyle.hashCode()
+    result = 31 * result + roundedArcRadius
     result = 31 * result + isColorNamesDetectEnabled.hashCode()
     result = 31 * result + isCssColorEnabled.hashCode()
     result = 31 * result + isHexDetectEnabled.hashCode()
@@ -346,6 +359,9 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     @JvmStatic
     val instance: ColorHighlighterState by lazy { service() }
 
+    const val MIN_ROUNDED_ARC_RADIUS = 1
+    const val MAX_ROUNDED_ARC_RADIUS = 10
+    const val DEFAULT_ROUNDED_ARC_RADIUS = 6
     const val VERSION = "20.0.0"
   }
 }

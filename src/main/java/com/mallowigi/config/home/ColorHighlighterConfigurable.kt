@@ -50,6 +50,8 @@ import com.mallowigi.ColorHighlighterIcons.Settings.TEXT_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.TUPLE_ICON
 import com.mallowigi.ColorHighlighterIcons.Settings.XCODE_ICON
 import com.mallowigi.FeatureLoader
+import com.mallowigi.config.home.ColorHighlighterState.Companion.MAX_ROUNDED_ARC_RADIUS
+import com.mallowigi.config.home.ColorHighlighterState.Companion.MIN_ROUNDED_ARC_RADIUS
 import com.mallowigi.inlay.refreshInlayHints
 import org.jetbrains.annotations.NonNls
 import javax.swing.DefaultComboBoxModel
@@ -150,6 +152,17 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
               settingsClone.highlightingStyle = it ?: HighlightingStyles.BACKGROUND
             }
         }.rowComment(message("ColorHighlighterSettingsForm.highlightingStyle.toolTipText"))
+
+        row(message("ColorHighlighterSettingsForm.roundedArcRadius.text")) {
+          slider(
+            min = MIN_ROUNDED_ARC_RADIUS,
+            max = MAX_ROUNDED_ARC_RADIUS,
+            minorTickSpacing = 1,
+            majorTickSpacing = 1
+          )
+            .bindValue(settingsClone::roundedArcRadius)
+            .enabledIf(enabledCheckbox.selected)
+        }.rowComment(message("ColorHighlighterSettingsForm.roundedArcRadius.toolTipText"))
       }
 
       markdownPanel = collapsibleGroup(message("ColorHighlighterSettingsForm.markdownSeparator.text")) {

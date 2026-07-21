@@ -1,5 +1,6 @@
 package com.mallowigi.highlighters
 
+import com.mallowigi.config.home.ColorHighlighterState
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.editor.markup.CustomHighlighterRenderer
@@ -10,6 +11,8 @@ import com.intellij.openapi.util.Key
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFile
 import com.intellij.ui.ColorUtil
+import com.mallowigi.config.home.ColorHighlighterState.Companion.MAX_ROUNDED_ARC_RADIUS
+import com.mallowigi.config.home.ColorHighlighterState.Companion.MIN_ROUNDED_ARC_RADIUS
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -17,7 +20,11 @@ import java.awt.RenderingHints
 import kotlin.math.max
 import kotlin.math.min
 
-data class RoundedHighlight(val range: IntRange, val color: Color)
+data class RoundedHighlight(
+  val range: IntRange,
+  val color: Color,
+  val fillBackground: Boolean
+)
 
 object RoundedBackgroundPainter {
   private val editorHighlightsKey =
@@ -26,7 +33,7 @@ object RoundedBackgroundPainter {
   /**
    * Applies the highlights to the editors
    */
-  fun apply(file: PsiFile, visitorKey: String, highlights: List<RoundedHighlight>) {
+  fun apply(file: PsiFile, visitorKey: String, highlights: List<RoundedHighlight>, arcRadius: Int) {
     val document = PsiDocumentManager.getInstance(file.project).getDocument(file) ?: return
     val editors = EditorFactory.getInstance().allEditors.filter { editor ->
       editor.project == file.project && editor.document == document
@@ -43,8 +50,8 @@ object RoundedBackgroundPainter {
 
       // Then we recreate the highlighters, avoiding duplicates
       val created = highlights
-        .distinctBy { "${it.range.first}:${it.range.last}:${it.color.rgb}" }
-        .mapNotNull { addHighlighter(editor, it) }
+        .distinctBy { "${it.range.first}:${it.range.last}:${it.color.rgb}:${it.fillBackground}" }
+        .mapNotNull { addHighlighter(editor, it, arcRadius) }
         .toMutableList()
 
       // Finally we save the highlighters in the editor using the key. This will allow us to remove them later when the file is re-annotated.
@@ -86,7 +93,7 @@ object RoundedBackgroundPainter {
   /**
    * Adds a range highlighter and give it the custom renderer to use rounded backgrounds
    */
-  private fun addHighlighter(editor: Editor, highlight: RoundedHighlight): RangeHighlighter? {
+  private fun addHighlighter(editor: Editor, highlight: RoundedHighlight, arcRadius: Int): RangeHighlighter? {
     val start = highlight.range.first
     val end = when {
       highlight.range.last > start -> highlight.range.last
@@ -102,7 +109,11 @@ object RoundedBackgroundPainter {
       null,
       HighlighterTargetArea.EXACT_RANGE
     )
-    rangeHighlighter.customRenderer = RoundedRangeRenderer(highlight.color)
+    rangeHighlighter.customRenderer = RoundedRangeRenderer(
+      color = highlight.color,
+      fillBackground = highlight.fillBackground,
+      arcRadius = arcRadius
+    )
     return rangeHighlighter
   }
 }
@@ -110,7 +121,13 @@ object RoundedBackgroundPainter {
 /**
  * A renderer that highlights a range in the editor with rounded borders.
  */
-private class RoundedRangeRenderer(private val color: Color) : CustomHighlighterRenderer {
+private class RoundedRangeRenderer(
+  private val color: Color,
+  private val fillBackground: Boolean,
+  arcRadius: Int
+) : CustomHighlighterRenderer {
+  private val safeArcRadius = arcRadius.coerceIn(MIN_ROUNDED_ARC_RADIUS, MAX_ROUNDED_ARC_RADIUS)
+
   override fun paint(editor: Editor, highlighter: RangeHighlighter, g: Graphics) {
     if (highlighter.startOffset >= highlighter.endOffset) return
 
@@ -125,8 +142,6 @@ private class RoundedRangeRenderer(private val color: Color) : CustomHighlighter
         /* balance = */ color.alpha / 255.0
       )
       val lineHeight = editor.lineHeight
-      // computes an arc proportional to the line height, so that they appear rounded
-      val arc = max(4, (lineHeight * 0.65).toInt())
 
       val startLine = editor.document.getLineNumber(highlighter.startOffset)
       val endLine = editor.document.getLineNumber(highlighter.endOffset)
@@ -149,9 +164,12 @@ private class RoundedRangeRenderer(private val color: Color) : CustomHighlighter
         val width = max(1, endPoint.x - x)
         val y = startPoint.y + 1
         val height = max(1, lineHeight - 2)
+        val arc = min(height, safeArcRadius * 2)
 
-        g2.color = mixedColor
-        g2.fillRoundRect(x, y, width, height, arc, arc)
+        if (fillBackground) {
+          g2.color = mixedColor
+          g2.fillRoundRect(x, y, width, height, arc, arc)
+        }
         g2.color = color
         g2.drawRoundRect(x, y, width, height, arc, arc)
       }
