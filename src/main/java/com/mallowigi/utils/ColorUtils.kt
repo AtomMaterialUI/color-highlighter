@@ -156,7 +156,7 @@ object ColorUtils {
     val hsl = FloatArray(3)
     RGBtoHSL(color.red, color.green, color.blue, hsl)
     return String.format("hsl(%d, %d%%, %d%%)",
-      (hsl[0] * 100).roundToLong(),
+      (hsl[0] * 360).roundToLong(),
       (hsl[1] * 100).roundToLong(),
       (hsl[2] * 100).roundToLong())
   }
@@ -165,7 +165,7 @@ object ColorUtils {
     val hsl = FloatArray(3)
     RGBtoHSL(color.red, color.green, color.blue, hsl)
     return String.format("hsl(%d, %d%%, %d%%, %d)",
-      (hsl[0] * 100).roundToLong(),
+      (hsl[0] * 360).roundToLong(),
       (hsl[1] * 100).roundToLong(),
       (hsl[2] * 100).roundToLong(),
       color.alpha / 255)
