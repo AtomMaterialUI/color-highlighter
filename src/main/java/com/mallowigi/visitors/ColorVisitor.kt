@@ -31,6 +31,9 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.mallowigi.config.home.ColorHighlighterState.Companion.instance
+import com.mallowigi.config.home.HighlightingStyles
+import com.mallowigi.highlighters.RoundedBackgroundPainter
+import com.mallowigi.highlighters.RoundedHighlight
 import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
@@ -39,6 +42,7 @@ import java.awt.Color
 abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
 
   private var highlightInfoHolder: HighlightInfoHolder? = null
+  private val roundedHighlights = mutableListOf<RoundedHighlight>()
   internal val config = instance
 
   /**
@@ -50,12 +54,23 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   fun highlight(element: PsiElement?, color: Color) {
     if (!instance.isEnabled) return
 
+    val textRange = element?.textRange
+    if (instance.highlightingStyle == HighlightingStyles.BACKGROUND && textRange != null) {
+      roundedHighlights += RoundedHighlight(
+        range = IntRange(textRange.startOffset, textRange.endOffset),
+        color = color
+      )
+    }
+
     assert(highlightInfoHolder != null)
     highlightInfoHolder!!.add(ColorHighlighter.highlightColor(element, color))
   }
 
   fun highlight(color: Color, range: IntRange) {
     if (!instance.isEnabled) return
+    if (instance.highlightingStyle == HighlightingStyles.BACKGROUND) {
+      roundedHighlights += RoundedHighlight(range = range, color = color)
+    }
     assert(highlightInfoHolder != null)
     highlightInfoHolder!!.add(ColorHighlighter.highlightColor(range, color))
   }
@@ -76,9 +91,25 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
     action: Runnable
   ): Boolean {
     highlightInfoHolder = holder
+    roundedHighlights.clear()
+    val visitorKey = this::class.qualifiedName ?: this::class.java.name
+
     try {
       action.run()
     } finally {
+      if (instance.isEnabled && instance.highlightingStyle == HighlightingStyles.BACKGROUND) {
+        RoundedBackgroundPainter.apply(
+          file = file,
+          visitorKey = visitorKey,
+          highlights = roundedHighlights
+        )
+      } else {
+        RoundedBackgroundPainter.clear(
+          file = file,
+          visitorKey = visitorKey
+        )
+      }
+      roundedHighlights.clear()
       highlightInfoHolder = null
     }
     return true

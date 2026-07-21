@@ -40,7 +40,6 @@ class BackgroundHighlighter : Highlighter {
 
     return TextAttributes.fromFlyweight(
       attributes.flyweight
-        .withBackground(mix)
         .withForeground(if (ColorUtil.isDark(mix)) Gray._254 else Gray._1))
   }
 }
