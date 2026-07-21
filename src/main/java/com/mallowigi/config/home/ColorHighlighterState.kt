@@ -49,6 +49,8 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
     var isTupleDetectEnabled: Boolean by property(true)
 
+    var detectIntegersEnabled: Boolean by property(false)
+
     var isRgbaEnabled: Boolean by property(true)
 
     var isJavaColorCtorEnabled: Boolean by property(true)
@@ -108,6 +110,12 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     get() = state.isTupleDetectEnabled
     set(value) {
       state.isTupleDetectEnabled = value
+    }
+
+  var detectIntegersEnabled: Boolean
+    get() = state.detectIntegersEnabled
+    set(value) {
+      state.detectIntegersEnabled = value
     }
 
   var isRgbaEnabled: Boolean
@@ -232,6 +240,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     this.isKotlinColorMethodEnabled = true
     this.isMarkdownEnabled = true
     this.isMarkupEnabled = true
+    this.detectIntegersEnabled = false
     this.isRgbaEnabled = true
     this.isRiderColorMethodEnabled = true
     this.isRustColorCtorEnabled = true
@@ -258,6 +267,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
   fun clone(): ColorHighlighterState {
     val clone = ColorHighlighterState()
+    clone.detectIntegersEnabled = this.detectIntegersEnabled
     clone.highlightingStyle = this.highlightingStyle
     clone.roundedArcRadius = this.roundedArcRadius
     clone.isColorNamesDetectEnabled = this.isColorNamesDetectEnabled
@@ -282,6 +292,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
 
   fun apply(state: ColorHighlighterState) {
     this.highlightingStyle = state.highlightingStyle
+    this.detectIntegersEnabled = state.detectIntegersEnabled
     this.roundedArcRadius = state.roundedArcRadius
     this.isColorNamesDetectEnabled = state.isColorNamesDetectEnabled
     this.isCssColorEnabled = state.isCssColorEnabled
@@ -311,6 +322,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
     other as ColorHighlighterState
 
     if (highlightingStyle != other.highlightingStyle) return false
+    if (detectIntegersEnabled != other.detectIntegersEnabled) return false
     if (roundedArcRadius != other.roundedArcRadius) return false
     if (isColorNamesDetectEnabled != other.isColorNamesDetectEnabled) return false
     if (isCssColorEnabled != other.isCssColorEnabled) return false
@@ -336,6 +348,7 @@ class ColorHighlighterState : SimplePersistentStateComponent<ColorHighlighterSta
   override fun hashCode(): Int {
     var result = isEnabled.hashCode()
     result = 31 * result + highlightingStyle.hashCode()
+    result = 31 * result + detectIntegersEnabled.hashCode()
     result = 31 * result + roundedArcRadius
     result = 31 * result + isColorNamesDetectEnabled.hashCode()
     result = 31 * result + isCssColorEnabled.hashCode()

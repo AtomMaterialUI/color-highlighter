@@ -26,7 +26,9 @@
 
 package com.mallowigi.search
 
+import com.mallowigi.config.home.ColorHighlighterState
 import com.mallowigi.search.parsers.ColorParserFactory
+import com.mallowigi.utils.ColorUtils
 import com.mallowigi.visitors.ColorVisitor
 import java.awt.Color
 import java.util.regex.Pattern
@@ -102,6 +104,14 @@ object ColorSearchEngine {
    * @param visitor a Language Visitor to provide additional formats (ex: Color() for Java/Kotlin)
    */
   fun getColor(text: String, visitor: ColorVisitor): Color? = try {
+    // Try pure integer color detection first if enabled
+    if (ColorHighlighterState.instance.detectIntegersEnabled) {
+      val pureIntegerColor = ColorUtils.getPureIntegerColor(text)
+      if (pureIntegerColor != null) {
+        return pureIntegerColor
+      }
+    }
+
     val normalizedText = text.replace("\"".toRegex(), "").replace("'".toRegex(), "")
     ColorParserFactory.getParser(normalizedText, visitor).parseColor(normalizedText)
   } catch (e: RuntimeException) {

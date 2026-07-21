@@ -124,6 +124,16 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
             .component
         }.rowComment(message("ColorHighlighterSettingsForm.tupleDetectCheckbox.toolTipText"))
 
+        row {
+          icon(TUPLE_ICON)
+            .gap(RightGap.SMALL)
+          checkBox(message("ColorHighlighterSettingsForm.pureIntegerColorDetectCheckbox.text"))
+            .bindSelected(settingsClone::detectIntegersEnabled)
+            .enabledIf(enabledCheckbox.selected)
+            .gap(RightGap.SMALL)
+            .component
+        }.rowComment(message("ColorHighlighterSettingsForm.pureIntegerColorDetectCheckbox.toolTipText"))
+
 
         row {
           icon(ANDROID_ICON)

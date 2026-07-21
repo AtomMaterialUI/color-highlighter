@@ -178,6 +178,35 @@ object ColorUtils {
   fun toRGBA(color: Color): String =
     String.format("rgb(%s, %s, %s, %d)", color.red, color.green, color.blue, color.alpha / 255)
 
+  /** Parse a pure integer as a 32-bit color (ARGB format: 0xAARRGGBB or 0xRRGGBB). */
+  fun getPureIntegerColor(text: String): Color? = try {
+    val value = when {
+      text.startsWith("0x") || text.startsWith("0X") -> text.substring(2).toLong(16)
+      else -> text.toLong()
+    }
+
+    return when {
+      value !in 0..0xFFFFFFFF -> null
+      value <= 0xFFFFFF       -> {
+        // Treat as RGB (assume opaque)
+        val r = ((value shr 16) and 0xFF).toInt()
+        val g = ((value shr 8) and 0xFF).toInt()
+        val b = (value and 0xFF).toInt()
+        Color(r, g, b)
+      }
+      else -> {
+        // Treat as ARGB
+        val a = ((value shr 24) and 0xFF).toInt()
+        val r = ((value shr 16) and 0xFF).toInt()
+        val g = ((value shr 8) and 0xFF).toInt()
+        val b = (value and 0xFF).toInt()
+        Color(r, g, b, a)
+      }
+    }
+  } catch (e: Exception) {
+    null
+  }
+
   /** Converts hsl to rgb. */
   @Suppress("FunctionName")
   private fun HSLtoRGB(h: Float, s: Float, l: Float): Int {
