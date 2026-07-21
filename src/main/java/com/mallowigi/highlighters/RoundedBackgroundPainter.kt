@@ -23,8 +23,14 @@ import kotlin.math.min
 data class RoundedHighlight(
   val range: IntRange,
   val color: Color,
-  val fillBackground: Boolean
+  val paintStyle: RoundedPaintStyle
 )
+
+enum class RoundedPaintStyle {
+  BACKGROUND,
+  BORDER,
+  UNDERLINE_PILL,
+}
 
 object RoundedBackgroundPainter {
   private val editorHighlightsKey =
@@ -50,7 +56,7 @@ object RoundedBackgroundPainter {
 
       // Then we recreate the highlighters, avoiding duplicates
       val created = highlights
-        .distinctBy { "${it.range.first}:${it.range.last}:${it.color.rgb}:${it.fillBackground}" }
+        .distinctBy { "${it.range.first}:${it.range.last}:${it.color.rgb}:${it.paintStyle}" }
         .mapNotNull { addHighlighter(editor, it, arcRadius) }
         .toMutableList()
 
@@ -111,7 +117,7 @@ object RoundedBackgroundPainter {
     )
     rangeHighlighter.customRenderer = RoundedRangeRenderer(
       color = highlight.color,
-      fillBackground = highlight.fillBackground,
+      paintStyle = highlight.paintStyle,
       arcRadius = arcRadius
     )
     return rangeHighlighter
@@ -123,7 +129,7 @@ object RoundedBackgroundPainter {
  */
 private class RoundedRangeRenderer(
   private val color: Color,
-  private val fillBackground: Boolean,
+  private val paintStyle: RoundedPaintStyle,
   arcRadius: Int
 ) : CustomHighlighterRenderer {
   private val safeArcRadius = arcRadius.coerceIn(MIN_ROUNDED_ARC_RADIUS, MAX_ROUNDED_ARC_RADIUS)
@@ -166,12 +172,28 @@ private class RoundedRangeRenderer(
         val height = max(1, lineHeight - 2)
         val arc = min(height, safeArcRadius * 2)
 
-        if (fillBackground) {
-          g2.color = mixedColor
-          g2.fillRoundRect(x, y, width, height, arc, arc)
+        when (paintStyle) {
+          RoundedPaintStyle.BACKGROUND -> {
+            g2.color = mixedColor
+            g2.fillRoundRect(x, y, width, height, arc, arc)
+            g2.color = color
+            g2.drawRoundRect(x, y, width, height, arc, arc)
+          }
+
+          RoundedPaintStyle.BORDER -> {
+            g2.color = color
+            g2.drawRoundRect(x, y, width, height, arc, arc)
+          }
+
+          RoundedPaintStyle.UNDERLINE_PILL -> {
+            val underlineHeight = max(2, height / 5)
+            val underlineY = y + height - underlineHeight
+            val underlineArc = min(underlineHeight, arc)
+
+            g2.color = mixedColor
+            g2.fillRoundRect(x, underlineY, width, underlineHeight, underlineArc, underlineArc)
+          }
         }
-        g2.color = color
-        g2.drawRoundRect(x, y, width, height, arc, arc)
       }
     } finally {
       g2.dispose()

@@ -36,6 +36,7 @@ class HighlighterStyleFactory {
     when (style) {
       HighlightingStyles.BACKGROUND -> BackgroundHighlighter()
       HighlightingStyles.BORDER -> BorderHighlighter()
+      HighlightingStyles.UNDERLINE_PILL -> UnderlinePillHighlighter()
       HighlightingStyles.UNDERLINE -> UnderlineHighlighter()
       HighlightingStyles.FOREGROUND -> ForegroundHighlighter()
       HighlightingStyles.INLINE -> InlineHighlighter()

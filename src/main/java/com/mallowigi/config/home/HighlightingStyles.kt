@@ -34,6 +34,7 @@ import com.mallowigi.ColorHighlighterIcons.Highlighting.DISABLED_ICON
 import com.mallowigi.ColorHighlighterIcons.Highlighting.FOREGROUND_ICON
 import com.mallowigi.ColorHighlighterIcons.Highlighting.INLINE_ICON
 import com.mallowigi.ColorHighlighterIcons.Highlighting.UNDERLINE_ICON
+import com.mallowigi.ColorHighlighterIcons.Highlighting.UNDERLINE_PILL_ICON
 import javax.swing.Icon
 
 enum class HighlightingStyles(
@@ -42,6 +43,7 @@ enum class HighlightingStyles(
 ) {
   BACKGROUND(message("HighlightingStyles.background"), BACKGROUND_ICON),
   BORDER(message("HighlightingStyles.border"), BORDER_ICON),
+  UNDERLINE_PILL(message("HighlightingStyles.underlinePill"), UNDERLINE_PILL_ICON),
   UNDERLINE(message("HighlightingStyles.underline"), UNDERLINE_ICON),
   FOREGROUND(message("HighlightingStyles.foreground"), FOREGROUND_ICON),
   INLINE(message("HighlightingStyles.inline"), INLINE_ICON),

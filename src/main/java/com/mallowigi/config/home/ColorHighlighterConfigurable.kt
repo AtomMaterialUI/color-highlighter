@@ -157,8 +157,8 @@ class ColorHighlighterConfigurable : BoundSearchableConfigurable(
           slider(
             min = MIN_ROUNDED_ARC_RADIUS,
             max = MAX_ROUNDED_ARC_RADIUS,
-            minorTickSpacing = 1,
-            majorTickSpacing = 1
+            minorTickSpacing = 2,
+            majorTickSpacing = 4
           )
             .bindValue(settingsClone::roundedArcRadius)
             .enabledIf(enabledCheckbox.selected)

@@ -34,6 +34,7 @@ import com.mallowigi.config.home.ColorHighlighterState.Companion.instance
 import com.mallowigi.config.home.HighlightingStyles
 import com.mallowigi.highlighters.RoundedBackgroundPainter
 import com.mallowigi.highlighters.RoundedHighlight
+import com.mallowigi.highlighters.RoundedPaintStyle
 import com.mallowigi.search.ColorMatch
 import com.mallowigi.search.parsers.ColorParser
 import java.awt.Color
@@ -44,7 +45,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   private var highlightInfoHolder: HighlightInfoHolder? = null
   private val roundedHighlights = mutableListOf<RoundedHighlight>()
   internal val config = instance
-  private val roundedStyles = listOf(HighlightingStyles.BACKGROUND, HighlightingStyles.BORDER)
+  private val roundedStyles = setOf(HighlightingStyles.BACKGROUND, HighlightingStyles.BORDER, HighlightingStyles.UNDERLINE_PILL)
 
   /**
    * Highlight the element with the given color.
@@ -61,7 +62,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
       roundedHighlights += RoundedHighlight(
         range = IntRange(textRange.startOffset, textRange.endOffset),
         color = color,
-        fillBackground = style == HighlightingStyles.BACKGROUND
+        paintStyle = style.toRoundedPaintStyle()
       )
     }
 
@@ -76,7 +77,7 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
       roundedHighlights += RoundedHighlight(
         range = range,
         color = color,
-        fillBackground = style == HighlightingStyles.BACKGROUND
+        paintStyle = style.toRoundedPaintStyle()
       )
     }
     assert(highlightInfoHolder != null)
@@ -163,4 +164,11 @@ abstract class ColorVisitor : HighlightVisitor, LangVisitor, DumbAware {
   override fun canAcceptMultiple(): Boolean = false
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? = null
+
+  private fun HighlightingStyles.toRoundedPaintStyle(): RoundedPaintStyle = when (this) {
+    HighlightingStyles.BACKGROUND -> RoundedPaintStyle.BACKGROUND
+    HighlightingStyles.BORDER -> RoundedPaintStyle.BORDER
+    HighlightingStyles.UNDERLINE_PILL -> RoundedPaintStyle.UNDERLINE_PILL
+    else -> RoundedPaintStyle.BACKGROUND
+  }
 }
