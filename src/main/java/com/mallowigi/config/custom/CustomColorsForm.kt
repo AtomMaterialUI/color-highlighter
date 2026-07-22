@@ -23,148 +23,83 @@
  *
  *
  */
+package com.mallowigi.config.custom
 
-/*
- * Created by JFormDesigner on Sat Sep 25 09:42:05 IDT 2021
- */
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.ui.DialogPanel
+import com.intellij.ui.dsl.builder.Align
+import com.intellij.ui.dsl.builder.panel
+import com.intellij.util.ui.ColumnInfo
+import com.mallowigi.ColorHighlighterBundle.message
+import com.mallowigi.colors.CustomColors
+import com.mallowigi.colors.SingleColor
+import com.mallowigi.config.SettingsFormUI
+import com.mallowigi.config.ui.columns.ColorEditableColumnInfo
+import com.mallowigi.config.ui.columns.NameEditableColumnInfo
+import com.mallowigi.config.ui.internal.CustomColorsTableItemEditor
+import com.mallowigi.config.ui.internal.CustomColorsTableModelEditor
+import javax.swing.JComponent
+import javax.swing.UIManager
 
-package com.mallowigi.config.custom;
+/** Settings form used to edit the user defined custom colors. */
+class CustomColorsForm :
+  SettingsFormUI<CustomColorsForm, CustomColorsConfig>,
+  Disposable {
 
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.util.ui.ColumnInfo;
-import com.mallowigi.ColorHighlighterBundle;
-import com.mallowigi.colors.CustomColors;
-import com.mallowigi.colors.SingleColor;
-import com.mallowigi.config.SettingsFormUI;
-import com.mallowigi.config.ui.columns.ColorEditableColumnInfo;
-import com.mallowigi.config.ui.columns.NameEditableColumnInfo;
-import com.mallowigi.config.ui.internal.CustomColorsTableItemEditor;
-import com.mallowigi.config.ui.internal.CustomColorsTableModelEditor;
-import net.miginfocom.swing.MigLayout;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+  private val columns: Array<ColumnInfo<*, *>> = arrayOf(
+    NameEditableColumnInfo(this, true),
+    ColorEditableColumnInfo(this),
+  )
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.util.ResourceBundle;
+  private var customColorsEditor: CustomColorsTableModelEditor<SingleColor>? = null
+  private lateinit var mainPanel: DialogPanel
 
-@SuppressWarnings({"FieldCanBeLocal",
-  "DuplicateStringLiteralInspection",
-  "StringConcatenation",
-  "InstanceVariableMayNotBeInitialized",
-  "ConfusingFloatingPointLiteral",
-  "ClassNamePrefixedWithPackageName"})
-public final class CustomColorsForm extends JPanel implements SettingsFormUI<CustomColorsForm, CustomColorsConfig>, Disposable {
-  private final transient ColumnInfo[] columns = {
-    new NameEditableColumnInfo(this, true),
-    new ColorEditableColumnInfo(this),
-  };
+  override val content: JComponent
+    get() = mainPanel
 
-  // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-  // Generated using JFormDesigner non-commercial license
-  private JLabel explanation;
-  private JPanel colorsPanel;
-  // JFormDesigner - End of variables declaration  //GEN-END:variables
+  override fun init() {
+    val editor = CustomColorsTableModelEditor(
+      columns,
+      CustomColorsTableItemEditor(),
+      message("no.custom.colors"),
+    )
+    customColorsEditor = editor
 
-  private JComponent customColorsTable;
-  private @Nullable CustomColorsTableModelEditor<SingleColor> customColorsEditor;
-
-  @Override
-  public void init() {
-    initComponents();
-    createTables();
+    mainPanel = panel {
+      group("Custom Colors Editor") {
+        row {
+          label(message("CustomColorsForm.explanation.text"))
+            .applyToComponent {
+              font = font.deriveFont(font.size - 1f)
+              foreground = UIManager.getColor("inactiveCaptionText")
+            }
+        }
+        row {
+          cell(editor.createComponent()).align(Align.FILL)
+        }.resizableRow()
+      }
+    }
   }
 
-  @Override
-  public @NotNull JComponent getContent() {
-    return this;
-  }
-
-  @Override
-  public void afterStateSet() {
+  override fun afterStateSet() {
     // add after state set
   }
 
-  @Override
-  public void dispose() {
-    customColorsEditor = null;
+  override fun dispose() {
+    customColorsEditor = null
   }
 
-  @Override
-  public void setFormState(final @NotNull CustomColorsConfig config) {
-    ApplicationManager.getApplication().invokeLater(() -> {
-      if (customColorsEditor != null) {
-        customColorsEditor.reset(config.getCustomColors().getTheAssociations());
-      }
-      afterStateSet();
-    });
-  }
-
-  @Override
-  public boolean isModified(@Nullable final CustomColorsConfig config) {
-    if (config == null) {
-      return false;
+  override fun setFormState(config: CustomColorsConfig) {
+    ApplicationManager.getApplication().invokeLater {
+      customColorsEditor?.reset(config.customColors.getTheAssociations())
+      afterStateSet()
     }
-
-    final boolean modified = customColorsEditor != null && config.isCustomColorsModified(customColorsEditor.getModel().getItems());
-    return modified;
   }
 
-  public CustomColors getCustomColors() {
-    assert customColorsEditor != null;
-    return new CustomColors(customColorsEditor.getModel().getItems());
-  }
+  override fun isModified(config: CustomColorsConfig): Boolean =
+    customColorsEditor?.let { config.isCustomColorsModified(it.getModel().items) } ?: false
 
-  private void createTables() {
-    createTable();
-  }
-
-  private void createTable() {
-    final CustomColorsTableItemEditor itemEditor = new CustomColorsTableItemEditor();
-    customColorsEditor = new CustomColorsTableModelEditor<>(columns,
-      itemEditor,
-      ColorHighlighterBundle.message("no.custom.colors"));
-    customColorsTable = customColorsEditor.createComponent();
-    colorsPanel.add(customColorsTable, "cell 0 0"); //NON-NLS
-
-  }
-
-  private void initComponents() {
-    // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-    // Generated using JFormDesigner non-commercial license
-    final ResourceBundle bundle = ResourceBundle.getBundle("messages.ColorHighlighterBundle");
-    explanation = new JLabel();
-    colorsPanel = new JPanel();
-
-    //======== this ========
-    setBorder(new TitledBorder(null, "Custom Colors Editor", TitledBorder.CENTER, TitledBorder.TOP));
-    setLayout(new MigLayout(
-      "hidemode 3",
-      // columns
-      "[369,grow,fill]",
-      // rows
-      "[]" +
-        "[270,grow,fill]" +
-        "[]"));
-
-    //---- explanation ----
-    explanation.setText(bundle.getString("CustomColorsForm.explanation.text"));
-    explanation.setFont(explanation.getFont().deriveFont(explanation.getFont().getSize() - 1f));
-    explanation.setForeground(UIManager.getColor("inactiveCaptionText"));
-    add(explanation, "cell 0 0");
-
-    //======== colorsPanel ========
-    {
-      colorsPanel.setLayout(new MigLayout(
-        "fill,hidemode 3,aligny top",
-        // columns
-        "0[grow,fill]0",
-        // rows
-        "0[grow,top]0"));
-    }
-    add(colorsPanel, "cell 0 1,grow");
-    // JFormDesigner - End of component initialization  //GEN-END:initComponents
-  }
-
+  val customColors: CustomColors
+    get() = CustomColors(customColorsEditor!!.getModel().items)
 }

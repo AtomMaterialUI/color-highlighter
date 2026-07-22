@@ -23,245 +23,216 @@
  *
  *
  */
-package com.mallowigi.config.ui.internal;
+package com.mallowigi.config.ui.internal
 
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Ref;
-import com.intellij.ui.*;
-import com.intellij.ui.table.TableView;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.*;
-import com.intellij.util.ui.table.ComboBoxTableCellEditor;
-import com.intellij.util.xmlb.XmlSerializer;
-import com.mallowigi.colors.SingleColor;
-import com.mallowigi.utils.ColorUtils;
-import org.jdom.Element;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.util.Comparing
+import com.intellij.openapi.util.Ref
+import com.intellij.ui.ClickListener
+import com.intellij.ui.ColorChooserService
+import com.intellij.ui.ColorPickerListener
+import com.intellij.ui.ColorUtil
+import com.intellij.ui.TableSpeedSearch
+import com.intellij.ui.ToolbarDecorator
+import com.intellij.ui.table.TableView
+import com.intellij.util.containers.ContainerUtil
+import com.intellij.util.ui.CollectionItemEditor
+import com.intellij.util.ui.CollectionModelEditor
+import com.intellij.util.ui.ColumnInfo
+import com.intellij.util.ui.JBUI
+import com.intellij.util.ui.ListTableModel
+import com.intellij.util.ui.UIUtil
+import com.intellij.util.ui.table.ComboBoxTableCellEditor
+import com.intellij.util.xmlb.XmlSerializer
+import com.mallowigi.colors.SingleColor
+import com.mallowigi.utils.ColorUtils
+import org.jetbrains.annotations.Nls
+import java.awt.Color
+import java.awt.event.MouseEvent
+import javax.swing.JComponent
+import javax.swing.event.TableModelEvent
+import javax.swing.event.TableModelListener
 
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+/**
+ * Table model editor for the custom colors settings, backed by a [TableView].
+ *
+ * @param T the type of the edited items
+ * @param columns the columns to display
+ * @param itemEditor the item editor used to clone/produce items
+ * @param emptyText the text shown when the table is empty
+ */
+@Suppress("MagicNumber", "unused")
+class CustomColorsTableModelEditor<T : Any>(
+  columns: Array<ColumnInfo<*, *>>,
+  itemEditor: CollectionItemEditor<T>,
+  @Nls(capitalization = Nls.Capitalization.Sentence) emptyText: String,
+) : CollectionModelEditor<T, CollectionItemEditor<T>>(itemEditor) {
 
-import static com.intellij.ui.TableSpeedSearch.installOn;
+  private val model: MyListTableModel = MyListTableModel(columns, ArrayList())
+  private val table: TableView<T> = TableView(model)
+  private val toolbarDecorator: ToolbarDecorator
 
-@SuppressWarnings({"SyntheticAccessorCall",
-    "AccessingNonPublicFieldOfAnotherObject",
-    "MagicNumber",
-    "unused"})
-public final class CustomColorsTableModelEditor<T> extends CollectionModelEditor<T, CollectionItemEditor<T>> {
-  private final TableView<T> table;
-  private final ToolbarDecorator toolbarDecorator;
+  init {
+    table.isStriped = true
+    table.setShowColumns(true)
+    table.rowHeight = 40
+    table.setMaxItemsForSizeCalculation(20)
+    table.ignoreRepaint = true
+    table.fillsViewportHeight = true
+    table.setShowGrid(false)
+    table.setDefaultEditor(Enum::class.java, ComboBoxTableCellEditor.INSTANCE)
+    table.setEnableAntialiasing(true)
+    table.preferredScrollableViewportSize = JBUI.size(200, -1)
+    table.visibleRowCount = 20
+    TableSpeedSearch.installOn(table)
 
-  private final MyListTableModel model;
-
-  public CustomColorsTableModelEditor(final ColumnInfo @NotNull [] columns,
-                                      @NotNull final CollectionItemEditor<T> itemEditor,
-                                      @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) final String emptyText) {
-    this(Collections.emptyList(), columns, itemEditor, emptyText);
-  }
-
-  @SuppressWarnings("MagicNumber")
-  private CustomColorsTableModelEditor(@NotNull final List<T> items,
-                                       final ColumnInfo @NotNull [] columns,
-                                       @NotNull final CollectionItemEditor<T> itemEditor,
-                                       @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) final String emptyText) {
-    super(itemEditor);
-
-    model = new MyListTableModel(columns, new ArrayList<>(items));
-    table = new TableView<>(model);
-    table.setStriped(true);
-    table.setShowColumns(true);
-    table.setRowHeight(40);
-    table.setMaxItemsForSizeCalculation(20);
-    table.setIgnoreRepaint(true);
-    table.setFillsViewportHeight(true);
-    table.setShowGrid(false);
-    table.setDefaultEditor(Enum.class, ComboBoxTableCellEditor.INSTANCE);
-    table.setEnableAntialiasing(true);
-    table.setPreferredScrollableViewportSize(JBUI.size(200, -1));
-    table.setVisibleRowCount(20);
-    TableSpeedSearch.installOn(table);
-
-    table.getEmptyText().setFont(UIUtil.getLabelFont().deriveFont(24.0f));
-    table.getEmptyText().setText(emptyText);
+    table.emptyText.setFont(UIUtil.getLabelFont().deriveFont(24.0f))
+    table.emptyText.text = emptyText
 
     // Add actions
-    toolbarDecorator = ToolbarDecorator.createDecorator(table, this);
+    toolbarDecorator = ToolbarDecorator.createDecorator(table, this)
 
     // Color picker listening
-    new CustomColorsClickListener().installOn(table);
+    CustomColorsClickListener().installOn(table)
   }
 
-  @SuppressWarnings("unused")
-  public static <T> void cloneUsingXmlSerialization(@NotNull final T oldItem, @NotNull final T newItem) {
-    final Element serialized = XmlSerializer.serialize(oldItem);
-    if (serialized != null) {
-      XmlSerializer.deserializeInto(newItem, serialized);
-    }
+  fun enabled(value: Boolean): CustomColorsTableModelEditor<T> {
+    table.isEnabled = value
+    return this
   }
 
-  @NotNull
-  public CustomColorsTableModelEditor<T> enabled(final boolean value) {
-    table.setEnabled(value);
-    return this;
+  fun modelListener(listener: DataChangedListener<T>): CustomColorsTableModelEditor<T> {
+    model.dataChangedListener = listener
+    model.addTableModelListener(listener)
+    return this
   }
 
-  public CustomColorsTableModelEditor<T> modelListener(@NotNull final DataChangedListener<T> listener) {
-    model.dataChangedListener = listener;
-    model.addTableModelListener(listener);
-    return this;
-  }
+  fun getModel(): ListTableModel<T> = model
 
-  @NotNull
-  public ListTableModel<T> getModel() {
-    return model;
-  }
+  fun createComponent(): JComponent = toolbarDecorator.createPanel()
 
-  @NotNull
-  public JComponent createComponent() {
-    return toolbarDecorator.createPanel();
-  }
+  fun selectItem(item: T) {
+    table.clearSelection()
 
-  public void selectItem(@NotNull final T item) {
-    table.clearSelection();
-
-    final @Nullable Ref<T> ref;
-    if (helper.hasModifiedItems()) {
-      ref = Ref.create();
-      helper.process((modified, original) -> {
-        if (item == original) {
-          ref.set(modified);
+    val ref: Ref<T>? = if (helper.hasModifiedItems()) {
+      Ref.create<T>().also { r ->
+        helper.process { modified, original ->
+          if (item === original) {
+            r.set(modified)
+          }
+          r.isNull
         }
-        return ref.isNull();
-      });
+      }
     } else {
-      ref = null;
+      null
     }
 
-    table.addSelection(ref == null || ref.isNull() ? item : ref.get());
+    table.addSelection(if (ref == null || ref.isNull) item else ref.get())
   }
 
-  @NotNull
-  public List<T> apply() {
+  fun apply(): List<T> {
     if (helper.hasModifiedItems()) {
-      @SuppressWarnings("unchecked") final ColumnInfo<T, Object>[] columns = model.getColumnInfos();
-      helper.process((newItem, oldItem) -> {
-        for (final ColumnInfo<T, Object> column : columns) {
+      @Suppress("UNCHECKED_CAST")
+      val columns = model.columnInfos as Array<ColumnInfo<T, Any?>>
+      helper.process { newItem, oldItem ->
+        for (column in columns) {
           if (column.isCellEditable(newItem)) {
-            column.setValue(oldItem, column.valueOf(newItem));
+            column.setValue(oldItem, column.valueOf(newItem))
           }
         }
 
-        model.items.set(ContainerUtil.indexOfIdentity(model.items, newItem), oldItem);
-        return true;
-      });
+        model.items[ContainerUtil.indexOfIdentity(model.items, newItem)] = oldItem
+        true
+      }
     }
 
-    helper.reset(model.items);
-    return model.items;
+    helper.reset(model.items)
+    return model.items
   }
 
-  @NotNull
-  @Override
-  protected List<T> getItems() {
-    return model.items;
+  override fun getItems(): List<T> = model.items
+
+  override fun reset(originalItems: List<T>) {
+    super.reset(originalItems)
+    model.items = ArrayList(originalItems)
   }
 
-  @Override
-  public void reset(@NotNull final List<? extends T> originalItems) {
-    super.reset(originalItems);
-    model.setItems(new ArrayList<>(originalItems));
-  }
+  abstract class DataChangedListener<T> : TableModelListener {
+    abstract fun dataChanged(columnInfo: ColumnInfo<T, *>, rowIndex: Int)
 
-  @SuppressWarnings({"AbstractClassNeverImplemented",
-      "NoopMethodInAbstractClass"})
-  public abstract static class DataChangedListener<T> implements TableModelListener {
-    public abstract void dataChanged(@NotNull ColumnInfo<T, ?> columnInfo, int rowIndex);
-
-    @Override
-    public void tableChanged(@NotNull final TableModelEvent e) {
+    override fun tableChanged(e: TableModelEvent) {
+      // Do nothing
     }
   }
 
-  @SuppressWarnings({"FieldHasSetterButNoGetter",
-      "SerializableInnerClassWithNonSerializableOuterClass",
-      "InstanceVariableMayNotBeInitialized"})
-  private final class MyListTableModel extends ListTableModel<T> {
-    private List<T> items;
-    private DataChangedListener<T> dataChangedListener;
+  private inner class MyListTableModel(
+    columnNames: Array<ColumnInfo<*, *>>,
+    items: MutableList<T>,
+  ) : ListTableModel<T>(columnNames, items) {
 
-    MyListTableModel(final ColumnInfo @NotNull [] columnNames, @NotNull final List<T> items) {
-      super(columnNames, items);
+    var dataChangedListener: DataChangedListener<T>? = null
 
-      this.items = items;
-    }
+    override fun setValueAt(aValue: Any?, rowIndex: Int, columnIndex: Int) {
+      if (rowIndex >= rowCount) return
 
-    @Override
-    public void setItems(@NotNull final List<T> items) {
-      this.items = items;
-      super.setItems(items);
-    }
+      @Suppress("UNCHECKED_CAST")
+      val column = columnInfos[columnIndex] as ColumnInfo<T, Any?>
+      val item = getItem(rowIndex)
+      val oldValue = column.valueOf(item)
 
-    @Override
-    public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {
-      if (rowIndex < getRowCount()) {
-        @SuppressWarnings("unchecked") final ColumnInfo<T, Object> column = getColumnInfos()[columnIndex];
-        final T item = getItem(rowIndex);
-        final Object oldValue = column.valueOf(item);
+      val changed = if (column.columnClass == String::class.java) {
+        !Comparing.strEqual(oldValue as? String, aValue as? String)
+      } else {
+        !Comparing.equal(oldValue, aValue)
+      }
 
-        if (column.getColumnClass() == String.class
-            ? !Comparing.strEqual(((String) oldValue), ((String) aValue))
-            : !Comparing.equal(oldValue, aValue)) {
-
-          column.setValue(helper.getMutable(item, rowIndex), aValue);
-          if (dataChangedListener != null) {
-            dataChangedListener.dataChanged(column, rowIndex);
-          }
-        }
+      if (changed) {
+        column.setValue(helper.getMutable(item, rowIndex), aValue)
+        dataChangedListener?.dataChanged(column, rowIndex)
       }
     }
   }
 
-  private class CustomColorsClickListener extends ClickListener {
-    @Override
-    public final boolean onClick(@NotNull final MouseEvent event, final int clickCount) {
-      final Point point = event.getPoint();
-      final int row = table.rowAtPoint(point);
-      final int column = table.columnAtPoint(point);
+  private inner class CustomColorsClickListener : ClickListener() {
+    override fun onClick(event: MouseEvent, clickCount: Int): Boolean {
+      val point = event.point
+      val row = table.rowAtPoint(point)
+      val column = table.columnAtPoint(point)
 
-      if (row >= 0 && row < table.getRowCount() && column == 1) {
-        final Object colorValue = model.getValueAt(row, 1);
-        final Color modelColor = ColorUtils.INSTANCE.getHex((String) colorValue);
+      if (row in 0 until table.rowCount && column == 1) {
+        val colorValue = model.getValueAt(row, 1) as String
+        val modelColor = ColorUtils.getHex(colorValue)
 
         ColorChooserService.getInstance().showDialog(
-            event.getComponent(),
-            "Choose Color",
-            modelColor,
-            false,
-            List.of(
-                new ColorPickerListener() {
-                  @Override
-                  public void colorChanged(final Color color) {
-                    ((SingleColor) model.items.get(row)).setCode(ColorUtil.toHex(color));
-                  }
+          event.component,
+          "Choose Color",
+          modelColor,
+          false,
+          listOf(
+            object : ColorPickerListener {
+              override fun colorChanged(color: Color) {
+                (model.items[row] as SingleColor).code = ColorUtil.toHex(color)
+              }
 
-                  @Override
-                  public void closed(@Nullable Color color) {
+              override fun closed(color: Color?) {
+                // Do nothing
+              }
+            },
+          ),
+        )
 
-                  }
-                })
-        );
-
-        return true;
+        return true
       }
-      return false;
+      return false
+    }
+  }
+
+  companion object {
+    @JvmStatic
+    fun <T : Any> cloneUsingXmlSerialization(oldItem: T, newItem: T) {
+      val serialized = XmlSerializer.serialize(oldItem)
+      if (serialized != null) {
+        XmlSerializer.deserializeInto(newItem, serialized)
+      }
     }
   }
 }
