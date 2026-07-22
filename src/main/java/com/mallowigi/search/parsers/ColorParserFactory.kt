@@ -49,6 +49,7 @@ object ColorParserFactory {
       !langVisitor.shouldVisit() -> NoParser()
       text.startsWith(HASH) && text.length > 1 -> HexColorParser(HASH)
       text.startsWith(RGB.text) -> RGBColorParser()
+      text.startsWith(DOT_COLOR.text) -> ColorColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
 

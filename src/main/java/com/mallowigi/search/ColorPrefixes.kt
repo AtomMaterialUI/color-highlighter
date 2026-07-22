@@ -30,6 +30,7 @@ enum class ColorPrefixes(val text: String) {
   COLOR_METHOD("Color."),
   JBCOLOR("JBColor."),
   RGB("rgb"),
+  DOT_COLOR("color"),
   HSL("hsl"),
   OX("0x"),
   COLOR("new Color("),

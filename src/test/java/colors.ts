@@ -29,6 +29,7 @@ let rgb = 'rgb(255, 128, 0)';
 let rgba = 'rgba(255,128, 0, 50)';
 let hsl = 'hsl(120, 100%, 50%)';
 let hsla = 'hsla(240, 100%, 50%, 0.2)';
+let color = obj.color(120, 100, 50);
 
 {
   colors: [

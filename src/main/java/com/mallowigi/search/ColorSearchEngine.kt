@@ -58,6 +58,10 @@ object ColorSearchEngine {
       "\\b(hsla\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*[0-9.]{1,3}\\s*\\))"
     ),  // hsla(0, 12, 120, 1)
     Pattern.compile(
+      "\\b((color\\s*\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*\\))|(color\\s*\\(\\s*\\d{1," +
+        "3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*\\)))"
+    ),  // color(128, 128, 128)
+    Pattern.compile(
       "\\b(Color\\s*\\(\\s*(0[xX])?[0-9a-fA-F]+\\s*\\))"
     ),  // Color(0x123456)
     Pattern.compile(
