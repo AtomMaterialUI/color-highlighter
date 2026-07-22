@@ -62,6 +62,9 @@ object ColorSearchEngine {
         "3}%\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*\\)))"
     ),  // color(128, 128, 128)
     Pattern.compile(
+      "\\b(color\\s*\\(\\s*[^)]+\\s*,\\s*[^)]+\\s*,\\s*[^)]+\\s*\\))"
+    ),  // color(r, g, b) or color(h, s, l) with any args
+    Pattern.compile(
       "\\b(Color\\s*\\(\\s*(0[xX])?[0-9a-fA-F]+\\s*\\))"
     ),  // Color(0x123456)
     Pattern.compile(

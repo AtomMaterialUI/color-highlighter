@@ -40,6 +40,7 @@ object ColorParserFactory {
   private const val HASH: String = "#"
   private val NO_HEX_PATTERN = """(\b[a-fA-F0-9]{6,8}\b)""".toRegex()
   private val TUPLE_PATTERN = """\((\d{1,3}(,\s*)?){3,4}\)""".toRegex()
+  private val COLOR_FUNCTION_PATTERN = """([a-fA-F0-9_])\s*\(\s*[^)]+\s*,\s*[^)]+\s*,\s*[^)]+\s*\)""".toRegex()
   private val config = ColorHighlighterState.instance
 
   fun getParser(text: String, langVisitor: LangVisitor): ColorParser {
@@ -52,6 +53,9 @@ object ColorParserFactory {
       text.startsWith(DOT_COLOR.text) -> ColorColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
+
+      // color() function with variables - color(r, g, b) or color(h, s, l)
+      COLOR_FUNCTION_PATTERN.matches(text) -> ColorFunctionParser()
 
       // Tuple detection
       config.isTupleDetectEnabled && TUPLE_PATTERN.matches(text) -> RGBColorParser()

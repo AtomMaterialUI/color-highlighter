@@ -38,7 +38,8 @@ class JSVisitor : ColorVisitor() {
 
   private val allowedTypes = listOf(
     "JS:NUMERIC_LITERAL",
-    "JS:STRING_LITERAL"
+    "JS:STRING_LITERAL",
+    "JS:CALL_EXPRESSION"
   )
 
   override fun accept(element: PsiElement): Color? {
@@ -53,7 +54,7 @@ class JSVisitor : ColorVisitor() {
 
   override fun suitableForFile(file: PsiFile): Boolean = true
 
-  override fun canAcceptMultiple(): Boolean = false
+  override fun canAcceptMultiple(): Boolean = true
 
   override fun acceptMultiple(element: PsiElement): List<ColorMatch>? {
     val type = PsiUtilCore.getElementType(element).toString()
