@@ -52,6 +52,11 @@ object ColorParserFactory {
       text.startsWith(RGB.text) -> RGBColorParser()
       text.startsWith(DOT_COLOR.text) -> ColorColorParser()
       text.startsWith(HSL.text) -> HSLColorParser()
+      text.startsWith(OKLAB.text) -> CssColorFunctionParser()
+      text.startsWith(OKLCH.text) -> CssColorFunctionParser()
+      text.startsWith(HWB.text) -> CssColorFunctionParser()
+      text.startsWith(LAB.text) -> CssColorFunctionParser()
+      text.startsWith(LCH.text) -> CssColorFunctionParser()
       text.startsWith(OX.text) -> HexColorParser(OX.text)
 
       // color() function with variables - color(r, g, b) or color(h, s, l)

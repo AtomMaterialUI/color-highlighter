@@ -1,6 +1,7 @@
 [versions]
 # libraries
 annotations = "26.1.0"
+colormath = "3.6.1"
 
 # plugins
 kotlin = "2.3.20"
@@ -11,6 +12,7 @@ ktlint = "13.1.0"
 
 [libraries]
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
+colormath = { group = "com.github.ajalt.colormath", name = "colormath-jvm", version.ref = "colormath" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }

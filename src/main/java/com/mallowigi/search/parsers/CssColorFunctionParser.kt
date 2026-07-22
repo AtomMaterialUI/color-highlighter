@@ -23,28 +23,27 @@
  *
  *
  */
+package com.mallowigi.search.parsers
 
-package com.mallowigi.search
+import com.github.ajalt.colormath.Color as ColormathColor
+import com.github.ajalt.colormath.parseOrNull
+import java.awt.Color
 
-enum class ColorPrefixes(val text: String) {
-  COLOR_METHOD("Color."),
-  JBCOLOR("JBColor."),
-  RGB("rgb"),
-  DOT_COLOR("color"),
-  HSL("hsl"),
-  HWB("hwb"),
-  OKLAB("oklab"),
-  OKLCH("oklch"),
-  LAB("lab"),
-  LCH("lch"),
-  OX("0x"),
-  COLOR("new Color("),
-  KT_COLOR("Color("),
-  COLOR_ARGB("Color.argb("),
-  COLOR_RGB("Color.rgb("),
-  COLOR_FROM_ARGB("Color.FromArgb("),
-  RGB_RUST("Rgb("),
-  NS_COLOR("[NSColor "),
-  SWIFT_COLOR("NSColor("),
-  UI_COLOR("[UIColor ")
+/**
+ * Parse the modern CSS color functions `hwb()`, `lab()`, `lch()`, `oklab()` and
+ * `oklch()` by delegating to the Colormath library, which handles the full CSS
+ * color spec grammar and the color-space conversions to sRGB.
+ */
+class CssColorFunctionParser : ColorParser {
+
+  override fun parseColor(text: String): Color? {
+    val argb = ColormathColor.parseOrNull(text)
+      ?.clamp()
+      ?.toSRGB()
+      ?.toRGBInt()
+      ?.argb
+      ?: return null
+    return Color(argb.toInt(), true)
+  }
+
 }

@@ -1737,3 +1737,27 @@
     color: electromagnetic;
     background-color: #2f3640;
 }
+.modern-hwb {
+    color: hwb(194 0% 0%);
+    background-color: hwb(194 0% 0% / 0.5);
+}
+
+.modern-lab {
+    color: lab(52% 40 60);
+    background-color: lab(52% 40 60 / 0.5);
+}
+
+.modern-lch {
+    color: lch(52% 60 40);
+    background-color: lch(52% 60 40 / 0.5);
+}
+
+.modern-oklab {
+    color: oklab(0.7 -0.1 0.1);
+    background-color: oklab(0.7 -0.1 0.1 / 0.5);
+}
+
+.modern-oklch {
+    color: oklch(0.7 0.15 200);
+    background-color: oklch(0.7 0.15 200 / 0.5);
+}

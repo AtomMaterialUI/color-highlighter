@@ -92,6 +92,10 @@ dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
   implementation("commons-io:commons-io:2.14.0")
   implementation("com.thoughtworks.xstream:xstream:1.4.21")
+  implementation(libs.colormath) {
+    // The Kotlin Gradle plugin already provides a compatible kotlin-stdlib.
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+  }
 
   intellijPlatform {
     intellijIdeaUltimate(platformVersion) {
