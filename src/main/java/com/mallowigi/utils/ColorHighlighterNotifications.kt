@@ -37,7 +37,6 @@ import com.intellij.openapi.util.NlsContexts
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.BalloonLayoutData
 import com.intellij.ui.awt.RelativePoint
-import com.mallowigi.ColorHighlighterBundle.message
 import org.jetbrains.annotations.NotNull
 import java.awt.Point
 import java.util.*
@@ -61,21 +60,6 @@ object ColorHighlighterNotifications {
   ) {
     val notification = createNotification("", content, NotificationType.INFORMATION)
     Notifications.Bus.notify(notification, project)
-  }
-
-  /**
-   * Show the update notification
-   *
-   * @param project the project to display in
-   */
-  @JvmStatic
-  fun showUpdate(project: Project) {
-    val notification = createNotification(
-      message("notification.update.title", getVersion()),
-      message("notification.update.content"),
-      NotificationType.INFORMATION
-    )
-    showFullNotification(project, notification)
   }
 
   /**

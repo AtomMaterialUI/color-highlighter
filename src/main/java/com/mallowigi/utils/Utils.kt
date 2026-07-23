@@ -29,6 +29,8 @@ package com.mallowigi.utils
 import com.dynatrace.hash4j.hashing.HashFunnel
 import com.dynatrace.hash4j.hashing.Hashing
 import com.intellij.ide.plugins.IdeaPluginDescriptor
+import com.intellij.ide.plugins.PluginDetailsService
+import com.intellij.ide.plugins.PluginDetailsService.PluginDetails
 import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.util.IconLoader
@@ -38,11 +40,17 @@ import com.mallowigi.ColorHighlighterBundle
 import java.awt.Color
 import javax.swing.Icon
 
-fun getPlugin(): IdeaPluginDescriptor? = PluginManagerCore.getPlugin(PluginId.getId("com.mallowigi.colorHighlighter"))
+@Suppress("UnstableApiUsage")
+fun getPlugin(): PluginDetails? =
+  PluginDetailsService.getInstance().findDetails(PluginId.getId("com.mallowigi.colorHighlighter"))
 
+@Suppress("UnstableApiUsage")
 fun getVersion(): String {
-  val plugin: IdeaPluginDescriptor? = getPlugin()
-  return if (plugin != null) plugin.version else ColorHighlighterBundle.message("plugin.version")
+  val plugin: PluginDetails? = getPlugin()
+  return when {
+    plugin != null -> plugin.version ?: ""
+    else           -> ColorHighlighterBundle.message("plugin.version")
+  }
 }
 
 fun String.toHash(): Long =

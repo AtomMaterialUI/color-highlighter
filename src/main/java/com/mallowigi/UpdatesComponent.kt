@@ -38,21 +38,17 @@ import com.mallowigi.utils.getVersion
 class UpdatesComponent : ProjectActivity {
   private var config: ColorHighlighterState = ColorHighlighterState.instance
 
-  override suspend fun execute(project: Project) = onProjectOpened(project)
+  override suspend fun execute(project: Project) = onProjectOpened()
 
-  private fun projectOpened(project: Project) {
+  private fun projectOpened() {
     // Show new version notification
     val pluginVersion = getVersion()
     // val updated = pluginVersion != config.version
     config.version = pluginVersion
-
-    // if (updated) {
-    //   ColorHighlighterNotifications.showUpdate(project)
-    // }
   }
 
-  private fun onProjectOpened(project: Project) {
+  private fun onProjectOpened() {
     config = ColorHighlighterState.instance
-    projectOpened(project)
+    projectOpened()
   }
 }
