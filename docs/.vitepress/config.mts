@@ -5,6 +5,7 @@ export default defineConfig({
   title: 'Color Highlighter',
   description: 'Preview your colors inline in the JetBrains IDEs.',
   lang: 'en-US',
+  base: '/color-highlighter/',
   lastUpdated: true,
   cleanUrls: true,
 
