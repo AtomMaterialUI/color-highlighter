@@ -18,6 +18,9 @@ hero:
     - theme: alt
       text: JetBrains Marketplace
       link: https://plugins.jetbrains.com/plugin/12320-color-highlighter
+    - theme: alt
+      text: ❤️ Sponsor
+      link: https://opencollective.com/atom-material-themes-and-plugins
 
 features:
   - icon: 🎨

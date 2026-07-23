@@ -20,10 +20,15 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/getting-started' },
+      { text: "What's New", link: '/guide/whats-new' },
       { text: 'Changelog', link: '/CHANGELOG' },
       {
         text: 'Marketplace',
         link: 'https://plugins.jetbrains.com/plugin/12320-color-highlighter',
+      },
+      {
+        text: '❤️ Sponsor',
+        link: 'https://opencollective.com/atom-material-themes-and-plugins',
       },
     ],
 
@@ -35,6 +40,7 @@ export default defineConfig({
           items: [
             { text: 'Getting Started', link: '/guide/getting-started' },
             { text: 'Features', link: '/guide/features' },
+            { text: "What's New", link: '/guide/whats-new' },
           ],
         },
         {
@@ -55,6 +61,14 @@ export default defineConfig({
             { text: 'Gotchas', link: '/guide/gotchas' },
             { text: 'Troubleshooting', link: '/guide/troubleshooting' },
             { text: 'FAQ', link: '/guide/faq' },
+          ],
+        },
+        {
+          text: 'Project',
+          collapsed: false,
+          items: [
+            { text: 'Contributing', link: '/guide/contributing' },
+            { text: 'Related Projects', link: '/guide/related-projects' },
           ],
         },
       ],
