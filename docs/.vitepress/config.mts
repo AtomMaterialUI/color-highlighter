@@ -24,7 +24,7 @@ export default defineConfig({
       { text: 'Changelog', link: '/CHANGELOG' },
       {
         text: 'Marketplace',
-        link: 'https://plugins.jetbrains.com/plugin/12320-color-highlighter',
+        link: 'https://plugins.jetbrains.com/plugin/13309-color-highlighter',
       },
       {
         text: '❤️ Sponsor',

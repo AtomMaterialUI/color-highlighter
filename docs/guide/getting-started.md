@@ -16,7 +16,7 @@ DataGrip, and more). It previews colors directly inside the editor.
 ### From the JetBrains Marketplace
 
 You can also download it directly from the
-[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/12320-color-highlighter)
+[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13309-color-highlighter)
 and install it via **Settings → Plugins → ⚙️ → Install Plugin from Disk…**.
 
 ## First Look
