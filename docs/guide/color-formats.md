@@ -3,6 +3,10 @@
 Color Highlighter understands many ways of expressing a color. This page lists
 the recognized notations.
 
+::: info
+You can disable specific formats in the settings.
+:::
+
 ## Hexadecimal
 
 Hex colors are detected with **3, 6, or 8 digits**, with or without a leading
@@ -21,6 +25,10 @@ as hex colors. Values like `100` or `1000` are intentionally ignored. See
 [Gotchas](/guide/gotchas).
 :::
 
+::: info
+They are enabled for all languages by default, but you can disable them in the settings.
+:::
+
 ### rgba vs. argb
 
 An 8-digit hex value is ambiguous: is the alpha channel first (`aarrggbb`) or
@@ -35,6 +43,18 @@ rgba(52, 152, 219, 0.5)
 argb(0.5, 52, 152, 219)
 hsl(204, 70%, 53%)
 hsla(204, 70%, 53%, 0.5)
+```
+
+## Lab / Lch
+
+The plugin also supports the Mathematical color spaces.
+
+```css
+lab(50, 20, 30)
+lch(50, 20, 30)
+oklab(50, 20, 30)
+oklch(50, 20, 30)
+hwb(204, 70%, 53%)
 ```
 
 ## Color Tuples
@@ -62,19 +82,20 @@ highlighted.
 
 ## Language Constructors & Properties
 
-Depending on the language, Color Highlighter can detect color objects:
+Depending on the language, Color Highlighter can also detect specific proprietary formats:
 
-| Language          | Constructor / Method                          |
-| ----------------- | --------------------------------------------- |
-| Java              | `new Color(r, g, b[, a])`, `ColorUIResource`  |
-| Java              | `Color.BLACK`, `Color.RED` (properties)       |
-| Kotlin            | `Color(r, g, b[, a])`, `ColorUIResource`      |
-| Kotlin            | `Color.BLACK`, `Color.RED` (properties)       |
-| Scala             | `new Color(…)`, `Color.RED`                   |
-| C#                | `Color.FromArgb(r, g, b[, a])`                |
-| Objective-C       | `[NSColor colorWith…]`, `[UIColor …]`         |
-| Swift             | `NSColor(…)`                                  |
-| Rust              | `Rgb(…)`                                       |
+| Language    | Constructor / Method                           |
+|-------------|------------------------------------------------|
+| Java        | `new Color(r, g, b[, a])`, `ColorUIResource`   |
+| Java        | `Color.BLACK`, `Color.RED` (properties)        |
+| Kotlin      | `Color(r, g, b[, a])`, `ColorUIResource`       |
+| Kotlin      | `Color.BLACK`, `Color.RED` (properties)        |
+| Scala       | `new Color(…)`, `Color.RED`                    |
+| JS/TS       | `.color(r, g, b[, a])`, `.color(h, s, l[, a])` |
+| C#          | `Color.FromArgb(r, g, b[, a])`                 |
+| Objective-C | `[NSColor colorWith…]`, `[UIColor …]`          |
+| Swift       | `NSColor(…)`                                   |
+| Rust        | `Rgb(…)`                                       |
 
 Each of these is individually toggleable in
 [Configuration](/guide/configuration#language-specific-settings).

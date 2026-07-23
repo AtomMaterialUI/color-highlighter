@@ -18,10 +18,14 @@ settings are hidden.
 Select how colors are rendered in the editor:
 
 - **Background** — paint the color behind the text.
-- **Foreground** — paint the text in the color.
 - **Border** — draw a border around the value.
+- **Underline pill** — draw a rounded "pill" underline beneath the value.
+- **Glow outline** — surround the value with a soft colored glow.
 - **Underline** — underline the value.
+- **Foreground** — paint the text in the color.
 - **Inline** — show a small colored swatch next to the value.
+- **Disabled (Gutter only)** — no inline highlight; the color is only shown in
+  the gutter.
 
 ### Rounded arc radius
 

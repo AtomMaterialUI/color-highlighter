@@ -13,27 +13,25 @@ example, PHP support requires the PHP plugin, which ships with PhpStorm).
 
 ## Programming Languages
 
-| Language        | Notes                                                         |
-| --------------- | ------------------------------------------------------------- |
-| **JavaScript**  | Also numeric literals (`0x…`)                                 |
-| **TypeScript**  | Also numeric literals (`0x…`)                                 |
-| **Java**        | `Color(…)`, `Color.RED`, `ColorUIResource`                    |
-| **Kotlin**      | `Color(…)`, `Color.RED`, `ColorUIResource`                    |
-| **Scala**       | Color constructor and color methods                           |
-| **Groovy**      |                                                               |
-| **C**           |                                                               |
-| **C++**         |                                                               |
-| **C#**          | `Color.FromArgb(…)`                                           |
-| **Objective-C** | `[NSColor colorWith…]`, `[UIColor …]`                         |
-| **Swift**       | `NSColor(…)`                                                  |
-| **Go**          |                                                               |
-| **Rust**        | `Rgb(…)` constructor                                          |
-| **Python**      | Tuples and numeric literals (`0x…`)                           |
-| **Ruby**        |                                                               |
-| **PHP**         |                                                               |
-| **Dart**        | Including references to color values                          |
-| **Lua**         |                                                               |
-| **R**           |                                                               |
+- **JavaScript**
+- **TypeScript**
+- **Java**
+- **Kotlin**
+- **Scala**
+- **Groovy**
+- **C**
+- **C++**
+- **C#**
+- **Objective-C**
+- **Swift**
+- **Go**
+- **Rust**
+- **Python**
+- **Ruby**
+- **PHP**
+- **Dart**
+- **Lua**
+- **R**
 
 ## Data & Config Formats
 
