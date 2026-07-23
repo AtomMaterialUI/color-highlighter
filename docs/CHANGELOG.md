@@ -10,6 +10,25 @@
 
 ### Bump
 
+## 20.0.0
+
+### Features
+
+- New **Highlighting Styles**: *Underline Pill* and *Glow Outline*
+- New Option: **Rounded Arc Radius** for *Background* and *Border* styles
+- New Parser: **Color Method**: detect `object.color(r, g, b, a)` and `object.color(h, s, l, a)` in JavaScript and TypeScript
+- New Detections: `oklch()`, `oklab()`, `lch()`, `lab()` and `hwb()` color functions
+
+### Fixes
+
+- Fix **Convert to HSL** action
+- Migrated the **Custom Colors** Settings Page to Kotlin UI DSL
+- Support for Java 25
+
+### Other
+
+- New Documentation: <https://atommaterialui.github.io/color-highlighter/>
+
 ## 19.1.0
 
 ### Fixes
