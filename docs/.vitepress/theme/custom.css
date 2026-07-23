@@ -1,0 +1,43 @@
+/* Masonry-style gallery used to showcase highlighting styles */
+.masonry {
+  column-count: 3;
+  column-gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 960px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .masonry {
+    column-count: 1;
+  }
+}
+
+.masonry figure {
+  break-inside: avoid;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+}
+
+.masonry figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+.masonry figcaption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  border-top: 1px solid var(--vp-c-divider);
+}

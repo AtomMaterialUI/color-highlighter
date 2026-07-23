@@ -31,6 +31,47 @@ For the **Background** and **Border** styles you can also set a
 [rounded arc radius](/guide/configuration#highlighting-style) (1–10) for softer
 corners.
 
+### Styles Gallery
+
+<div class="masonry">
+  <figure>
+    <img src="../screens/styles/background.png" alt="Background style" />
+    <figcaption>Background</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/border.png" alt="Border style" />
+    <figcaption>Border</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/underlinePill.png" alt="Underline pill style" />
+    <figcaption>Underline pill</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/glow.png" alt="Glow outline style" />
+    <figcaption>Glow outline</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/underline.png" alt="Underline style" />
+    <figcaption>Underline</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/foreground.png" alt="Foreground style" />
+    <figcaption>Foreground</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/inline.png" alt="Inline style" />
+    <figcaption>Inline</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/noRadius.png" alt="Background with no rounded radius" />
+    <figcaption>No radius</figcaption>
+  </figure>
+  <figure>
+    <img src="../screens/styles/largeRadius.png" alt="Background with a large rounded radius" />
+    <figcaption>Large radius</figcaption>
+  </figure>
+</div>
+
 ## Gutter Previews
 
 A color swatch is shown in the editor gutter next to each detected color. This

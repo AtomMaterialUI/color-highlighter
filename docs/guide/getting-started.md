@@ -35,6 +35,8 @@ Each color is rendered inline according to your chosen
 [highlighting style](/guide/configuration#highlighting-style), and a color
 preview appears in the [gutter](/guide/gutter).
 
+![Screenshot](../screens/screenshot.png)
+
 ## Where to Go Next
 
 - Browse the full list of [Features](/guide/features).
